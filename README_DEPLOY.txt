@@ -62,3 +62,6 @@ Cập nhật v1.6:
 - Trang admin dùng tab panel rõ ràng: chọn tab nào chỉ hiển thị đúng phần chỉnh sửa của tab đó.
 - Có thể mở trực tiếp admin.html#images, #gift, #guests, #rsvp, #setup.
 - Thanh tab cố định trên cùng để thao tác gọn hơn.
+
+
+V1.7: Admin tabs now use forced inline hide/show + cache-busting query strings. If old admin still appears, hard refresh Ctrl+F5 or delete old files before upload.

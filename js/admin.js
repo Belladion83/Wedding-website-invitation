@@ -60,8 +60,19 @@ function login(){ const pwd=$('password').value; const expected=(window.DEFAULT_
 const tabNames = {content:'Nội dung', images:'Hình ảnh', gift:'QR & ngân hàng', guests:'Khách mời', rsvp:'RSVP', setup:'Thiết lập'};
 function showTab(name, scrollToTabs=false){
   if(!name || !document.getElementById(name)) name='content';
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
-  document.querySelectorAll('.tab-panel').forEach(panel=>panel.classList.toggle('active', panel.id===name));
+  document.querySelectorAll('.tabs button').forEach(b=>{
+    const active = b.dataset.tab===name;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+  // Force hide/show by inline style so the admin works even if an old cached CSS file is still loaded.
+  document.querySelectorAll('.tab-panel').forEach(panel=>{
+    const active = panel.id===name;
+    panel.classList.toggle('active', active);
+    panel.hidden = !active;
+    panel.style.display = active ? (panel.classList.contains('grid2') ? 'grid' : 'block') : 'none';
+    panel.setAttribute('aria-hidden', active ? 'false' : 'true');
+  });
   if($('tabHelp')) $('tabHelp').textContent = `Bạn đang chỉnh tab ${tabNames[name] || name}. Trang quản trị chỉ hiển thị đúng nhóm chỉnh sửa của tab này.`;
   if(name==='rsvp') renderRsvp();
   if(name==='images') renderImagePreviews(), renderAlbumPreview();
@@ -87,3 +98,5 @@ async function renderRsvp(){
 function exportCsv(){ const head=['Timestamp','Guest ID','Tên khách','Tham dự','Đi cùng','Khách của','Lời chúc']; const lines=[head,...rsvps.map(x=>[x.timestamp,x.guestId,x.guestName,x.attending,x.companions,x.guestOf,x.wish])].map(r=>r.map(v=>'"'+String(v||'').replaceAll('"','""')+'"').join(',')); const blob=new Blob(['\ufeff'+lines.join('\n')],{type:'text/csv'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='rsvp.csv'; a.click(); }
 $('loginBtn').onclick=login; $('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()}); document.querySelector('.tabs').onclick=switchTab; $('saveLocalBtn').onclick=saveLocal; $('saveCloudBtn').onclick=saveCloud; $('downloadConfigBtn').onclick=downloadConfig; $('resetLocalBtn').onclick=resetLocal; $('copyLinksBtn').onclick=renderLinks; $('refreshRsvpBtn').onclick=renderRsvp; $('exportCsvBtn').onclick=exportCsv; $('clearLocalBtn').onclick=()=>{ if(confirm('Xóa RSVP local trên trình duyệt này?')){ localStorage.removeItem('wedding_rsvp'); localStorage.removeItem('wedding_rsvp_records'); renderRsvp(); }};
 $('galleryFiles').onchange=addGalleryFiles; $('galleryText').addEventListener('input', renderAlbumPreview); $('clearGalleryBtn').onclick=()=>{ if(confirm('Xóa danh sách ảnh album đang nhập?')){ $('galleryText').value=''; renderAlbumPreview(); }};
+window.addEventListener('hashchange', ()=>showTab((location.hash||'#content').replace('#',''), false));
+setTimeout(()=>showTab((location.hash||'#content').replace('#',''), false), 0);
