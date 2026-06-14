@@ -15,12 +15,28 @@ const imgDefs = [
 function clone(o){ return JSON.parse(JSON.stringify(o || {})); }
 function getPath(obj,path){ return path.split('.').reduce((o,k)=>o&&o[k],obj); }
 function setPath(obj,path,value){ const keys=path.split('.'); let o=obj; keys.slice(0,-1).forEach(k=>{ if(!o[k]||typeof o[k]!=='object') o[k]={}; o=o[k]; }); o[keys[keys.length-1]]=value; }
-function setMsg(txt){ $('saveMsg').textContent = txt || ''; $('statusLine').textContent = txt || 'Sẵn sàng chỉnh sửa'; }
-function fileToDataUrl(file){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(file); }); }
+function setMsg(txt){ if($('saveMsg')) $('saveMsg').textContent = txt || ''; if($('statusLine')) $('statusLine').textContent = txt || 'Sẵn sàng chỉnh sửa'; }
+function fileToDataUrl(file){ return WeddingCMS.readFileDataUrl(file); }
+function getCloudUrl(){ return WeddingCMS.getScriptUrl(config); }
+function isDataUrl(v){ return String(v || '').startsWith('data:'); }
+async function uploadImageForPath(path, file){
+  const url = getCloudUrl();
+  if(url){
+    setMsg('Đang upload ảnh lên Google Drive: ' + (file.name || path));
+    const result = await WeddingCMS.uploadImage(url, config.adminPassword, file, path);
+    setPath(config, path, result.url);
+    setMsg('Đã upload ảnh lên cloud. Bấm Lưu để đồng bộ thay đổi cho mọi thiết bị.');
+    return result.url;
+  }
+  const localUrl = await fileToDataUrl(file);
+  setPath(config, path, localUrl);
+  setMsg('Chưa cấu hình Google Apps Script URL: ảnh chỉ preview/lưu nháp trên thiết bị này, chưa đồng bộ toàn bộ khách.');
+  return localUrl;
+}
 function buildImageFields(){
   $('imageFields').innerHTML = imgDefs.map(([path,label]) => `<div class="image-card"><h3>${label}</h3><img data-preview="${path}" src=""><small>${path}</small><input data-image-url="${path}" placeholder="URL ảnh hoặc data image"><input type="file" accept="image/*" data-image-file="${path}"></div>`).join('');
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.oninput=()=>{ setPath(config, inp.dataset.imageUrl, inp.value); renderImagePreviews(); });
-  document.querySelectorAll('[data-image-file]').forEach(inp=>inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; const url=await fileToDataUrl(f); setPath(config, inp.dataset.imageFile, url); renderImagePreviews(); });
+  document.querySelectorAll('[data-image-file]').forEach(inp=>inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; try{ await uploadImageForPath(inp.dataset.imageFile, f); }catch(err){ console.error(err); setMsg('Upload cloud không thành công. Vui lòng kiểm tra Google Apps Script URL/quyền Drive rồi thử lại.'); } renderImagePreviews(); });
 }
 function fillForm(){
   fields().forEach(el=>{ el.value = getPath(config, el.dataset.field) || ''; });
@@ -45,10 +61,27 @@ async function addGalleryFiles(){
   const files = Array.from($('galleryFiles').files || []);
   if(!files.length) return;
   const urls = [];
-  for(const f of files) urls.push(await fileToDataUrl(f));
+  const cloud = !!getCloudUrl();
+  for(let i=0;i<files.length;i++){
+    const f = files[i];
+    try{
+      if(cloud){
+        setMsg(`Đang upload ảnh album ${i+1}/${files.length}: ${f.name}`);
+        const result = await WeddingCMS.uploadImage(getCloudUrl(), config.adminPassword, f, 'gallery');
+        urls.push(result.url);
+      }else{
+        urls.push(await fileToDataUrl(f));
+      }
+    }catch(err){
+      console.error(err);
+      setMsg(`Không upload được ảnh album ${i+1}. Đã dừng để tránh mất dữ liệu.`);
+      break;
+    }
+  }
   const current = $('galleryText').value.split('\n').map(x=>x.trim()).filter(Boolean);
   $('galleryText').value = current.concat(urls).join('\n');
   renderAlbumPreview();
+  setMsg(cloud ? 'Đã upload album lên cloud. Bấm Lưu để đồng bộ cho mọi thiết bị.' : 'Album đang là dữ liệu local. Cần cấu hình Google Apps Script để đồng bộ mọi thiết bị.');
 }
 async function load(){
   config = await WeddingCMS.loadConfig({includeDraft:true});
@@ -86,13 +119,29 @@ function switchTab(e){ const btn=e.target.closest('[data-tab]'); if(!btn) return
 function saveLocal(){ readForm(); WeddingCMS.saveDraft(config); setMsg('Đã lưu bản nháp. Bản nháp chỉ dùng trong trang admin và không làm thay đổi thiệp đang công khai.'); }
 async function saveCloud(){
   readForm();
+  const url = getCloudUrl();
+  if(!url){
+    setMsg('Chưa có Google Apps Script Web App URL nên chưa thể Lưu đồng bộ cho mọi thiết bị. Vào tab Thiết lập để cấu hình trước.');
+    showTab('setup', true);
+    return;
+  }
+  const hasLocalImages = JSON.stringify(config).includes('data:image/');
+  if(hasLocalImages && !confirm('Một số ảnh vẫn đang là dữ liệu local/data URL. Chúng có thể không phù hợp để đồng bộ lâu dài. Bạn vẫn muốn Lưu?')) return;
+  config.googleAppsScriptUrl = url;
+  setMsg('Đang lưu dữ liệu thật lên Google Sheet...');
+  await WeddingCMS.postNoCors(url,{action:'saveConfig',password:config.adminPassword,config});
   WeddingCMS.saveLive(config);
   WeddingCMS.clearDraft();
-  if(config.googleAppsScriptUrl){
-    await WeddingCMS.postNoCors(config.googleAppsScriptUrl,{action:'saveConfig',password:config.adminPassword,config});
-    setMsg('Đã LƯU thật lên Google Sheet và xóa bản nháp local. Khách truy cập sẽ thấy dữ liệu mới sau khi tải lại trang.');
-  }else{
-    setMsg('Đã LƯU thật trên trình duyệt này và xóa bản nháp. Để tất cả khách truy cập thấy thay đổi, hãy cấu hình Google Apps Script ở tab Thiết lập.');
+  try{
+    await new Promise(r=>setTimeout(r,1200));
+    const remote = await WeddingCMS.jsonp(url,'getConfig');
+    if(remote && remote.ok){
+      setMsg('Đã LƯU và đồng bộ dữ liệu trên cloud. Tất cả thiết bị sẽ thấy thay đổi sau khi tải lại trang thiệp.');
+    }else{
+      setMsg('Đã gửi lệnh Lưu. Nếu chưa thấy đổi trên thiết bị khác, kiểm tra Apps Script Deployment.');
+    }
+  }catch(e){
+    setMsg('Đã gửi lệnh Lưu. Không đọc lại được dữ liệu ngay, vui lòng thử refresh sau vài giây.');
   }
 }
 function resetLocal(){ if(confirm('Xóa bản nháp local và quay về dữ liệu đã lưu thật/Google Sheet?')){ WeddingCMS.clearDraft(); location.reload(); } }

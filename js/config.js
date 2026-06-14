@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.5-admin-images-layout-sync',
+  version: '1.9-global-sync',
   adminPassword: '29062026',
   googleAppsScriptUrl: '',
   site: {

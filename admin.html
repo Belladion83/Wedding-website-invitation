@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Thiệp báo hỷ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=1.8">
+  <link rel="stylesheet" href="css/admin.css?v=1.9">
 </head>
 <body>
   <div class="wrap">
@@ -19,7 +19,7 @@
     <main id="adminApp" class="hidden">
       <header class="topbar">
         <div><h1>Quản trị thiệp</h1><p id="statusLine">Đang tải dữ liệu...</p></div>
-        <div class="actions"><a class="btn ghost" href="index.html" target="_blank">Xem thiệp</a><button class="btn" id="saveLocalBtn">Lưu bản nháp</button><button class="btn gold" id="saveCloudBtn">Lưu</button></div>
+        <div class="actions"><a class="btn ghost" href="index.html" target="_blank">Xem thiệp</a><button class="btn" id="saveLocalBtn">Lưu bản nháp</button><button class="btn gold" id="saveCloudBtn">Lưu đồng bộ</button></div>
       </header>
       <nav class="tabs" id="adminTabs" aria-label="Nhóm chỉnh sửa">
         <button type="button" data-tab="content" class="active">Nội dung</button>
@@ -39,7 +39,7 @@
       </section>
       <section id="images" class="tab-panel card">
         <h2>Hình ảnh</h2>
-        <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ thiết bị. File sẽ được chuyển thành dữ liệu ảnh để xem thử và lưu trong bản nháp/admin. Album hỗ trợ chọn nhiều ảnh cùng lúc.</p>
+        <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ thiết bị. Nếu đã cấu hình Google Apps Script, ảnh sẽ được upload lên Google Drive để tất cả thiết bị đều thấy. Nếu chưa cấu hình, ảnh chỉ dùng để preview/lưu nháp trên thiết bị hiện tại. Album hỗ trợ chọn nhiều ảnh cùng lúc.</p>
         <div class="image-grid" id="imageFields"></div>
         <h2>Album ảnh cưới</h2>
         <div class="album-tools"><input type="file" id="galleryFiles" accept="image/*" multiple><button class="btn" id="clearGalleryBtn" type="button">Xóa album đang chọn</button></div><textarea id="galleryText" rows="10" placeholder="Mỗi dòng là 1 URL ảnh hoặc dữ liệu ảnh đã được tạo từ file"></textarea><div class="album-preview" id="albumPreview"></div>
@@ -54,9 +54,9 @@
       <section id="rsvp" class="tab-panel card">
         <h2>Dashboard RSVP</h2><div class="stats"><div><b id="total">0</b><span>Tổng phản hồi</span></div><div><b id="yes">0</b><span>Tham dự</span></div><div><b id="no">0</b><span>Không tham dự</span></div><div><b id="bride">0</b><span>Khách cô dâu</span></div><div><b id="groom">0</b><span>Khách chú rể</span></div><div><b id="common">0</b><span>Khách chung</span></div></div><div class="actions"><button class="btn" id="refreshRsvpBtn">Làm mới RSVP</button><button class="btn" id="exportCsvBtn">Xuất CSV</button><button class="btn danger" id="clearLocalBtn">Xóa RSVP local</button></div><div class="table-wrap"><table><thead><tr><th>Thời gian</th><th>Guest ID</th><th>Tên khách</th><th>Tham dự</th><th>Đi cùng</th><th>Khách của</th><th>Lời chúc</th></tr></thead><tbody id="rsvpRows"></tbody></table></div></section>
       <section id="setup" class="tab-panel card">
-        <h2>Thiết lập Google Sheet / Apps Script</h2><p>1) Tạo Google Sheet mới. 2) Mở Extensions → Apps Script. 3) Dán file <b>google-apps-script.gs</b>. 4) Deploy Web App. 5) Dán URL Web App vào ô dưới đây rồi bấm lưu bản nháp và upload lại file nếu cần.</p><label>Google Apps Script Web App URL<input data-field="googleAppsScriptUrl"></label><p class="hint">Nút <b>Lưu bản nháp</b> chỉ lưu để bạn chỉnh thử trong Admin. Nút <b>Lưu</b> mới cập nhật dữ liệu thật cho thiệp; nếu có Google Apps Script URL thì dữ liệu được gửi lên Google Sheet để khách khác cũng thấy.</p><label>Mật khẩu admin<input data-field="adminPassword"></label><label>Link nhạc nền MP3<input data-field="site.musicUrl"></label><label>Màu vàng chủ đạo<input data-field="site.colorPrimary"></label><div class="actions"><button class="btn" id="downloadConfigBtn">Tải config JSON</button><button class="btn" id="resetLocalBtn">Xóa bản nháp local</button></div><p class="msg" id="saveMsg"></p></section>
+        <h2>Thiết lập Google Sheet / Apps Script</h2><p>1) Tạo Google Sheet mới. 2) Mở Extensions → Apps Script. 3) Dán file <b>google-apps-script.gs</b>. 4) Deploy Web App. 5) Dán URL Web App vào ô dưới đây. Lưu ý: để mọi thiết bị đều tự đọc dữ liệu cloud, URL này cần được cấu hình một lần trong file js/config.js hoặc được tôi cập nhật vào source sau khi bạn gửi URL.</p><label>Google Apps Script Web App URL<input data-field="googleAppsScriptUrl"></label><p class="hint">Nút <b>Lưu bản nháp</b> chỉ lưu để bạn chỉnh thử trên thiết bị hiện tại. Nút <b>Lưu</b> sẽ publish lên Google Sheet/Google Drive để mọi thiết bị thấy thay đổi. Nếu chưa có Google Apps Script URL thì không thể đồng bộ toàn bộ thiết bị.</p><label>Mật khẩu admin<input data-field="adminPassword"></label><label>Link nhạc nền MP3<input data-field="site.musicUrl"></label><label>Màu vàng chủ đạo<input data-field="site.colorPrimary"></label><div class="actions"><button class="btn" id="downloadConfigBtn">Tải config JSON</button><button class="btn" id="resetLocalBtn">Xóa bản nháp local</button></div><p class="msg" id="saveMsg"></p></section>
     </main>
   </div>
-  <script src="js/config.js?v=1.8"></script><script src="js/cms-client.js?v=1.8"></script><script src="js/admin.js?v=1.8"></script>
+  <script src="js/config.js?v=1.9"></script><script src="js/cms-client.js?v=1.9"></script><script src="js/admin.js?v=1.9"></script>
 </body>
 </html>
