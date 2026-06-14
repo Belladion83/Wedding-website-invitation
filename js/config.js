@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.1-cms',
+  version: '1.3-visual-sync',
   adminPassword: '29062026',
   googleAppsScriptUrl: '',
   site: {

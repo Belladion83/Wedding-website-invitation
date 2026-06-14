@@ -45,3 +45,6 @@ A002, Chị Trần Thị B, Cô dâu
 - Who has access: Anyone.
 - Copy Web App URL và dán vào Admin.
 
+
+
+V1.3 visual sync: cập nhật giao diện để bám sát mockup dài màu kem/vàng, hero dạng ảnh vòm + text, card mềm, event layout truyền thống tinh chỉnh.
