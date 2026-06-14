@@ -1,7 +1,7 @@
 window.DEFAULT_WEDDING_CONFIG = {
   version: '1.9-global-sync',
-  adminPassword: '29062026',
-  googleAppsScriptUrl: '',
+  adminPassword: '832501',
+  googleAppsScriptUrl: 'AKfycbxEytWyacmGPXntktLmicqxBmNtch2EER4OjKHDY06A',
   site: {
     groomShortName: 'Phú Quí',
     brideShortName: 'Ánh Nguyệt',
@@ -9,8 +9,8 @@ window.DEFAULT_WEDDING_CONFIG = {
     brideFullName: 'Lương Thị Ánh Nguyệt',
     groomRole: 'Trưởng Nam',
     brideRole: 'Trưởng Nữ',
-    weddingDate: '2026-06-29T18:00:00+07:00',
-    displayDate: '29 . 06 . 2026',
+    weddingDate: '2026-07-18T18:00:00+07:00',
+    displayDate: '18 . 07 . 2026',
     eventType: 'TIỆC BÁO HỶ',
     saveText: 'SAVE OUR DATE',
     musicUrl: 'assets/music/background.mp3',
@@ -35,7 +35,7 @@ window.DEFAULT_WEDDING_CONFIG = {
     text: 'Hành trình yêu thương của chúng tôi sẽ được viết tại đây. Bạn có thể chỉnh nội dung này trong trang Admin để kể lại câu chuyện của cô dâu và chú rể theo cách riêng, nhẹ nhàng và chân thành nhất.'
   },
   families: {
-    groomSide: { title: 'NHÀ TRAI', father: 'Ông: Trần Văn Nam', mother: 'Bà: Nguyễn Thị Lan', address: 'Địa chỉ: 123 Nguyễn Huệ, TP. Hồ Chí Minh' },
+    groomSide: { title: 'NHÀ TRAI', father: 'Ông: Trần Ngọc Truyền', mother: 'Bà: Nguyễn Thị Lan', address: 'Địa chỉ: 123 Nguyễn Huệ, TP. Hồ Chí Minh' },
     brideSide: { title: 'NHÀ GÁI', father: 'Ông: Lê Hoàng Phúc', mother: 'Bà: Phạm Thị Mai', address: 'Địa chỉ: 456 Lê Lợi, TP. Hồ Chí Minh' }
   },
   event: {
@@ -45,8 +45,8 @@ window.DEFAULT_WEDDING_CONFIG = {
     address: '177 Phan Chu Trinh, Quận Bình Thạnh, TP. Hồ Chí Minh',
     ceremonyTitle: 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI',
     dayLabel: 'CHỦ NHẬT',
-    dateDay: '29',
-    monthLabel: 'THÁNG 06',
+    dateDay: '18',
+    monthLabel: 'THÁNG 07',
     year: '2026',
     lunarDate: '(Tức ngày 15/05 năm Bính Ngọ)',
     timeLabel: '18:00'
