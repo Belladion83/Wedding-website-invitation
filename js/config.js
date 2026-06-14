@@ -7,6 +7,8 @@ window.DEFAULT_WEDDING_CONFIG = {
     brideShortName: 'Ánh Nguyệt',
     groomFullName: 'Trần Ngô Phú Quí',
     brideFullName: 'Ánh Nguyệt',
+    groomRole: 'Trưởng Nam',
+    brideRole: 'Trưởng Nữ',
     weddingDate: '2026-06-29T18:00:00+07:00',
     displayDate: '29 . 06 . 2026',
     eventType: 'TIỆC BÁO HỶ',
@@ -41,7 +43,12 @@ window.DEFAULT_WEDDING_CONFIG = {
     description: 'Tới dự buổi tiệc rượu chung vui cùng gia đình chúng tôi tại',
     venue: 'TRUNG TÂM HỘI NGHỊ & TIỆC CƯỚI\nJOLIE WEDDING & EVENT',
     address: '177 Phan Chu Trinh, Quận Bình Thạnh, TP. Hồ Chí Minh',
+    ceremonyTitle: 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI',
     dayLabel: 'CHỦ NHẬT',
+    dateDay: '29',
+    monthLabel: 'THÁNG 06',
+    year: '2026',
+    lunarDate: '(Tức ngày 15/05 năm Bính Ngọ)',
     timeLabel: '18:00'
   },
   gallery: [

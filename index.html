@@ -48,7 +48,32 @@
       </section>
       <section class="couple cards section-reveal"><article><img id="groomPhoto" alt="Chú rể"><div><h3 id="groomName"></h3><p id="groomBirthday"></p><p id="groomSubtitle"></p><p id="groomAddress"></p></div></article><article><img id="bridePhoto" alt="Cô dâu"><div><h3 id="brideName"></h3><p id="brideBirthday"></p><p id="brideSubtitle"></p><p id="brideAddress"></p></div></article></section>
       <section class="story panel section-reveal"><h2 id="storyTitle">OUR STORY</h2><p id="storyText"></p></section>
-      <section class="event-grid section-reveal"><article class="family panel"><h3 id="groomSideTitle"></h3><p id="groomFather"></p><p id="groomMother"></p><p id="groomFamAddress"></p></article><article class="event-card panel"><p id="eventIntro">TRÂN TRỌNG KÍNH MỜI</p><h3 id="eventDesc">TỚI DỰ BUỔI TIỆC RƯỢU CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI TẠI</h3><h2 id="venue"></h2><p id="venueAddress"></p><div class="event-meta"><span>📅 <b id="eventDay"></b><br><em id="eventDate"></em></span><span>🕕 VÀO LÚC<br><em id="eventTime"></em></span></div><a class="btn solid" id="mapBtn" target="_blank" rel="noopener">CHỈ ĐƯỜNG</a></article><article class="family panel"><h3 id="brideSideTitle"></h3><p id="brideFather"></p><p id="brideMother"></p><p id="brideFamAddress"></p></article></section>
+      <section class="event-invite section-reveal" id="eventInvite">
+        <div class="event-ribbon">THÔNG TIN LỄ BÁO HỶ</div>
+        <div class="event-top">
+          <article class="person-side"><img id="eventGroomPhoto" alt="Chú rể"><p id="eventGroomRole">Trưởng Nam</p><h3 id="eventGroomShort">Phú Quí</h3></article>
+          <div class="double-happiness" aria-hidden="true">囍</div>
+          <article class="person-side"><img id="eventBridePhoto" alt="Cô dâu"><p id="eventBrideRole">Trưởng Nữ</p><h3 id="eventBrideShort">Ánh Nguyệt</h3></article>
+        </div>
+        <div class="family-row">
+          <article><p>Ông Bà</p><h4 id="groomFather"></h4><h4 id="groomMother"></h4><small id="groomFamAddress"></small></article>
+          <span class="family-divider"></span>
+          <article><p>Ông Bà</p><h4 id="brideFather"></h4><h4 id="brideMother"></h4><small id="brideFamAddress"></small></article>
+        </div>
+        <div class="formal-couple">
+          <h2 id="formalGroomName"></h2><p id="formalGroomRole">TRƯỞNG NAM</p><span>&</span><h2 id="formalBrideName"></h2><p id="formalBrideRole">TRƯỞNG NỮ</p>
+        </div>
+        <div class="ceremony-block">
+          <h3 id="ceremonyTitle">TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI</h3>
+          <h4 id="venue"></h4>
+          <p id="venueAddress"></p>
+          <p class="time-label">VÀO LÚC <strong id="eventTime"></strong></p>
+          <div class="date-line"><span id="eventDay"></span><i></i><b id="eventDateDay"></b><i></i><span id="eventMonth"></span></div>
+          <div class="year-line" id="eventYear"></div>
+          <p class="lunar" id="eventLunar"></p>
+          <a class="btn solid" id="mapBtn" target="_blank" rel="noopener">CHỈ ĐƯỜNG</a>
+        </div>
+      </section>
       <section class="gallery panel section-reveal"><h2>ALBUM ẢNH CƯỚI ♥</h2><div class="gallery-grid" id="galleryGrid"></div></section>
       <section class="rsvp panel section-reveal"><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI ♥</button></section>
       <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">29 . 06 . 2026 ♥</p></div></section>
