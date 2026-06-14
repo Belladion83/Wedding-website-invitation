@@ -48,3 +48,11 @@ A002, Chị Trần Thị B, Cô dâu
 
 
 V1.3 visual sync: cập nhật giao diện để bám sát mockup dài màu kem/vàng, hero dạng ảnh vòm + text, card mềm, event layout truyền thống tinh chỉnh.
+
+
+Version 1.5 changes:
+- Đồng bộ layout PC/tablet/mobile bằng cùng một bố cục canvas dài.
+- Tách tên đầu thiệp thành 3 dòng: tên chú rể, &, tên cô dâu.
+- Ẩn toàn bộ QR/quà mừng đến khi bấm nút Gửi quà mừng cưới.
+- Admin có thể chọn ảnh cho Hero, vỏ thiệp, cô dâu, chú rể, QR và chọn nhiều ảnh album cùng lúc.
+- Đã loại bỏ icon/trái tim không được yêu cầu khỏi UI chính.

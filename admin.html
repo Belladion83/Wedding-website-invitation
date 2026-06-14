@@ -31,10 +31,10 @@
       </section>
       <section id="images" class="tab card">
         <h2>Hình ảnh</h2>
-        <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ máy để tạo bản xem thử. Để lưu online bền vững, nên dùng URL ảnh đã upload lên GitHub/Google Drive/hosting ảnh.</p>
+        <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ thiết bị. File sẽ được chuyển thành dữ liệu ảnh để xem thử và lưu trong bản nháp/admin. Album hỗ trợ chọn nhiều ảnh cùng lúc.</p>
         <div class="image-grid" id="imageFields"></div>
         <h2>Album ảnh cưới</h2>
-        <textarea id="galleryText" rows="10" placeholder="Mỗi dòng là 1 URL ảnh"></textarea>
+        <div class="album-tools"><input type="file" id="galleryFiles" accept="image/*" multiple><button class="btn" id="clearGalleryBtn" type="button">Xóa album đang chọn</button></div><textarea id="galleryText" rows="10" placeholder="Mỗi dòng là 1 URL ảnh hoặc dữ liệu ảnh đã được tạo từ file"></textarea><div class="album-preview" id="albumPreview"></div>
       </section>
       <section id="gift" class="tab card grid2">
         <div><h2>QR cô dâu</h2><label>Tiêu đề<input data-field="banking.bride.title"></label><label>Ngân hàng<input data-field="banking.bride.bank"></label><label>Số tài khoản<input data-field="banking.bride.accountNo"></label><label>Chủ tài khoản<input data-field="banking.bride.accountName"></label><label>Nội dung CK<input data-field="banking.bride.memo"></label><label>URL QR<input data-field="banking.bride.qr"></label></div>

@@ -1,12 +1,12 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.4-mockup-exact',
+  version: '1.5-admin-images-layout-sync',
   adminPassword: '29062026',
   googleAppsScriptUrl: '',
   site: {
     groomShortName: 'Phú Quí',
     brideShortName: 'Ánh Nguyệt',
     groomFullName: 'Trần Ngô Phú Quí',
-    brideFullName: 'Ánh Nguyệt',
+    brideFullName: 'Lương Thị Ánh Nguyệt',
     groomRole: 'Trưởng Nam',
     brideRole: 'Trưởng Nữ',
     weddingDate: '2026-06-29T18:00:00+07:00',
@@ -28,7 +28,7 @@ window.DEFAULT_WEDDING_CONFIG = {
   },
   couple: {
     groom: { name: 'TRẦN NGÔ PHÚ QUÍ', birthday: '12 . 05 . 1996', subtitle: 'Chú rể', address: 'TP. Hồ Chí Minh' },
-    bride: { name: 'ÁNH NGUYỆT', birthday: '21 . 09 . 1998', subtitle: 'Cô dâu', address: 'TP. Hồ Chí Minh' }
+    bride: { name: 'LƯƠNG THỊ ÁNH NGUYỆT', birthday: '21 . 09 . 1998', subtitle: 'Cô dâu', address: 'TP. Hồ Chí Minh' }
   },
   story: {
     title: 'OUR STORY',

@@ -12,7 +12,7 @@
 </head>
 <body>
   <audio id="bgMusic" loop preload="none"></audio>
-  <button class="music-toggle hidden" id="musicToggle" aria-label="Bật/tắt nhạc">♪</button>
+  <button class="music-toggle hidden" id="musicToggle" aria-label="Bật/tắt nhạc">Nhạc</button>
 
   <main id="app" class="page-shell">
     <section class="intro" id="intro">
@@ -27,7 +27,6 @@
         </div>
         <div class="intro-right">
           <div class="paper-edge paper-edge-right"></div>
-          <div class="flower-top"></div>
           <figure class="polaroid p1"><img id="envPhoto1" alt="Ảnh cô dâu chú rể"><figcaption id="envDate1">29 . 06 . 2026</figcaption></figure>
           <figure class="polaroid p2"><img id="envPhoto2" alt="Ảnh cô dâu chú rể"><figcaption id="envDate2">29 . 06 . 2026</figcaption></figure>
           <p class="save-final">SAVE OUR DATE</p>
@@ -40,12 +39,12 @@
       <section class="hero section-reveal">
         <div class="hero-arch-wrap"><div class="hero-arch" id="heroPhoto"></div></div>
         <div class="hero-content">
-          <p class="invitee" id="inviteeLine">Kính mời<br><span>Quý khách ♥</span></p>
-          <h2 id="heroNames">TRẦN NGÔ PHÚ QUÍ & ÁNH NGUYỆT</h2>
+          <p class="invitee" id="inviteeLine"><span>Kính mời</span><span>Quý khách</span></p>
+          <h2 class="hero-names" id="heroNames"><span id="heroGroomName">TRẦN NGÔ PHÚ QUÍ</span><span>&</span><span id="heroBrideName">ÁNH NGUYỆT</span></h2>
           <p class="hero-date" id="heroDate">29 . 06 . 2026</p>
           <div class="divider"></div>
           <div class="countdown" id="countdown"><div><strong>00</strong><span>Ngày</span></div><div><strong>00</strong><span>Giờ</span></div><div><strong>00</strong><span>Phút</span></div><div><strong>00</strong><span>Giây</span></div></div>
-          <button class="plain" id="musicStart">▷ Bật nhạc nền</button>
+          <button class="plain" id="musicStart">Bật nhạc nền</button>
         </div>
       </section>
 
@@ -56,14 +55,12 @@
 
       <section class="story panel section-reveal">
         <h2 id="storyTitle">OUR STORY</h2>
-        <span class="tiny-heart">♥</span>
         <p id="storyText"></p>
       </section>
 
       <section class="event-invite section-reveal" id="eventInvite">
         <div class="event-top">
           <article class="person-side"><img id="eventGroomPhoto" alt="Chú rể"><p id="eventGroomRole">Trưởng Nam</p><h3 id="eventGroomShort">Phú Quí</h3></article>
-          <div class="double-happiness" aria-hidden="true">囍</div>
           <article class="person-side"><img id="eventBridePhoto" alt="Cô dâu"><p id="eventBrideRole">Trưởng Nữ</p><h3 id="eventBrideShort">Ánh Nguyệt</h3></article>
         </div>
         <div class="event-ribbon">THÔNG TIN LỄ BÁO HỶ</div>
@@ -87,18 +84,16 @@
         </div>
       </section>
 
-      <section class="gallery panel section-reveal"><h2>ALBUM ẢNH CƯỚI ♥</h2><div class="gallery-grid" id="galleryGrid"></div></section>
+      <section class="gallery panel section-reveal"><h2>ALBUM ẢNH CƯỚI</h2><div class="gallery-grid" id="galleryGrid"></div></section>
 
-      <section class="rsvp panel section-reveal"><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI ♥</button></section>
+      <section class="rsvp panel section-reveal"><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI</button></section>
 
-      <section class="gift-inline panel section-reveal"><h2>GỬI QUÀ MỪNG CƯỚI ♥</h2><div class="gift-grid inline"><article><h3 id="brideGiftTitleInline"></h3><img id="brideQrInline" alt="QR cô dâu"><p id="brideBankInline"></p><p id="brideAccInline"></p><p id="brideNameBankInline"></p></article><article><h3 id="groomGiftTitleInline"></h3><img id="groomQrInline" alt="QR chú rể"><p id="groomBankInline"></p><p id="groomAccInline"></p><p id="groomNameBankInline"></p></article></div></section>
-
-      <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">29 . 06 . 2026 ♥</p></div></section>
+      <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">29 . 06 . 2026</p></div></section>
     </section>
   </main>
 
   <div class="lightbox" id="lightbox"><button id="closeLightbox">×</button><img id="lightboxImg" alt="Ảnh cưới"><button id="prevImg">‹</button><button id="nextImg">›</button></div>
-  <div class="gift-sheet" id="giftSheet"><div class="gift-content"><button class="close" id="closeGift">×</button><h2>GỬI QUÀ MỪNG CƯỚI ♥</h2><div class="gift-grid"><article><h3 id="brideGiftTitle"></h3><img id="brideQr" alt="QR cô dâu"><p id="brideBank"></p><p id="brideAcc"></p><p id="brideNameBank"></p><small id="brideMemo"></small></article><article><h3 id="groomGiftTitle"></h3><img id="groomQr" alt="QR chú rể"><p id="groomBank"></p><p id="groomAcc"></p><p id="groomNameBank"></p><small id="groomMemo"></small></article></div><button class="btn outline" id="backInvite">QUAY LẠI THIỆP</button></div></div>
+  <div class="gift-sheet" id="giftSheet"><div class="gift-content"><button class="close" id="closeGift">×</button><h2>GỬI QUÀ MỪNG CƯỚI</h2><div class="gift-grid"><article><h3 id="brideGiftTitle"></h3><img id="brideQr" alt="QR cô dâu"><p id="brideBank"></p><p id="brideAcc"></p><p id="brideNameBank"></p><small id="brideMemo"></small></article><article><h3 id="groomGiftTitle"></h3><img id="groomQr" alt="QR chú rể"><p id="groomBank"></p><p id="groomAcc"></p><p id="groomNameBank"></p><small id="groomMemo"></small></article></div><button class="btn outline" id="backInvite">QUAY LẠI THIỆP</button></div></div>
   <script src="js/config.js"></script><script src="js/cms-client.js"></script><script src="js/main.js"></script>
 </body>
 </html>
