@@ -56,3 +56,9 @@ Version 1.5 changes:
 - Ẩn toàn bộ QR/quà mừng đến khi bấm nút Gửi quà mừng cưới.
 - Admin có thể chọn ảnh cho Hero, vỏ thiệp, cô dâu, chú rể, QR và chọn nhiều ảnh album cùng lúc.
 - Đã loại bỏ icon/trái tim không được yêu cầu khỏi UI chính.
+
+
+Cập nhật v1.6:
+- Trang admin dùng tab panel rõ ràng: chọn tab nào chỉ hiển thị đúng phần chỉnh sửa của tab đó.
+- Có thể mở trực tiếp admin.html#images, #gift, #guests, #rsvp, #setup.
+- Thanh tab cố định trên cùng để thao tác gọn hơn.

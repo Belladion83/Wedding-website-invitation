@@ -21,31 +21,39 @@
         <div><h1>Quản trị thiệp</h1><p id="statusLine">Đang tải dữ liệu...</p></div>
         <div class="actions"><a class="btn ghost" href="index.html" target="_blank">Xem thiệp</a><button class="btn" id="saveLocalBtn">Lưu bản nháp</button><button class="btn gold" id="saveCloudBtn">Lưu lên Google Sheet</button></div>
       </header>
-      <nav class="tabs"><button data-tab="content" class="active">Nội dung</button><button data-tab="images">Hình ảnh</button><button data-tab="gift">QR & ngân hàng</button><button data-tab="guests">Khách mời</button><button data-tab="rsvp">RSVP</button><button data-tab="setup">Thiết lập</button></nav>
-      <section id="content" class="tab active card grid2">
+      <nav class="tabs" id="adminTabs" aria-label="Nhóm chỉnh sửa">
+        <button type="button" data-tab="content" class="active">Nội dung</button>
+        <button type="button" data-tab="images">Hình ảnh</button>
+        <button type="button" data-tab="gift">QR & ngân hàng</button>
+        <button type="button" data-tab="guests">Khách mời</button>
+        <button type="button" data-tab="rsvp">RSVP</button>
+        <button type="button" data-tab="setup">Thiết lập</button>
+      </nav>
+      <p class="tab-help" id="tabHelp">Bạn đang chỉnh tab Nội dung. Khi chọn tab khác, trang quản trị chỉ hiển thị đúng nhóm chỉnh sửa của tab đó.</p>
+      <section id="content" class="tab-panel active card grid2">
         <div><h2>Thông tin chung</h2><label>Tên ngắn chú rể<input data-field="site.groomShortName"></label><label>Tên ngắn cô dâu<input data-field="site.brideShortName"></label><label>Họ tên chú rể<input data-field="site.groomFullName"></label><label>Họ tên cô dâu<input data-field="site.brideFullName"></label><label>Ngày báo hỷ hiển thị<input data-field="site.displayDate"></label><label>Ngày giờ countdown<input data-field="site.weddingDate"></label><label>Loại tiệc<input data-field="site.eventType"></label><label>Vai trò chú rể<input data-field="site.groomRole"></label><label>Vai trò cô dâu<input data-field="site.brideRole"></label><label>Link Google Maps<input data-field="site.googleMapsUrl"></label></div>
         <div><h2>Our Story</h2><label>Tiêu đề<input data-field="story.title"></label><label>Câu chuyện<textarea rows="10" data-field="story.text"></textarea></label><h2>Thông tin cô dâu chú rể</h2><label>Sinh nhật chú rể<input data-field="couple.groom.birthday"></label><label>Mô tả chú rể<input data-field="couple.groom.subtitle"></label><label>Sinh nhật cô dâu<input data-field="couple.bride.birthday"></label><label>Mô tả cô dâu<input data-field="couple.bride.subtitle"></label></div>
         <div><h2>Nhà trai</h2><label>Tiêu đề<input data-field="families.groomSide.title"></label><label>Ông<input data-field="families.groomSide.father"></label><label>Bà<input data-field="families.groomSide.mother"></label><label>Địa chỉ<textarea rows="3" data-field="families.groomSide.address"></textarea></label></div>
         <div><h2>Nhà gái</h2><label>Tiêu đề<input data-field="families.brideSide.title"></label><label>Ông<input data-field="families.brideSide.father"></label><label>Bà<input data-field="families.brideSide.mother"></label><label>Địa chỉ<textarea rows="3" data-field="families.brideSide.address"></textarea></label></div>
         <div class="wide"><h2>Thông tin tiệc</h2><div class="grid2"><label>Lời mời<input data-field="event.intro"></label><label>Mô tả<input data-field="event.description"></label><label>Nhà hàng / sảnh<textarea rows="3" data-field="event.venue"></textarea></label><label>Địa chỉ<textarea rows="3" data-field="event.address"></textarea></label><label>Tiêu đề địa điểm<input data-field="event.ceremonyTitle"></label><label>Thứ<input data-field="event.dayLabel"></label><label>Ngày<input data-field="event.dateDay"></label><label>Tháng<input data-field="event.monthLabel"></label><label>Năm<input data-field="event.year"></label><label>Ngày âm lịch<input data-field="event.lunarDate"></label><label>Giờ tiệc<input data-field="event.timeLabel"></label></div></div>
       </section>
-      <section id="images" class="tab card">
+      <section id="images" class="tab-panel card">
         <h2>Hình ảnh</h2>
         <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ thiết bị. File sẽ được chuyển thành dữ liệu ảnh để xem thử và lưu trong bản nháp/admin. Album hỗ trợ chọn nhiều ảnh cùng lúc.</p>
         <div class="image-grid" id="imageFields"></div>
         <h2>Album ảnh cưới</h2>
         <div class="album-tools"><input type="file" id="galleryFiles" accept="image/*" multiple><button class="btn" id="clearGalleryBtn" type="button">Xóa album đang chọn</button></div><textarea id="galleryText" rows="10" placeholder="Mỗi dòng là 1 URL ảnh hoặc dữ liệu ảnh đã được tạo từ file"></textarea><div class="album-preview" id="albumPreview"></div>
       </section>
-      <section id="gift" class="tab card grid2">
+      <section id="gift" class="tab-panel card grid2">
         <div><h2>QR cô dâu</h2><label>Tiêu đề<input data-field="banking.bride.title"></label><label>Ngân hàng<input data-field="banking.bride.bank"></label><label>Số tài khoản<input data-field="banking.bride.accountNo"></label><label>Chủ tài khoản<input data-field="banking.bride.accountName"></label><label>Nội dung CK<input data-field="banking.bride.memo"></label><label>URL QR<input data-field="banking.bride.qr"></label></div>
         <div><h2>QR chú rể</h2><label>Tiêu đề<input data-field="banking.groom.title"></label><label>Ngân hàng<input data-field="banking.groom.bank"></label><label>Số tài khoản<input data-field="banking.groom.accountNo"></label><label>Chủ tài khoản<input data-field="banking.groom.accountName"></label><label>Nội dung CK<input data-field="banking.groom.memo"></label><label>URL QR<input data-field="banking.groom.qr"></label></div>
       </section>
-      <section id="guests" class="tab card">
+      <section id="guests" class="tab-panel card">
         <h2>Danh sách khách mời</h2><p class="hint">Mỗi dòng: Guest ID, Tên khách, Nhóm khách. Ví dụ: A001, Anh Nguyễn Văn A, Chú rể</p><textarea id="guestText" rows="12"></textarea><div class="actions"><button class="btn" id="copyLinksBtn">Tạo & copy link mời</button></div><pre id="guestLinks"></pre>
       </section>
-      <section id="rsvp" class="tab card">
+      <section id="rsvp" class="tab-panel card">
         <h2>Dashboard RSVP</h2><div class="stats"><div><b id="total">0</b><span>Tổng phản hồi</span></div><div><b id="yes">0</b><span>Tham dự</span></div><div><b id="no">0</b><span>Không tham dự</span></div><div><b id="bride">0</b><span>Khách cô dâu</span></div><div><b id="groom">0</b><span>Khách chú rể</span></div><div><b id="common">0</b><span>Khách chung</span></div></div><div class="actions"><button class="btn" id="refreshRsvpBtn">Làm mới RSVP</button><button class="btn" id="exportCsvBtn">Xuất CSV</button><button class="btn danger" id="clearLocalBtn">Xóa RSVP local</button></div><div class="table-wrap"><table><thead><tr><th>Thời gian</th><th>Guest ID</th><th>Tên khách</th><th>Tham dự</th><th>Đi cùng</th><th>Khách của</th><th>Lời chúc</th></tr></thead><tbody id="rsvpRows"></tbody></table></div></section>
-      <section id="setup" class="tab card">
+      <section id="setup" class="tab-panel card">
         <h2>Thiết lập Google Sheet / Apps Script</h2><p>1) Tạo Google Sheet mới. 2) Mở Extensions → Apps Script. 3) Dán file <b>google-apps-script.gs</b>. 4) Deploy Web App. 5) Dán URL Web App vào ô dưới đây rồi bấm lưu bản nháp và upload lại file nếu cần.</p><label>Google Apps Script Web App URL<input data-field="googleAppsScriptUrl"></label><label>Mật khẩu admin<input data-field="adminPassword"></label><label>Link nhạc nền MP3<input data-field="site.musicUrl"></label><label>Màu vàng chủ đạo<input data-field="site.colorPrimary"></label><div class="actions"><button class="btn" id="downloadConfigBtn">Tải config JSON</button><button class="btn" id="resetLocalBtn">Xóa bản nháp local</button></div><p class="msg" id="saveMsg"></p></section>
     </main>
   </div>

@@ -52,10 +52,26 @@ async function addGalleryFiles(){
 }
 async function load(){
   config = await WeddingCMS.loadConfig();
-  buildImageFields(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.'); renderRsvp();
+  buildImageFields(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
+  const initialTab = (location.hash || '#content').replace('#','');
+  showTab(initialTab, false);
 }
 function login(){ const pwd=$('password').value; const expected=(window.DEFAULT_WEDDING_CONFIG && window.DEFAULT_WEDDING_CONFIG.adminPassword) || (config&&config.adminPassword) || '29062026'; if(pwd===expected){$('loginPanel').classList.add('hidden');$('adminApp').classList.remove('hidden');load();}else $('loginMsg').textContent='Sai mật khẩu admin.'; }
-function switchTab(e){ const name=e.target.dataset.tab; if(!name) return; document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===name)); document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.id===name)); if(name==='rsvp') renderRsvp(); }
+const tabNames = {content:'Nội dung', images:'Hình ảnh', gift:'QR & ngân hàng', guests:'Khách mời', rsvp:'RSVP', setup:'Thiết lập'};
+function showTab(name, scrollToTabs=false){
+  if(!name || !document.getElementById(name)) name='content';
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===name));
+  document.querySelectorAll('.tab-panel').forEach(panel=>panel.classList.toggle('active', panel.id===name));
+  if($('tabHelp')) $('tabHelp').textContent = `Bạn đang chỉnh tab ${tabNames[name] || name}. Trang quản trị chỉ hiển thị đúng nhóm chỉnh sửa của tab này.`;
+  if(name==='rsvp') renderRsvp();
+  if(name==='images') renderImagePreviews(), renderAlbumPreview();
+  if(scrollToTabs){
+    const tabs = $('adminTabs') || document.querySelector('.tabs');
+    tabs && tabs.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  if(location.hash !== '#'+name) history.replaceState(null, '', '#'+name);
+}
+function switchTab(e){ const btn=e.target.closest('[data-tab]'); if(!btn) return; showTab(btn.dataset.tab, true); }
 function saveLocal(){ readForm(); WeddingCMS.saveLocal(config); setMsg('Đã lưu bản nháp trên trình duyệt này. Mở thiệp trên cùng trình duyệt để xem thay đổi.'); }
 async function saveCloud(){ readForm(); if(!config.googleAppsScriptUrl){ setMsg('Chưa có Google Apps Script URL. Hãy cấu hình ở tab Thiết lập trước.'); return; } await WeddingCMS.postNoCors(config.googleAppsScriptUrl,{action:'saveConfig',password:config.adminPassword,config}); WeddingCMS.saveLocal(config); setMsg('Đã gửi cấu hình lên Google Sheet. Ảnh dạng data lớn có thể làm Google Sheet lưu chậm, nên dùng URL ảnh nếu album quá nhiều.'); }
 function resetLocal(){ if(confirm('Xóa bản nháp local và quay về cấu hình mặc định/Google Sheet?')){ WeddingCMS.clearLocal(); location.reload(); } }
