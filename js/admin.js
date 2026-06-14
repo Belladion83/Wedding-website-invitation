@@ -51,7 +51,7 @@ async function addGalleryFiles(){
   renderAlbumPreview();
 }
 async function load(){
-  config = await WeddingCMS.loadConfig();
+  config = await WeddingCMS.loadConfig({includeDraft:true});
   buildImageFields(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
   const initialTab = (location.hash || '#content').replace('#','');
   showTab(initialTab, false);
@@ -83,9 +83,19 @@ function showTab(name, scrollToTabs=false){
   if(location.hash !== '#'+name) history.replaceState(null, '', '#'+name);
 }
 function switchTab(e){ const btn=e.target.closest('[data-tab]'); if(!btn) return; showTab(btn.dataset.tab, true); }
-function saveLocal(){ readForm(); WeddingCMS.saveLocal(config); setMsg('Đã lưu bản nháp trên trình duyệt này. Mở thiệp trên cùng trình duyệt để xem thay đổi.'); }
-async function saveCloud(){ readForm(); if(!config.googleAppsScriptUrl){ setMsg('Chưa có Google Apps Script URL. Hãy cấu hình ở tab Thiết lập trước.'); return; } await WeddingCMS.postNoCors(config.googleAppsScriptUrl,{action:'saveConfig',password:config.adminPassword,config}); WeddingCMS.saveLocal(config); setMsg('Đã gửi cấu hình lên Google Sheet. Ảnh dạng data lớn có thể làm Google Sheet lưu chậm, nên dùng URL ảnh nếu album quá nhiều.'); }
-function resetLocal(){ if(confirm('Xóa bản nháp local và quay về cấu hình mặc định/Google Sheet?')){ WeddingCMS.clearLocal(); location.reload(); } }
+function saveLocal(){ readForm(); WeddingCMS.saveDraft(config); setMsg('Đã lưu bản nháp. Bản nháp chỉ dùng trong trang admin và không làm thay đổi thiệp đang công khai.'); }
+async function saveCloud(){
+  readForm();
+  WeddingCMS.saveLive(config);
+  WeddingCMS.clearDraft();
+  if(config.googleAppsScriptUrl){
+    await WeddingCMS.postNoCors(config.googleAppsScriptUrl,{action:'saveConfig',password:config.adminPassword,config});
+    setMsg('Đã LƯU thật lên Google Sheet và xóa bản nháp local. Khách truy cập sẽ thấy dữ liệu mới sau khi tải lại trang.');
+  }else{
+    setMsg('Đã LƯU thật trên trình duyệt này và xóa bản nháp. Để tất cả khách truy cập thấy thay đổi, hãy cấu hình Google Apps Script ở tab Thiết lập.');
+  }
+}
+function resetLocal(){ if(confirm('Xóa bản nháp local và quay về dữ liệu đã lưu thật/Google Sheet?')){ WeddingCMS.clearDraft(); location.reload(); } }
 function downloadConfig(){ readForm(); const blob=new Blob([JSON.stringify(config,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='wedding-config.json'; a.click(); }
 function renderLinks(){ readForm(); const base=location.origin + location.pathname.replace(/admin\.html$/,'index.html'); const text=(config.guests||[]).map(g=>`${g.name}: ${base}?id=${encodeURIComponent(g.id)}&name=${encodeURIComponent(g.name)}`).join('\n'); $('guestLinks').textContent=text; navigator.clipboard && navigator.clipboard.writeText(text).catch(()=>{}); }
 function getLocalRsvps(){ try{return JSON.parse(localStorage.getItem('wedding_rsvp')||localStorage.getItem('wedding_rsvp_records')||'[]')}catch(e){return[]} }

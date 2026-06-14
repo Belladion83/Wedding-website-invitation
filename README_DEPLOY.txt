@@ -65,3 +65,10 @@ Cập nhật v1.6:
 
 
 V1.7: Admin tabs now use forced inline hide/show + cache-busting query strings. If old admin still appears, hard refresh Ctrl+F5 or delete old files before upload.
+
+
+V1.8 updates:
+- Nút Lưu bản nháp chỉ lưu draft trong Admin, không làm thay đổi thiệp công khai.
+- Nút Lưu mới cập nhật dữ liệu thật; nếu đã cấu hình Google Apps Script thì lưu lên Google Sheet cho khách truy cập khác.
+- Phần thông tin lễ báo hỷ đồng bộ lại màu beige/champagne gold.
+- Thêm nền hoa nhẹ và tăng khoảng cách chữ/nút trên màn mở thiệp.
