@@ -1,22 +1,61 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Thiệp báo hỷ Phú Quí & Ánh Nguyệt</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f8efe2;--paper:#fffaf2;--gold:#b98645;--text:#594838;--line:#dcc7a8}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#fff 0,#f8efe2 45%,#ead4b2 100%);color:var(--text);font-family:Inter,sans-serif}.screen{min-height:100vh;display:grid;place-items:center;padding:22px}.card{width:min(760px,100%);min-height:520px;background:linear-gradient(135deg,#fffdf8,#f1e3cf);border:1px solid var(--line);box-shadow:0 24px 70px rgba(90,65,35,.18);border-radius:24px;text-align:center;padding:38px;position:relative;overflow:hidden}.card:before,.card:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.35);filter:blur(2px)}.card:before{left:-80px;top:-80px}.card:after{right:-80px;bottom:-80px}.save{letter-spacing:.38em;color:var(--gold);font:700 14px Playfair Display,serif;animation:fade 1.8s both}.names{font:400 clamp(54px,14vw,96px) Great Vibes,cursive;color:var(--gold);margin:26px 0 8px}.names span{display:block;font:500 28px Playfair Display,serif;color:var(--text)}.date{font:600 22px Playfair Display,serif;letter-spacing:.14em}.btn{border:1px solid var(--gold);background:transparent;color:var(--gold);padding:14px 32px;margin-top:24px;border-radius:999px;font-weight:700;letter-spacing:.08em}.btn.gold{background:linear-gradient(135deg,#d7b77f,#b98645);color:white}.photo-row{display:flex;gap:18px;justify-content:center;margin:24px 0;flex-wrap:wrap}.photo{width:180px;background:white;padding:10px 10px 32px;box-shadow:0 14px 34px rgba(80,55,25,.16);transform:rotate(-3deg);position:relative}.photo:nth-child(2){transform:rotate(4deg)}.ph{height:210px;background:linear-gradient(135deg,#f7ead5,#fff,#e0c49b);display:grid;place-items:center;color:var(--gold);font-family:Great Vibes,cursive;font-size:34px}.photo small{position:absolute;left:0;right:0;bottom:10px}.content{display:none}.hero{min-height:100vh;display:grid;place-items:center;text-align:center;padding:28px}.hero h1{font:700 clamp(30px,8vw,62px) Playfair Display,serif;color:var(--gold);margin:10px 0}.invitee{font:400 32px Great Vibes,cursive;color:var(--gold)}.count{display:flex;gap:16px;justify-content:center;margin-top:28px;flex-wrap:wrap}.count div{background:#fff8;border:1px solid var(--line);border-radius:16px;min-width:82px;padding:16px}.count strong{display:block;font:700 32px Playfair Display,serif}.section{width:min(940px,92%);margin:28px auto;background:#fff9;border:1px solid var(--line);border-radius:22px;padding:30px;text-align:center;box-shadow:0 18px 55px rgba(90,65,35,.12)}h2{font-family:Playfair Display,serif;color:var(--gold)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.thumb{aspect-ratio:1;background:linear-gradient(135deg,#fff,#ead3ae);display:grid;place-items:center;border-radius:12px;color:var(--gold);font-family:Great Vibes,cursive;font-size:28px}.thumb:last-child{background:linear-gradient(rgba(80,60,40,.55),rgba(80,60,40,.55)),linear-gradient(135deg,#fff,#ead3ae);color:white;font-family:Inter,sans-serif;font-weight:700}.form{display:grid;gap:12px;max-width:640px;margin:auto}input,select{border:1px solid var(--line);border-radius:12px;padding:14px;background:white;color:var(--text);font:400 15px Inter,sans-serif}.footer{min-height:360px;display:grid;place-items:center;text-align:center;color:white;background:linear-gradient(rgba(80,60,40,.35),rgba(80,60,40,.45)),linear-gradient(135deg,#c3a06f,#f6e7ce)}.footer h2{font:400 72px Great Vibes,cursive;color:white}@keyframes fade{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:none}}@media(max-width:640px){.grid{grid-template-columns:repeat(4,1fr);gap:7px}.section{padding:22px}.photo{width:142px}.ph{height:170px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Thiệp báo hỷ Phú Quí & Ánh Nguyệt</title>
+  <meta name="theme-color" content="#f7efe3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<section id="cover" class="screen"><div class="card"><div class="save">SAVE OUR DATE</div><div class="names">Phú Quí<span>&</span>Ánh Nguyệt</div><p class="date">29 . 06 . 2026</p><p>TIỆC BÁO HỶ</p><button class="btn" onclick="openCard()">MỞ THIỆP</button><div id="inside" style="display:none"><div class="photo-row"><div class="photo"><div class="ph">Ảnh 1</div><small>29 . 06 . 2026</small></div><div class="photo"><div class="ph">Ảnh 2</div><small>29 . 06 . 2026</small></div></div><div class="save">SAVE OUR DATE</div><button class="btn gold" onclick="enterSite()">MỞ THIỆP</button></div></div></section>
-<main id="content" class="content"><section class="hero"><div><p id="guestText" class="invitee">Kính mời Quý khách</p><h1>Phú Quí & Ánh Nguyệt</h1><p class="date">29 . 06 . 2026</p><div class="count"><div><strong id="d">00</strong>ngày</div><div><strong id="h">00</strong>giờ</div><div><strong id="m">00</strong>phút</div><div><strong id="s">00</strong>giây</div></div></div></section><section class="section"><h2>Thông tin cô dâu chú rể</h2><p><b>Chú rể:</b> Trần Ngô Phú Quí</p><p><b>Cô dâu:</b> Ánh Nguyệt</p></section><section class="section"><h2>Our Story</h2><p>Đây là ô nội dung câu chuyện tình yêu. Bạn có thể thay đổi đoạn text này sau.</p></section><section class="section"><h2>Thông tin lễ báo hỷ</h2><p>Trân trọng kính mời Quý khách đến dự tiệc báo hỷ của chúng tôi.</p><p><b>Thời gian:</b> 18:00 - 29.06.2026</p><p><b>Địa điểm:</b> Nhà hàng / Trung tâm tiệc cưới</p><a class="btn gold" href="https://maps.google.com" target="_blank">CHỈ ĐƯỜNG</a></section><section class="section"><h2>Album ảnh cưới</h2><div class="grid" id="gallery"></div></section><section class="section"><h2>Vui lòng xác nhận</h2><p>Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form class="form" onsubmit="submitRSVP(event)"><input placeholder="Họ và tên" required><input placeholder="Gửi lời chúc đến cô dâu và chú rể"><select required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input placeholder="Quý khách đến tham dự cùng ai?"><select required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn gold">GỬI LỜI CHÚC & XÁC NHẬN</button></form><button class="btn" onclick="alert('Phần QR mừng cưới sẽ được gắn sau khi bạn gửi QR thật của cô dâu và chú rể.')">GỬI QUÀ MỪNG CƯỚI</button></section><section class="footer"><div><h2>Thank You</h2><p>Cảm ơn Quý khách đã chung vui cùng chúng tôi.</p><h3>Phú Quí & Ánh Nguyệt</h3></div></section></main>
-<script>
-const q=new URLSearchParams(location.search),guest=q.get('guest')||q.get('id');if(guest)guestText.textContent='Kính mời '+decodeURIComponent(guest);
-function openCard(){document.getElementById('inside').style.display='block'}function enterSite(){cover.style.display='none';content.style.display='block'}
-function tick(){let diff=Math.max(0,new Date('2026-06-29T18:00:00+07:00')-new Date());d.textContent=String(Math.floor(diff/864e5)).padStart(2,'0');h.textContent=String(Math.floor(diff/36e5)%24).padStart(2,'0');m.textContent=String(Math.floor(diff/6e4)%60).padStart(2,'0');s.textContent=String(Math.floor(diff/1e3)%60).padStart(2,'0')}setInterval(tick,1000);tick();
-gallery.innerHTML=Array.from({length:16},(_,i)=>'<div class="thumb">'+(i===15?'+24':('Ảnh '+(i+1)))+'</div>').join('');
-function submitRSVP(e){e.preventDefault();alert('Đã ghi nhận RSVP trên bản demo. Bản hoàn chỉnh sẽ gửi về Google Sheet.');e.target.reset()}
-</script>
-</body></html>
+  <audio id="bgMusic" loop preload="none"></audio>
+  <button class="music-toggle hidden" id="musicToggle" aria-label="Bật/tắt nhạc">♪</button>
+  <main id="app">
+    <section class="intro" id="intro">
+      <div class="envelope-wrap">
+        <div class="envelope" id="envelope">
+          <div class="env-left"></div><div class="env-right"></div>
+          <div class="env-card">
+            <p class="save fade-in" data-bind="site.saveText">SAVE OUR DATE</p>
+            <h1><span id="introGroom">Phú Quí</span><small>&</small><span id="introBride">Ánh Nguyệt</span></h1>
+            <p class="date" id="introDate">29 . 06 . 2026</p>
+            <p class="type" id="introType">TIỆC BÁO HỶ</p>
+            <button class="btn outline" id="openEnvelope">MỞ THIỆP</button>
+          </div>
+          <div class="photo-stack" id="photoStack">
+            <figure class="polaroid p1"><img id="envPhoto1" alt="Ảnh cô dâu chú rể"><figcaption id="envDate1">29 . 06 . 2026</figcaption></figure>
+            <figure class="polaroid p2"><img id="envPhoto2" alt="Ảnh cô dâu chú rể"><figcaption id="envDate2">29 . 06 . 2026</figcaption></figure>
+            <p class="save-final">SAVE OUR DATE</p>
+            <button class="btn solid final-open" id="enterSite">MỞ THIỆP</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="site hidden" id="site">
+      <section class="hero section-reveal">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-content">
+          <p class="invitee" id="inviteeLine">Kính mời Quý khách</p>
+          <h2 id="heroNames">TRẦN NGÔ PHÚ QUÍ & ÁNH NGUYỆT</h2>
+          <p class="hero-date" id="heroDate">29 . 06 . 2026</p>
+          <div class="divider"></div>
+          <div class="countdown" id="countdown"><div><strong>00</strong><span>Ngày</span></div><div><strong>00</strong><span>Giờ</span></div><div><strong>00</strong><span>Phút</span></div><div><strong>00</strong><span>Giây</span></div></div>
+          <button class="plain" id="musicStart">▷ Bật nhạc nền</button>
+        </div>
+      </section>
+      <section class="couple cards section-reveal"><article><img id="groomPhoto" alt="Chú rể"><div><h3 id="groomName"></h3><p id="groomBirthday"></p><p id="groomSubtitle"></p><p id="groomAddress"></p></div></article><article><img id="bridePhoto" alt="Cô dâu"><div><h3 id="brideName"></h3><p id="brideBirthday"></p><p id="brideSubtitle"></p><p id="brideAddress"></p></div></article></section>
+      <section class="story panel section-reveal"><h2 id="storyTitle">OUR STORY</h2><p id="storyText"></p></section>
+      <section class="event-grid section-reveal"><article class="family panel"><h3 id="groomSideTitle"></h3><p id="groomFather"></p><p id="groomMother"></p><p id="groomFamAddress"></p></article><article class="event-card panel"><p id="eventIntro">TRÂN TRỌNG KÍNH MỜI</p><h3 id="eventDesc">TỚI DỰ BUỔI TIỆC RƯỢU CHUNG VUI CÙNG GIA ĐÌNH CHÚNG TÔI TẠI</h3><h2 id="venue"></h2><p id="venueAddress"></p><div class="event-meta"><span>📅 <b id="eventDay"></b><br><em id="eventDate"></em></span><span>🕕 VÀO LÚC<br><em id="eventTime"></em></span></div><a class="btn solid" id="mapBtn" target="_blank" rel="noopener">CHỈ ĐƯỜNG</a></article><article class="family panel"><h3 id="brideSideTitle"></h3><p id="brideFather"></p><p id="brideMother"></p><p id="brideFamAddress"></p></article></section>
+      <section class="gallery panel section-reveal"><h2>ALBUM ẢNH CƯỚI ♥</h2><div class="gallery-grid" id="galleryGrid"></div></section>
+      <section class="rsvp panel section-reveal"><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI ♥</button></section>
+      <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">29 . 06 . 2026 ♥</p></div></section>
+    </section>
+  </main>
+  <div class="lightbox" id="lightbox"><button id="closeLightbox">×</button><img id="lightboxImg" alt="Ảnh cưới"><button id="prevImg">‹</button><button id="nextImg">›</button></div>
+  <div class="gift-sheet" id="giftSheet"><div class="gift-content"><button class="close" id="closeGift">×</button><h2>GỬI QUÀ MỪNG CƯỚI ♥</h2><div class="gift-grid"><article><h3 id="brideGiftTitle"></h3><img id="brideQr" alt="QR cô dâu"><p id="brideBank"></p><p id="brideAcc"></p><p id="brideNameBank"></p><small id="brideMemo"></small></article><article><h3 id="groomGiftTitle"></h3><img id="groomQr" alt="QR chú rể"><p id="groomBank"></p><p id="groomAcc"></p><p id="groomNameBank"></p><small id="groomMemo"></small></article></div><button class="btn outline" id="backInvite">QUAY LẠI THIỆP</button></div></div>
+  <script src="js/config.js"></script><script src="js/cms-client.js"></script><script src="js/main.js"></script>
+</body>
+</html>
