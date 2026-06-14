@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.3-visual-sync',
+  version: '1.4-mockup-exact',
   adminPassword: '29062026',
   googleAppsScriptUrl: '',
   site: {

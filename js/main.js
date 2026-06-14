@@ -4,65 +4,82 @@ const $ = (id) => document.getElementById(id);
 const params = new URLSearchParams(location.search);
 const guestId = params.get('id') || params.get('guest') || '';
 const guestNameParam = params.get('name') || '';
-function getPath(obj, path){ return path.split('.').reduce((o,k)=>o && o[k], obj); }
 function setText(id, value){ const el=$(id); if(el) el.textContent = value || ''; }
 function setSrc(id, value){ const el=$(id); if(el) el.src = value || ''; }
-function setBg(id, value){ const el=$(id); if(el) el.style.backgroundImage = `url('${value}')`; }
+function setBg(id, value){ const el=$(id); if(el) el.style.backgroundImage = value ? `url('${value}')` : ''; }
+function stripPrefix(s){ return String(s || '').replace(/^Ông:\s*/i,'').replace(/^Bà:\s*/i,'').replace(/^Địa chỉ:\s*/i,''); }
 function resolveGuest(){
-  const list = C.guests || [];
-  const found = list.find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
+  const found = (C.guests || []).find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
   return { id: guestId, name: guestNameParam || (found && found.name) || '', side: (found && found.side) || '' };
 }
 function initContent(){
   document.documentElement.style.setProperty('--gold', C.site.colorPrimary || '#b98645');
   document.documentElement.style.setProperty('--gold2', C.site.colorPrimary || '#d7b77f');
+  $('bgMusic').src = C.site.musicUrl || '';
   setText('introGroom', C.site.groomShortName); setText('introBride', C.site.brideShortName); setText('introDate', C.site.displayDate); setText('introType', C.site.eventType);
-  document.querySelectorAll('[data-bind="site.saveText"]').forEach(el=>el.textContent=C.site.saveText || 'SAVE OUR DATE');
+  document.querySelectorAll('[data-bind="site.saveText"]').forEach(el => el.textContent = C.site.saveText || 'SAVE OUR DATE');
   setSrc('envPhoto1', C.images.envelope1); setSrc('envPhoto2', C.images.envelope2); setText('envDate1', C.site.displayDate); setText('envDate2', C.site.displayDate);
-  setBg('heroBg', C.images.hero); setBg('thanks', C.images.thankYouBg || C.images.hero);
-  setText('heroNames', `${C.site.groomFullName} & ${C.site.brideFullName}`); setText('heroDate', C.site.displayDate);
-  const guest = resolveGuest();
-  if(guest.name) setText('inviteeLine', `Kính mời ${guest.name}`);
-  setSrc('groomPhoto', C.images.groom); setSrc('bridePhoto', C.images.bride);
-  setSrc('eventGroomPhoto', C.images.groom); setSrc('eventBridePhoto', C.images.bride);
+  setBg('heroPhoto', C.images.hero); setBg('thanks', C.images.thankYouBg || C.images.hero);
+  setText('heroNames', `${C.site.groomFullName} & ${C.site.brideFullName}`.toUpperCase()); setText('heroDate', C.site.displayDate);
+  const guest = resolveGuest(); if (guest.name) setText('inviteeLine', `Kính mời\n${guest.name} ♥`);
+  setSrc('groomPhoto', C.images.groom); setSrc('bridePhoto', C.images.bride); setSrc('eventGroomPhoto', C.images.groom); setSrc('eventBridePhoto', C.images.bride);
   setText('groomName', C.couple.groom.name); setText('groomBirthday', `☷ ${C.couple.groom.birthday}`); setText('groomSubtitle', `✧ ${C.couple.groom.subtitle}`); setText('groomAddress', `⌖ ${C.couple.groom.address}`);
   setText('brideName', C.couple.bride.name); setText('brideBirthday', `☷ ${C.couple.bride.birthday}`); setText('brideSubtitle', `✧ ${C.couple.bride.subtitle}`); setText('brideAddress', `⌖ ${C.couple.bride.address}`);
-  setText('storyTitle', C.story.title); setText('storyText', C.story.text);
-  setText('eventGroomRole', C.site.groomRole || 'Trưởng Nam'); setText('eventBrideRole', C.site.brideRole || 'Trưởng Nữ');
-  setText('eventGroomShort', C.site.groomShortName); setText('eventBrideShort', C.site.brideShortName);
-  setText('formalGroomName', C.site.groomFullName); setText('formalBrideName', C.site.brideFullName);
-  setText('formalGroomRole', (C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideRole', (C.site.brideRole || 'Trưởng Nữ').toUpperCase());
-  setText('groomFather', C.families.groomSide.father); setText('groomMother', C.families.groomSide.mother); setText('groomFamAddress', C.families.groomSide.address);
-  setText('brideFather', C.families.brideSide.father); setText('brideMother', C.families.brideSide.mother); setText('brideFamAddress', C.families.brideSide.address);
-  setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI');
-  setText('venue', C.event.venue); setText('venueAddress', C.event.address); setText('eventDay', C.event.dayLabel);
-  setText('eventDateDay', C.event.dateDay || (C.site.displayDate||'').split('.')[0].trim()); setText('eventMonth', C.event.monthLabel || 'THÁNG'); setText('eventYear', C.event.year || ''); setText('eventLunar', C.event.lunarDate || ''); setText('eventTime', C.event.timeLabel); $('mapBtn').href = C.site.googleMapsUrl || '#';
-  setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`); setText('thanksDate', `${C.site.displayDate} ♥`);
-  setText('brideGiftTitle', C.banking.bride.title); setSrc('brideQr', C.banking.bride.qr); setText('brideBank', `Ngân hàng: ${C.banking.bride.bank}`); setText('brideAcc', `STK: ${C.banking.bride.accountNo}`); setText('brideNameBank', `Tên TK: ${C.banking.bride.accountName}`); setText('brideMemo', `Nội dung CK: ${C.banking.bride.memo}`);
-  setText('groomGiftTitle', C.banking.groom.title); setSrc('groomQr', C.banking.groom.qr); setText('groomBank', `Ngân hàng: ${C.banking.groom.bank}`); setText('groomAcc', `STK: ${C.banking.groom.accountNo}`); setText('groomNameBank', `Tên TK: ${C.banking.groom.accountName}`); setText('groomMemo', `Nội dung CK: ${C.banking.groom.memo}`);
-  $('bgMusic').src = C.site.musicUrl || '';
-  const nameInput = document.querySelector('[name="guestName"]');
-  const sideSelect = document.querySelector('[name="guestOf"]');
-  if(guest.name){ nameInput.value = guest.name; nameInput.readOnly = true; }
-  if(guest.side) sideSelect.value = guest.side;
-  renderGallery();
+  setText('storyTitle', C.story.title || 'OUR STORY'); setText('storyText', C.story.text);
+  setText('eventGroomRole', C.site.groomRole || 'Trưởng Nam'); setText('eventBrideRole', C.site.brideRole || 'Trưởng Nữ'); setText('eventGroomShort', C.site.groomShortName); setText('eventBrideShort', C.site.brideShortName);
+  setText('groomFather', stripPrefix(C.families.groomSide.father)); setText('groomMother', stripPrefix(C.families.groomSide.mother)); setText('groomFamAddress', stripPrefix(C.families.groomSide.address));
+  setText('brideFather', stripPrefix(C.families.brideSide.father)); setText('brideMother', stripPrefix(C.families.brideSide.mother)); setText('brideFamAddress', stripPrefix(C.families.brideSide.address));
+  setText('formalGroomName', C.site.groomFullName); setText('formalGroomRole', String(C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideName', C.site.brideFullName); setText('formalBrideRole', String(C.site.brideRole || 'Trưởng Nữ').toUpperCase());
+  setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI'); setText('venue', C.event.venue); setText('venueAddress', C.event.address); setText('eventTime', C.event.timeLabel); setText('eventDay', C.event.dayLabel); setText('eventDateDay', C.event.dateDay); setText('eventMonth', C.event.monthLabel); setText('eventYear', C.event.year); setText('eventLunar', C.event.lunarDate);
+  const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
+  setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', `${C.site.displayDate} ♥`);
+  fillGift('', C.banking.bride, C.banking.groom); fillGift('Inline', C.banking.bride, C.banking.groom);
+  buildGallery();
 }
-function renderGallery(){
-  const grid = $('galleryGrid'); grid.innerHTML=''; const imgs=C.gallery || []; const shown=imgs.slice(0,16);
-  shown.forEach((src,i)=>{ const d=document.createElement('div'); d.className='thumb'; d.innerHTML=`<img src="${src}" alt="Ảnh cưới ${i+1}">`; if(i===15 && imgs.length>16){ const m=document.createElement('div'); m.className='more'; m.textContent=`+${imgs.length-15}`; d.appendChild(m); } d.onclick=()=>openLightbox(i); grid.appendChild(d); });
+function fillGift(suffix, bride, groom){
+  setText('brideGiftTitle'+suffix, bride.title); setSrc('brideQr'+suffix, bride.qr); setText('brideBank'+suffix, bride.bank); setText('brideAcc'+suffix, bride.accountNo); setText('brideNameBank'+suffix, bride.accountName); setText('brideMemo'+suffix, bride.memo);
+  setText('groomGiftTitle'+suffix, groom.title); setSrc('groomQr'+suffix, groom.qr); setText('groomBank'+suffix, groom.bank); setText('groomAcc'+suffix, groom.accountNo); setText('groomNameBank'+suffix, groom.accountName); setText('groomMemo'+suffix, groom.memo);
 }
-function openLightbox(i){ galleryIndex=i; $('lightbox').classList.add('open'); $('lightboxImg').src=C.gallery[galleryIndex]; }
-function moveGallery(step){ galleryIndex=(galleryIndex+step+C.gallery.length)%C.gallery.length; $('lightboxImg').src=C.gallery[galleryIndex]; }
-function startMusic(){ const a=$('bgMusic'); if(!a.src) return; a.play().catch(()=>{}); $('musicToggle').classList.remove('hidden'); }
-function countdown(){ const target=new Date(C.site.weddingDate).getTime(); const now=Date.now(); let diff=Math.max(0,target-now); const d=Math.floor(diff/86400000); diff-=d*86400000; const h=Math.floor(diff/3600000); diff-=h*3600000; const m=Math.floor(diff/60000); diff-=m*60000; const s=Math.floor(diff/1000); const vals=[d,h,m,s]; document.querySelectorAll('#countdown strong').forEach((el,i)=>el.textContent=String(vals[i]).padStart(2,'0')); }
-function localSave(payload){ const arr=JSON.parse(localStorage.getItem('wedding_rsvp')||'[]'); arr.push(payload); localStorage.setItem('wedding_rsvp',JSON.stringify(arr)); }
+function buildGallery(){
+  const grid = $('galleryGrid'); if(!grid) return;
+  const imgs = C.gallery || [];
+  const shown = imgs.slice(0,16);
+  grid.innerHTML = shown.map((src,i)=>`<div class="thumb" data-i="${i}"><img src="${src}" alt="Ảnh cưới ${i+1}">${i===15 && imgs.length>16 ? `<div class="more">+${imgs.length-15}<br>Ảnh khác</div>` : ''}</div>`).join('');
+  grid.querySelectorAll('.thumb').forEach(el=>el.onclick=()=>openLightbox(Number(el.dataset.i)));
+}
+function openLightbox(i){ galleryIndex=i; const imgs=C.gallery||[]; if(!imgs.length) return; $('lightboxImg').src=imgs[galleryIndex%imgs.length]; $('lightbox').classList.add('open'); }
+function navLightbox(step){ const imgs=C.gallery||[]; if(!imgs.length) return; galleryIndex=(galleryIndex+step+imgs.length)%imgs.length; $('lightboxImg').src=imgs[galleryIndex]; }
+function startCountdown(){
+  const boxes = document.querySelectorAll('#countdown strong');
+  const target = new Date(C.site.weddingDate || '2026-06-29T18:00:00+07:00');
+  function tick(){
+    const diff = Math.max(0, target - new Date());
+    const vals = [Math.floor(diff/864e5), Math.floor(diff/36e5)%24, Math.floor(diff/6e4)%60, Math.floor(diff/1e3)%60];
+    vals.forEach((v,i)=>{ if(boxes[i]) boxes[i].textContent=String(v).padStart(2,'0'); });
+  }
+  tick(); setInterval(tick,1000);
+}
+function initEvents(){
+  $('openEnvelope').onclick = () => $('envelope').classList.add('opened');
+  $('enterSite').onclick = () => { $('intro').classList.add('hidden'); $('site').classList.remove('hidden'); $('musicToggle').classList.remove('hidden'); playMusic(); window.scrollTo({top:0, behavior:'smooth'}); };
+  $('musicStart').onclick = playMusic; $('musicToggle').onclick = toggleMusic;
+  $('giftBtn').onclick = () => $('giftSheet').classList.add('open'); $('closeGift').onclick = () => $('giftSheet').classList.remove('open'); $('backInvite').onclick = () => $('giftSheet').classList.remove('open');
+  $('closeLightbox').onclick=()=> $('lightbox').classList.remove('open'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
+  $('rsvpForm').onsubmit = submitRsvp;
+  const obs = new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting && x.target.classList.add('visible')), {threshold:.14});
+  document.querySelectorAll('.section-reveal').forEach(el=>obs.observe(el));
+}
+async function playMusic(){ const a=$('bgMusic'); if(!a || !a.src) return; try{ await a.play(); $('musicToggle').textContent='♪'; }catch(e){ console.warn(e); } }
+function toggleMusic(){ const a=$('bgMusic'); if(!a) return; if(a.paused) playMusic(); else { a.pause(); $('musicToggle').textContent='♫'; } }
 async function submitRsvp(e){
-  e.preventDefault(); const fd=new FormData(e.target); const guest=resolveGuest();
-  const payload={ action:'rsvp', timestamp:new Date().toISOString(), guestId: guest.id || '', guestName:fd.get('guestName'), wish:fd.get('wish'), attending:fd.get('attending'), companions:fd.get('companions'), guestOf:fd.get('guestOf')};
-  $('formStatus').textContent='Đang gửi xác nhận...';
-  try{ if(C.googleAppsScriptUrl){ await WeddingCMS.postNoCors(C.googleAppsScriptUrl, payload); } localSave(payload); $('formStatus').textContent='Cảm ơn Quý khách! Cô dâu và chú rể đã nhận được xác nhận.'; e.target.reset(); if(guest.name){ const nameInput=document.querySelector('[name="guestName"]'); nameInput.value=guest.name; nameInput.readOnly=true;} if(guest.side) document.querySelector('[name="guestOf"]').value=guest.side; }
-  catch(err){ localSave(payload); $('formStatus').textContent='Đã lưu xác nhận trên thiết bị. Vui lòng gửi lại nếu cần.'; }
+  e.preventDefault();
+  const guest = resolveGuest();
+  const data = Object.fromEntries(new FormData(e.target));
+  const payload = { action:'rsvp', timestamp:new Date().toISOString(), guestId: guest.id || '', guestLinkName: guest.name || '', ...data };
+  try{
+    const arr = JSON.parse(localStorage.getItem('wedding_rsvp_records') || '[]'); arr.push(payload); localStorage.setItem('wedding_rsvp_records', JSON.stringify(arr));
+    if(C.googleAppsScriptUrl) await WeddingCMS.postNoCors(C.googleAppsScriptUrl, payload);
+    $('formStatus').textContent = 'Cảm ơn Quý khách! Lời chúc và xác nhận đã được ghi nhận.'; e.target.reset();
+  }catch(err){ $('formStatus').textContent = 'Đã lưu trên trình duyệt. Google Sheet hiện chưa kết nối hoặc chưa phản hồi.'; }
 }
-function initEvents(){ $('openEnvelope').onclick=()=> $('envelope').classList.add('opened'); $('enterSite').onclick=()=>{ $('intro').classList.add('hidden'); $('site').classList.remove('hidden'); startMusic(); setTimeout(()=>window.scrollTo(0,0),0);}; $('musicStart').onclick=startMusic; $('musicToggle').onclick=()=>{ const a=$('bgMusic'); if(a.paused){a.play(); $('musicToggle').textContent='♪'} else {a.pause(); $('musicToggle').textContent='♫'} }; $('rsvpForm').onsubmit=submitRsvp; $('giftBtn').onclick=()=> $('giftSheet').classList.add('open'); $('closeGift').onclick=$('backInvite').onclick=()=> $('giftSheet').classList.remove('open'); $('closeLightbox').onclick=()=> $('lightbox').classList.remove('open'); $('prevImg').onclick=()=>moveGallery(-1); $('nextImg').onclick=()=>moveGallery(1); }
-function revealOnScroll(){ const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12}); document.querySelectorAll('.section-reveal').forEach(el=>io.observe(el)); }
-(async function(){ C = await WeddingCMS.loadConfig(); initContent(); initEvents(); revealOnScroll(); countdown(); setInterval(countdown,1000); })();
+(async function(){ C = await WeddingCMS.loadConfig(); initContent(); startCountdown(); initEvents(); })();
