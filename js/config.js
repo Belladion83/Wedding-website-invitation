@@ -1,7 +1,7 @@
 window.DEFAULT_WEDDING_CONFIG = {
   version: '1.9-global-sync',
   adminPassword: '832501',
-  googleAppsScriptUrl: 'AKfycbxEytWyacmGPXntktLmicqxBmNtch2EER4OjKHDY06A',
+  googleAppsScriptUrl: 'https://script.google.com/u/0/home/projects/11JMNfyjA-Gb93jgVYJaBpNKDSzQeW4tXa49H0IVt0BWWpVH6mtf1KWF4/edit',
   site: {
     groomShortName: 'Phú Quí',
     brideShortName: 'Ánh Nguyệt',
