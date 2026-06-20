@@ -35,3 +35,6 @@ LƯU Ý VỀ HÌNH ẢNH:
 LINK KIỂM TRA SAU KHI DEPLOY:
 - Thiệp: index.html?v=19
 - Admin: admin.html?v=19
+
+
+V1.10: Web App URL da duoc gan san: https://script.google.com/macros/s/AKfycbxEytWyacmGPXntktLmicqxBmNtch2EER4OjKHDY06A/exec
