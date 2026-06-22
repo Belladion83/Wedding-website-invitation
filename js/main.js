@@ -8,6 +8,16 @@ function setText(id, value){ const el=$(id); if(el) el.textContent = value || ''
 function imgUrl(value){ return WeddingCMS && WeddingCMS.normalizeImageUrl ? WeddingCMS.normalizeImageUrl(value) : (value || ''); }
 function setSrc(id, value){ const el=$(id); if(el) el.src = imgUrl(value); }
 function setBg(id, value){ const el=$(id); const v = imgUrl(value); if(el) el.style.backgroundImage = v ? `url("${v}")` : ''; }
+
+function getFocus(kind){
+  const base = (C && C.imageFocus && C.imageFocus[kind]) || {};
+  return { x: Number(base.x ?? 50), y: Number(base.y ?? 50) };
+}
+function applyImgFocus(el, kind){
+  if(!el) return;
+  const f = getFocus(kind);
+  el.style.objectPosition = `${f.x}% ${f.y}%`;
+}
 function stripPrefix(s){ return String(s || '').replace(/^Ông:\s*/i,'').replace(/^Bà:\s*/i,'').replace(/^Địa chỉ:\s*/i,''); }
 function resolveGuest(){
   const found = (C.guests || []).find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
@@ -27,6 +37,7 @@ function initContent(){
   const guest = resolveGuest();
   if (guest.name) $('inviteeLine').innerHTML = `<span>Kính mời</span><span>${escapeHtml(guest.name)}</span>`;
   setSrc('groomPhoto', C.images.groom); setSrc('bridePhoto', C.images.bride); setSrc('eventGroomPhoto', C.images.groom); setSrc('eventBridePhoto', C.images.bride);
+  applyImgFocus($('groomPhoto'), 'groom'); applyImgFocus($('eventGroomPhoto'), 'groom'); applyImgFocus($('bridePhoto'), 'bride'); applyImgFocus($('eventBridePhoto'), 'bride');
   setText('groomName', C.couple.groom.name); setText('groomBirthday', C.couple.groom.birthday); setText('groomSubtitle', C.couple.groom.subtitle); setText('groomAddress', C.couple.groom.address);
   setText('brideName', C.couple.bride.name); setText('brideBirthday', C.couple.bride.birthday); setText('brideSubtitle', C.couple.bride.subtitle); setText('brideAddress', C.couple.bride.address);
   setText('storyTitle', C.story.title || 'OUR STORY'); setText('storyText', C.story.text);

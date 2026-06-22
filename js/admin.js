@@ -2,6 +2,59 @@ let config = null;
 let rsvps = [];
 const $ = (id) => document.getElementById(id);
 const fields = () => Array.from(document.querySelectorAll('[data-field]'));
+
+const focusDefs = [
+  ['groom','Ảnh chú rể'],
+  ['bride','Ảnh cô dâu']
+];
+function ensureImageFocus(){
+  if(!config.imageFocus || typeof config.imageFocus !== 'object') config.imageFocus = {};
+  if(!config.imageFocus.groom) config.imageFocus.groom = { x:50, y:28 };
+  if(!config.imageFocus.bride) config.imageFocus.bride = { x:50, y:26 };
+}
+function getFocus(kind){
+  ensureImageFocus();
+  const f = config.imageFocus[kind] || {};
+  return { x: Number(f.x ?? 50), y: Number(f.y ?? 50) };
+}
+function setFocus(kind, axis, value){
+  ensureImageFocus();
+  config.imageFocus[kind][axis] = Number(value);
+}
+function applyFocusToImg(el, kind){
+  if(!el) return;
+  const f = getFocus(kind);
+  el.style.objectPosition = `${f.x}% ${f.y}%`;
+}
+function renderFocusEditor(){
+  ensureImageFocus();
+  const groom = getFocus('groom');
+  const bride = getFocus('bride');
+  if($('focusGroomX')) $('focusGroomX').value = groom.x;
+  if($('focusGroomY')) $('focusGroomY').value = groom.y;
+  if($('focusBrideX')) $('focusBrideX').value = bride.x;
+  if($('focusBrideY')) $('focusBrideY').value = bride.y;
+  if($('focusGroomXVal')) $('focusGroomXVal').textContent = `${groom.x}%`;
+  if($('focusGroomYVal')) $('focusGroomYVal').textContent = `${groom.y}%`;
+  if($('focusBrideXVal')) $('focusBrideXVal').textContent = `${bride.x}%`;
+  if($('focusBrideYVal')) $('focusBrideYVal').textContent = `${bride.y}%`;
+  [['focusPreviewGroomRect','groom'],['focusPreviewGroomCircle','groom'],['focusPreviewBrideRect','bride'],['focusPreviewBrideCircle','bride']].forEach(([id,kind])=>{
+    const img = $(id);
+    if(!img) return;
+    img.src = WeddingCMS.normalizeImageUrl(getPath(config, `images.${kind}`) || '');
+    applyFocusToImg(img, kind);
+  });
+}
+function bindFocusEditor(){
+  [['focusGroomX','groom','x'],['focusGroomY','groom','y'],['focusBrideX','bride','x'],['focusBrideY','bride','y']].forEach(([id,kind,axis])=>{
+    const el = $(id);
+    if(!el) return;
+    const handler = ()=>{ setFocus(kind, axis, el.value); renderFocusEditor(); };
+    el.addEventListener('input', handler);
+    el.addEventListener('change', handler);
+  });
+}
+
 const imgDefs = [
   ['images.hero','Ảnh Hero / ảnh lớn đầu thiệp'],
   ['images.envelope1','Ảnh rút ra 1 trên vỏ thiệp'],
@@ -42,7 +95,7 @@ function fillForm(){
   fields().forEach(el=>{ el.value = getPath(config, el.dataset.field) || ''; });
   $('galleryText').value = (config.gallery || []).join('\n');
   $('guestText').value = (config.guests || []).map(g=>`${g.id || ''}, ${g.name || ''}, ${g.side || ''}`).join('\n');
-  renderImagePreviews(); renderAlbumPreview();
+  renderImagePreviews(); renderAlbumPreview(); renderFocusEditor();
 }
 function readForm(){
   fields().forEach(el=>setPath(config, el.dataset.field, el.value));
@@ -50,8 +103,9 @@ function readForm(){
   config.guests = $('guestText').value.split('\n').map(line=>line.split(',').map(x=>x.trim())).filter(a=>a[0]||a[1]).map(a=>({id:a[0], name:a[1], side:a[2]||''}));
 }
 function renderImagePreviews(){
-  document.querySelectorAll('[data-preview]').forEach(img=>img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''));
+  document.querySelectorAll('[data-preview]').forEach(img=>{ img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''); const p = img.dataset.preview; if(p === 'images.groom') applyFocusToImg(img, 'groom'); if(p === 'images.bride') applyFocusToImg(img, 'bride'); });
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.value = getPath(config, inp.dataset.imageUrl) || '');
+  renderFocusEditor();
 }
 function renderAlbumPreview(){
   const imgs = ($('galleryText').value || '').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,16);
@@ -132,7 +186,7 @@ function assertNoDataImages(){
 
 async function load(){
   config = await WeddingCMS.loadConfig({includeDraft:true});
-  buildImageFields(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
+  buildImageFields(); bindFocusEditor(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
   const initialTab = (location.hash || '#content').replace('#','');
   showTab(initialTab, false);
 }
