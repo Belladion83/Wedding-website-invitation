@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.11-global-cloud-fixed',
+  version: '1.12-drive-image-display-fix',
   adminPassword: '29062026',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -7,10 +7,10 @@ window.DEFAULT_WEDDING_CONFIG = {
     brideShortName: 'Ánh Nguyệt',
     groomFullName: 'Trần Ngô Phú Quí',
     brideFullName: 'Lương Thị Ánh Nguyệt',
-    groomRole: 'Út Nam',
-    brideRole: 'Út Nữ',
-    weddingDate: '2026-07-18T18:00:00+07:00',
-    displayDate: '18 . 07 . 2026',
+    groomRole: 'Trưởng Nam',
+    brideRole: 'Trưởng Nữ',
+    weddingDate: '2026-06-29T18:00:00+07:00',
+    displayDate: '29 . 06 . 2026',
     eventType: 'TIỆC BÁO HỶ',
     saveText: 'SAVE OUR DATE',
     musicUrl: 'assets/music/background.mp3',

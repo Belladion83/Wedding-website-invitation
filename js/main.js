@@ -5,8 +5,9 @@ const params = new URLSearchParams(location.search);
 const guestId = params.get('id') || params.get('guest') || '';
 const guestNameParam = params.get('name') || '';
 function setText(id, value){ const el=$(id); if(el) el.textContent = value || ''; }
-function setSrc(id, value){ const el=$(id); if(el) el.src = value || ''; }
-function setBg(id, value){ const el=$(id); if(el) el.style.backgroundImage = value ? `url("${value}")` : ''; }
+function imgUrl(value){ return WeddingCMS && WeddingCMS.normalizeImageUrl ? WeddingCMS.normalizeImageUrl(value) : (value || ''); }
+function setSrc(id, value){ const el=$(id); if(el) el.src = imgUrl(value); }
+function setBg(id, value){ const el=$(id); const v = imgUrl(value); if(el) el.style.backgroundImage = v ? `url("${v}")` : ''; }
 function stripPrefix(s){ return String(s || '').replace(/^Ông:\s*/i,'').replace(/^Bà:\s*/i,'').replace(/^Địa chỉ:\s*/i,''); }
 function resolveGuest(){
   const found = (C.guests || []).find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
@@ -48,11 +49,11 @@ function buildGallery(){
   const grid = $('galleryGrid'); if(!grid) return;
   const imgs = (C.gallery || []).filter(Boolean);
   const shown = imgs.slice(0,16);
-  grid.innerHTML = shown.map((src,i)=>`<div class="thumb" data-i="${i}"><img src="${src}" alt="Ảnh cưới ${i+1}">${i===15 && imgs.length>16 ? `<div class="more">+${imgs.length-15}<br>Ảnh khác</div>` : ''}</div>`).join('');
+  grid.innerHTML = shown.map((src,i)=>`<div class="thumb" data-i="${i}"><img src="${imgUrl(src)}" alt="Ảnh cưới ${i+1}">${i===15 && imgs.length>16 ? `<div class="more">+${imgs.length-15}<br>Ảnh khác</div>` : ''}</div>`).join('');
   grid.querySelectorAll('.thumb').forEach(el=>el.onclick=()=>openLightbox(Number(el.dataset.i)));
 }
-function openLightbox(i){ galleryIndex=i; const imgs=C.gallery||[]; if(!imgs.length) return; $('lightboxImg').src=imgs[galleryIndex%imgs.length]; $('lightbox').classList.add('open'); }
-function navLightbox(step){ const imgs=C.gallery||[]; if(!imgs.length) return; galleryIndex=(galleryIndex+step+imgs.length)%imgs.length; $('lightboxImg').src=imgs[galleryIndex]; }
+function openLightbox(i){ galleryIndex=i; const imgs=C.gallery||[]; if(!imgs.length) return; $('lightboxImg').src=imgUrl(imgs[galleryIndex%imgs.length]); $('lightbox').classList.add('open'); }
+function navLightbox(step){ const imgs=C.gallery||[]; if(!imgs.length) return; galleryIndex=(galleryIndex+step+imgs.length)%imgs.length; $('lightboxImg').src=imgUrl(imgs[galleryIndex]); }
 function startCountdown(){
   const boxes = document.querySelectorAll('#countdown strong');
   const target = new Date(C.site.weddingDate || '2026-06-29T18:00:00+07:00');

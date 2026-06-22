@@ -50,12 +50,12 @@ function readForm(){
   config.guests = $('guestText').value.split('\n').map(line=>line.split(',').map(x=>x.trim())).filter(a=>a[0]||a[1]).map(a=>({id:a[0], name:a[1], side:a[2]||''}));
 }
 function renderImagePreviews(){
-  document.querySelectorAll('[data-preview]').forEach(img=>img.src = getPath(config, img.dataset.preview) || '');
+  document.querySelectorAll('[data-preview]').forEach(img=>img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''));
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.value = getPath(config, inp.dataset.imageUrl) || '');
 }
 function renderAlbumPreview(){
   const imgs = ($('galleryText').value || '').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,16);
-  $('albumPreview').innerHTML = imgs.map(src=>`<img src="${src}">`).join('');
+  $('albumPreview').innerHTML = imgs.map(src=>`<img src="${WeddingCMS.normalizeImageUrl(src)}">`).join('');
 }
 async function addGalleryFiles(){
   const files = Array.from($('galleryFiles').files || []);

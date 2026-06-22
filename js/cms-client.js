@@ -1,5 +1,5 @@
 (function(){
-  // v1.11: real global cloud sync.
+  // v1.12: real global cloud sync + Google Drive image display normalization.
   // Draft remains local for admin preview only. Public site prioritizes Google Sheet config and ignores device-specific local saved data when a Web App URL is configured.
   const DRAFT_KEY = 'wedding_cms_draft_config_v1';
   const LIVE_KEY = 'wedding_cms_live_config_v1';
@@ -16,6 +16,27 @@
     return target;
   };
   const clone = (obj) => JSON.parse(JSON.stringify(obj || {}));
+
+  const normalizeImageUrl = (value) => {
+    const s = String(value || '').trim();
+    if (!s) return '';
+    if (s.startsWith('data:') || s.startsWith('assets/') || s.startsWith('./') || s.startsWith('../')) return s;
+    let id = '';
+    let m = s.match(/\/file\/d\/([^/]+)/);
+    if (m) id = m[1];
+    if (!id) {
+      try {
+        const u = new URL(s);
+        if (u.hostname.includes('drive.google.com')) id = u.searchParams.get('id') || '';
+      } catch(e) {}
+    }
+    if (!id) {
+      m = s.match(/(?:id=|\/d\/)([-\w]{20,})/);
+      if (m) id = m[1];
+    }
+    if (id) return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w2000';
+    return s;
+  };
   const readKey = (key) => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch(e){ return null; } };
   const writeKey = (key, cfg) => localStorage.setItem(key, JSON.stringify(cfg));
   const removeKey = (key) => localStorage.removeItem(key);
@@ -111,6 +132,7 @@
       mimeType: file.type || 'image/png',
       dataUrl
     });
+    if (data && data.url) data.url = normalizeImageUrl(data.url);
     return data;
   };
 
@@ -142,6 +164,6 @@
     return cfg;
   };
 
-  window.WeddingCMS = { DRAFT_KEY, LIVE_KEY, LEGACY_KEY, getDefault, getDraft, getLive, saveDraft, saveLive, clearDraft, clearLive, clearAllLocal, deepMerge, loadConfig, jsonp, postForm, postNoCors, uploadImage, readFileDataUrl, getScriptUrl,
+  window.WeddingCMS = { DRAFT_KEY, LIVE_KEY, LEGACY_KEY, getDefault, getDraft, getLive, saveDraft, saveLive, clearDraft, clearLive, clearAllLocal, deepMerge, loadConfig, jsonp, postForm, postNoCors, uploadImage, readFileDataUrl, getScriptUrl, normalizeImageUrl,
     getLocal:getDraft, saveLocal:saveDraft, clearLocal:clearDraft };
 })();

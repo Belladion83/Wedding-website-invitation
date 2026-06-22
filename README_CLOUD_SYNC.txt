@@ -34,3 +34,6 @@ CÁCH KIỂM TRA:
 NÚT TRONG ADMIN:
 - Lưu bản nháp: chỉ lưu trên thiết bị hiện tại, không ảnh hưởng khách mời.
 - Lưu đồng bộ: lưu thật lên Google Sheet/Drive, mọi thiết bị sẽ thấy sau khi tải lại trang.
+
+
+V1.12 note: Ảnh upload lên Google Drive sẽ được chuyển sang link thumbnail public (drive.google.com/thumbnail?id=...&sz=w2000) để hiển thị ổn định trên thẻ img và background của thiệp. Sau khi upload ảnh trong Admin, bấm Lưu đồng bộ để cập nhật cho tất cả thiết bị.
