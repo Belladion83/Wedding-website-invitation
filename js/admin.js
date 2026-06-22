@@ -126,22 +126,29 @@ async function saveCloud(){
     return;
   }
   const hasLocalImages = JSON.stringify(config).includes('data:image/');
-  if(hasLocalImages && !confirm('Một số ảnh vẫn đang là dữ liệu local/data URL. Chúng có thể không phù hợp để đồng bộ lâu dài. Bạn vẫn muốn Lưu?')) return;
+  if(hasLocalImages && !confirm('Một số ảnh vẫn đang là dữ liệu local/data URL. Các ảnh này có thể quá nặng để đồng bộ. Bạn nên upload ảnh bằng nút chọn file ở tab Hình ảnh trước. Bạn vẫn muốn Lưu?')) return;
   config.googleAppsScriptUrl = url;
   setMsg('Đang lưu dữ liệu thật lên Google Sheet...');
-  await WeddingCMS.postNoCors(url,{action:'saveConfig',password:config.adminPassword,config});
-  WeddingCMS.saveLive(config);
-  WeddingCMS.clearDraft();
   try{
-    await new Promise(r=>setTimeout(r,1200));
+    const result = await WeddingCMS.postForm(url, {
+      action:'saveConfig',
+      password:config.adminPassword,
+      configJson: JSON.stringify(config)
+    });
+    WeddingCMS.clearDraft();
+    WeddingCMS.clearLive();
+    await new Promise(r=>setTimeout(r,800));
     const remote = await WeddingCMS.jsonp(url,'getConfig');
-    if(remote && remote.ok){
-      setMsg('Đã LƯU và đồng bộ dữ liệu trên cloud. Tất cả thiết bị sẽ thấy thay đổi sau khi tải lại trang thiệp.');
+    if(remote && remote.ok && remote.config){
+      config = remote.config;
+      fillForm();
+      setMsg('Đã LƯU THẬT lên Google Sheet. Tất cả thiết bị sẽ thấy thay đổi sau khi tải lại trang thiệp.');
     }else{
-      setMsg('Đã gửi lệnh Lưu. Nếu chưa thấy đổi trên thiết bị khác, kiểm tra Apps Script Deployment.');
+      setMsg('Đã lưu nhưng chưa đọc lại được dữ liệu. Hãy refresh sau vài giây.');
     }
-  }catch(e){
-    setMsg('Đã gửi lệnh Lưu. Không đọc lại được dữ liệu ngay, vui lòng thử refresh sau vài giây.');
+  }catch(err){
+    console.error(err);
+    setMsg('Chưa lưu được dữ liệu thật: ' + (err.message || err) + '. Hãy kiểm tra Apps Script đã dán code v1.11, Deploy Web App quyền Anyone và URL /exec đúng.');
   }
 }
 function resetLocal(){ if(confirm('Xóa bản nháp local và quay về dữ liệu đã lưu thật/Google Sheet?')){ WeddingCMS.clearDraft(); location.reload(); } }
@@ -149,8 +156,8 @@ function downloadConfig(){ readForm(); const blob=new Blob([JSON.stringify(confi
 function renderLinks(){ readForm(); const base=location.origin + location.pathname.replace(/admin\.html$/,'index.html'); const text=(config.guests||[]).map(g=>`${g.name}: ${base}?id=${encodeURIComponent(g.id)}&name=${encodeURIComponent(g.name)}`).join('\n'); $('guestLinks').textContent=text; navigator.clipboard && navigator.clipboard.writeText(text).catch(()=>{}); }
 function getLocalRsvps(){ try{return JSON.parse(localStorage.getItem('wedding_rsvp')||localStorage.getItem('wedding_rsvp_records')||'[]')}catch(e){return[]} }
 async function renderRsvp(){
-  rsvps = getLocalRsvps();
-  if(config && config.googleAppsScriptUrl){ try{ const remote=await WeddingCMS.jsonp(config.googleAppsScriptUrl,'getRsvps'); if(remote && remote.ok && Array.isArray(remote.rsvps)) rsvps=remote.rsvps; }catch(e){} }
+  rsvps = (config && config.googleAppsScriptUrl) ? [] : getLocalRsvps();
+  if(config && config.googleAppsScriptUrl){ try{ const remote=await WeddingCMS.jsonp(config.googleAppsScriptUrl,'getRsvps'); if(remote && remote.ok && Array.isArray(remote.rsvps)) rsvps=remote.rsvps; }catch(e){ setMsg('Chưa đọc được RSVP cloud: ' + (e.message || e)); } }
   $('total').textContent=rsvps.length; $('yes').textContent=rsvps.filter(x=>x.attending==='Có tham dự').length; $('no').textContent=rsvps.filter(x=>x.attending==='Rất tiếc không thể tham dự').length; $('bride').textContent=rsvps.filter(x=>x.guestOf==='Cô dâu').length; $('groom').textContent=rsvps.filter(x=>x.guestOf==='Chú rể').length; $('common').textContent=rsvps.filter(x=>x.guestOf==='Khách chung').length;
   $('rsvpRows').innerHTML=rsvps.map(x=>`<tr><td>${x.timestamp||''}</td><td>${x.guestId||''}</td><td>${x.guestName||''}</td><td>${x.attending||''}</td><td>${x.companions||''}</td><td>${x.guestOf||''}</td><td>${x.wish||''}</td></tr>`).join('');
 }

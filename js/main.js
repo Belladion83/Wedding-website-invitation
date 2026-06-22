@@ -81,10 +81,18 @@ async function submitRsvp(e){
   const data = Object.fromEntries(new FormData(e.target));
   const payload = { action:'rsvp', timestamp:new Date().toISOString(), guestId: guest.id || '', guestLinkName: guest.name || '', ...data };
   try{
-    const arr = JSON.parse(localStorage.getItem('wedding_rsvp_records') || '[]'); arr.push(payload); localStorage.setItem('wedding_rsvp_records', JSON.stringify(arr));
-    localStorage.setItem('wedding_rsvp', JSON.stringify(arr));
-    if(C.googleAppsScriptUrl) await WeddingCMS.postNoCors(C.googleAppsScriptUrl, payload);
+    if(C.googleAppsScriptUrl){
+      await WeddingCMS.postForm(C.googleAppsScriptUrl, { action:'rsvp', payloadJson: JSON.stringify(payload) });
+    }else{
+      const arr = JSON.parse(localStorage.getItem('wedding_rsvp_records') || '[]');
+      arr.push(payload);
+      localStorage.setItem('wedding_rsvp_records', JSON.stringify(arr));
+      localStorage.setItem('wedding_rsvp', JSON.stringify(arr));
+    }
     setText('formStatus','Cảm ơn Quý khách. Lời chúc và xác nhận đã được ghi nhận.'); e.target.reset();
-  }catch(err){ console.error(err); setText('formStatus','Chưa gửi được xác nhận. Vui lòng thử lại sau.'); }
+  }catch(err){
+    console.error(err);
+    setText('formStatus','Chưa gửi được xác nhận. Vui lòng thử lại sau.');
+  }
 }
 (async function init(){ C = await WeddingCMS.loadConfig(); initContent(); startCountdown(); initEvents(); })();

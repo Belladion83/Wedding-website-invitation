@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.10-global-sync-url',
+  version: '1.11-global-cloud-fixed',
   adminPassword: '29062026',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbxEytWyacmGPXntktLmicqxBmNtch2EER4OjKHDY06A/exec',
   site: {
