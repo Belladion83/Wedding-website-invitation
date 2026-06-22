@@ -3,6 +3,8 @@ let rsvps = [];
 const $ = (id) => document.getElementById(id);
 const fields = () => Array.from(document.querySelectorAll('[data-field]'));
 
+const defaultTransforms = { hero:{x:50,y:50,zoom:1}, envelope1:{x:50,y:50,zoom:1}, envelope2:{x:50,y:50,zoom:1}, groom:{x:50,y:28,zoom:1}, bride:{x:50,y:26,zoom:1}, thankYouBg:{x:50,y:50,zoom:1} };
+
 const transformDefs = [
   { key:'hero', path:'images.hero', label:'Ảnh Hero', previews:['transformPreviewHero'] },
   { key:'envelope1', path:'images.envelope1', label:'Ảnh rút ra 1', previews:['transformPreviewEnvelope1'] },
@@ -13,12 +15,19 @@ const transformDefs = [
 ];
 function ensureImageTransforms(){
   if(!config.imageTransforms || typeof config.imageTransforms !== 'object') config.imageTransforms = {};
-  const defaults = { hero:{x:50,y:50,zoom:1}, envelope1:{x:50,y:50,zoom:1}, envelope2:{x:50,y:50,zoom:1}, groom:{x:50,y:28,zoom:1}, bride:{x:50,y:26,zoom:1}, thankYouBg:{x:50,y:50,zoom:1} };
-  Object.keys(defaults).forEach(key=>{ if(!config.imageTransforms[key]) config.imageTransforms[key] = { ...defaults[key] }; else { config.imageTransforms[key].x = Number(config.imageTransforms[key].x ?? defaults[key].x); config.imageTransforms[key].y = Number(config.imageTransforms[key].y ?? defaults[key].y); config.imageTransforms[key].zoom = Number(config.imageTransforms[key].zoom ?? defaults[key].zoom); } });
+  Object.keys(defaultTransforms).forEach(key=>{ if(!config.imageTransforms[key]) config.imageTransforms[key] = { ...defaultTransforms[key] }; else { config.imageTransforms[key].x = Number(config.imageTransforms[key].x ?? defaultTransforms[key].x); config.imageTransforms[key].y = Number(config.imageTransforms[key].y ?? defaultTransforms[key].y); config.imageTransforms[key].zoom = Number(config.imageTransforms[key].zoom ?? defaultTransforms[key].zoom); } });
 }
 function getTransform(key){ ensureImageTransforms(); return config.imageTransforms[key]; }
 function setTransformValue(key, axis, value){ ensureImageTransforms(); config.imageTransforms[key][axis] = axis === 'zoom' ? Number(value) : Number(value); }
 function applyTransformToImg(el, key){ if(!el) return; const t = getTransform(key); el.style.objectPosition = `${t.x}% ${t.y}%`; el.style.transform = `scale(${t.zoom})`; el.style.transformOrigin = 'center center'; }
+
+function resetTransform(key){
+  ensureImageTransforms();
+  config.imageTransforms[key] = { ...defaultTransforms[key] };
+  renderTransformEditor();
+  renderImagePreviews();
+  setMsg('Đã reset căn chỉnh ảnh. Bấm Lưu đồng bộ để áp dụng cho tất cả thiết bị.');
+}
 function renderTransformEditor(){
   ensureImageTransforms();
   transformDefs.forEach(def=>{
@@ -64,6 +73,9 @@ function bindTransformEditor(){
       img.addEventListener('mousedown', start);
       img.addEventListener('touchstart', start, {passive:false});
     });
+  });
+  document.querySelectorAll('[data-reset-transform]').forEach(btn=>{
+    btn.onclick = ()=> resetTransform(btn.dataset.resetTransform);
   });
 }
 
