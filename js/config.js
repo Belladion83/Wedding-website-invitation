@@ -1,20 +1,20 @@
 window.DEFAULT_WEDDING_CONFIG = {
   version: '1.13-auto-upload-before-save',
-  adminPassword: '29062026',
+  adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
     groomShortName: 'Phú Quí',
     brideShortName: 'Ánh Nguyệt',
     groomFullName: 'Trần Ngô Phú Quí',
     brideFullName: 'Lương Thị Ánh Nguyệt',
-    groomRole: 'Trưởng Nam',
-    brideRole: 'Trưởng Nữ',
-    weddingDate: '2026-06-29T18:00:00+07:00',
-    displayDate: '29 . 06 . 2026',
+    groomRole: 'Út Nam',
+    brideRole: 'Út Nữ',
+    weddingDate: '2026-07-18T18:00:00+07:00',
+    displayDate: '18 . 07 . 2026',
     eventType: 'TIỆC BÁO HỶ',
     saveText: 'SAVE OUR DATE',
     musicUrl: 'assets/music/background.mp3',
-    googleMapsUrl: 'https://maps.google.com/?q=Wedding%20Restaurant',
+    googleMapsUrl: 'https://maps.app.goo.gl/gW5kYpe2KMEC3goF8',
     colorPrimary: '#b98645',
     colorBackground: '#f8efe2'
   },
@@ -27,16 +27,16 @@ window.DEFAULT_WEDDING_CONFIG = {
     thankYouBg: 'assets/images/venue.jpg'
   },
   couple: {
-    groom: { name: 'TRẦN NGÔ PHÚ QUÍ', birthday: '12 . 05 . 1996', subtitle: 'Chú rể', address: 'TP. Hồ Chí Minh' },
-    bride: { name: 'LƯƠNG THỊ ÁNH NGUYỆT', birthday: '21 . 09 . 1998', subtitle: 'Cô dâu', address: 'TP. Hồ Chí Minh' }
+    groom: { name: 'TRẦN NGÔ PHÚ QUÍ', birthday: '08 . 03 . 1999', subtitle: 'Chú rể', address: 'TP. Hồ Chí Minh' },
+    bride: { name: 'LƯƠNG THỊ ÁNH NGUYỆT', birthday: '25 . 01 . 2000', subtitle: 'Cô dâu', address: 'TP. Hồ Chí Minh' }
   },
   story: {
     title: 'OUR STORY',
     text: 'Hành trình yêu thương của chúng tôi sẽ được viết tại đây. Bạn có thể chỉnh nội dung này trong trang Admin để kể lại câu chuyện của cô dâu và chú rể theo cách riêng, nhẹ nhàng và chân thành nhất.'
   },
   families: {
-    groomSide: { title: 'NHÀ TRAI', father: 'Ông: Trần Văn Nam', mother: 'Bà: Nguyễn Thị Lan', address: 'Địa chỉ: 123 Nguyễn Huệ, TP. Hồ Chí Minh' },
-    brideSide: { title: 'NHÀ GÁI', father: 'Ông: Lê Hoàng Phúc', mother: 'Bà: Phạm Thị Mai', address: 'Địa chỉ: 456 Lê Lợi, TP. Hồ Chí Minh' }
+    groomSide: { title: 'NHÀ TRAI', father: 'Ông: Trần Ngọc Truyền', mother: 'Bà: Ngô Thanh Thuỷ', address: 'Địa chỉ: Khóm Hộ Phòng, Phường Giá Rai, Tỉnh Cà Mau' },
+    brideSide: { title: 'NHÀ GÁI', father: 'Ông: Lương Đình Phong', mother: 'Bà: Nguyễn Thị Tình', address: 'Địa chỉ: Tổ 18, Xã Di Linh, Tỉnh Lâm Đồng' }
   },
   event: {
     intro: 'TRÂN TRỌNG KÍNH MỜI',
@@ -45,11 +45,11 @@ window.DEFAULT_WEDDING_CONFIG = {
     address: '177 Phan Chu Trinh, Quận Bình Thạnh, TP. Hồ Chí Minh',
     ceremonyTitle: 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI',
     dayLabel: 'CHỦ NHẬT',
-    dateDay: '29',
-    monthLabel: 'THÁNG 06',
+    dateDay: '18',
+    monthLabel: 'THÁNG 07',
     year: '2026',
-    lunarDate: '(Tức ngày 15/05 năm Bính Ngọ)',
-    timeLabel: '18:00'
+    lunarDate: '(Tức ngày 05/06 năm Bính Ngọ)',
+    timeLabel: '17:30'
   },
   gallery: [
     'assets/images/venue.jpg','assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg',
@@ -59,7 +59,7 @@ window.DEFAULT_WEDDING_CONFIG = {
     'assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg','assets/images/paper-invite.jpg'
   ],
   banking: {
-    bride: { title: 'Mừng cưới cô dâu', bank: 'Vietcombank', accountNo: '1234 5678 9999', accountName: 'ANH NGUYET', qr: 'assets/qr/bride-qr.svg', memo: 'Mung cuoi Anh Nguyet' },
+    bride: { title: 'Mừng cưới cô dâu', bank: 'Vietcombank', accountNo: '1234 5678 9999', accountName: 'LUONG THI ANH NGUYET', qr: 'assets/qr/bride-qr.svg', memo: 'Mung cuoi Anh Nguyet' },
     groom: { title: 'Mừng cưới chú rể', bank: 'Techcombank', accountNo: '9999 8888 7777', accountName: 'TRAN NGO PHU QUI', qr: 'assets/qr/groom-qr.svg', memo: 'Mung cuoi Phu Qui' }
   },
   guests: [
