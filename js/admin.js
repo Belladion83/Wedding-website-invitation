@@ -3,59 +3,72 @@ let rsvps = [];
 const $ = (id) => document.getElementById(id);
 const fields = () => Array.from(document.querySelectorAll('[data-field]'));
 
-const focusDefs = [
-  ['groom','Ảnh chú rể'],
-  ['bride','Ảnh cô dâu']
+const transformDefs = [
+  { key:'hero', path:'images.hero', label:'Ảnh Hero', previews:['transformPreviewHero'] },
+  { key:'envelope1', path:'images.envelope1', label:'Ảnh rút ra 1', previews:['transformPreviewEnvelope1'] },
+  { key:'envelope2', path:'images.envelope2', label:'Ảnh rút ra 2', previews:['transformPreviewEnvelope2'] },
+  { key:'groom', path:'images.groom', label:'Ảnh chú rể', previews:['transformPreviewGroomRect','transformPreviewGroomCircle'] },
+  { key:'bride', path:'images.bride', label:'Ảnh cô dâu', previews:['transformPreviewBrideRect','transformPreviewBrideCircle'] },
+  { key:'thankYouBg', path:'images.thankYouBg', label:'Ảnh nền cảm ơn', previews:['transformPreviewThankYouBg'] }
 ];
-function ensureImageFocus(){
-  if(!config.imageFocus || typeof config.imageFocus !== 'object') config.imageFocus = {};
-  if(!config.imageFocus.groom) config.imageFocus.groom = { x:50, y:28 };
-  if(!config.imageFocus.bride) config.imageFocus.bride = { x:50, y:26 };
+function ensureImageTransforms(){
+  if(!config.imageTransforms || typeof config.imageTransforms !== 'object') config.imageTransforms = {};
+  const defaults = { hero:{x:50,y:50,zoom:1}, envelope1:{x:50,y:50,zoom:1}, envelope2:{x:50,y:50,zoom:1}, groom:{x:50,y:28,zoom:1}, bride:{x:50,y:26,zoom:1}, thankYouBg:{x:50,y:50,zoom:1} };
+  Object.keys(defaults).forEach(key=>{ if(!config.imageTransforms[key]) config.imageTransforms[key] = { ...defaults[key] }; else { config.imageTransforms[key].x = Number(config.imageTransforms[key].x ?? defaults[key].x); config.imageTransforms[key].y = Number(config.imageTransforms[key].y ?? defaults[key].y); config.imageTransforms[key].zoom = Number(config.imageTransforms[key].zoom ?? defaults[key].zoom); } });
 }
-function getFocus(kind){
-  ensureImageFocus();
-  const f = config.imageFocus[kind] || {};
-  return { x: Number(f.x ?? 50), y: Number(f.y ?? 50) };
-}
-function setFocus(kind, axis, value){
-  ensureImageFocus();
-  config.imageFocus[kind][axis] = Number(value);
-}
-function applyFocusToImg(el, kind){
-  if(!el) return;
-  const f = getFocus(kind);
-  el.style.objectPosition = `${f.x}% ${f.y}%`;
-}
-function renderFocusEditor(){
-  ensureImageFocus();
-  const groom = getFocus('groom');
-  const bride = getFocus('bride');
-  if($('focusGroomX')) $('focusGroomX').value = groom.x;
-  if($('focusGroomY')) $('focusGroomY').value = groom.y;
-  if($('focusBrideX')) $('focusBrideX').value = bride.x;
-  if($('focusBrideY')) $('focusBrideY').value = bride.y;
-  if($('focusGroomXVal')) $('focusGroomXVal').textContent = `${groom.x}%`;
-  if($('focusGroomYVal')) $('focusGroomYVal').textContent = `${groom.y}%`;
-  if($('focusBrideXVal')) $('focusBrideXVal').textContent = `${bride.x}%`;
-  if($('focusBrideYVal')) $('focusBrideYVal').textContent = `${bride.y}%`;
-  [['focusPreviewGroomRect','groom'],['focusPreviewGroomCircle','groom'],['focusPreviewBrideRect','bride'],['focusPreviewBrideCircle','bride']].forEach(([id,kind])=>{
-    const img = $(id);
-    if(!img) return;
-    img.src = WeddingCMS.normalizeImageUrl(getPath(config, `images.${kind}`) || '');
-    applyFocusToImg(img, kind);
+function getTransform(key){ ensureImageTransforms(); return config.imageTransforms[key]; }
+function setTransformValue(key, axis, value){ ensureImageTransforms(); config.imageTransforms[key][axis] = axis === 'zoom' ? Number(value) : Number(value); }
+function applyTransformToImg(el, key){ if(!el) return; const t = getTransform(key); el.style.objectPosition = `${t.x}% ${t.y}%`; el.style.transform = `scale(${t.zoom})`; el.style.transformOrigin = 'center center'; }
+function renderTransformEditor(){
+  ensureImageTransforms();
+  transformDefs.forEach(def=>{
+    const t = getTransform(def.key);
+    const cap = def.key.charAt(0).toUpperCase() + def.key.slice(1);
+    if($(`transform${cap}X`)) $('transform'+cap+'X').value = t.x;
+    if($(`transform${cap}Y`)) $('transform'+cap+'Y').value = t.y;
+    if($(`transform${cap}Zoom`)) $('transform'+cap+'Zoom').value = t.zoom;
+    if($(`transform${cap}XVal`)) $('transform'+cap+'XVal').textContent = `${Math.round(t.x)}%`;
+    if($(`transform${cap}YVal`)) $('transform'+cap+'YVal').textContent = `${Math.round(t.y)}%`;
+    if($(`transform${cap}ZoomVal`)) $('transform'+cap+'ZoomVal').textContent = `${Number(t.zoom).toFixed(2)}x`;
+    def.previews.forEach(id=>{ const img = $(id); if(!img) return; img.src = WeddingCMS.normalizeImageUrl(getPath(config, def.path) || ''); applyTransformToImg(img, def.key); });
   });
 }
-function bindFocusEditor(){
-  [['focusGroomX','groom','x'],['focusGroomY','groom','y'],['focusBrideX','bride','x'],['focusBrideY','bride','y']].forEach(([id,kind,axis])=>{
-    const el = $(id);
-    if(!el) return;
-    const handler = ()=>{ setFocus(kind, axis, el.value); renderFocusEditor(); };
-    el.addEventListener('input', handler);
-    el.addEventListener('change', handler);
+function bindTransformEditor(){
+  transformDefs.forEach(def=>{
+    const cap = def.key.charAt(0).toUpperCase() + def.key.slice(1);
+    [['X','x'],['Y','y'],['Zoom','zoom']].forEach(([suffix,axis])=>{
+      const el = $('transform'+cap+suffix);
+      if(!el) return;
+      const handler = ()=>{ setTransformValue(def.key, axis, el.value); renderTransformEditor(); renderImagePreviews(); };
+      el.addEventListener('input', handler);
+      el.addEventListener('change', handler);
+    });
+    def.previews.forEach(id=>{
+      const img = $(id);
+      if(!img) return;
+      const box = img.parentElement;
+      let dragging = false;
+      const move = (clientX, clientY)=>{
+        const rect = box.getBoundingClientRect();
+        const x = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
+        const y = Math.max(0, Math.min(100, ((clientY - rect.top) / rect.height) * 100));
+        setTransformValue(def.key, 'x', x);
+        setTransformValue(def.key, 'y', y);
+        renderTransformEditor();
+        renderImagePreviews();
+      };
+      const onMouseMove = (e)=>{ if(!dragging) return; move(e.clientX, e.clientY); };
+      const stop = ()=>{ dragging = false; box.classList.remove('dragging'); window.removeEventListener('mousemove', onMouseMove); window.removeEventListener('mouseup', stop); window.removeEventListener('touchmove', onTouchMove); window.removeEventListener('touchend', stop); };
+      const onTouchMove = (e)=>{ if(!dragging || !e.touches[0]) return; move(e.touches[0].clientX, e.touches[0].clientY); };
+      const start = (e)=>{ dragging = true; box.classList.add('dragging'); const point = e.touches ? e.touches[0] : e; move(point.clientX, point.clientY); window.addEventListener('mousemove', onMouseMove); window.addEventListener('mouseup', stop); window.addEventListener('touchmove', onTouchMove, {passive:false}); window.addEventListener('touchend', stop); if(e.cancelable) e.preventDefault(); };
+      img.addEventListener('mousedown', start);
+      img.addEventListener('touchstart', start, {passive:false});
+    });
   });
 }
 
 const imgDefs = [
+
   ['images.hero','Ảnh Hero / ảnh lớn đầu thiệp'],
   ['images.envelope1','Ảnh rút ra 1 trên vỏ thiệp'],
   ['images.envelope2','Ảnh rút ra 2 trên vỏ thiệp'],
@@ -95,7 +108,7 @@ function fillForm(){
   fields().forEach(el=>{ el.value = getPath(config, el.dataset.field) || ''; });
   $('galleryText').value = (config.gallery || []).join('\n');
   $('guestText').value = (config.guests || []).map(g=>`${g.id || ''}, ${g.name || ''}, ${g.side || ''}`).join('\n');
-  renderImagePreviews(); renderAlbumPreview(); renderFocusEditor();
+  renderImagePreviews(); renderAlbumPreview(); renderTransformEditor();
 }
 function readForm(){
   fields().forEach(el=>setPath(config, el.dataset.field, el.value));
@@ -103,9 +116,9 @@ function readForm(){
   config.guests = $('guestText').value.split('\n').map(line=>line.split(',').map(x=>x.trim())).filter(a=>a[0]||a[1]).map(a=>({id:a[0], name:a[1], side:a[2]||''}));
 }
 function renderImagePreviews(){
-  document.querySelectorAll('[data-preview]').forEach(img=>{ img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''); const p = img.dataset.preview; if(p === 'images.groom') applyFocusToImg(img, 'groom'); if(p === 'images.bride') applyFocusToImg(img, 'bride'); });
+  document.querySelectorAll('[data-preview]').forEach(img=>{ img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''); const p = img.dataset.preview; const map = {'images.hero':'hero','images.envelope1':'envelope1','images.envelope2':'envelope2','images.groom':'groom','images.bride':'bride','images.thankYouBg':'thankYouBg'}; if(map[p]) applyTransformToImg(img, map[p]); });
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.value = getPath(config, inp.dataset.imageUrl) || '');
-  renderFocusEditor();
+  renderTransformEditor();
 }
 function renderAlbumPreview(){
   const imgs = ($('galleryText').value || '').split('\n').map(x=>x.trim()).filter(Boolean).slice(0,16);
@@ -186,7 +199,7 @@ function assertNoDataImages(){
 
 async function load(){
   config = await WeddingCMS.loadConfig({includeDraft:true});
-  buildImageFields(); bindFocusEditor(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
+  buildImageFields(); bindTransformEditor(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
   const initialTab = (location.hash || '#content').replace('#','');
   showTab(initialTab, false);
 }

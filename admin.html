@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Thiệp báo hỷ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=1.14">
+  <link rel="stylesheet" href="css/admin.css?v=1.15">
 </head>
 <body>
   <div class="wrap">
@@ -42,27 +42,15 @@
         <p class="hint">Bạn có thể dán URL ảnh hoặc chọn file từ thiết bị. Nếu đã cấu hình Google Apps Script, ảnh sẽ được upload lên Google Drive để tất cả thiết bị đều thấy. Nếu chưa cấu hình, ảnh chỉ dùng để preview/lưu nháp trên thiết bị hiện tại. Album hỗ trợ chọn nhiều ảnh cùng lúc.</p>
         <div class="image-grid" id="imageFields"></div>
         <div class="crop-editor card-lite">
-          <h2>Căn chỉnh avatar</h2>
-          <p class="hint">Điều chỉnh vùng trung tâm hiển thị của ảnh chú rể và cô dâu. Khi thay đổi, khung preview sẽ cập nhật ngay. Sau đó bấm <b>Lưu đồng bộ</b> để áp dụng cho tất cả thiết bị.</p>
-          <div class="crop-grid">
-            <div class="crop-card">
-              <h3>Avatar chú rể</h3>
-              <label>Căn ngang: <span id="focusGroomXVal">50%</span><input type="range" min="0" max="100" step="1" id="focusGroomX"></label>
-              <label>Căn dọc: <span id="focusGroomYVal">28%</span><input type="range" min="0" max="100" step="1" id="focusGroomY"></label>
-              <div class="focus-previews">
-                <div class="focus-box rect"><img id="focusPreviewGroomRect" alt="Preview chú rể"></div>
-                <div class="focus-box circle"><img id="focusPreviewGroomCircle" alt="Preview chú rể hình tròn"></div>
-              </div>
-            </div>
-            <div class="crop-card">
-              <h3>Avatar cô dâu</h3>
-              <label>Căn ngang: <span id="focusBrideXVal">50%</span><input type="range" min="0" max="100" step="1" id="focusBrideX"></label>
-              <label>Căn dọc: <span id="focusBrideYVal">26%</span><input type="range" min="0" max="100" step="1" id="focusBrideY"></label>
-              <div class="focus-previews">
-                <div class="focus-box rect"><img id="focusPreviewBrideRect" alt="Preview cô dâu"></div>
-                <div class="focus-box circle"><img id="focusPreviewBrideCircle" alt="Preview cô dâu hình tròn"></div>
-              </div>
-            </div>
+          <h2>Căn chỉnh hình ảnh</h2>
+          <p class="hint">Áp dụng cho toàn bộ ảnh hiển thị trên thiệp, trừ album ảnh cưới. Bạn có thể chỉnh <b>căn ngang</b>, <b>căn dọc</b>, <b>zoom</b> và <b>kéo trực tiếp trong khung preview</b>. Sau đó bấm <b>Lưu đồng bộ</b> để áp dụng cho tất cả thiết bị.</p>
+          <div class="crop-grid all-images">
+            <div class="crop-card" data-transform-card="hero"><h3>Ảnh Hero</h3><label>Căn ngang: <span id="transformHeroXVal">50%</span><input type="range" min="0" max="100" step="1" id="transformHeroX"></label><label>Căn dọc: <span id="transformHeroYVal">50%</span><input type="range" min="0" max="100" step="1" id="transformHeroY"></label><label>Zoom: <span id="transformHeroZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformHeroZoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box arch"><img id="transformPreviewHero" alt="Preview ảnh hero"></div></div></div>
+            <div class="crop-card" data-transform-card="envelope1"><h3>Ảnh rút ra 1</h3><label>Căn ngang: <span id="transformEnvelope1XVal">50%</span><input type="range" min="0" max="100" step="1" id="transformEnvelope1X"></label><label>Căn dọc: <span id="transformEnvelope1YVal">50%</span><input type="range" min="0" max="100" step="1" id="transformEnvelope1Y"></label><label>Zoom: <span id="transformEnvelope1ZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformEnvelope1Zoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box rect portrait"><img id="transformPreviewEnvelope1" alt="Preview ảnh vỏ thiệp 1"></div></div></div>
+            <div class="crop-card" data-transform-card="envelope2"><h3>Ảnh rút ra 2</h3><label>Căn ngang: <span id="transformEnvelope2XVal">50%</span><input type="range" min="0" max="100" step="1" id="transformEnvelope2X"></label><label>Căn dọc: <span id="transformEnvelope2YVal">50%</span><input type="range" min="0" max="100" step="1" id="transformEnvelope2Y"></label><label>Zoom: <span id="transformEnvelope2ZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformEnvelope2Zoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box rect portrait"><img id="transformPreviewEnvelope2" alt="Preview ảnh vỏ thiệp 2"></div></div></div>
+            <div class="crop-card" data-transform-card="groom"><h3>Ảnh chú rể</h3><label>Căn ngang: <span id="transformGroomXVal">50%</span><input type="range" min="0" max="100" step="1" id="transformGroomX"></label><label>Căn dọc: <span id="transformGroomYVal">28%</span><input type="range" min="0" max="100" step="1" id="transformGroomY"></label><label>Zoom: <span id="transformGroomZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformGroomZoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box rect"><img id="transformPreviewGroomRect" alt="Preview chú rể"></div><div class="focus-box circle"><img id="transformPreviewGroomCircle" alt="Preview chú rể hình tròn"></div></div></div>
+            <div class="crop-card" data-transform-card="bride"><h3>Ảnh cô dâu</h3><label>Căn ngang: <span id="transformBrideXVal">50%</span><input type="range" min="0" max="100" step="1" id="transformBrideX"></label><label>Căn dọc: <span id="transformBrideYVal">26%</span><input type="range" min="0" max="100" step="1" id="transformBrideY"></label><label>Zoom: <span id="transformBrideZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformBrideZoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box rect"><img id="transformPreviewBrideRect" alt="Preview cô dâu"></div><div class="focus-box circle"><img id="transformPreviewBrideCircle" alt="Preview cô dâu hình tròn"></div></div></div>
+            <div class="crop-card" data-transform-card="thankYouBg"><h3>Ảnh nền lời cảm ơn</h3><label>Căn ngang: <span id="transformThankYouBgXVal">50%</span><input type="range" min="0" max="100" step="1" id="transformThankYouBgX"></label><label>Căn dọc: <span id="transformThankYouBgYVal">50%</span><input type="range" min="0" max="100" step="1" id="transformThankYouBgY"></label><label>Zoom: <span id="transformThankYouBgZoomVal">1.00x</span><input type="range" min="1" max="2.5" step="0.01" id="transformThankYouBgZoom"></label><div class="drag-hint">Kéo trực tiếp trong khung preview để căn vị trí</div><div class="focus-previews"><div class="focus-box wide"><img id="transformPreviewThankYouBg" alt="Preview ảnh nền cảm ơn"></div></div></div>
           </div>
         </div>
         <h2>Album ảnh cưới</h2>
@@ -81,6 +69,6 @@
         <h2>Thiết lập Google Sheet / Apps Script</h2><p>1) Tạo Google Sheet mới. 2) Mở Extensions → Apps Script. 3) Dán file <b>google-apps-script.gs</b>. 4) Deploy Web App. 5) Dán URL Web App vào ô dưới đây. Lưu ý: để mọi thiết bị đều tự đọc dữ liệu cloud, URL này cần được cấu hình một lần trong file js/config.js hoặc được tôi cập nhật vào source sau khi bạn gửi URL.</p><label>Google Apps Script Web App URL<input data-field="googleAppsScriptUrl"></label><p class="hint">Nút <b>Lưu bản nháp</b> chỉ lưu để bạn chỉnh thử trên thiết bị hiện tại. Nút <b>Lưu</b> sẽ publish lên Google Sheet/Google Drive để mọi thiết bị thấy thay đổi. Nếu chưa có Google Apps Script URL thì không thể đồng bộ toàn bộ thiết bị.</p><label>Mật khẩu admin<input data-field="adminPassword"></label><label>Link nhạc nền MP3<input data-field="site.musicUrl"></label><label>Màu vàng chủ đạo<input data-field="site.colorPrimary"></label><div class="actions"><button class="btn" id="downloadConfigBtn">Tải config JSON</button><button class="btn" id="resetLocalBtn">Xóa bản nháp local</button></div><p class="msg" id="saveMsg"></p></section>
     </main>
   </div>
-  <script src="js/config.js?v=1.14"></script><script src="js/cms-client.js?v=1.14"></script><script src="js/admin.js?v=1.14"></script>
+  <script src="js/config.js?v=1.15"></script><script src="js/cms-client.js?v=1.15"></script><script src="js/admin.js?v=1.15"></script>
 </body>
 </html>

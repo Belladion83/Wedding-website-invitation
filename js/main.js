@@ -9,14 +9,23 @@ function imgUrl(value){ return WeddingCMS && WeddingCMS.normalizeImageUrl ? Wedd
 function setSrc(id, value){ const el=$(id); if(el) el.src = imgUrl(value); }
 function setBg(id, value){ const el=$(id); const v = imgUrl(value); if(el) el.style.backgroundImage = v ? `url("${v}")` : ''; }
 
-function getFocus(kind){
-  const base = (C && C.imageFocus && C.imageFocus[kind]) || {};
-  return { x: Number(base.x ?? 50), y: Number(base.y ?? 50) };
+function getTransform(kind){
+  const base = (C && C.imageTransforms && C.imageTransforms[kind]) || {};
+  return { x: Number(base.x ?? 50), y: Number(base.y ?? 50), zoom: Number(base.zoom ?? 1) };
 }
-function applyImgFocus(el, kind){
+function applyImgTransform(el, kind){
   if(!el) return;
-  const f = getFocus(kind);
-  el.style.objectPosition = `${f.x}% ${f.y}%`;
+  const t = getTransform(kind);
+  el.style.objectPosition = `${t.x}% ${t.y}%`;
+  el.style.transform = `scale(${t.zoom})`;
+  el.style.transformOrigin = 'center center';
+}
+function applyBgTransform(el, kind){
+  if(!el) return;
+  const t = getTransform(kind);
+  el.style.backgroundPosition = `${t.x}% ${t.y}%`;
+  el.style.backgroundSize = `${Math.max(100, t.zoom * 100)}%`;
+  el.style.backgroundRepeat = 'no-repeat';
 }
 function stripPrefix(s){ return String(s || '').replace(/^Ông:\s*/i,'').replace(/^Bà:\s*/i,'').replace(/^Địa chỉ:\s*/i,''); }
 function resolveGuest(){
@@ -30,14 +39,16 @@ function initContent(){
   setText('introGroom', C.site.groomShortName); setText('introBride', C.site.brideShortName); setText('introDate', C.site.displayDate); setText('introType', C.site.eventType);
   document.querySelectorAll('[data-bind="site.saveText"]').forEach(el => el.textContent = C.site.saveText || 'SAVE OUR DATE');
   setSrc('envPhoto1', C.images.envelope1); setSrc('envPhoto2', C.images.envelope2); setText('envDate1', C.site.displayDate); setText('envDate2', C.site.displayDate);
+  applyImgTransform($('envPhoto1'), 'envelope1'); applyImgTransform($('envPhoto2'), 'envelope2');
   setBg('heroPhoto', C.images.hero); setBg('thanks', C.images.thankYouBg || C.images.hero);
+  applyBgTransform($('heroPhoto'), 'hero'); applyBgTransform($('thanks'), 'thankYouBg');
   setText('heroGroomName', (C.site.groomFullName || '').toUpperCase());
   setText('heroBrideName', (C.site.brideFullName || '').toUpperCase());
   setText('heroDate', C.site.displayDate);
   const guest = resolveGuest();
   if (guest.name) $('inviteeLine').innerHTML = `<span>Kính mời</span><span>${escapeHtml(guest.name)}</span>`;
   setSrc('groomPhoto', C.images.groom); setSrc('bridePhoto', C.images.bride); setSrc('eventGroomPhoto', C.images.groom); setSrc('eventBridePhoto', C.images.bride);
-  applyImgFocus($('groomPhoto'), 'groom'); applyImgFocus($('eventGroomPhoto'), 'groom'); applyImgFocus($('bridePhoto'), 'bride'); applyImgFocus($('eventBridePhoto'), 'bride');
+  applyImgTransform($('groomPhoto'), 'groom'); applyImgTransform($('eventGroomPhoto'), 'groom'); applyImgTransform($('bridePhoto'), 'bride'); applyImgTransform($('eventBridePhoto'), 'bride');
   setText('groomName', C.couple.groom.name); setText('groomBirthday', C.couple.groom.birthday); setText('groomSubtitle', C.couple.groom.subtitle); setText('groomAddress', C.couple.groom.address);
   setText('brideName', C.couple.bride.name); setText('brideBirthday', C.couple.bride.birthday); setText('brideSubtitle', C.couple.bride.subtitle); setText('brideAddress', C.couple.bride.address);
   setText('storyTitle', C.story.title || 'OUR STORY'); setText('storyText', C.story.text);
