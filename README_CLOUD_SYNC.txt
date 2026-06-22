@@ -37,3 +37,6 @@ NÚT TRONG ADMIN:
 
 
 V1.12 note: Ảnh upload lên Google Drive sẽ được chuyển sang link thumbnail public (drive.google.com/thumbnail?id=...&sz=w2000) để hiển thị ổn định trên thẻ img và background của thiệp. Sau khi upload ảnh trong Admin, bấm Lưu đồng bộ để cập nhật cho tất cả thiết bị.
+
+
+V1.13: Khi bấm Lưu đồng bộ, hệ thống sẽ tự chuyển các ảnh còn nằm trong local/data URL lên Google Drive trước, sau đó mới lưu config lên Google Sheet. Điều này tránh lỗi mỗi thiết bị thấy ảnh khác nhau hoặc config quá nặng do chứa ảnh base64.

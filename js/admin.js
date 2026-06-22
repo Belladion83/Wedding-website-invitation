@@ -83,6 +83,53 @@ async function addGalleryFiles(){
   renderAlbumPreview();
   setMsg(cloud ? 'Đã upload album lên cloud. Bấm Lưu để đồng bộ cho mọi thiết bị.' : 'Album đang là dữ liệu local. Cần cấu hình Google Apps Script để đồng bộ mọi thiết bị.');
 }
+
+async function uploadDataUrlForPath(path, dataUrl){
+  const url = getCloudUrl();
+  if(!url || !isDataUrl(dataUrl)) return dataUrl;
+  const mime = (String(dataUrl).match(/^data:([^;]+);base64,/) || [,'image/png'])[1];
+  const ext = (mime.split('/')[1] || 'png').replace('jpeg','jpg');
+  const fakeFileName = path.replace(/[^a-z0-9_-]+/gi,'-') + '-' + Date.now() + '.' + ext;
+  const data = await WeddingCMS.postForm(url, {
+    action:'uploadImage',
+    uploadId:'auto_' + Date.now() + '_' + Math.random().toString(36).slice(2),
+    password:config.adminPassword || '',
+    fieldPath:path || '',
+    filename:fakeFileName,
+    mimeType:mime,
+    dataUrl:dataUrl
+  });
+  if(data && data.url) return WeddingCMS.normalizeImageUrl(data.url);
+  throw new Error('Upload ảnh local lên Drive không trả về URL');
+}
+async function uploadPendingLocalImages(){
+  const tasks = [];
+  imgDefs.forEach(([path])=>{
+    const v = getPath(config, path);
+    if(isDataUrl(v)) tasks.push({type:'field', path, value:v});
+  });
+  (config.gallery || []).forEach((v, i)=>{
+    if(isDataUrl(v)) tasks.push({type:'gallery', path:'gallery.'+i, index:i, value:v});
+  });
+  if(!tasks.length) return 0;
+  for(let i=0; i<tasks.length; i++){
+    const t = tasks[i];
+    setMsg(`Đang chuyển ảnh local lên Google Drive (${i+1}/${tasks.length})...`);
+    const url = await uploadDataUrlForPath(t.path, t.value);
+    if(t.type === 'gallery') config.gallery[t.index] = url;
+    else setPath(config, t.path, url);
+  }
+  renderImagePreviews();
+  renderAlbumPreview();
+  return tasks.length;
+}
+function assertNoDataImages(){
+  const found = [];
+  imgDefs.forEach(([path])=>{ if(isDataUrl(getPath(config,path))) found.push(path); });
+  (config.gallery || []).forEach((v,i)=>{ if(isDataUrl(v)) found.push('gallery['+i+']'); });
+  return found;
+}
+
 async function load(){
   config = await WeddingCMS.loadConfig({includeDraft:true});
   buildImageFields(); fillForm(); setMsg('Đã tải cấu hình. Bạn có thể chỉnh nội dung, hình ảnh và lưu.');
@@ -125,11 +172,17 @@ async function saveCloud(){
     showTab('setup', true);
     return;
   }
-  const hasLocalImages = JSON.stringify(config).includes('data:image/');
-  if(hasLocalImages && !confirm('Một số ảnh vẫn đang là dữ liệu local/data URL. Các ảnh này có thể quá nặng để đồng bộ. Bạn nên upload ảnh bằng nút chọn file ở tab Hình ảnh trước. Bạn vẫn muốn Lưu?')) return;
   config.googleAppsScriptUrl = url;
-  setMsg('Đang lưu dữ liệu thật lên Google Sheet...');
+  setMsg('Đang kiểm tra ảnh local trước khi lưu đồng bộ...');
   try{
+    const uploadedCount = await uploadPendingLocalImages();
+    const stillLocal = assertNoDataImages();
+    if(stillLocal.length){
+      setMsg('Chưa thể lưu đồng bộ vì vẫn còn ảnh local chưa upload: ' + stillLocal.join(', ') + '. Hãy thử chọn ảnh nhỏ hơn hoặc dán URL ảnh Drive.');
+      return;
+    }
+    if(uploadedCount) setMsg('Đã chuyển ' + uploadedCount + ' ảnh lên Google Drive. Đang lưu dữ liệu thật lên Google Sheet...');
+    else setMsg('Đang lưu dữ liệu thật lên Google Sheet...');
     const result = await WeddingCMS.postForm(url, {
       action:'saveConfig',
       password:config.adminPassword,
@@ -148,7 +201,7 @@ async function saveCloud(){
     }
   }catch(err){
     console.error(err);
-    setMsg('Chưa lưu được dữ liệu thật: ' + (err.message || err) + '. Hãy kiểm tra Apps Script đã dán code v1.11, Deploy Web App quyền Anyone và URL /exec đúng.');
+    setMsg('Chưa lưu được dữ liệu thật: ' + (err.message || err) + '. Hãy kiểm tra Apps Script đã dán code v1.13, Deploy Web App quyền Anyone, URL /exec đúng và ảnh không vượt dung lượng.');
   }
 }
 function resetLocal(){ if(confirm('Xóa bản nháp local và quay về dữ liệu đã lưu thật/Google Sheet?')){ WeddingCMS.clearDraft(); location.reload(); } }
