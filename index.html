@@ -8,32 +8,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1.21">
-  <link rel="stylesheet" href="css/frame-fix.css?v=1.21">
-  <link rel="stylesheet" href="css/cinelove-inspired.css?v=1.21">
-  <link rel="stylesheet" href="css/template39-inspired.css?v=1.21">
+  <link rel="stylesheet" href="css/style.css?v=1.22">
+  <link rel="stylesheet" href="css/frame-fix.css?v=1.22">
+  <link rel="stylesheet" href="css/cinelove-inspired.css?v=1.22">
+  <link rel="stylesheet" href="css/template39-inspired.css?v=1.22">
+  <link rel="stylesheet" href="css/template44-opening.css?v=1.22">
 </head>
 <body>
   <audio id="bgMusic" loop preload="none"></audio>
   <button class="music-toggle hidden" id="musicToggle" aria-label="Bật/tắt nhạc">Nhạc</button>
 
   <main id="app" class="page-shell">
-    <section class="intro" id="intro">
-      <div class="intro-frame" id="envelope">
-        <div class="intro-left">
-          <div class="paper-edge paper-edge-left"></div>
-          <p class="save fade-in" data-bind="site.saveText">SAVE OUR DATE</p>
-          <h1 class="script-names"><span id="introGroom">Phú Quí</span><small>&</small><span id="introBride">Ánh Nguyệt</span></h1>
-          <p class="date" id="introDate">18 . 07 . 2026</p>
-          <p class="type" id="introType">TIỆC BÁO HỶ</p>
-          <button class="btn outline" id="openEnvelope">MỞ THIỆP</button>
+    <section class="intro template44-intro" id="intro">
+      <div class="t44-gate" id="envelope" role="button" tabindex="0" aria-label="Chạm để mở thiệp">
+        <button class="t44-music-pill" type="button" id="musicStart">Nhạc</button>
+
+        <div class="t44-cover" id="openEnvelope">
+          <div class="t44-line t44-small">YOU ARE</div>
+          <div class="t44-line t44-big">THE LOVE OF</div>
+          <div class="t44-line t44-big">MY LIFE</div>
+          <div class="t44-divider"></div>
+          <div class="t44-line t44-script">LOVE</div>
+          <div class="t44-line t44-wedding">WEDDING</div>
+          <p class="t44-note">Gửi đến bạn tấm thiệp cưới đầy yêu thương.</p>
+          <p class="t44-touch">Chạm để mở thiệp</p>
         </div>
-        <div class="intro-right">
-          <div class="paper-edge paper-edge-right"></div>
-          <figure class="polaroid p1"><div class="polaroid-media"><img id="envPhoto1" alt="Ảnh cô dâu chú rể"></div><figcaption id="envDate1">18 . 07 . 2026</figcaption></figure>
-          <figure class="polaroid p2"><div class="polaroid-media"><img id="envPhoto2" alt="Ảnh cô dâu chú rể"></div><figcaption id="envDate2">18 . 07 . 2026</figcaption></figure>
-          <p class="save-final">SAVE OUR DATE</p>
-          <button class="btn solid final-open" id="enterSite">MỞ THIỆP</button>
+
+        <div class="t44-letter" id="enterSite">
+          <p class="t44-kicker">FALL IN</p>
+          <h1><span id="introGroom">Phú Quí</span><small>&</small><span id="introBride">Ánh Nguyệt</span></h1>
+          <p class="t44-date" id="introDate">18 . 07 . 2026</p>
+          <p class="t44-type" id="introType">TIỆC BÁO HỶ</p>
+          <p class="t44-poem">As the clouds and mist dissipate,<br>I love you and everyone knows it.</p>
+          <button class="btn solid t44-open-btn" type="button">Mở thiệp</button>
         </div>
       </div>
     </section>
@@ -120,6 +127,6 @@
 
   <div class="lightbox" id="lightbox"><button id="closeLightbox">×</button><img id="lightboxImg" alt="Ảnh cưới"><button id="prevImg">‹</button><button id="nextImg">›</button></div>
   <div class="gift-sheet" id="giftSheet"><div class="gift-content"><button class="close" id="closeGift">×</button><h2>GỬI QUÀ MỪNG CƯỚI</h2><div class="gift-grid"><article><h3 id="brideGiftTitle"></h3><img id="brideQr" alt="QR cô dâu"><p id="brideBank"></p><p id="brideAcc"></p><p id="brideNameBank"></p><small id="brideMemo"></small></article><article><h3 id="groomGiftTitle"></h3><img id="groomQr" alt="QR chú rể"><p id="groomBank"></p><p id="groomAcc"></p><p id="groomNameBank"></p><small id="groomMemo"></small></article></div><button class="btn outline" id="backInvite">QUAY LẠI THIỆP</button></div></div>
-  <script src="js/config.js?v=1.21"></script><script src="js/cms-client.js?v=1.21"></script><script src="js/main.js?v=1.21"></script>
+  <script src="js/config.js?v=1.22"></script><script src="js/cms-client.js?v=1.22"></script><script src="js/main.js?v=1.22"></script>
 </body>
 </html>

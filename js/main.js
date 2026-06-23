@@ -103,9 +103,37 @@ function startCountdown(){
   tick(); setInterval(tick,1000);
 }
 function initEvents(){
-  $('openEnvelope').onclick = () => $('envelope').classList.add('opened');
-  $('enterSite').onclick = () => { $('intro').classList.add('hidden'); $('site').classList.remove('hidden'); $('musicToggle').classList.remove('hidden'); playMusic(); window.scrollTo({top:0, behavior:'smooth'}); };
-  $('musicStart').onclick = playMusic; $('musicToggle').onclick = toggleMusic;
+  const gate = $('envelope');
+  const openBtn = $('openEnvelope');
+  const enterBtn = $('enterSite');
+  const openInvitation = (e) => {
+    if(e) e.stopPropagation();
+    if(gate) gate.classList.add('opened');
+  };
+  const enterInvitation = (e) => {
+    if(e) e.stopPropagation();
+    $('intro').classList.add('hidden');
+    $('site').classList.remove('hidden');
+    $('musicToggle').classList.remove('hidden');
+    playMusic();
+    window.scrollTo({top:0, behavior:'smooth'});
+  };
+  if(openBtn) openBtn.onclick = openInvitation;
+  if(gate) {
+    gate.onclick = () => {
+      if(!gate.classList.contains('opened')) openInvitation();
+    };
+    gate.onkeydown = (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if(!gate.classList.contains('opened')) openInvitation();
+        else enterInvitation(e);
+      }
+    };
+  }
+  if(enterBtn) enterBtn.onclick = enterInvitation;
+  if($('musicStart')) $('musicStart').onclick = (e) => { e.stopPropagation(); playMusic(); };
+  $('musicToggle').onclick = toggleMusic;
   $('giftBtn').onclick = () => $('giftSheet').classList.add('open'); $('closeGift').onclick = () => $('giftSheet').classList.remove('open'); $('backInvite').onclick = () => $('giftSheet').classList.remove('open');
   $('closeLightbox').onclick=()=> $('lightbox').classList.remove('open'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
   $('rsvpForm').onsubmit = submitRsvp;

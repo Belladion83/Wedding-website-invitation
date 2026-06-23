@@ -1,0 +1,302 @@
+
+/* v1.22 - Template 44 inspired opening effect.
+   Touch-to-open poetic cover. No original CineLove assets/source copied. */
+
+.template44-intro{
+  min-height:100vh !important;
+  background:#fff !important;
+  padding:0 !important;
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  overflow:hidden;
+}
+
+.template44-intro.hidden{
+  display:none !important;
+}
+
+.t44-gate{
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(143,20,32,.05), transparent 26%),
+    linear-gradient(180deg,#fff,#fffaf4);
+  cursor:pointer;
+  overflow:hidden;
+  outline:none;
+}
+
+.t44-gate:before,
+.t44-gate:after{
+  content:"";
+  position:absolute;
+  width:62vw;
+  max-width:330px;
+  height:62vw;
+  max-height:330px;
+  border:1px solid rgba(214,167,93,.35);
+  border-radius:50%;
+  opacity:.32;
+  pointer-events:none;
+}
+.t44-gate:before{
+  top:-120px;
+  left:-110px;
+}
+.t44-gate:after{
+  right:-125px;
+  bottom:-125px;
+}
+
+.t44-music-pill{
+  position:absolute;
+  top:36px;
+  left:34px;
+  z-index:5;
+  border:2px solid #b88c4b;
+  background:rgba(255,255,255,.78);
+  color:#8a6331;
+  border-radius:999px;
+  padding:18px 28px;
+  font-weight:800;
+  font-size:18px;
+  box-shadow:none;
+}
+
+.t44-cover,
+.t44-letter{
+  width:min(86vw,430px);
+  min-height:640px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:42px 28px;
+  color:#8f1420;
+  transition:opacity .8s ease, transform .9s cubic-bezier(.19,1,.22,1), filter .8s ease;
+}
+
+.t44-cover{
+  position:relative;
+  z-index:2;
+}
+
+.t44-cover:before{
+  content:"";
+  position:absolute;
+  inset:34px 18px;
+  border:1px solid rgba(214,167,93,.26);
+  border-radius:220px 220px 22px 22px;
+  opacity:0;
+  transform:scale(.95);
+  transition:opacity .7s ease, transform .7s ease;
+}
+
+.t44-gate:not(.opened) .t44-cover:before{
+  animation:t44BorderIn 1.8s .4s ease forwards;
+}
+
+@keyframes t44BorderIn{
+  to{opacity:1;transform:scale(1)}
+}
+
+.t44-line{
+  position:relative;
+  z-index:1;
+  opacity:0;
+  transform:translateY(22px);
+  animation:t44FadeUp .9s ease forwards;
+}
+
+.t44-small{
+  font-family:Inter,Arial,sans-serif;
+  font-size:14px;
+  letter-spacing:.45em;
+  color:#8c7a70;
+  margin-bottom:12px;
+}
+
+.t44-big{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(44px,12vw,70px);
+  line-height:.95;
+  letter-spacing:.04em;
+  color:#8f1420;
+  font-weight:700;
+}
+
+.t44-line:nth-child(1){animation-delay:.18s}
+.t44-line:nth-child(2){animation-delay:.38s}
+.t44-line:nth-child(3){animation-delay:.56s}
+.t44-line:nth-child(5){animation-delay:.9s}
+.t44-line:nth-child(6){animation-delay:1.08s}
+
+.t44-divider{
+  width:72px;
+  height:1px;
+  background:#d6a75d;
+  margin:26px 0 20px;
+  opacity:0;
+  animation:t44FadeUp .9s .76s ease forwards;
+}
+
+.t44-script{
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  color:#d6a75d;
+  font-size:34px;
+  line-height:1;
+}
+
+.t44-wedding{
+  font-family:"Playfair Display",serif;
+  font-size:42px;
+  letter-spacing:.12em;
+  color:#8f1420;
+  margin-top:4px;
+}
+
+.t44-note{
+  max-width:300px;
+  color:#7d6d64;
+  font-size:15px;
+  line-height:1.75;
+  margin:28px 0 0;
+  opacity:0;
+  animation:t44FadeUp .9s 1.25s ease forwards;
+}
+
+.t44-touch{
+  color:#8f1420;
+  margin-top:34px;
+  text-decoration:underline;
+  text-underline-offset:4px;
+  font-weight:700;
+  opacity:0;
+  animation:t44PulseTouch 1.8s 1.5s ease infinite;
+}
+
+@keyframes t44FadeUp{
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes t44PulseTouch{
+  0%,100%{opacity:.42;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-3px)}
+}
+
+/* Open state: cover moves out, invitation card reveals */
+.t44-letter{
+  position:absolute;
+  z-index:3;
+  opacity:0;
+  transform:translateY(48px) scale(.94);
+  filter:blur(10px);
+  pointer-events:none;
+  background:rgba(255,255,255,.66);
+  border:1px solid rgba(214,167,93,.28);
+  border-radius:260px 260px 26px 26px;
+  box-shadow:0 20px 70px rgba(90,40,24,.10);
+  min-height:620px;
+}
+
+.t44-gate.opened .t44-cover{
+  opacity:0;
+  transform:translateY(-60px) scale(.96);
+  filter:blur(8px);
+  pointer-events:none;
+}
+
+.t44-gate.opened .t44-letter{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+  pointer-events:auto;
+  transition-delay:.16s;
+}
+
+.t44-kicker{
+  font-family:"Cormorant Garamond",serif;
+  color:#d6a75d;
+  font-style:italic;
+  font-size:30px;
+  margin:0 0 18px;
+}
+
+.t44-letter h1{
+  font-family:"Playfair Display",serif;
+  color:#8f1420;
+  font-size:clamp(42px,11vw,68px);
+  line-height:1;
+  margin:0;
+  text-transform:uppercase;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+}
+
+.t44-letter h1 small{
+  color:#d6a75d;
+  font-size:.55em;
+  line-height:.85;
+}
+
+.t44-date{
+  font-family:"Playfair Display",serif;
+  color:#8f1420;
+  letter-spacing:.38em;
+  font-size:20px;
+  font-weight:700;
+  margin:30px 0 8px;
+}
+
+.t44-type{
+  color:#7d6d64;
+  letter-spacing:.24em;
+  font-size:12px;
+  margin:0 0 22px;
+}
+
+.t44-poem{
+  color:#7d6d64;
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:18px;
+  line-height:1.55;
+  margin:0 0 26px;
+}
+
+.t44-open-btn{
+  border-radius:999px !important;
+  padding:14px 30px !important;
+}
+
+@media(max-width:520px){
+  .t44-music-pill{
+    top:28px;
+    left:26px;
+    padding:15px 24px;
+    font-size:17px;
+  }
+
+  .t44-cover,.t44-letter{
+    width:88vw;
+    min-height:610px;
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  .t44-big{
+    font-size:clamp(42px,14vw,64px);
+  }
+
+  .t44-letter h1{
+    font-size:clamp(34px,12vw,56px);
+  }
+}
