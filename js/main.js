@@ -9,9 +9,22 @@ function imgUrl(value){ return WeddingCMS && WeddingCMS.normalizeImageUrl ? Wedd
 function setSrc(id, value){ const el=$(id); if(el) el.src = imgUrl(value); }
 function setBg(id, value){ const el=$(id); const v = imgUrl(value); if(el) el.style.backgroundImage = v ? `url("${v}")` : ''; }
 
+const DEFAULT_IMAGE_TRANSFORMS = {
+  hero: { x: 50, y: 50, zoom: 1 },
+  envelope1: { x: 50, y: 50, zoom: 1 },
+  envelope2: { x: 50, y: 50, zoom: 1 },
+  groom: { x: 50, y: 28, zoom: 1 },
+  bride: { x: 50, y: 26, zoom: 1 },
+  thankYouBg: { x: 50, y: 50, zoom: 1 }
+};
 function getTransform(kind){
+  const fallback = DEFAULT_IMAGE_TRANSFORMS[kind] || { x: 50, y: 50, zoom: 1 };
   const base = (C && C.imageTransforms && C.imageTransforms[kind]) || {};
-  return { x: Number(base.x ?? 50), y: Number(base.y ?? 50), zoom: Number(base.zoom ?? 1) };
+  return {
+    x: Number(base.x ?? fallback.x),
+    y: Number(base.y ?? fallback.y),
+    zoom: Number(base.zoom ?? fallback.zoom)
+  };
 }
 function applyImgTransform(el, kind){
   if(!el) return;

@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.13-auto-upload-before-save',
+  version: '1.17-frame-safe-fixed',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -25,6 +25,14 @@ window.DEFAULT_WEDDING_CONFIG = {
     groom: 'assets/images/groom.svg',
     bride: 'assets/images/bride.svg',
     thankYouBg: 'assets/images/venue.jpg'
+  },
+  imageTransforms: {
+    hero: { x: 50, y: 50, zoom: 1 },
+    envelope1: { x: 50, y: 50, zoom: 1 },
+    envelope2: { x: 50, y: 50, zoom: 1 },
+    groom: { x: 50, y: 28, zoom: 1 },
+    bride: { x: 50, y: 26, zoom: 1 },
+    thankYouBg: { x: 50, y: 50, zoom: 1 }
   },
   couple: {
     groom: { name: 'TRẦN NGÔ PHÚ QUÍ', birthday: '08 . 03 . 1999', subtitle: 'Chú rể', address: 'TP. Hồ Chí Minh' },
