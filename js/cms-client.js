@@ -17,25 +17,49 @@
   };
   const clone = (obj) => JSON.parse(JSON.stringify(obj || {}));
 
+  const getDriveFileId = (value) => {
+    const s = String(value || '').trim();
+    if (!s) return '';
+    let m = s.match(/\/file\/d\/([^/?#]+)/);
+    if (m) return m[1];
+    try {
+      const u = new URL(s);
+      if (u.hostname.includes('drive.google.com')) {
+        const id = u.searchParams.get('id') || '';
+        if (id) return id;
+      }
+      if (u.hostname.includes('googleusercontent.com')) {
+        m = s.match(/\/d\/([-\w]{20,})/);
+        if (m) return m[1];
+      }
+    } catch(e) {}
+    m = s.match(/(?:id=|\/d\/)([-\w]{20,})/);
+    return m ? m[1] : '';
+  };
+  const toDriveShareUrl = (value) => {
+    const id = getDriveFileId(value);
+    return id ? 'https://drive.google.com/file/d/' + encodeURIComponent(id) + '/view?usp=sharing' : String(value || '').trim();
+  };
   const normalizeImageUrl = (value) => {
     const s = String(value || '').trim();
     if (!s) return '';
     if (s.startsWith('data:') || s.startsWith('assets/') || s.startsWith('./') || s.startsWith('../')) return s;
-    let id = '';
-    let m = s.match(/\/file\/d\/([^/]+)/);
-    if (m) id = m[1];
-    if (!id) {
-      try {
-        const u = new URL(s);
-        if (u.hostname.includes('drive.google.com')) id = u.searchParams.get('id') || '';
-      } catch(e) {}
-    }
-    if (!id) {
-      m = s.match(/(?:id=|\/d\/)([-\w]{20,})/);
-      if (m) id = m[1];
-    }
+    const id = getDriveFileId(s);
     if (id) return 'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w2000';
     return s;
+  };
+  const driveImageCandidates = (value) => {
+    const s = String(value || '').trim();
+    if (!s) return [];
+    if (s.startsWith('data:') || s.startsWith('assets/') || s.startsWith('./') || s.startsWith('../')) return [s];
+    const id = getDriveFileId(s);
+    if (!id) return [s];
+    return [
+      'https://drive.google.com/thumbnail?id=' + encodeURIComponent(id) + '&sz=w2000',
+      'https://lh3.googleusercontent.com/d/' + encodeURIComponent(id) + '=w2000',
+      'https://drive.google.com/uc?export=view&id=' + encodeURIComponent(id),
+      toDriveShareUrl(s)
+    ];
   };
   const readKey = (key) => { try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch(e){ return null; } };
   const writeKey = (key, cfg) => localStorage.setItem(key, JSON.stringify(cfg));
@@ -132,7 +156,15 @@
       mimeType: file.type || 'image/png',
       dataUrl
     });
-    if (data && data.url) data.url = normalizeImageUrl(data.url);
+    // Store a normal Google Drive share link, because users can manually paste this form and it previews reliably.
+    // Keep previewUrl/candidates for immediate Admin preview right after upload.
+    if (data) {
+      const sourceUrl = data.driveUrl || data.viewUrl || data.url || data.downloadUrl || data.altUrl || '';
+      data.storedUrl = toDriveShareUrl(sourceUrl);
+      data.previewUrl = normalizeImageUrl(sourceUrl);
+      data.candidates = driveImageCandidates(sourceUrl);
+      data.url = data.storedUrl;
+    }
     return data;
   };
 
@@ -164,6 +196,6 @@
     return cfg;
   };
 
-  window.WeddingCMS = { DRAFT_KEY, LIVE_KEY, LEGACY_KEY, getDefault, getDraft, getLive, saveDraft, saveLive, clearDraft, clearLive, clearAllLocal, deepMerge, loadConfig, jsonp, postForm, postNoCors, uploadImage, readFileDataUrl, getScriptUrl, normalizeImageUrl,
+  window.WeddingCMS = { DRAFT_KEY, LIVE_KEY, LEGACY_KEY, getDefault, getDraft, getLive, saveDraft, saveLive, clearDraft, clearLive, clearAllLocal, deepMerge, loadConfig, jsonp, postForm, postNoCors, uploadImage, readFileDataUrl, getScriptUrl, normalizeImageUrl, getDriveFileId, toDriveShareUrl, driveImageCandidates,
     getLocal:getDraft, saveLocal:saveDraft, clearLocal:clearDraft };
 })();

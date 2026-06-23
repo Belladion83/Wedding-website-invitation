@@ -3,6 +3,40 @@ let rsvps = [];
 const $ = (id) => document.getElementById(id);
 const fields = () => Array.from(document.querySelectorAll('[data-field]'));
 
+const imagePreviewCache = {};
+const imagePreviewUpdatedAt = {};
+function cacheBust(url, key){
+  const s = String(url || '');
+  if(!s) return '';
+  if(s.startsWith('data:') || s.startsWith('assets/') || s.startsWith('./') || s.startsWith('../')) return s;
+  const stamp = imagePreviewUpdatedAt[key] || Date.now();
+  return s + (s.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(stamp);
+}
+function setImageWithFallback(img, src, key, transformKey){
+  if(!img) return;
+  const localPreview = imagePreviewCache[key] || '';
+  const candidates = (WeddingCMS.driveImageCandidates ? WeddingCMS.driveImageCandidates(src) : [WeddingCMS.normalizeImageUrl(src)])
+    .map(u => cacheBust(u, key))
+    .filter(Boolean);
+  if(localPreview && !candidates.includes(localPreview)) candidates.push(localPreview);
+  if(!candidates.length) candidates.push('');
+  let index = 0;
+  img.onerror = () => {
+    index += 1;
+    if(index < candidates.length) img.src = candidates[index];
+    else if(localPreview) img.src = localPreview;
+  };
+  img.onload = () => {
+    // Once the Drive image loads successfully, the local preview is no longer needed.
+    if(localPreview && img.src !== localPreview && !String(img.src || '').startsWith('data:')) {
+      delete imagePreviewCache[key];
+    }
+    if(transformKey) applyTransformToImg(img, transformKey);
+  };
+  img.src = candidates[0];
+  if(transformKey) applyTransformToImg(img, transformKey);
+}
+
 const defaultTransforms = { hero:{x:50,y:50,zoom:1}, envelope1:{x:50,y:50,zoom:1}, envelope2:{x:50,y:50,zoom:1}, groom:{x:50,y:28,zoom:1}, bride:{x:50,y:26,zoom:1}, thankYouBg:{x:50,y:50,zoom:1} };
 
 const transformDefs = [
@@ -39,7 +73,7 @@ function renderTransformEditor(){
     if($(`transform${cap}XVal`)) $('transform'+cap+'XVal').textContent = `${Math.round(t.x)}%`;
     if($(`transform${cap}YVal`)) $('transform'+cap+'YVal').textContent = `${Math.round(t.y)}%`;
     if($(`transform${cap}ZoomVal`)) $('transform'+cap+'ZoomVal').textContent = `${Number(t.zoom).toFixed(2)}x`;
-    def.previews.forEach(id=>{ const img = $(id); if(!img) return; img.src = WeddingCMS.normalizeImageUrl(getPath(config, def.path) || ''); applyTransformToImg(img, def.key); });
+    def.previews.forEach(id=>{ const img = $(id); if(!img) return; setImageWithFallback(img, getPath(config, def.path) || '', def.path, def.key); });
   });
 }
 function bindTransformEditor(){
@@ -99,21 +133,38 @@ function getCloudUrl(){ return WeddingCMS.getScriptUrl(config); }
 function isDataUrl(v){ return String(v || '').startsWith('data:'); }
 async function uploadImageForPath(path, file){
   const url = getCloudUrl();
+  const localUrl = await fileToDataUrl(file);
+
+  // Show selected image immediately in Admin while Google Drive prepares the public thumbnail.
+  imagePreviewCache[path] = localUrl;
+  imagePreviewUpdatedAt[path] = Date.now();
+  renderImagePreviews();
+  renderTransformEditor();
+
   if(url){
     setMsg('Đang upload ảnh lên Google Drive: ' + (file.name || path));
     const result = await WeddingCMS.uploadImage(url, config.adminPassword, file, path);
-    setPath(config, path, result.url);
-    setMsg('Đã upload ảnh lên cloud. Bấm Lưu để đồng bộ thay đổi cho mọi thiết bị.');
-    return result.url;
+    const storedUrl = result.storedUrl || result.driveUrl || result.viewUrl || result.url || result.downloadUrl || result.altUrl || '';
+
+    // Store the Drive share link, same behavior as manually pasting a Drive link.
+    setPath(config, path, storedUrl);
+    imagePreviewUpdatedAt[path] = Date.now();
+
+    renderImagePreviews();
+    renderTransformEditor();
+    setMsg('Đã upload ảnh lên Google Drive và điền link Drive vào Admin. Bấm Lưu đồng bộ để áp dụng cho mọi thiết bị.');
+    return storedUrl;
   }
-  const localUrl = await fileToDataUrl(file);
+
   setPath(config, path, localUrl);
   setMsg('Chưa cấu hình Google Apps Script URL: ảnh chỉ preview/lưu nháp trên thiết bị này, chưa đồng bộ toàn bộ khách.');
+  renderImagePreviews();
+  renderTransformEditor();
   return localUrl;
 }
 function buildImageFields(){
   $('imageFields').innerHTML = imgDefs.map(([path,label]) => `<div class="image-card"><h3>${label}</h3><img data-preview="${path}" src=""><small>${path}</small><input data-image-url="${path}" placeholder="URL ảnh hoặc data image"><input type="file" accept="image/*" data-image-file="${path}"></div>`).join('');
-  document.querySelectorAll('[data-image-url]').forEach(inp=>inp.oninput=()=>{ setPath(config, inp.dataset.imageUrl, inp.value); renderImagePreviews(); });
+  document.querySelectorAll('[data-image-url]').forEach(inp=>inp.oninput=()=>{ delete imagePreviewCache[inp.dataset.imageUrl]; imagePreviewUpdatedAt[inp.dataset.imageUrl] = Date.now(); setPath(config, inp.dataset.imageUrl, inp.value); renderImagePreviews(); renderTransformEditor(); });
   document.querySelectorAll('[data-image-file]').forEach(inp=>inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; try{ await uploadImageForPath(inp.dataset.imageFile, f); }catch(err){ console.error(err); setMsg('Upload cloud không thành công. Vui lòng kiểm tra Google Apps Script URL/quyền Drive rồi thử lại.'); } renderImagePreviews(); });
 }
 function fillForm(){
@@ -128,7 +179,11 @@ function readForm(){
   config.guests = $('guestText').value.split('\n').map(line=>line.split(',').map(x=>x.trim())).filter(a=>a[0]||a[1]).map(a=>({id:a[0], name:a[1], side:a[2]||''}));
 }
 function renderImagePreviews(){
-  document.querySelectorAll('[data-preview]').forEach(img=>{ img.src = WeddingCMS.normalizeImageUrl(getPath(config, img.dataset.preview) || ''); const p = img.dataset.preview; const map = {'images.hero':'hero','images.envelope1':'envelope1','images.envelope2':'envelope2','images.groom':'groom','images.bride':'bride','images.thankYouBg':'thankYouBg'}; if(map[p]) applyTransformToImg(img, map[p]); });
+  const map = {'images.hero':'hero','images.envelope1':'envelope1','images.envelope2':'envelope2','images.groom':'groom','images.bride':'bride','images.thankYouBg':'thankYouBg'};
+  document.querySelectorAll('[data-preview]').forEach(img=>{
+    const p = img.dataset.preview;
+    setImageWithFallback(img, getPath(config, p) || '', p, map[p]);
+  });
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.value = getPath(config, inp.dataset.imageUrl) || '');
   renderTransformEditor();
 }
@@ -147,7 +202,7 @@ async function addGalleryFiles(){
       if(cloud){
         setMsg(`Đang upload ảnh album ${i+1}/${files.length}: ${f.name}`);
         const result = await WeddingCMS.uploadImage(getCloudUrl(), config.adminPassword, f, 'gallery');
-        urls.push(result.url);
+        urls.push(result.storedUrl || result.driveUrl || result.viewUrl || result.url);
       }else{
         urls.push(await fileToDataUrl(f));
       }
@@ -178,7 +233,7 @@ async function uploadDataUrlForPath(path, dataUrl){
     mimeType:mime,
     dataUrl:dataUrl
   });
-  if(data && data.url) return WeddingCMS.normalizeImageUrl(data.url);
+  if(data) return data.storedUrl || data.driveUrl || data.viewUrl || data.url || data.downloadUrl || data.altUrl;
   throw new Error('Upload ảnh local lên Drive không trả về URL');
 }
 async function uploadPendingLocalImages(){

@@ -1,5 +1,5 @@
 /**
- * Google Apps Script backend for Wedding Website Invitation v1.12.
+ * Google Apps Script backend for Wedding Website Invitation v1.18.
  * Sheets used: Config, RSVP
  * Drive folder used: Wedding Invitation Images
  * Deploy: Apps Script -> Deploy -> Web app
