@@ -118,16 +118,12 @@ function initEvents(){
     playMusic();
     window.scrollTo({top:0, behavior:'smooth'});
   };
-  if(openBtn) openBtn.onclick = openInvitation;
-  if(gate) {
-    gate.onclick = () => {
-      if(!gate.classList.contains('opened')) openInvitation();
-    };
-    gate.onkeydown = (e) => {
+  if(openBtn){
+    openBtn.onclick = openInvitation;
+    openBtn.onkeydown = (e) => {
       if(e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        if(!gate.classList.contains('opened')) openInvitation();
-        else enterInvitation(e);
+        openInvitation(e);
       }
     };
   }
