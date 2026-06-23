@@ -108,7 +108,7 @@ function initEvents(){
   const enterBtn = $('enterSite');
   const openInvitation = (e) => {
     if(e) e.stopPropagation();
-    if(gate) gate.classList.add('opened');
+    if(gate && !gate.classList.contains('opened')) gate.classList.add('opened');
   };
   const enterInvitation = (e) => {
     if(e) e.stopPropagation();
