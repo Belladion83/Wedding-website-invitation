@@ -8,8 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=1.18">
-  <link rel="stylesheet" href="css/frame-fix.css?v=1.18">
+  <link rel="stylesheet" href="css/style.css?v=1.20">
+  <link rel="stylesheet" href="css/frame-fix.css?v=1.20">
+  <link rel="stylesheet" href="css/cinelove-inspired.css?v=1.20">
+  <link rel="stylesheet" href="css/template39-inspired.css?v=1.20">
 </head>
 <body>
   <audio id="bgMusic" loop preload="none"></audio>
@@ -36,8 +38,8 @@
       </div>
     </section>
 
-    <section class="site hidden" id="site">
-      <section class="hero section-reveal">
+    <section class="site hidden cinelove-site" id="site">
+      <section class="hero section-reveal cinelove-cover">
         <div class="hero-arch-wrap"><div class="hero-arch" id="heroPhoto"></div></div>
         <div class="hero-content">
           <p class="invitee" id="inviteeLine"><span>Kính mời</span><span>Quý khách</span></p>
@@ -49,17 +51,30 @@
         </div>
       </section>
 
-      <section class="couple cards section-reveal">
+      
+      <section class="calendar39 panel section-reveal" id="calendar39">
+        <div class="section-flower">✦</div>
+        <p class="section-kicker">Our wedding day</p>
+        <h2>THÁNG 07 / 2026</h2>
+        <div class="calendar-box">
+          <div class="calendar-week"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+        <p class="calendar-note">Ngày hạnh phúc của chúng mình được đánh dấu bằng trái tim.</p>
+      </section>
+
+      <section class="couple cards section-reveal cinelove-couple">
         <article><div class="couple-photo-frame"><img id="groomPhoto" alt="Chú rể"></div><div><h3 id="groomName"></h3><p id="groomBirthday"></p><p id="groomSubtitle"></p><p id="groomAddress"></p></div></article>
         <article><div class="couple-photo-frame"><img id="bridePhoto" alt="Cô dâu"></div><div><h3 id="brideName"></h3><p id="brideBirthday"></p><p id="brideSubtitle"></p><p id="brideAddress"></p></div></article>
       </section>
 
-      <section class="story panel section-reveal">
+      <section class="story panel section-reveal cinelove-story">
+        <div class="cinelove-section-kicker">Love</div>
         <h2 id="storyTitle">OUR STORY</h2>
         <p id="storyText"></p>
       </section>
 
-      <section class="event-invite section-reveal" id="eventInvite">
+      <section class="event-invite section-reveal cinelove-event" id="eventInvite">
         <div class="event-top">
           <article class="person-side"><div class="person-photo-frame"><img id="eventGroomPhoto" alt="Chú rể"></div><p id="eventGroomRole">Út Nam</p><h3 id="eventGroomShort">Phú Quí</h3></article>
           <article class="person-side"><div class="person-photo-frame"><img id="eventBridePhoto" alt="Cô dâu"></div><p id="eventBrideRole">Út Nữ</p><h3 id="eventBrideShort">Ánh Nguyệt</h3></article>
@@ -85,9 +100,19 @@
         </div>
       </section>
 
-      <section class="gallery panel section-reveal"><h2>ALBUM ẢNH CƯỚI</h2><div class="gallery-grid" id="galleryGrid"></div></section>
+      
+      <section class="timeline39 panel section-reveal" id="timeline39">
+        <div class="section-flower">✦</div>
+        <p class="section-kicker">Wedding Timeline</p>
+        <h2>LỊCH TRÌNH BUỔI TIỆC</h2>
+        <div class="timeline-list" id="timelineList"></div>
+      </section>
 
-      <section class="rsvp panel section-reveal"><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI</button></section>
+      <section class="gallery panel section-reveal cinelove-gallery">
+        <div class="cinelove-section-kicker">Album</div><h2>ALBUM ẢNH CƯỚI</h2><div class="gallery-grid" id="galleryGrid"></div></section>
+
+      <section class="rsvp panel section-reveal cinelove-rsvp">
+        <div class="cinelove-section-kicker">RSVP</div><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><input name="companions" placeholder="Quý khách đến tham dự cùng ai?"><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI</button></section>
 
       <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">18 . 07 . 2026</p></div></section>
     </section>
@@ -95,6 +120,6 @@
 
   <div class="lightbox" id="lightbox"><button id="closeLightbox">×</button><img id="lightboxImg" alt="Ảnh cưới"><button id="prevImg">‹</button><button id="nextImg">›</button></div>
   <div class="gift-sheet" id="giftSheet"><div class="gift-content"><button class="close" id="closeGift">×</button><h2>GỬI QUÀ MỪNG CƯỚI</h2><div class="gift-grid"><article><h3 id="brideGiftTitle"></h3><img id="brideQr" alt="QR cô dâu"><p id="brideBank"></p><p id="brideAcc"></p><p id="brideNameBank"></p><small id="brideMemo"></small></article><article><h3 id="groomGiftTitle"></h3><img id="groomQr" alt="QR chú rể"><p id="groomBank"></p><p id="groomAcc"></p><p id="groomNameBank"></p><small id="groomMemo"></small></article></div><button class="btn outline" id="backInvite">QUAY LẠI THIỆP</button></div></div>
-  <script src="js/config.js?v=1.18"></script><script src="js/cms-client.js?v=1.18"></script><script src="js/main.js?v=1.18"></script>
+  <script src="js/config.js?v=1.20"></script><script src="js/cms-client.js?v=1.20"></script><script src="js/main.js?v=1.20"></script>
 </body>
 </html>

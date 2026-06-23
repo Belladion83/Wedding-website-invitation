@@ -1,0 +1,606 @@
+
+/* v1.20 Template 39-inspired redesign.
+   Inspired by the public structure of Cinelove Template 39:
+   hero -> calendar -> bride/groom -> love story -> families/event -> timeline -> RSVP -> album -> love box -> thank you.
+   Does not copy original assets/source. */
+
+:root{
+  --t39-red:#8f1420;
+  --t39-red-dark:#650b13;
+  --t39-gold:#d6a75d;
+  --t39-cream:#fff9f1;
+  --t39-paper:#f8efe2;
+  --t39-ink:#4a2c25;
+  --t39-muted:#806d62;
+  --t39-line:#ead5c2;
+  --gold:#8f1420;
+  --gold2:#d6a75d;
+  --event-accent:#8f1420;
+}
+
+body{
+  background:#eee6dc !important;
+  color:var(--t39-ink);
+}
+
+.page-shell{
+  width:min(100%, 520px) !important;
+  max-width:520px !important;
+  margin:0 auto !important;
+  background:var(--t39-cream) !important;
+  box-shadow:0 0 45px rgba(70,34,23,.18) !important;
+  overflow:hidden;
+}
+
+.site{
+  padding:0 !important;
+  background:var(--t39-cream) !important;
+}
+
+/* Opening envelope/card */
+.intro{
+  background:linear-gradient(180deg,#f8efe2,#fff9f1) !important;
+}
+.intro-frame{
+  border-radius:0 !important;
+  background:transparent !important;
+}
+.save,.save-final{
+  color:var(--t39-red) !important;
+  letter-spacing:.32em !important;
+}
+.script-names{
+  color:var(--t39-red) !important;
+}
+.btn.solid,
+#rsvpForm button,
+#wish39 button{
+  background:var(--t39-red) !important;
+  border:1px solid var(--t39-red) !important;
+  color:#fff !important;
+  border-radius:999px !important;
+}
+.btn.outline{
+  color:var(--t39-red) !important;
+  border-color:var(--t39-red) !important;
+  border-radius:999px !important;
+}
+
+/* HERO TEMPLATE 39 STYLE */
+.hero.cinelove-cover{
+  min-height:100vh !important;
+  display:flex !important;
+  flex-direction:column !important;
+  padding:0 !important;
+  background:
+    radial-gradient(circle at 20% 8%,rgba(214,167,93,.25),transparent 28%),
+    linear-gradient(180deg,#fff9f1,#fff) !important;
+}
+
+.hero-arch-wrap{
+  order:2;
+  width:100%;
+  min-height:58vh;
+  height:58vh !important;
+  padding:0 20px 26px !important;
+  display:block !important;
+}
+
+.hero-arch{
+  width:100% !important;
+  height:100% !important;
+  border-radius:260px 260px 18px 18px !important;
+  box-shadow:0 22px 60px rgba(99,38,20,.20) !important;
+  background-position:center top !important;
+}
+
+.hero-content{
+  order:1;
+  padding:52px 24px 18px !important;
+  text-align:center !important;
+  position:relative;
+}
+
+.hero-content:before{
+  content:"2026";
+  display:block;
+  font-family:"Playfair Display",serif;
+  color:var(--t39-red);
+  font-size:64px;
+  line-height:.9;
+  letter-spacing:.06em;
+  margin-bottom:10px;
+}
+
+.invitee{
+  display:block !important;
+  color:var(--t39-muted) !important;
+  letter-spacing:.08em !important;
+  margin:0 0 12px !important;
+}
+
+.invitee span:first-child{
+  display:block;
+  font-size:12px !important;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+
+.invitee span+span{
+  font-size:22px !important;
+  color:var(--t39-red) !important;
+  font-family:"Cormorant Garamond",serif;
+}
+
+.hero-names{
+  color:var(--t39-red) !important;
+  font-size:clamp(34px,9vw,52px) !important;
+  line-height:1.05 !important;
+  gap:2px !important;
+}
+
+.hero-names span:nth-child(2){
+  color:var(--t39-gold) !important;
+  font-size:.65em;
+}
+
+.divider{
+  background:var(--t39-gold) !important;
+  width:90px !important;
+  margin:18px auto !important;
+}
+
+.hero-date{
+  color:var(--t39-red) !important;
+  font-weight:800 !important;
+  letter-spacing:.18em !important;
+}
+
+.countdown{
+  display:grid !important;
+  grid-template-columns:repeat(4,1fr) !important;
+  gap:8px !important;
+  margin:18px 0 8px !important;
+}
+
+.countdown div{
+  min-width:0 !important;
+  background:#fff !important;
+  border:1px solid var(--t39-line) !important;
+  box-shadow:0 8px 22px rgba(95,38,18,.08);
+  border-radius:14px !important;
+  padding:10px 4px !important;
+}
+
+.countdown strong{
+  color:var(--t39-red) !important;
+  font-family:"Playfair Display",serif !important;
+}
+
+.countdown span{
+  color:var(--t39-muted) !important;
+}
+
+/* Section titles */
+.section-flower{
+  width:34px;
+  height:34px;
+  margin:0 auto 8px;
+  color:var(--t39-gold);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.section-kicker,
+.cinelove-section-kicker{
+  color:var(--t39-gold) !important;
+  font-family:"Cormorant Garamond",serif;
+  font-style:italic;
+  font-size:20px;
+  text-align:center;
+  margin:0 0 4px;
+}
+.panel h2,
+.story h2,
+.gallery h2,
+.rsvp h2,
+.timeline39 h2,
+.calendar39 h2,
+.wish39 h2{
+  color:var(--t39-red) !important;
+  letter-spacing:.08em !important;
+  text-align:center;
+}
+
+/* Calendar section */
+.calendar39{
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  padding:46px 24px !important;
+  background:#fff !important;
+  box-shadow:none !important;
+}
+
+.calendar-box{
+  margin:22px auto 0;
+  max-width:360px;
+  background:var(--t39-paper);
+  border:1px solid var(--t39-line);
+  padding:16px;
+  box-shadow:0 18px 45px rgba(89,42,24,.12);
+}
+
+.calendar-week,
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  text-align:center;
+  gap:7px;
+}
+
+.calendar-week span{
+  color:var(--t39-red);
+  font-weight:800;
+  font-size:12px;
+}
+
+.calendar-grid{
+  margin-top:10px;
+}
+
+.calendar-grid span{
+  position:relative;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--t39-ink);
+  font-weight:600;
+}
+
+.calendar-grid span.active{
+  color:#fff;
+  z-index:1;
+}
+
+.calendar-grid span.active:before{
+  content:"";
+  position:absolute;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--t39-red);
+  z-index:-1;
+  box-shadow:0 8px 20px rgba(143,20,32,.28);
+}
+
+.calendar-grid span.active b{
+  position:absolute;
+  right:1px;
+  top:-5px;
+  color:var(--t39-gold);
+  font-size:15px;
+}
+
+.calendar-note{
+  color:var(--t39-muted);
+  text-align:center;
+  font-size:14px;
+  margin-top:14px;
+}
+
+/* Couple */
+.couple.cinelove-couple{
+  width:100% !important;
+  margin:0 !important;
+  padding:38px 20px !important;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:18px !important;
+  background:linear-gradient(180deg,#fff9f1,#fff) !important;
+}
+
+.couple article{
+  background:#fff !important;
+  border:1px solid var(--t39-line) !important;
+  border-radius:22px !important;
+  box-shadow:0 16px 42px rgba(91,43,23,.10) !important;
+  display:grid !important;
+  grid-template-columns:128px 1fr !important;
+  gap:16px !important;
+  padding:16px !important;
+  overflow:hidden;
+}
+
+.couple h3{
+  color:var(--t39-red) !important;
+  font-size:22px !important;
+  line-height:1.2 !important;
+}
+
+.couple p{
+  color:var(--t39-muted) !important;
+  font-size:13px !important;
+}
+
+.couple-photo-frame{
+  height:158px !important;
+  border-radius:18px !important;
+}
+
+/* Love story */
+.story.cinelove-story{
+  width:100% !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:48px 24px !important;
+  background:#fff !important;
+}
+
+.story p{
+  color:var(--t39-muted) !important;
+  font-size:21px !important;
+  line-height:1.85 !important;
+  text-align:center;
+}
+
+/* Event */
+.event-invite.cinelove-event{
+  width:100% !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:var(--t39-paper) !important;
+}
+
+.event-top{
+  padding:42px 20px 20px !important;
+}
+
+.person-photo-frame{
+  width:142px !important;
+  height:142px !important;
+  border:4px solid #fff;
+  box-shadow:0 15px 35px rgba(70,34,20,.14);
+}
+
+.person-side p{
+  color:var(--t39-muted) !important;
+}
+
+.person-side h3{
+  color:var(--t39-red) !important;
+  font-size:30px !important;
+}
+
+.heart-mark{
+  color:var(--t39-red) !important;
+}
+
+.event-ribbon{
+  background:var(--t39-red) !important;
+  color:#fff !important;
+  letter-spacing:.08em;
+}
+
+.family-row{
+  background:#fff;
+  padding:28px 24px !important;
+}
+
+.family-row h4,
+.formal-couple h2,
+.ceremony-block h3,
+.ceremony-block h4,
+.date-line b{
+  color:var(--t39-red) !important;
+}
+
+.ceremony-block{
+  background:#fff !important;
+  padding:34px 24px 44px !important;
+}
+
+/* Timeline */
+.timeline39{
+  margin:0 !important;
+  padding:50px 24px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:#fff !important;
+  box-shadow:none !important;
+}
+
+.timeline-list{
+  max-width:390px;
+  margin:24px auto 0;
+  position:relative;
+}
+
+.timeline-list:before{
+  content:"";
+  position:absolute;
+  left:48px;
+  top:12px;
+  bottom:12px;
+  width:1px;
+  background:var(--t39-line);
+}
+
+.timeline-item{
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:12px;
+  position:relative;
+  padding:0 0 28px;
+}
+
+.time-dot{
+  width:78px;
+  height:78px;
+  border-radius:50%;
+  background:var(--t39-red);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-family:"Playfair Display",serif;
+  font-size:20px;
+  box-shadow:0 10px 26px rgba(143,20,32,.22);
+  z-index:1;
+}
+
+.timeline-item h3{
+  margin:8px 0 6px;
+  color:var(--t39-red);
+  font-family:"Playfair Display",serif;
+}
+
+.timeline-item p{
+  color:var(--t39-muted);
+  margin:0;
+  line-height:1.6;
+}
+
+/* RSVP */
+.rsvp.cinelove-rsvp{
+  width:100% !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:linear-gradient(180deg,#fff9f1,#fff) !important;
+  padding:52px 20px !important;
+}
+
+.rsvp form{
+  max-width:370px;
+  margin:20px auto 0;
+  padding:20px;
+  background:#fff;
+  border:1px solid var(--t39-line);
+  box-shadow:0 18px 45px rgba(90,42,22,.12);
+  border-radius:20px;
+  display:grid !important;
+  grid-template-columns:1fr !important;
+  gap:12px !important;
+}
+
+input,select,textarea{
+  border-radius:14px !important;
+  border:1px solid var(--t39-line) !important;
+}
+
+#giftBtn{
+  color:var(--t39-red) !important;
+  border-color:var(--t39-red) !important;
+  background:#fff !important;
+  margin:20px auto 0 !important;
+  display:block !important;
+}
+
+/* Album */
+.gallery.cinelove-gallery{
+  width:100% !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:48px 16px !important;
+  background:#fff !important;
+}
+
+.gallery-grid{
+  display:grid !important;
+  grid-template-columns:repeat(4,1fr) !important;
+  gap:6px !important;
+  background:var(--t39-red);
+  padding:8px;
+  border-radius:18px;
+}
+
+.gallery-grid .thumb:first-child{
+  grid-column:1/-1;
+  aspect-ratio:1.45/1;
+}
+
+.thumb{
+  border-radius:12px !important;
+}
+
+.thumb img{
+  border-radius:12px !important;
+}
+
+/* Wish box */
+.wish39{
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:52px 22px !important;
+  background:var(--t39-paper) !important;
+  position:relative;
+  overflow:hidden;
+}
+
+.wish39 p{
+  text-align:center;
+  color:var(--t39-muted);
+}
+
+.wish-box{
+  max-width:370px;
+  margin:20px auto 0;
+  display:grid;
+  gap:12px;
+}
+
+.heart-stage{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.fly-heart{
+  position:absolute;
+  bottom:80px;
+  color:var(--t39-red);
+  font-size:20px;
+  animation:flyHeart 1.55s ease-out forwards;
+}
+
+@keyframes flyHeart{
+  0%{opacity:0;transform:translate(0,0) scale(.7)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.5)}
+}
+
+/* Thank you */
+.thanks{
+  margin:0 !important;
+  min-height:440px !important;
+}
+
+.thanks:before{
+  background:linear-gradient(rgba(87,12,20,.38),rgba(87,12,20,.70)) !important;
+}
+
+.thanks h2{
+  color:#fff !important;
+}
+
+@media(max-width:760px){
+  .page-shell{width:100% !important;box-shadow:none !important}
+  .hero-arch-wrap{min-height:470px}
+  .couple article{grid-template-columns:118px 1fr !important}
+  .event-top{grid-template-columns:1fr 1fr !important}
+  .family-row{grid-template-columns:1fr !important}
+  .family-divider{display:none}
+  .date-line{gap:12px !important}
+}

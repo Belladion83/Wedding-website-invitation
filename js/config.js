@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.18-upload-preview-drive-fix',
+  version: '1.20-template39-inspired',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -59,6 +59,11 @@ window.DEFAULT_WEDDING_CONFIG = {
     lunarDate: '(Tức ngày 05/06 năm Bính Ngọ)',
     timeLabel: '17:30'
   },
+  timeline: [
+    { time: '17:30', title: 'Đón tiếp khách', description: 'Cô dâu và chú rể hân hạnh đón tiếp quý khách.' },
+    { time: '18:00', title: 'Tiệc báo hỷ', description: 'Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.' },
+    { time: '18:30', title: 'Khai tiệc', description: 'Cùng nâng ly chúc mừng hạnh phúc của cô dâu chú rể.' }
+  ],
   gallery: [
     'assets/images/venue.jpg','assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg',
     'assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg','assets/images/paper-invite.jpg',

@@ -132,3 +132,69 @@ async function submitRsvp(e){
   }
 }
 (async function init(){ C = await WeddingCMS.loadConfig(); initContent(); startCountdown(); initEvents(); })();
+
+
+function renderCalendar39(){
+  const grid = $('calendarGrid');
+  if(!grid || !C || !C.site) return;
+  const date = new Date(C.site.weddingDate || '2026-07-18T18:00:00+07:00');
+  const y = date.getFullYear();
+  const m = date.getMonth();
+  const d = date.getDate();
+
+  const first = new Date(y, m, 1);
+  const last = new Date(y, m + 1, 0);
+  const startOffset = (first.getDay() + 6) % 7;
+  const cells = [];
+  for(let i=0;i<startOffset;i++) cells.push('<span class="muted"></span>');
+  for(let day=1; day<=last.getDate(); day++){
+    const cls = day === d ? 'active' : '';
+    cells.push(`<span class="${cls}">${day}${day === d ? '<b>♥</b>' : ''}</span>`);
+  }
+  grid.innerHTML = cells.join('');
+}
+
+function renderTimeline39(){
+  const wrap = $('timelineList');
+  if(!wrap) return;
+  const items = (C.timeline && C.timeline.length ? C.timeline : [
+    {time:'17:30', title:'Đón tiếp khách', description:'Cô dâu và chú rể hân hạnh đón tiếp quý khách.'},
+    {time:'18:00', title:'Tiệc báo hỷ', description:'Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.'},
+    {time:'18:30', title:'Khai tiệc', description:'Cùng nâng ly chúc mừng hạnh phúc của cô dâu chú rể.'}
+  ]);
+  wrap.innerHTML = items.map((it,idx)=>`
+    <article class="timeline-item">
+      <div class="time-dot"><span>${it.time || ''}</span></div>
+      <div>
+        <h3>${it.title || ''}</h3>
+        <p>${it.description || ''}</p>
+      </div>
+    </article>
+  `).join('');
+}
+
+function bindWish39(){
+  const btn = $('floatingWishBtn');
+  const txt = $('floatingWish');
+  const stage = $('heartStage');
+  if(!btn || !txt || !stage) return;
+  btn.onclick = ()=>{
+    const value = (txt.value || '').trim();
+    if(value){
+      const current = $('wish') || null;
+      if(current && !current.value) current.value = value;
+    }
+    for(let i=0;i<18;i++){
+      const h = document.createElement('span');
+      h.className = 'fly-heart';
+      h.textContent = ['♥','♡','❤'][i % 3];
+      h.style.left = (45 + Math.random()*12) + '%';
+      h.style.animationDelay = (Math.random()*0.25) + 's';
+      h.style.setProperty('--x', (Math.random()*160 - 80) + 'px');
+      h.style.setProperty('--y', (-80 - Math.random()*180) + 'px');
+      stage.appendChild(h);
+      setTimeout(()=>h.remove(), 1700);
+    }
+    txt.value = '';
+  };
+}
