@@ -74,6 +74,9 @@ function initContent(){
   setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', C.site.displayDate);
   fillGift('', C.banking.bride, C.banking.groom);
   buildGallery();
+  renderCalendar39();
+  renderTimeline39();
+  bindWish39();
 }
 function escapeHtml(v){return String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 function fillGift(suffix, bride, groom){

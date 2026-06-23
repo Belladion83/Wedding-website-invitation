@@ -21,3 +21,22 @@
 .image-card input[type="file"] {
   cursor: pointer;
 }
+
+.timeline-admin{
+  grid-column:1/-1;
+  border-top:1px solid var(--line);
+  margin-top:14px;
+  padding-top:16px;
+}
+.timeline-admin textarea{
+  min-height:150px;
+  font-family:Inter,Arial,sans-serif;
+  line-height:1.55;
+}
+.timeline-admin code{
+  background:#fff7ec;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:2px 6px;
+  color:var(--gold);
+}

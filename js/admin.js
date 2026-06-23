@@ -167,16 +167,30 @@ function buildImageFields(){
   document.querySelectorAll('[data-image-url]').forEach(inp=>inp.oninput=()=>{ delete imagePreviewCache[inp.dataset.imageUrl]; imagePreviewUpdatedAt[inp.dataset.imageUrl] = Date.now(); setPath(config, inp.dataset.imageUrl, inp.value); renderImagePreviews(); renderTransformEditor(); });
   document.querySelectorAll('[data-image-file]').forEach(inp=>inp.onchange=async()=>{ const f=inp.files[0]; if(!f) return; try{ await uploadImageForPath(inp.dataset.imageFile, f); }catch(err){ console.error(err); setMsg('Upload cloud không thành công. Vui lòng kiểm tra Google Apps Script URL/quyền Drive rồi thử lại.'); } renderImagePreviews(); });
 }
+
+function formatTimelineText(){
+  const items = Array.isArray(config.timeline) ? config.timeline : [];
+  return items.map(x => `${x.time || ''} | ${x.title || ''} | ${x.description || ''}`.trim()).join('\n');
+}
+function parseTimelineText(text){
+  return String(text || '').split('\n').map(line => line.trim()).filter(Boolean).map(line => {
+    const parts = line.split('|').map(x => x.trim());
+    return { time: parts[0] || '', title: parts[1] || '', description: parts.slice(2).join(' | ') || '' };
+  }).filter(x => x.time || x.title || x.description);
+}
+
 function fillForm(){
   fields().forEach(el=>{ el.value = getPath(config, el.dataset.field) || ''; });
   $('galleryText').value = (config.gallery || []).join('\n');
   $('guestText').value = (config.guests || []).map(g=>`${g.id || ''}, ${g.name || ''}, ${g.side || ''}`).join('\n');
+  if($('timelineText')) $('timelineText').value = formatTimelineText();
   renderImagePreviews(); renderAlbumPreview(); renderTransformEditor();
 }
 function readForm(){
   fields().forEach(el=>setPath(config, el.dataset.field, el.value));
   config.gallery = $('galleryText').value.split('\n').map(x=>x.trim()).filter(Boolean);
   config.guests = $('guestText').value.split('\n').map(line=>line.split(',').map(x=>x.trim())).filter(a=>a[0]||a[1]).map(a=>({id:a[0], name:a[1], side:a[2]||''}));
+  if($('timelineText')) config.timeline = parseTimelineText($('timelineText').value);
 }
 function renderImagePreviews(){
   const map = {'images.hero':'hero','images.envelope1':'envelope1','images.envelope2':'envelope2','images.groom':'groom','images.bride':'bride','images.thankYouBg':'thankYouBg'};

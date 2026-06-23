@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Admin Thiệp báo hỷ</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/admin.css?v=1.20">
+  <link rel="stylesheet" href="css/admin.css?v=1.21">
 </head>
 <body>
   <div class="wrap">
@@ -36,6 +36,12 @@
         <div><h2>Nhà trai</h2><label>Tiêu đề<input data-field="families.groomSide.title"></label><label>Ông<input data-field="families.groomSide.father"></label><label>Bà<input data-field="families.groomSide.mother"></label><label>Địa chỉ<textarea rows="3" data-field="families.groomSide.address"></textarea></label></div>
         <div><h2>Nhà gái</h2><label>Tiêu đề<input data-field="families.brideSide.title"></label><label>Ông<input data-field="families.brideSide.father"></label><label>Bà<input data-field="families.brideSide.mother"></label><label>Địa chỉ<textarea rows="3" data-field="families.brideSide.address"></textarea></label></div>
         <div class="wide"><h2>Thông tin tiệc</h2><div class="grid2"><label>Lời mời<input data-field="event.intro"></label><label>Mô tả<input data-field="event.description"></label><label>Nhà hàng / sảnh<textarea rows="3" data-field="event.venue"></textarea></label><label>Địa chỉ<textarea rows="3" data-field="event.address"></textarea></label><label>Tiêu đề địa điểm<input data-field="event.ceremonyTitle"></label><label>Thứ<input data-field="event.dayLabel"></label><label>Ngày<input data-field="event.dateDay"></label><label>Tháng<input data-field="event.monthLabel"></label><label>Năm<input data-field="event.year"></label><label>Ngày âm lịch<input data-field="event.lunarDate"></label><label>Giờ tiệc<input data-field="event.timeLabel"></label></div></div>
+
+          <div class="timeline-admin">
+            <h2>Lịch trình buổi tiệc</h2>
+            <p class="hint">Mỗi dòng là một mốc thời gian theo định dạng: <b>Giờ | Tiêu đề | Mô tả</b>. Ví dụ: <code>17:30 | Đón tiếp khách | Cô dâu và chú rể hân hạnh đón tiếp quý khách.</code></p>
+            <textarea id="timelineText" rows="6" placeholder="17:30 | Đón tiếp khách | Cô dâu và chú rể hân hạnh đón tiếp quý khách.&#10;18:00 | Tiệc báo hỷ | Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.&#10;18:30 | Khai tiệc | Cùng nâng ly chúc mừng hạnh phúc của cô dâu chú rể."></textarea>
+          </div>
       </section>
       <section id="images" class="tab-panel card">
         <h2>Hình ảnh</h2>
@@ -69,6 +75,6 @@
         <h2>Thiết lập Google Sheet / Apps Script</h2><p>1) Tạo Google Sheet mới. 2) Mở Extensions → Apps Script. 3) Dán file <b>google-apps-script.gs</b>. 4) Deploy Web App. 5) Dán URL Web App vào ô dưới đây. Lưu ý: để mọi thiết bị đều tự đọc dữ liệu cloud, URL này cần được cấu hình một lần trong file js/config.js hoặc được tôi cập nhật vào source sau khi bạn gửi URL.</p><label>Google Apps Script Web App URL<input data-field="googleAppsScriptUrl"></label><p class="hint">Nút <b>Lưu bản nháp</b> chỉ lưu để bạn chỉnh thử trên thiết bị hiện tại. Nút <b>Lưu</b> sẽ publish lên Google Sheet/Google Drive để mọi thiết bị thấy thay đổi. Nếu chưa có Google Apps Script URL thì không thể đồng bộ toàn bộ thiết bị.</p><label>Mật khẩu admin<input data-field="adminPassword"></label><label>Link nhạc nền MP3<input data-field="site.musicUrl"></label><label>Màu vàng chủ đạo<input data-field="site.colorPrimary"></label><div class="actions"><button class="btn" id="downloadConfigBtn">Tải config JSON</button><button class="btn" id="resetLocalBtn">Xóa bản nháp local</button></div><p class="msg" id="saveMsg"></p></section>
     </main>
   </div>
-  <script src="js/config.js?v=1.20"></script><script src="js/cms-client.js?v=1.20"></script><script src="js/admin.js?v=1.20"></script>
+  <script src="js/config.js?v=1.21"></script><script src="js/cms-client.js?v=1.21"></script><script src="js/admin.js?v=1.21"></script>
 </body>
 </html>
