@@ -105,32 +105,27 @@ function startCountdown(){
 function initEvents(){
   const gate = $('envelope');
   const openBtn = $('openEnvelopeButton');
-  const musicBtn = $('musicStart');
   let introOpened = false;
 
   const revealSiteBelow = () => {
     $('site').classList.remove('hidden');
     $('musicToggle').classList.remove('hidden');
     $('intro').classList.add('sequence-done');
-    const offset = Math.max(Math.round(window.innerHeight * 0.18), 140);
+    const offset = Math.max(Math.round(window.innerHeight * 0.28), 220);
     window.scrollTo({ top: offset, behavior: 'smooth' });
   };
 
-  const openInvitation = async (e) => {
+  const openInvitation = (e) => {
     if(e) e.stopPropagation();
     if(introOpened) return;
     introOpened = true;
-
-    if(musicBtn) musicBtn.classList.add('playing');
     playMusic();
-
     if(gate) gate.classList.add('opened');
-    setTimeout(() => { if(gate) gate.classList.add('flap-back'); }, 950);
-    setTimeout(revealSiteBelow, 2250);
+    setTimeout(()=>{ if(gate) gate.classList.add('paper-visible'); }, 280);
+    setTimeout(revealSiteBelow, 2050);
   };
 
   if(openBtn) openBtn.onclick = openInvitation;
-  if(musicBtn) musicBtn.onclick = (e) => { e.stopPropagation(); playMusic(); musicBtn.classList.add('playing'); };
 
   $('giftBtn').onclick = ()=> $('giftOverlay').classList.add('show');
   $('giftBack').onclick = ()=> $('giftOverlay').classList.remove('show');
