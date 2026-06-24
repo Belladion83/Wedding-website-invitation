@@ -203,7 +203,7 @@
   position:absolute;
   left:0;
   right:0;
-  top:220px;
+  top:250px;
   margin:auto;
   width:100%;
   height:156px;
@@ -230,7 +230,7 @@
 .gif-seal{
   position:absolute;
   left:50%;
-  top:336px;
+  top:375px;
   transform:translateX(-50%);
   width:62px;
   height:62px;
@@ -420,7 +420,7 @@
     top:112px;
   }
   .gif-flap{
-    top:214px;
+    top:242px;
     height:150px;
   }
   .gif-flap:before{
@@ -430,7 +430,7 @@
     height:1px;
   }
   .gif-seal{
-    top:320px;
+    top:361px;
   }
   .gif-card{
     width:76%;
@@ -450,4 +450,14 @@
   .gif-card h1{
     font-size:clamp(30px,9.5vw,44px);
   }
+}
+
+
+/* v1.31 attached-flap correction:
+   Keep the flap hinge exactly aligned with the top edge of the envelope pocket. */
+.gif-flap{
+  border-top-color:rgba(214,167,93,.30);
+}
+.gif-front{
+  border-top:1px solid rgba(214,167,93,.20);
 }
