@@ -112,10 +112,10 @@
 /* Layer 3: card; completely hidden inside at first */
 .gif-card{
   position:absolute;
-  left:8%;
+  left:5%;
   bottom:58px;
-  width:84%;
-  aspect-ratio:1/1;
+  width:90%;
+  aspect-ratio:0.9/1;
   margin:0;
   border-radius:18px;
   background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,248,240,.98));
