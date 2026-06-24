@@ -122,9 +122,9 @@ function initEvents(){
     playMusic();
 
     if(gate) gate.classList.add('opened');
-    setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 780);
-    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 980);
-    setTimeout(revealSiteBelow, 2300);
+    setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 180);
+    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 340);
+    setTimeout(revealSiteBelow, 2100);
   };
 
   if(openBtn) openBtn.onclick = openInvitation;
