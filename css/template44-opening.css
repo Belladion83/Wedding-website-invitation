@@ -373,7 +373,7 @@
 }
 .t44-gate.card-rise .gif-card{
   opacity:1;
-  transform:translateY(-90px);
+  transform:translateY(-140px);
   z-index:8;
   box-shadow:0 24px 54px rgba(93,45,22,.17);
 }
