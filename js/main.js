@@ -104,34 +104,38 @@ function startCountdown(){
 }
 function initEvents(){
   const gate = $('envelope');
-  const openBtn = $('openEnvelope');
-  const enterBtn = $('enterSite');
-  const openInvitation = (e) => {
-    if(e) e.stopPropagation();
-    if(gate && !gate.classList.contains('opened')) gate.classList.add('opened');
-  };
-  const enterInvitation = (e) => {
-    if(e) e.stopPropagation();
-    $('intro').classList.add('hidden');
+  const openBtn = $('openEnvelopeButton');
+  const musicBtn = $('musicStart');
+  let introOpened = false;
+
+  const revealSiteBelow = () => {
     $('site').classList.remove('hidden');
     $('musicToggle').classList.remove('hidden');
-    playMusic();
-    window.scrollTo({top:0, behavior:'smooth'});
+    $('intro').classList.add('sequence-done');
+    const offset = Math.max(Math.round(window.innerHeight * 0.18), 140);
+    window.scrollTo({ top: offset, behavior: 'smooth' });
   };
-  if(openBtn){
-    openBtn.onclick = openInvitation;
-    openBtn.onkeydown = (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openInvitation(e);
-      }
-    };
-  }
-  if(enterBtn) enterBtn.onclick = enterInvitation;
-  if($('musicStart')) $('musicStart').onclick = (e) => { e.stopPropagation(); playMusic(); };
-  $('musicToggle').onclick = toggleMusic;
-  $('giftBtn').onclick = () => $('giftSheet').classList.add('open'); $('closeGift').onclick = () => $('giftSheet').classList.remove('open'); $('backInvite').onclick = () => $('giftSheet').classList.remove('open');
-  $('closeLightbox').onclick=()=> $('lightbox').classList.remove('open'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
+
+  const openInvitation = async (e) => {
+    if(e) e.stopPropagation();
+    if(introOpened) return;
+    introOpened = true;
+
+    if(musicBtn) musicBtn.classList.add('playing');
+    playMusic();
+
+    if(gate) gate.classList.add('opened');
+    setTimeout(() => { if(gate) gate.classList.add('flap-back'); }, 950);
+    setTimeout(revealSiteBelow, 2250);
+  };
+
+  if(openBtn) openBtn.onclick = openInvitation;
+  if(musicBtn) musicBtn.onclick = (e) => { e.stopPropagation(); playMusic(); musicBtn.classList.add('playing'); };
+
+  $('giftBtn').onclick = ()=> $('giftOverlay').classList.add('show');
+  $('giftBack').onclick = ()=> $('giftOverlay').classList.remove('show');
+  $('lightbox').onclick = (e)=> { if(e.target.id==='lightbox') $('lightbox').classList.remove('show'); };
+  $('closeLightbox').onclick=()=> $('lightbox').classList.remove('show'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
   $('rsvpForm').onsubmit = submitRsvp;
   const obs = new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting && x.target.classList.add('visible')), {threshold:.14});
   document.querySelectorAll('.section-reveal').forEach(el=>obs.observe(el));
