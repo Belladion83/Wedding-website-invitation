@@ -111,7 +111,7 @@ function initEvents(){
     $('site').classList.remove('hidden');
     $('musicToggle').classList.remove('hidden');
     $('intro').classList.add('sequence-done');
-    const offset = Math.max(Math.round(window.innerHeight * 0.28), 220);
+    const offset = Math.max(Math.round(window.innerHeight * 0.30), 230);
     window.scrollTo({ top: offset, behavior: 'smooth' });
   };
 
@@ -120,9 +120,11 @@ function initEvents(){
     if(introOpened) return;
     introOpened = true;
     playMusic();
+
     if(gate) gate.classList.add('opened');
-    setTimeout(()=>{ if(gate) gate.classList.add('paper-visible'); }, 280);
-    setTimeout(revealSiteBelow, 2050);
+    setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 780);
+    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 980);
+    setTimeout(revealSiteBelow, 2300);
   };
 
   if(openBtn) openBtn.onclick = openInvitation;
