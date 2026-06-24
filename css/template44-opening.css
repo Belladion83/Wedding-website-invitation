@@ -180,34 +180,34 @@
   position:absolute;
   left:0;
   right:0;
-  bottom:226px;
+  top:220px;
   margin:auto;
-  width:0;
-  height:0;
-  border-left:215px solid transparent;
-  border-right:215px solid transparent;
-  border-top:156px solid #fff4e6;
-  transform-origin:top center;
+  width:100%;
+  height:156px;
+  background:linear-gradient(180deg,#fff4e6,#f8ebda);
+  clip-path:polygon(0 0, 100% 0, 50% 100%);
+  transform-origin:50% 0;
   transform:rotateX(0deg);
   z-index:7;
   filter:drop-shadow(0 8px 8px rgba(110,64,38,.08));
   transition:transform 1.05s cubic-bezier(.22,.85,.23,1), z-index 0s linear .72s;
+  border-top:1px solid rgba(214,167,93,.25);
 }
 .gif-flap:before{
   content:"";
   position:absolute;
-  left:-215px;
-  top:-156px;
-  width:430px;
-  height:156px;
-  border-top:1px solid rgba(214,167,93,.25);
+  left:0;
+  right:0;
+  top:0;
+  height:1px;
+  background:rgba(214,167,93,.22);
 }
 
 /* Layer 6: seal button */
 .gif-seal{
   position:absolute;
   left:50%;
-  bottom:214px;
+  top:336px;
   transform:translateX(-50%);
   width:62px;
   height:62px;
@@ -386,19 +386,17 @@
     top:112px;
   }
   .gif-flap{
-    border-left:45vw solid transparent;
-    border-right:45vw solid transparent;
-    border-top:150px solid #fff4e6;
-    bottom:220px;
-  }
-  .gif-flap:before{
-    left:-45vw;
-    top:-150px;
-    width:90vw;
+    top:214px;
     height:150px;
   }
+  .gif-flap:before{
+    left:0;
+    top:0;
+    width:100%;
+    height:1px;
+  }
   .gif-seal{
-    bottom:208px;
+    top:320px;
   }
   .gif-card{
     width:76%;
