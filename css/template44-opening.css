@@ -130,6 +130,7 @@
     transform 1.35s cubic-bezier(.22,1,.22,1),
     box-shadow 1.0s ease;
 }
+
 .gif-card:before,
 .gif-card:after{
   content:"";
@@ -365,15 +366,15 @@
 /* Animation states */
 .t44-gate.opened .gif-flap{
   transform:rotateX(180deg);
-  z-index:1;
+  z-index:7;
 }
 .t44-gate.flap-back .gif-flap{
-  z-index:1;
-  opacity:.98;
+  z-index:0;
+  pointer-events:none;
 }
 .t44-gate.card-rise .gif-card{
   opacity:1;
-  transform:translateY(-116px);
+  transform:translateY(-150px);
   z-index:8;
   box-shadow:0 24px 54px rgba(93,45,22,.17);
 }
@@ -433,13 +434,13 @@
     top:361px;
   }
   .gif-card{
-    width:76%;
-    left:12%;
-    bottom:58px;
+    width:88%;
+    left:6%;
+    bottom:46px;
     transform:translateY(174px);
   }
   .t44-gate.card-rise .gif-card{
-    transform:translateY(-102px);
+    transform:translateY(-128px);
   }
   .t44-big{
     font-size:clamp(29px,10vw,44px);
@@ -461,3 +462,8 @@
 .gif-front{
   border-top:1px solid rgba(214,167,93,.20);
 }
+
+
+/* v1.32:
+   User card size applied.
+   Sequence: seal click -> flap opens -> flap-back sends flap behind -> card-rise pulls the larger card out. */
