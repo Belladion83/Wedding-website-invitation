@@ -123,8 +123,8 @@ function initEvents(){
 
     if(gate) gate.classList.add('opened');
     setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 120);
-    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 820);
-    setTimeout(revealSiteBelow, 2450);
+    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 760);
+    setTimeout(revealSiteBelow, 2400);
   };
 
   if(openBtn) openBtn.onclick = openInvitation;

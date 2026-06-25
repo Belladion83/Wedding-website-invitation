@@ -492,3 +492,173 @@
    Sequence: seal click -> flap opens -> flap-back sends flap behind -> card-rise pulls the larger card out. */
 
 /* v1.34: only the envelope visual design was changed to a more triangular style based on the user reference; opening animation logic remains from v1.32. */
+
+
+/* v1.35 refinements based on user feedback:
+   1) Remove the brown/orange triangle behind the closed envelope.
+   2) Make the two side triangular folds meet the top edge cleanly.
+   3) Make the invitation feel like it rises from inside the envelope, not just fading in. */
+
+.gif-back{
+  position:absolute;
+  left:3%;
+  right:3%;
+  bottom:28px;
+  height:282px;
+  border-radius:0 0 14px 14px;
+  background:linear-gradient(180deg,#f6ebcf,#efdfba);
+  box-shadow:0 16px 36px rgba(96,48,25,.10);
+  z-index:1;
+  overflow:hidden;
+}
+.gif-back:before,
+.gif-back:after{
+  content:none !important;
+  display:none !important;
+}
+
+.gif-front{
+  position:absolute;
+  left:2.5%;
+  right:2.5%;
+  bottom:28px;
+  height:282px;
+  z-index:4;
+  border-radius:0 0 14px 14px;
+  overflow:hidden;
+  pointer-events:none;
+}
+.gif-front-left,
+.gif-front-right,
+.gif-front-bottom{
+  position:absolute;
+  inset:0;
+}
+.gif-front-left{
+  background:linear-gradient(180deg,#efe0b6,#e5d2a2);
+  clip-path:polygon(0 0, 50% 55%, 0 100%);
+  z-index:2;
+  filter:drop-shadow(8px 0 8px rgba(70,52,18,.10));
+}
+.gif-front-right{
+  background:linear-gradient(180deg,#efe0b6,#e5d2a2);
+  clip-path:polygon(100% 0, 100% 100%, 50% 55%);
+  z-index:2;
+  filter:drop-shadow(-8px 0 8px rgba(70,52,18,.10));
+}
+.gif-front-bottom{
+  background:linear-gradient(180deg,#f0e1b6,#e7d5a8);
+  clip-path:polygon(0 100%, 50% 40%, 100% 100%);
+  z-index:3;
+  filter:drop-shadow(0 -3px 6px rgba(70,52,18,.10));
+}
+
+.gif-flap{
+  position:absolute;
+  left:3%;
+  right:3%;
+  top:250px;
+  margin:auto;
+  height:156px;
+  background:linear-gradient(180deg,#f5e6c7,#ebd9ac);
+  clip-path:polygon(0 0, 100% 0, 50% 100%);
+  transform-origin:50% 0;
+  transform:rotateX(0deg);
+  z-index:7;
+  filter:drop-shadow(0 8px 8px rgba(110,64,38,.08));
+  transition:transform 1.05s cubic-bezier(.22,.85,.23,1), z-index 0s linear .72s;
+  border-top:1px solid rgba(214,167,93,.24);
+}
+.gif-flap:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.02));
+  clip-path:inherit;
+}
+
+/* Bigger card remains, but start it deeper inside the envelope and make the opacity snap in quickly. */
+.gif-card{
+  position:absolute;
+  left:6%;
+  bottom:46px;
+  width:88%;
+  aspect-ratio:0.9/1;
+  margin:0;
+  border-radius:18px;
+  background:linear-gradient(180deg,rgba(255,255,255,.98),rgba(255,248,240,.98));
+  border:1px solid rgba(214,167,93,.28);
+  box-shadow:0 16px 42px rgba(93,45,22,.10);
+  z-index:2;
+  opacity:0;
+  transform:translateY(250px);
+  overflow:hidden;
+  transition:
+    opacity .12s linear .04s,
+    transform 1.25s cubic-bezier(.22,1,.22,1),
+    box-shadow 1.0s ease;
+}
+.t44-gate.card-rise .gif-card{
+  opacity:1;
+  transform:translateY(-150px);
+  z-index:8;
+  box-shadow:0 24px 50px rgba(93,45,22,.17);
+}
+
+/* Keep flap behind before the card starts rising. */
+.t44-gate.opened .gif-flap{
+  transform:rotateX(180deg);
+  z-index:7;
+}
+.t44-gate.flap-back .gif-flap{
+  z-index:0;
+  pointer-events:none;
+}
+
+@media(max-width:520px){
+  .gif-back{
+    left:3%;
+    right:3%;
+    bottom:28px;
+    height:270px;
+  }
+  .gif-front{
+    left:2.5%;
+    right:2.5%;
+    bottom:28px;
+    height:270px;
+  }
+  .gif-front-left{
+    background:linear-gradient(180deg,#efe0b6,#e5d2a2);
+    clip-path:polygon(0 0, 50% 55%, 0 100%);
+    z-index:2;
+    filter:drop-shadow(8px 0 8px rgba(70,52,18,.10));
+  }
+  .gif-front-right{
+    background:linear-gradient(180deg,#efe0b6,#e5d2a2);
+    clip-path:polygon(100% 0, 100% 100%, 50% 55%);
+    z-index:2;
+    filter:drop-shadow(-8px 0 8px rgba(70,52,18,.10));
+  }
+  .gif-front-bottom{
+    background:linear-gradient(180deg,#f0e1b6,#e7d5a8);
+    clip-path:polygon(0 100%, 50% 40%, 100% 100%);
+    z-index:3;
+    filter:drop-shadow(0 -3px 6px rgba(70,52,18,.10));
+  }
+  .gif-flap{
+    left:3%;
+    right:3%;
+    top:240px;
+    height:150px;
+  }
+  .gif-card{
+    width:88%;
+    left:6%;
+    bottom:46px;
+    transform:translateY(230px);
+  }
+  .t44-gate.card-rise .gif-card{
+    transform:translateY(-128px);
+  }
+}
