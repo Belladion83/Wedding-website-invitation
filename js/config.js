@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.35-envelope-refine-card-pull',
+  version: '1.37-dresscode-colors-calendar-center',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -62,7 +62,7 @@ window.DEFAULT_WEDDING_CONFIG = {
   dresscode: {
     kicker: 'Dresscode',
     title: 'TRANG PHỤC GỢI Ý',
-    note: 'Quý khách vui lòng ưu tiên các gam màu trang nhã, nhẹ nhàng và thanh lịch để đồng điệu cùng không gian buổi tiệc.'
+    note: 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn.'
   },
   timeline: [
     { time: '17:30', title: 'Đón tiếp khách', description: 'Cô dâu và chú rể hân hạnh đón tiếp quý khách.' },

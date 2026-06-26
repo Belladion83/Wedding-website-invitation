@@ -73,7 +73,7 @@ function initContent(){
   const D = C.dresscode || {};
   setText('dresscodeKicker', D.kicker || 'Dresscode');
   setText('dresscodeTitle', D.title || 'TRANG PHỤC GỢI Ý');
-  setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu trang nhã, nhẹ nhàng và thanh lịch để đồng điệu cùng không gian buổi tiệc.');
+  setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn.');
   const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
   setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', C.site.displayDate);
   fillGift('', C.banking.bride, C.banking.groom);
