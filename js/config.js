@@ -59,6 +59,11 @@ window.DEFAULT_WEDDING_CONFIG = {
     lunarDate: '(Tức ngày 05/06 năm Bính Ngọ)',
     timeLabel: '17:30'
   },
+  dresscode: {
+    kicker: 'Dresscode',
+    title: 'TRANG PHỤC GỢI Ý',
+    note: 'Quý khách vui lòng ưu tiên các gam màu trang nhã, nhẹ nhàng và thanh lịch để đồng điệu cùng không gian buổi tiệc.'
+  },
   timeline: [
     { time: '17:30', title: 'Đón tiếp khách', description: 'Cô dâu và chú rể hân hạnh đón tiếp quý khách.' },
     { time: '18:00', title: 'Tiệc báo hỷ', description: 'Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.' },

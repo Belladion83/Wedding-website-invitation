@@ -220,6 +220,14 @@ body{
   padding:46px 24px !important;
   background:#fff !important;
   box-shadow:none !important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.calendar39 > *{
+  width:100%;
 }
 
 .calendar-box{
@@ -403,6 +411,42 @@ body{
 .ceremony-block{
   background:#fff !important;
   padding:34px 24px 44px !important;
+}
+
+
+
+/* Dresscode */
+.dresscode39{
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  padding:48px 24px !important;
+  background:linear-gradient(180deg,#fff9f1 0%, #fff 100%) !important;
+  box-shadow:none !important;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.dresscode39 .section-flower,
+.dresscode39 .section-kicker,
+.dresscode39 h2,
+.dresscode39 .dresscode-note{
+  width:100%;
+}
+
+.dresscode39 h2{
+  margin-bottom:16px;
+}
+
+.dresscode-note{
+  max-width:420px;
+  margin:0 auto;
+  color:var(--t39-muted);
+  font-size:18px;
+  line-height:1.8;
+  font-family:"Cormorant Garamond",serif;
 }
 
 /* Timeline */
@@ -600,7 +644,10 @@ input,select,textarea{
   .hero-arch-wrap{min-height:470px}
   .couple article{grid-template-columns:118px 1fr !important}
   .event-top{grid-template-columns:1fr 1fr !important}
-  .family-row{grid-template-columns:1fr !important}
+  .family-row{grid-template-columns:1fr 1fr !important;gap:14px !important;align-items:start !important;padding-left:18px !important;padding-right:18px !important}
+  .family-row article{min-width:0}
+  .family-row h4{font-size:18px !important}
+  .family-row small{font-size:14px !important}
   .family-divider{display:none}
   .date-line{gap:12px !important}
 }
@@ -630,4 +677,15 @@ input,select,textarea{
   text-align:center;
   color:var(--t39-muted);
   padding:18px;
+}
+
+
+/* v1.36 content layout fixes */
+.calendar39 .calendar-box{width:min(100%,360px);margin-left:auto !important;margin-right:auto !important;}
+.calendar39 .calendar-note{max-width:420px;margin-left:auto !important;margin-right:auto !important;}
+@media(max-width:760px){
+  .calendar39{padding-left:18px !important;padding-right:18px !important;}
+  .calendar39 .calendar-box{width:min(100%, 390px);}
+  .dresscode39{padding:42px 20px !important;}
+  .dresscode-note{font-size:17px;line-height:1.7;}
 }

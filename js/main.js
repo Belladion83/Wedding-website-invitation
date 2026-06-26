@@ -70,6 +70,10 @@ function initContent(){
   setText('brideFather', stripPrefix(C.families.brideSide.father)); setText('brideMother', stripPrefix(C.families.brideSide.mother)); setText('brideFamAddress', stripPrefix(C.families.brideSide.address));
   setText('formalGroomName', C.site.groomFullName); setText('formalGroomRole', String(C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideName', C.site.brideFullName); setText('formalBrideRole', String(C.site.brideRole || 'Trưởng Nữ').toUpperCase());
   setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI'); setText('venue', C.event.venue); setText('venueAddress', C.event.address); setText('eventTime', C.event.timeLabel); setText('eventDay', C.event.dayLabel); setText('eventDateDay', C.event.dateDay); setText('eventMonth', C.event.monthLabel); setText('eventYear', C.event.year); setText('eventLunar', C.event.lunarDate);
+  const D = C.dresscode || {};
+  setText('dresscodeKicker', D.kicker || 'Dresscode');
+  setText('dresscodeTitle', D.title || 'TRANG PHỤC GỢI Ý');
+  setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu trang nhã, nhẹ nhàng và thanh lịch để đồng điệu cùng không gian buổi tiệc.');
   const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
   setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', C.site.displayDate);
   fillGift('', C.banking.bride, C.banking.groom);
