@@ -1365,3 +1365,37 @@ input,select,textarea{
     gap:10px !important;
   }
 }
+
+
+/* v1.49 increase only the text size in the "Kính mời Quý khách" section by ~20% over v1.48 */
+.invitee span:first-child{
+  font-size:15.6px !important;
+}
+
+.invitee span+span{
+  font-size:28.8px !important;
+}
+
+.hero-names{
+  font-size:clamp(31px, 7.56vw, 50px) !important;
+  line-height:1.08 !important;
+  gap:12px !important;
+}
+
+.hero-names span:nth-child(2){
+  font-size:.42em !important;
+}
+
+@media(max-width:760px){
+  .invitee span:first-child{
+    font-size:15.6px !important;
+  }
+  .invitee span+span{
+    font-size:27.6px !important;
+  }
+  .hero-names{
+    font-size:clamp(28.8px, 7.32vw, 42px) !important;
+    line-height:1.1 !important;
+    gap:10px !important;
+  }
+}
