@@ -1288,3 +1288,46 @@ input,select,textarea{
     margin:10px 0 !important;
   }
 }
+
+
+/* v1.47 restore full-width look for the “Kính mời Quý khách” frame */
+.hero.cinelove-cover{
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  align-items:stretch !important;
+  background:#fff !important;
+}
+
+.hero-arch-wrap,
+.hero-content{
+  width:100% !important;
+  max-width:none !important;
+  min-width:0 !important;
+  align-self:stretch !important;
+  box-sizing:border-box !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+.hero-content{
+  background:#fff !important;
+  border-radius:0 !important;
+  padding-left:24px !important;
+  padding-right:24px !important;
+}
+
+/* Keep the section visually full-bleed inside the page shell on mobile */
+@media(max-width:760px){
+  .hero.cinelove-cover,
+  .hero-arch-wrap,
+  .hero-content{
+    width:100% !important;
+    margin:0 !important;
+  }
+  .hero-content{
+    padding-left:22px !important;
+    padding-right:22px !important;
+  }
+}
