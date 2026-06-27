@@ -1735,3 +1735,70 @@ input,select,textarea{
     font-size:clamp(44px, 8.8vw, 52px) !important;
   }
 }
+
+
+/* v1.56 unify section kicker titles like the provided Album sample */
+.section-flower{
+  display:none !important;
+}
+
+.cinelove-section-kicker,
+.section-kicker,
+.calendar-title{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  width:auto !important;
+  margin:0 auto 14px !important;
+  color:var(--t39-gold) !important;
+  font-family:"Cormorant Garamond", serif !important;
+  font-style:italic !important;
+  font-weight:500 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+  line-height:1.2 !important;
+  position:relative !important;
+}
+
+.cinelove-section-kicker::before,
+.cinelove-section-kicker::after,
+.section-kicker::before,
+.section-kicker::after,
+.calendar-title::before,
+.calendar-title::after{
+  content:'✦';
+  color:var(--t39-gold) !important;
+  font-style:normal !important;
+  font-size:.48em !important;
+  line-height:1 !important;
+  transform:translateY(-1px);
+}
+
+.cinelove-section-kicker,
+.section-kicker{
+  font-size:clamp(28px, 4vw, 36px) !important;
+}
+
+.calendar-title{
+  font-size:clamp(26px, 4vw, 34px) !important;
+}
+
+@media(max-width:760px){
+  .cinelove-section-kicker,
+  .section-kicker{
+    gap:10px !important;
+    font-size:clamp(24px, 6vw, 30px) !important;
+    margin-bottom:12px !important;
+  }
+  .calendar-title{
+    gap:10px !important;
+    font-size:clamp(23px, 6vw, 28px) !important;
+  }
+}
+
+/* v1.56 exact style for venue brand casing */
+#venue .venue-brand{
+  text-transform:none !important;
+  font-variant-caps:normal !important;
+}

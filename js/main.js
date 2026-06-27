@@ -90,10 +90,12 @@ function initContent(){
 }
 function escapeHtml(v){return String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
 function titleCaseWords(str){
-  return String(str || '')
-    .toLowerCase()
-    .replace(/([a-zà-ỹ])/g, m => m.toUpperCase())
-    .replace(/\s*&\s*/g, ' & ')
+  return String(str || "")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(w => w === "&" ? "&" : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ")
+    .replace(/\s*&\s*/g, " & ")
     .trim();
 }
 function renderVenueBlock(value){
@@ -109,7 +111,7 @@ function renderVenueBlock(value){
     line1 = raw.replace(/\s*JOLIE WEDDING & EVENT\s*/i,'').trim();
     line2 = 'Jolie Wedding & Event';
   }
-  if(line2) line2 = titleCaseWords(line2);
+  if(line2 && line2 !== 'Jolie Wedding & Event') line2 = titleCaseWords(line2);
   el.innerHTML = `<span class="venue-main">${escapeHtml(line1)}</span>${line2 ? `<span class="venue-brand">${escapeHtml(line2)}</span>` : ''}`;
 }
 function fillGift(suffix, bride, groom){
