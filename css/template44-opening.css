@@ -862,3 +862,26 @@
 .gif-card h1 small{
   font-family:"UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
 }
+
+/* v1.50 UTM Edwardian Script web font setup
+   Put your licensed Vietnamese-supported font file in:
+   assets/fonts/UTM-Edwardian-Script.woff2
+   or assets/fonts/UTM-Edwardian-Script.otf
+   or assets/fonts/UTM-Edwardian-Script.ttf */
+@font-face{
+  font-family:"UTM Edwardian Script Web";
+  src:
+    url("../assets/fonts/UTM-Edwardian-Script.woff2") format("woff2"),
+    url("../assets/fonts/UTM-Edwardian-Script.otf") format("opentype"),
+    url("../assets/fonts/UTM-Edwardian-Script.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+
+/* v1.50 force UTM Edwardian Script Web on intro card names */
+.gif-card h1,
+.gif-card h1 small{
+  font-family:"UTM Edwardian Script Web", "UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+}

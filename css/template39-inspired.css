@@ -1399,3 +1399,32 @@ input,select,textarea{
     gap:10px !important;
   }
 }
+
+/* v1.50 UTM Edwardian Script web font setup
+   Put your licensed Vietnamese-supported font file in:
+   assets/fonts/UTM-Edwardian-Script.woff2
+   or assets/fonts/UTM-Edwardian-Script.otf
+   or assets/fonts/UTM-Edwardian-Script.ttf */
+@font-face{
+  font-family:"UTM Edwardian Script Web";
+  src:
+    url("../assets/fonts/UTM-Edwardian-Script.woff2") format("woff2"),
+    url("../assets/fonts/UTM-Edwardian-Script.otf") format("opentype"),
+    url("../assets/fonts/UTM-Edwardian-Script.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+
+
+/* v1.50 force UTM Edwardian Script Web on requested name sections.
+   Avatar short names in .event-top .person-side h3 are intentionally not included. */
+.hero-names,
+.hero-names span,
+.formal-couple h2,
+.formal-couple span{
+  font-family:"UTM Edwardian Script Web", "UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+}
