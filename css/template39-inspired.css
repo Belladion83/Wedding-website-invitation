@@ -1143,3 +1143,57 @@ input,select,textarea{
     line-height:.84 !important;
   }
 }
+
+
+/* v1.45 trial UTM Edwardian Script + 30% smaller full-name text in 2 sections */
+.hero-names,
+.hero-names span,
+.formal-couple h2,
+.formal-couple span{
+  font-family:"UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+}
+
+/* 30% smaller than v1.44 for Kinh moi Quy khach */
+.hero-names{
+  font-size:clamp(24px, 5.8vw, 39px) !important;
+  line-height:.88 !important;
+  gap:4px !important;
+}
+.hero-names span{
+  display:block !important;
+  white-space:nowrap !important;
+}
+.hero-names span:nth-child(2){
+  font-size:.38em !important;
+  line-height:.82 !important;
+}
+
+/* 30% smaller than v1.44 for Thong tin le bao hy */
+.formal-couple h2{
+  font-size:clamp(29px, 6.8vw, 45px) !important;
+  line-height:.88 !important;
+  white-space:nowrap !important;
+  margin:2px 0 !important;
+}
+.formal-couple span{
+  font-size:46px !important;
+  line-height:1 !important;
+}
+
+@media(max-width:760px){
+  .hero-names{
+    font-size:clamp(22px, 5.5vw, 31px) !important;
+    line-height:.90 !important;
+    gap:2px !important;
+  }
+  .formal-couple h2{
+    font-size:clamp(26px, 6.3vw, 36px) !important;
+    line-height:.90 !important;
+  }
+  .formal-couple span{
+    font-size:40px !important;
+  }
+}

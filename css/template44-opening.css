@@ -852,3 +852,13 @@
 .t44-script{
   color:#b18a4e !important;
 }
+
+
+/* v1.45 trial UTM Edwardian Script on intro card names */
+.gif-card h1{
+  font-family:"UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+  letter-spacing:0 !important;
+}
+.gif-card h1 small{
+  font-family:"UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+}
