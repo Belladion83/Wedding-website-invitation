@@ -1428,3 +1428,19 @@ input,select,textarea{
   font-weight:400 !important;
   letter-spacing:0 !important;
 }
+
+
+/* v1.51 make the active wedding date number clearly visible in white */
+.calendar-grid span.active{
+  color:#ffffff !important;
+  font-weight:800 !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.12) !important;
+}
+
+.calendar-grid span.active::before{
+  background:var(--t39-red) !important;
+}
+
+.calendar-grid span.active b{
+  color:#f6e3a4 !important;
+}
