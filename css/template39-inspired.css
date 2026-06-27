@@ -1473,3 +1473,31 @@ input,select,textarea{
 .calendar-grid span.active b{
   display:none !important;
 }
+
+
+/* v1.53 make calendar heart marker bigger and softer */
+.calendar-grid span.active::before{
+  content:"♥" !important;
+  color:#b9838d !important;
+  font-size:58px !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+  transform:translateY(2px) scale(1.02) !important;
+  text-shadow:
+    0 6px 16px rgba(137, 89, 97, .18),
+    0 2px 4px rgba(137, 89, 97, .10) !important;
+  filter:saturate(.95) !important;
+}
+
+.calendar-grid span.active{
+  color:#ffffff !important;
+  font-weight:800 !important;
+  text-shadow:0 1px 1px rgba(72,52,34,.18) !important;
+}
+
+@media(max-width:760px){
+  .calendar-grid span.active::before{
+    font-size:62px !important;
+    transform:translateY(2px) scale(1.02) !important;
+  }
+}
