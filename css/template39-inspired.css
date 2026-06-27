@@ -1444,3 +1444,32 @@ input,select,textarea{
 .calendar-grid span.active b{
   color:#f6e3a4 !important;
 }
+
+
+/* v1.52 change active date marker from circle to heart */
+.calendar-grid span.active{
+  color:#ffffff !important;
+  font-weight:800 !important;
+  text-shadow:0 1px 1px rgba(0,0,0,.14) !important;
+}
+
+.calendar-grid span.active::before{
+  content:"♥" !important;
+  position:absolute !important;
+  inset:auto !important;
+  width:auto !important;
+  height:auto !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:var(--t39-red) !important;
+  font-size:44px !important;
+  line-height:1 !important;
+  z-index:-1 !important;
+  box-shadow:none !important;
+  transform:translateY(1px) !important;
+}
+
+/* hide the small extra heart because the main marker is now a heart */
+.calendar-grid span.active b{
+  display:none !important;
+}
