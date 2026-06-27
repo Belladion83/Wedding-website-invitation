@@ -825,3 +825,30 @@
 .gif-card h1{
   font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
 }
+
+
+/* v1.43 better wedding-script font + all red intro text to unified gold */
+.gif-card h1{
+  font-family:"Pinyon Script", "Ephesis", "Allura", "Parisienne", "Great Vibes", serif !important;
+  color:#b18a4e !important;
+  font-weight:400 !important;
+  font-size:clamp(46px,9.6vw,70px) !important;
+  line-height:.74 !important;
+  letter-spacing:0 !important;
+}
+.gif-card h1 small{
+  font-family:"Pinyon Script", "Ephesis", "Allura", "Parisienne", "Great Vibes", serif !important;
+  color:#b18a4e !important;
+  font-size:.40em !important;
+}
+.t44-big,
+.t44-wedding,
+.t44-date,
+.t44-type,
+.gif-hint{
+  color:#b18a4e !important;
+}
+.t44-kicker,
+.t44-script{
+  color:#b18a4e !important;
+}

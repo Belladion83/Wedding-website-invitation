@@ -41,6 +41,12 @@ function applyBgTransform(el, kind){
   el.style.backgroundRepeat = 'no-repeat';
 }
 function stripPrefix(s){ return String(s || '').replace(/^Ông:\s*/i,'').replace(/^Bà:\s*/i,'').replace(/^Địa chỉ:\s*/i,''); }
+function toNameCase(s){
+  return String(s || '')
+    .trim()
+    .toLocaleLowerCase('vi-VN')
+    .replace(/(^|[\s\-'])\p{L}/gu, m => m.toLocaleUpperCase('vi-VN'));
+}
 function resolveGuest(){
   const found = (C.guests || []).find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
   return { id: guestId, name: guestNameParam || (found && found.name) || '', side: (found && found.side) || '' };
@@ -49,33 +55,33 @@ function initContent(){
   document.documentElement.style.setProperty('--gold', C.site.colorPrimary || '#b98645');
   document.documentElement.style.setProperty('--gold2', C.site.colorPrimary || '#d7b77f');
   $('bgMusic').src = C.site.musicUrl || '';
-  setText('introGroom', C.site.groomShortName); setText('introBride', C.site.brideShortName); setText('introDate', C.site.displayDate); setText('introType', C.site.eventType);
+  setText('introGroom', toNameCase(C.site.groomShortName)); setText('introBride', toNameCase(C.site.brideShortName)); setText('introDate', C.site.displayDate); setText('introType', C.site.eventType);
   document.querySelectorAll('[data-bind="site.saveText"]').forEach(el => el.textContent = C.site.saveText || 'SAVE OUR DATE');
   setSrc('envPhoto1', C.images.envelope1); setSrc('envPhoto2', C.images.envelope2); setText('envDate1', C.site.displayDate); setText('envDate2', C.site.displayDate);
   applyImgTransform($('envPhoto1'), 'envelope1'); applyImgTransform($('envPhoto2'), 'envelope2');
   setBg('heroPhoto', C.images.hero); setBg('thanks', C.images.thankYouBg || C.images.hero);
   applyBgTransform($('heroPhoto'), 'hero'); applyBgTransform($('thanks'), 'thankYouBg');
-  setText('heroGroomName', (C.site.groomFullName || '').toUpperCase());
-  setText('heroBrideName', (C.site.brideFullName || '').toUpperCase());
+  setText('heroGroomName', toNameCase(C.site.groomFullName));
+  setText('heroBrideName', toNameCase(C.site.brideFullName));
   setText('heroDate', C.site.displayDate);
   const guest = resolveGuest();
   if (guest.name) $('inviteeLine').innerHTML = `<span>Kính mời</span><span>${escapeHtml(guest.name)}</span>`;
   setSrc('groomPhoto', C.images.groom); setSrc('bridePhoto', C.images.bride); setSrc('eventGroomPhoto', C.images.groom); setSrc('eventBridePhoto', C.images.bride);
   applyImgTransform($('groomPhoto'), 'groom'); applyImgTransform($('eventGroomPhoto'), 'groom'); applyImgTransform($('bridePhoto'), 'bride'); applyImgTransform($('eventBridePhoto'), 'bride');
-  setText('groomName', C.couple.groom.name); setText('groomBirthday', C.couple.groom.birthday); setText('groomSubtitle', C.couple.groom.subtitle); setText('groomAddress', C.couple.groom.address);
-  setText('brideName', C.couple.bride.name); setText('brideBirthday', C.couple.bride.birthday); setText('brideSubtitle', C.couple.bride.subtitle); setText('brideAddress', C.couple.bride.address);
+  setText('groomName', toNameCase(C.couple.groom.name)); setText('groomBirthday', C.couple.groom.birthday); setText('groomSubtitle', C.couple.groom.subtitle); setText('groomAddress', C.couple.groom.address);
+  setText('brideName', toNameCase(C.couple.bride.name)); setText('brideBirthday', C.couple.bride.birthday); setText('brideSubtitle', C.couple.bride.subtitle); setText('brideAddress', C.couple.bride.address);
   setText('storyTitle', C.story.title || 'OUR STORY'); setText('storyText', C.story.text);
-  setText('eventGroomRole', C.site.groomRole || 'Trưởng Nam'); setText('eventBrideRole', C.site.brideRole || 'Trưởng Nữ'); setText('eventGroomShort', C.site.groomShortName); setText('eventBrideShort', C.site.brideShortName);
+  setText('eventGroomRole', C.site.groomRole || 'Trưởng Nam'); setText('eventBrideRole', C.site.brideRole || 'Trưởng Nữ'); setText('eventGroomShort', toNameCase(C.site.groomShortName)); setText('eventBrideShort', toNameCase(C.site.brideShortName));
   setText('groomFather', stripPrefix(C.families.groomSide.father)); setText('groomMother', stripPrefix(C.families.groomSide.mother)); setText('groomFamAddress', stripPrefix(C.families.groomSide.address));
   setText('brideFather', stripPrefix(C.families.brideSide.father)); setText('brideMother', stripPrefix(C.families.brideSide.mother)); setText('brideFamAddress', stripPrefix(C.families.brideSide.address));
-  setText('formalGroomName', C.site.groomFullName); setText('formalGroomRole', String(C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideName', C.site.brideFullName); setText('formalBrideRole', String(C.site.brideRole || 'Trưởng Nữ').toUpperCase());
+  setText('formalGroomName', toNameCase(C.site.groomFullName)); setText('formalGroomRole', String(C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideName', toNameCase(C.site.brideFullName)); setText('formalBrideRole', String(C.site.brideRole || 'Trưởng Nữ').toUpperCase());
   setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI'); setText('venue', C.event.venue); setText('venueAddress', C.event.address); setText('eventTime', C.event.timeLabel); setText('eventDay', C.event.dayLabel); setText('eventDateDay', C.event.dateDay); setText('eventMonth', C.event.monthLabel); setText('eventYear', C.event.year); setText('eventLunar', C.event.lunarDate);
   const D = C.dresscode || {};
   setText('dresscodeKicker', D.kicker || 'Dresscode');
   setText('dresscodeTitle', D.title || 'TRANG PHỤC GỢI Ý');
   setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn, đen.');
   const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
-  setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', C.site.displayDate);
+  setText('thanksNames', `${toNameCase(C.site.groomShortName)} & ${toNameCase(C.site.brideShortName)}`); setText('thanksDate', C.site.displayDate);
   fillGift('', C.banking.bride, C.banking.groom);
   buildGallery();
   renderCalendar39();

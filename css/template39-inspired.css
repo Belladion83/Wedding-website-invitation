@@ -1018,3 +1018,96 @@ input,select,textarea{
   .formal-couple span{font-size:52px !important;}
   .event-top .person-side h3{font-size:28px !important;}
 }
+
+
+/* v1.43 unify red text to gold, closer name font, and no forced uppercase look */
+:root{
+  --t39-red:#b18a4e !important;
+  --t39-red-dark:#8f6d34 !important;
+  --t39-gold:#b18a4e !important;
+  --gold:#b18a4e !important;
+  --gold2:#b18a4e !important;
+  --event-accent:#b18a4e !important;
+}
+
+/* keep ribbon background as original deep red; only text colors are unified */
+.event-ribbon{
+  background:#8f1420 !important;
+  color:#fff !important;
+}
+
+/* Global visible text areas that were red now use one gold tone */
+.hero-date,
+.countdown strong,
+.couple h3,
+.story h2,
+.calendar39 h2,
+.calendar-week span,
+.calendar-grid span,
+.section-flower,
+.section-kicker,
+.dresscode39 h2,
+.timeline39 h2,
+.timeline-item .time,
+.rsvp39 h2,
+.gifts39 h2,
+.thanks39 h2,
+.album39 h2,
+.event-top .person-side h3,
+.family-row h4,
+.formal-couple h2,
+.formal-couple span,
+.ceremony-block h3,
+.ceremony-block h4,
+.date-line b,
+.year-line,
+.hero-names,
+.hero-names span{
+  color:#b18a4e !important;
+}
+
+/* Requested name font: same family as the intro card and closer to sample. */
+.hero-names,
+.hero-names span,
+.formal-couple h2,
+.formal-couple span{
+  font-family:"Pinyon Script", "Ephesis", "Allura", "Parisienne", "Great Vibes", serif !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  letter-spacing:0 !important;
+}
+.hero-names{
+  font-size:clamp(46px,11vw,76px) !important;
+  line-height:.78 !important;
+  gap:12px !important;
+}
+.hero-names span:nth-child(2){
+  font-size:.46em !important;
+  line-height:.8 !important;
+}
+.formal-couple h2{
+  font-size:clamp(58px,14vw,94px) !important;
+  line-height:.76 !important;
+  margin:4px 0 !important;
+}
+.formal-couple span{
+  font-size:66px !important;
+  line-height:1 !important;
+}
+
+/* This specific pair of short names stays in the older section font, but adopts the unified gold color. */
+.event-top .person-side h3{
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  font-size:30px !important;
+  line-height:1.08 !important;
+  font-weight:700 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+}
+
+@media(max-width:760px){
+  .hero-names{font-size:clamp(42px,12vw,64px) !important;}
+  .formal-couple h2{font-size:clamp(50px,14vw,76px) !important;}
+  .formal-couple span{font-size:54px !important;}
+  .event-top .person-side h3{font-size:28px !important;}
+}
