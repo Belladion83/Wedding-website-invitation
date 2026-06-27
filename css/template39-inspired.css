@@ -1197,3 +1197,94 @@ input,select,textarea{
     font-size:40px !important;
   }
 }
+
+
+/* v1.46 keep section size; only the name text is smaller
+   The previous v1.45 made the name block feel compressed. These rules keep the visual space
+   of the "Kính mời Quý khách" and formal-couple sections while keeping the text smaller. */
+.hero-content{
+  min-height:330px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  padding-top:52px !important;
+  padding-bottom:28px !important;
+}
+
+.hero-names{
+  font-size:clamp(24px, 5.8vw, 39px) !important;
+  line-height:1.08 !important;
+  gap:12px !important;
+  min-height:118px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+  align-items:center !important;
+  margin:10px 0 12px !important;
+}
+
+.hero-names span{
+  white-space:nowrap !important;
+}
+
+.hero-names span:nth-child(2){
+  font-size:.42em !important;
+  line-height:1 !important;
+  margin:2px 0 !important;
+}
+
+.formal-couple{
+  min-height:250px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  padding-top:30px !important;
+  padding-bottom:20px !important;
+}
+
+.formal-couple h2{
+  font-size:clamp(29px, 6.8vw, 45px) !important;
+  line-height:1.08 !important;
+  white-space:nowrap !important;
+  margin:8px 0 !important;
+}
+
+.formal-couple span{
+  font-size:46px !important;
+  line-height:1 !important;
+  margin:10px 0 !important;
+}
+
+@media(max-width:760px){
+  .hero-content{
+    min-height:320px !important;
+    padding-top:48px !important;
+    padding-bottom:28px !important;
+  }
+
+  .hero-names{
+    font-size:clamp(22px, 5.5vw, 31px) !important;
+    line-height:1.10 !important;
+    gap:10px !important;
+    min-height:108px !important;
+    margin:10px 0 12px !important;
+  }
+
+  .formal-couple{
+    min-height:240px !important;
+    padding-top:28px !important;
+    padding-bottom:20px !important;
+  }
+
+  .formal-couple h2{
+    font-size:clamp(26px, 6.3vw, 36px) !important;
+    line-height:1.10 !important;
+    margin:8px 0 !important;
+  }
+
+  .formal-couple span{
+    font-size:40px !important;
+    margin:10px 0 !important;
+  }
+}
