@@ -1331,3 +1331,37 @@ input,select,textarea{
     padding-right:22px !important;
   }
 }
+
+
+/* v1.48 slightly larger text only for the “Kính mời Quý khách” section */
+.invitee span:first-child{
+  font-size:13px !important;
+}
+
+.invitee span+span{
+  font-size:24px !important;
+}
+
+.hero-names{
+  font-size:clamp(26px, 6.3vw, 42px) !important;
+  line-height:1.08 !important;
+  gap:12px !important;
+}
+
+.hero-names span:nth-child(2){
+  font-size:.42em !important;
+}
+
+@media(max-width:760px){
+  .invitee span:first-child{
+    font-size:13px !important;
+  }
+  .invitee span+span{
+    font-size:23px !important;
+  }
+  .hero-names{
+    font-size:clamp(24px, 6.1vw, 35px) !important;
+    line-height:1.1 !important;
+    gap:10px !important;
+  }
+}
