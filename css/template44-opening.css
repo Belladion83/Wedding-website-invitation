@@ -769,3 +769,49 @@
     font-size:clamp(32px,8.6vw,50px) !important;
   }
 }
+
+
+/* v1.41 closer script font
+   Previous version used Great Vibes. This version uses Allura first because it is thinner,
+   more flowing, and closer to the gold wedding calligraphy sample. */
+.gif-card h1{
+  font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
+  color:#b18a4e !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  font-size:clamp(42px,9.2vw,66px) !important;
+  line-height:.78 !important;
+  letter-spacing:.005em !important;
+  gap:8px !important;
+}
+
+.gif-card h1 small{
+  color:#c79d4b !important;
+  font-size:.44em !important;
+  line-height:.9 !important;
+  margin:.02em 0 -.02em !important;
+  font-family:"Cormorant Garamond",serif !important;
+}
+
+.gif-card{
+  aspect-ratio:1.05/1 !important;
+}
+
+.gif-card-inner{
+  padding:20px 20px 18px !important;
+}
+
+.t44-kicker{
+  margin-bottom:8px !important;
+}
+
+.t44-date{
+  margin-top:12px !important;
+}
+
+@media(max-width:520px){
+  .gif-card h1{
+    font-size:clamp(40px,9.8vw,60px) !important;
+    line-height:.78 !important;
+  }
+}

@@ -900,3 +900,58 @@ input,select,textarea{
     font-size:52px !important;
   }
 }
+
+
+/* v1.41 closer script font for public invitation names */
+.hero-names,
+.hero-names span,
+.person-side h3,
+.formal-couple h2{
+  font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
+  color:#b18a4e !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  letter-spacing:.005em !important;
+}
+
+.hero-names{
+  font-size:clamp(44px,11vw,72px) !important;
+  line-height:.82 !important;
+  gap:12px !important;
+}
+
+.hero-names span:nth-child(2){
+  color:#c79d4b !important;
+  font-family:"Cormorant Garamond",serif !important;
+  font-size:.50em !important;
+  line-height:.8 !important;
+}
+
+.person-side h3{
+  font-size:50px !important;
+  line-height:.86 !important;
+}
+
+.formal-couple h2{
+  font-size:clamp(56px,14vw,92px) !important;
+  line-height:.78 !important;
+  margin:4px 0 !important;
+}
+
+.formal-couple span{
+  color:#7d6a58 !important;
+  font-family:"Cormorant Garamond",serif !important;
+}
+
+@media(max-width:760px){
+  .hero-names{
+    font-size:clamp(42px,12vw,62px) !important;
+    line-height:.82 !important;
+  }
+  .person-side h3{
+    font-size:44px !important;
+  }
+  .formal-couple h2{
+    font-size:clamp(48px,14vw,74px) !important;
+  }
+}
