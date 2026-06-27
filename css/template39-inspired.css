@@ -1649,3 +1649,89 @@ input,select,textarea{
     font-size:clamp(22px, 5.8vw, 28px) !important;
   }
 }
+
+
+/* v1.55 make ceremony text visually uniform and non-caps for brand line */
+#venueAddress,
+.time-label,
+.time-label strong,
+.date-line,
+.date-line span,
+.date-line b,
+.year-line,
+.lunar{
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings:"lnum" 1, "tnum" 1, "kern" 1 !important;
+  text-rendering:optimizeLegibility !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+#venue .venue-brand{
+  text-transform:none !important;
+  letter-spacing:0 !important;
+  font-variant-caps:normal !important;
+  font-size:clamp(27px, 4.8vw, 36px) !important;
+}
+
+#venueAddress{
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:clamp(18px, 3.8vw, 20px) !important;
+  line-height:1.55 !important;
+}
+
+.time-label,
+.time-label strong{
+  font-family:"Cormorant Garamond", serif !important;
+  line-height:1.35 !important;
+}
+
+.time-label{
+  font-size:clamp(19px, 4vw, 22px) !important;
+}
+
+.time-label strong{
+  font-size:1em !important;
+  font-weight:700 !important;
+}
+
+.date-line{
+  align-items:center !important;
+}
+
+.date-line span,
+.date-line b{
+  font-family:"Cormorant Garamond", serif !important;
+}
+
+.date-line span{
+  font-size:clamp(21px, 4.5vw, 26px) !important;
+  line-height:1.1 !important;
+}
+
+.date-line b{
+  font-size:clamp(49px, 8vw, 60px) !important;
+  line-height:1 !important;
+  font-weight:700 !important;
+}
+
+.year-line{
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:clamp(26px, 5vw, 30px) !important;
+  line-height:1.15 !important;
+}
+
+.lunar{
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:clamp(17px, 3.6vw, 19px) !important;
+  line-height:1.5 !important;
+}
+
+@media(max-width:760px){
+  #venue .venue-brand{
+    font-size:clamp(24px, 6.5vw, 31px) !important;
+  }
+  .date-line b{
+    font-size:clamp(44px, 8.8vw, 52px) !important;
+  }
+}
