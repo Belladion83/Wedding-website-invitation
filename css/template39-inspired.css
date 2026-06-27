@@ -1501,3 +1501,151 @@ input,select,textarea{
     transform:translateY(2px) scale(1.02) !important;
   }
 }
+
+
+/* v1.54 ceremony block typography and venue split fix */
+#venue{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:6px !important;
+  margin:0 auto 18px !important;
+  text-align:center !important;
+  width:100% !important;
+  line-height:1.28 !important;
+}
+
+#venue .venue-main{
+  display:block !important;
+  color:var(--t39-red) !important;
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  font-size:clamp(22px, 4.4vw, 28px) !important;
+  line-height:1.28 !important;
+  letter-spacing:.015em !important;
+  text-transform:uppercase !important;
+}
+
+#venue .venue-brand{
+  display:block !important;
+  color:var(--t39-red) !important;
+  font-family:"UTM Edwardian Script Web", "UTM Edwardian Script", "Edwardian Script ITC", "Edwardian Script", "Palace Script MT", "Pinyon Script", "Ephesis", "Allura", serif !important;
+  font-size:clamp(28px, 5vw, 38px) !important;
+  line-height:1.06 !important;
+  letter-spacing:0 !important;
+  text-transform:none !important;
+}
+
+#venueAddress,
+.time-label,
+.year-line,
+.lunar{
+  width:100% !important;
+  text-align:center !important;
+  line-height:1.55 !important;
+  letter-spacing:0 !important;
+  font-kerning:normal !important;
+  text-wrap:balance;
+}
+
+#venueAddress,
+.lunar{
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:clamp(18px, 3.8vw, 20px) !important;
+  color:var(--t39-muted) !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  max-width:34ch !important;
+}
+
+.time-label{
+  margin:12px auto 10px !important;
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  font-size:clamp(18px, 4vw, 21px) !important;
+  color:var(--t39-red) !important;
+}
+
+.time-label strong{
+  display:inline-block !important;
+  font-size:1.05em !important;
+  font-weight:700 !important;
+  letter-spacing:.02em !important;
+  vertical-align:baseline !important;
+}
+
+.date-line{
+  display:flex !important;
+  align-items:baseline !important;
+  justify-content:center !important;
+  gap:12px !important;
+  width:100% !important;
+  margin:6px auto 0 !important;
+  flex-wrap:nowrap !important;
+}
+
+.date-line span,
+.date-line b{
+  display:inline-block !important;
+  line-height:1 !important;
+  vertical-align:baseline !important;
+}
+
+.date-line span{
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  font-size:clamp(21px, 4.5vw, 26px) !important;
+  letter-spacing:.02em !important;
+}
+
+.date-line b{
+  font-size:clamp(48px, 8vw, 60px) !important;
+  font-weight:700 !important;
+}
+
+.date-line i{
+  display:block !important;
+  width:1px !important;
+  height:1.25em !important;
+  align-self:center !important;
+  background:rgba(102,77,57,.24) !important;
+}
+
+.year-line{
+  margin-top:12px !important;
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  font-size:clamp(24px, 5vw, 30px) !important;
+  color:var(--t39-red) !important;
+}
+
+.lunar{
+  margin-top:10px !important;
+}
+
+@media(max-width:760px){
+  #venue .venue-main{
+    font-size:clamp(20px, 5.8vw, 24px) !important;
+    line-height:1.3 !important;
+  }
+  #venue .venue-brand{
+    font-size:clamp(25px, 7vw, 33px) !important;
+  }
+  #venueAddress,
+  .lunar{
+    max-width:31ch !important;
+    font-size:clamp(17px, 4.6vw, 19px) !important;
+  }
+  .time-label{
+    font-size:clamp(17px, 4.8vw, 20px) !important;
+  }
+  .date-line{
+    gap:10px !important;
+  }
+  .date-line span{
+    font-size:clamp(19px, 5vw, 22px) !important;
+  }
+  .date-line b{
+    font-size:clamp(42px, 9vw, 52px) !important;
+  }
+  .year-line{
+    font-size:clamp(22px, 5.8vw, 28px) !important;
+  }
+}

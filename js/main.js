@@ -75,7 +75,7 @@ function initContent(){
   setText('groomFather', stripPrefix(C.families.groomSide.father)); setText('groomMother', stripPrefix(C.families.groomSide.mother)); setText('groomFamAddress', stripPrefix(C.families.groomSide.address));
   setText('brideFather', stripPrefix(C.families.brideSide.father)); setText('brideMother', stripPrefix(C.families.brideSide.mother)); setText('brideFamAddress', stripPrefix(C.families.brideSide.address));
   setText('formalGroomName', toNameCase(C.site.groomFullName)); setText('formalGroomRole', String(C.site.groomRole || 'Trưởng Nam').toUpperCase()); setText('formalBrideName', toNameCase(C.site.brideFullName)); setText('formalBrideRole', String(C.site.brideRole || 'Trưởng Nữ').toUpperCase());
-  setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI'); setText('venue', C.event.venue); setText('venueAddress', C.event.address); setText('eventTime', C.event.timeLabel); setText('eventDay', C.event.dayLabel); setText('eventDateDay', C.event.dateDay); setText('eventMonth', C.event.monthLabel); setText('eventYear', C.event.year); setText('eventLunar', C.event.lunarDate);
+  setText('ceremonyTitle', C.event.ceremonyTitle || 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI'); renderVenueBlock(C.event.venue); setText('venueAddress', C.event.address); setText('eventTime', C.event.timeLabel); setText('eventDay', C.event.dayLabel); setText('eventDateDay', C.event.dateDay); setText('eventMonth', C.event.monthLabel); setText('eventYear', C.event.year); setText('eventLunar', C.event.lunarDate);
   const D = C.dresscode || {};
   setText('dresscodeKicker', D.kicker || 'Dresscode');
   setText('dresscodeTitle', D.title || 'TRANG PHỤC GỢI Ý');
@@ -89,6 +89,21 @@ function initContent(){
   bindWish39();
 }
 function escapeHtml(v){return String(v||'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function renderVenueBlock(value){
+  const el = $('venue');
+  if(!el) return;
+  const raw = String(value || '').trim();
+  let line1 = raw, line2 = '';
+  if(raw.includes('\n')){
+    const parts = raw.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+    line1 = parts[0] || '';
+    line2 = parts.slice(1).join(' ');
+  }else if(/JOLIE WEDDING & EVENT/i.test(raw)) {
+    line1 = raw.replace(/\s*JOLIE WEDDING & EVENT\s*/i,'').trim();
+    line2 = 'JOLIE WEDDING & EVENT';
+  }
+  el.innerHTML = `<span class="venue-main">${escapeHtml(line1)}</span>${line2 ? `<span class="venue-brand">${escapeHtml(line2)}</span>` : ''}`;
+}
 function fillGift(suffix, bride, groom){
   setText('brideGiftTitle'+suffix, bride.title); setSrc('brideQr'+suffix, bride.qr); setText('brideBank'+suffix, bride.bank); setText('brideAcc'+suffix, bride.accountNo); setText('brideNameBank'+suffix, bride.accountName); setText('brideMemo'+suffix, bride.memo);
   setText('groomGiftTitle'+suffix, groom.title); setSrc('groomQr'+suffix, groom.qr); setText('groomBank'+suffix, groom.bank); setText('groomAcc'+suffix, groom.accountNo); setText('groomNameBank'+suffix, groom.accountName); setText('groomMemo'+suffix, groom.memo);
