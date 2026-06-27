@@ -815,3 +815,13 @@
     line-height:.78 !important;
   }
 }
+
+
+/* v1.42 keep intro card as the gold font source of truth */
+.gif-card h1,
+.gif-card h1 small{
+  color:#b18a4e !important;
+}
+.gif-card h1{
+  font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
+}

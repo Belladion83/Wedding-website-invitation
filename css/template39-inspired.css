@@ -955,3 +955,66 @@ input,select,textarea{
     font-size:clamp(48px,14vw,74px) !important;
   }
 }
+
+
+/* v1.42 final name styling per user request */
+/* Use the same font/color as the first intro card for the requested sections: */
+/* - Kính mời Quý khách section names (.hero-names) */
+/* - Names inside thông tin lễ báo hỷ (.formal-couple h2 and ampersand) */
+.hero-names,
+.hero-names span,
+.formal-couple h2,
+.formal-couple span{
+  font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
+  color:#b18a4e !important;
+  text-transform:none !important;
+  font-weight:400 !important;
+  letter-spacing:.005em !important;
+}
+
+.hero-names{
+  font-size:clamp(44px,11vw,72px) !important;
+  line-height:.82 !important;
+  gap:12px !important;
+}
+
+.hero-names span:nth-child(2){
+  font-family:"Allura", "Parisienne", "Great Vibes", "Cormorant Garamond", serif !important;
+  color:#b18a4e !important;
+  font-size:.52em !important;
+  line-height:.82 !important;
+}
+
+.formal-couple h2{
+  font-size:clamp(56px,14vw,92px) !important;
+  line-height:.78 !important;
+  margin:4px 0 !important;
+}
+
+.formal-couple span{
+  font-size:64px !important;
+  line-height:1 !important;
+}
+
+/* Revert the avatar-name row in the screenshot area to the old pre-font-change appearance. */
+.event-top .person-side p{
+  color:var(--t39-muted) !important;
+  font-family:"Cormorant Garamond", serif !important;
+}
+
+.event-top .person-side h3{
+  font-family:"Playfair Display", "Cormorant Garamond", serif !important;
+  color:var(--t39-red) !important;
+  font-size:30px !important;
+  line-height:1.08 !important;
+  font-weight:700 !important;
+  letter-spacing:.01em !important;
+  text-transform:none !important;
+}
+
+@media(max-width:760px){
+  .hero-names{font-size:clamp(42px,12vw,62px) !important;}
+  .formal-couple h2{font-size:clamp(48px,14vw,74px) !important;}
+  .formal-couple span{font-size:52px !important;}
+  .event-top .person-side h3{font-size:28px !important;}
+}
