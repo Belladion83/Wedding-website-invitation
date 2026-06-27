@@ -838,3 +838,65 @@ input,select,textarea{
 .dresscode-color.color-black span{background:#1f1f1f !important;}
 .dresscode-color.color-black b{color:#454545 !important;}
 @media(max-width:760px){.dresscode-colors{grid-template-columns:repeat(5,1fr) !important;}}
+
+
+/* v1.40 script gold name styling across invitation */
+.hero-names,
+.hero-names span,
+.person-side h3,
+.formal-couple h2{
+  font-family:"Great Vibes", "Cormorant Garamond", serif !important;
+  color:#b69561 !important;
+  text-transform:none !important;
+  letter-spacing:.01em !important;
+  font-weight:400 !important;
+}
+
+.hero-names{
+  font-size:clamp(36px,10vw,60px) !important;
+  line-height:.95 !important;
+  gap:10px !important;
+}
+
+.hero-names span:nth-child(2){
+  color:#d6a75d !important;
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:.62em !important;
+}
+
+.person-side h3{
+  font-size:44px !important;
+  line-height:.92 !important;
+}
+
+.formal-couple{
+  padding:24px 18px 8px !important;
+}
+
+.formal-couple h2{
+  font-size:clamp(46px,12vw,78px) !important;
+  line-height:.9 !important;
+  margin:6px 0 !important;
+}
+
+.formal-couple span{
+  color:#7f6a58 !important;
+  font-family:"Cormorant Garamond", serif !important;
+  font-size:64px !important;
+  line-height:1 !important;
+}
+
+@media(max-width:760px){
+  .hero-names{
+    font-size:clamp(34px,10.5vw,54px) !important;
+  }
+  .person-side h3{
+    font-size:38px !important;
+  }
+  .formal-couple h2{
+    font-size:clamp(40px,12vw,62px) !important;
+  }
+  .formal-couple span{
+    font-size:52px !important;
+  }
+}
