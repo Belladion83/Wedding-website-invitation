@@ -831,3 +831,10 @@ input,select,textarea{
     height:40px !important;
   }
 }
+
+
+/* v1.39 dresscode black */
+.dresscode-colors{grid-template-columns:repeat(5,1fr) !important;}
+.dresscode-color.color-black span{background:#1f1f1f !important;}
+.dresscode-color.color-black b{color:#454545 !important;}
+@media(max-width:760px){.dresscode-colors{grid-template-columns:repeat(5,1fr) !important;}}

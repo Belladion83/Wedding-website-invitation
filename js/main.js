@@ -73,7 +73,7 @@ function initContent(){
   const D = C.dresscode || {};
   setText('dresscodeKicker', D.kicker || 'Dresscode');
   setText('dresscodeTitle', D.title || 'TRANG PHỤC GỢI Ý');
-  setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn.');
+  setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn, đen.');
   const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
   setText('thanksNames', `${C.site.groomShortName} & ${C.site.brideShortName}`.toUpperCase()); setText('thanksDate', C.site.displayDate);
   fillGift('', C.banking.bride, C.banking.groom);
@@ -126,9 +126,10 @@ function initEvents(){
     playMusic();
 
     if(gate) gate.classList.add('opened');
-    setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 120);
-    setTimeout(()=>{ if(gate) gate.classList.add('card-rise'); }, 760);
-    setTimeout(revealSiteBelow, 2400);
+    setTimeout(()=>{ if(gate) gate.classList.add('flap-back'); }, 760);
+    setTimeout(()=>{ if(gate) gate.classList.add('card-pull'); }, 840);
+    setTimeout(()=>{ if(gate) gate.classList.add('card-front'); }, 1520);
+    setTimeout(revealSiteBelow, 2700);
   };
 
   if(openBtn) openBtn.onclick = openInvitation;
