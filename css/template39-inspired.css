@@ -1111,3 +1111,35 @@ input,select,textarea{
   .formal-couple span{font-size:54px !important;}
   .event-top .person-side h3{font-size:28px !important;}
 }
+
+
+/* v1.44 make full bride/groom names smaller so each full name stays on a single line */
+.hero-names{
+  font-size:clamp(34px, 8.2vw, 56px) !important;
+  line-height:.84 !important;
+  gap:8px !important;
+}
+.hero-names span{
+  display:block !important;
+  white-space:nowrap !important;
+}
+.hero-names span:nth-child(2){
+  font-size:.42em !important;
+}
+
+.formal-couple h2{
+  font-size:clamp(42px, 9.6vw, 64px) !important;
+  line-height:.82 !important;
+  white-space:nowrap !important;
+}
+
+@media(max-width:760px){
+  .hero-names{
+    font-size:clamp(30px, 7.8vw, 44px) !important;
+    gap:6px !important;
+  }
+  .formal-couple h2{
+    font-size:clamp(36px, 8.6vw, 52px) !important;
+    line-height:.84 !important;
+  }
+}
