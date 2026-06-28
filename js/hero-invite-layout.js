@@ -29,8 +29,10 @@
     if(old196) old196.remove();
     const old197 = document.getElementById('hero-invite-layout-v197');
     if(old197) old197.remove();
+    const old198 = document.getElementById('hero-invite-layout-v198');
+    if(old198) old198.remove();
     const style = document.createElement('style');
-    style.id = 'hero-invite-layout-v197';
+    style.id = 'hero-invite-layout-v198';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover{
         justify-content:flex-start !important;
@@ -61,19 +63,20 @@
         padding:0 !important;
         gap:0 !important;
         color:var(--cine-wine) !important;
-        font-family:"Cormorant Garamond", "Playfair Display", serif !important;
-        font-weight:600 !important;
+        font-family:"Great Vibes", cursive !important;
+        font-weight:400 !important;
         font-size:clamp(43px, 9.4vw, 58px) !important;
         line-height:.92 !important;
-        letter-spacing:-.035em !important;
+        letter-spacing:0 !important;
         text-transform:none !important;
         white-space:nowrap !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names span{
-        font-family:inherit !important;
+        font-family:"Great Vibes", cursive !important;
         font-size:inherit !important;
+        font-weight:400 !important;
         line-height:.92 !important;
-        letter-spacing:-.035em !important;
+        letter-spacing:0 !important;
         text-transform:none !important;
         white-space:nowrap !important;
       }
