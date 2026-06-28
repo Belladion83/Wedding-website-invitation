@@ -8,9 +8,11 @@
     if(oldStyle3) oldStyle3.remove();
     const oldStyle4 = document.getElementById('hero-name-size-15-v191');
     if(oldStyle4) oldStyle4.remove();
-    if(document.getElementById('hero-name-size-15-v192')) return;
+    const oldStyle5 = document.getElementById('hero-name-size-15-v192');
+    if(oldStyle5) oldStyle5.remove();
+    if(document.getElementById('hero-name-size-15-v193')) return;
     const style = document.createElement('style');
-    style.id = 'hero-name-size-15-v192';
+    style.id = 'hero-name-size-15-v193';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
@@ -25,7 +27,7 @@
       }
       body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
       body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-        font-size:clamp(18px, 2.85vw, 29px) !important;
+        font-size:clamp(17px, 2.71vw, 28px) !important;
         line-height:1.15 !important;
         white-space:nowrap !important;
         letter-spacing:.02em !important;
@@ -54,7 +56,7 @@
         }
         body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
         body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-          font-size:clamp(15px, 4.2vw, 19px) !important;
+          font-size:clamp(14px, 4vw, 18px) !important;
           line-height:1.16 !important;
           white-space:nowrap !important;
           letter-spacing:.01em !important;
@@ -72,7 +74,7 @@
         }
         body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
         body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-          font-size:15px !important;
+          font-size:14px !important;
         }
       }
     `;
