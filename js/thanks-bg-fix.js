@@ -57,10 +57,22 @@
       map.rel = 'noopener';
     }
   }
+  function ensureFormalIntro(){
+    const formalCouple = document.querySelector('.formal-couple');
+    if(!formalCouple) return;
+    let intro = document.getElementById('formalIntro');
+    if(!intro){
+      intro = document.createElement('p');
+      intro.className = 'formal-intro';
+      intro.id = 'formalIntro';
+      intro.textContent = 'Trân trọng báo tin Lễ Báo Hỷ của';
+      formalCouple.parentNode.insertBefore(intro, formalCouple);
+    }
+  }
   function applyVisualRefinements(){
-    if(document.getElementById('calendar-requested-fix-v184')) return;
+    if(document.getElementById('visual-refinements-v185')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v184';
+    style.id = 'visual-refinements-v185';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -92,53 +104,61 @@
         margin-bottom:14px !important;
       }
 
-      /* Uniform separation for every direct website section */
+      /* Real empty space between sections: no border/object attached to sections */
       .cinelove-site{
         background:#f1e8dc !important;
+        display:flex !important;
+        flex-direction:column !important;
+        gap:14px !important;
       }
       .cinelove-site > section{
         position:relative !important;
-        margin-top:0 !important;
-        margin-bottom:0 !important;
-        box-shadow:0 -7px 16px rgba(112,76,43,.08), 0 12px 28px rgba(112,76,43,.14) !important;
-      }
-      .cinelove-site > section:not(:first-child){
-        border-top:14px solid #f1e8dc !important;
+        margin:0 !important;
+        border-top:none !important;
+        box-shadow:0 12px 30px rgba(112,76,43,.15), 0 -4px 14px rgba(112,76,43,.06) !important;
+        overflow:hidden !important;
       }
       .cinelove-site > section:first-child{
-        box-shadow:0 12px 28px rgba(112,76,43,.12) !important;
+        box-shadow:0 12px 30px rgba(112,76,43,.13) !important;
+      }
+      .cinelove-site > section:last-child{
+        margin-bottom:0 !important;
       }
 
-      /* Fade in + slight upward slide when sections enter viewport */
+      /* Apply the RSVP-style reveal behavior consistently to every section */
       .site:not(.hidden) .section-reveal{
         opacity:0 !important;
-        transform:translate3d(0,38px,0) !important;
-        transition:opacity 1.05s ease, transform 1.05s ease !important;
+        transform:translateY(24px) !important;
+        transition:opacity .9s ease, transform .9s ease !important;
         will-change:opacity, transform;
       }
       .site:not(.hidden) .section-reveal.visible{
         opacity:1 !important;
-        transform:translate3d(0,0,0) !important;
+        transform:none !important;
       }
       .site.hidden .section-reveal{
         opacity:0 !important;
-        transform:translate3d(0,38px,0) !important;
+        transform:translateY(24px) !important;
       }
 
       .formal-intro{
-        margin:8px 0 18px !important;
+        margin:22px 0 8px !important;
+        padding:0 22px !important;
         text-align:center !important;
-        font:500 24px/1.4 "Cormorant Garamond", serif !important;
+        font-family:"Cormorant Garamond", serif !important;
+        font-weight:500 !important;
+        font-size:clamp(22px, 4.8vw, 30px) !important;
+        line-height:1.35 !important;
         letter-spacing:.02em !important;
-        color:var(--t39-muted) !important;
+        color:var(--t39-gold) !important;
       }
       @media (max-width:520px){
-        .cinelove-site > section:not(:first-child){
-          border-top-width:12px !important;
+        .cinelove-site{
+          gap:12px !important;
         }
         .formal-intro{
-          font-size:21px !important;
-          margin:6px 0 16px !important;
+          margin:20px 0 6px !important;
+          font-size:clamp(21px, 5vw, 27px) !important;
         }
       }
       @media (prefers-reduced-motion: reduce){
@@ -174,11 +194,11 @@
           window.setTimeout(function(){
             entry.target.classList.add('visible');
             entry.target.dataset.revealShown = '1';
-          }, 80);
+          }, 60);
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold:0.18, rootMargin:'0px 0px -12% 0px' });
+    }, { threshold:0.14, rootMargin:'0px 0px -8% 0px' });
 
     window.setTimeout(function(){
       sections.forEach(function(section){
@@ -200,6 +220,7 @@
   function runEnhancements(){
     refreshThanksBg();
     restoreMapTarget();
+    ensureFormalIntro();
     applyVisualRefinements();
     watchSiteReveal();
     initSectionReveal();
@@ -209,5 +230,6 @@
   window.addEventListener('load', runEnhancements);
   setTimeout(refreshThanksBg, 1200);
   setTimeout(refreshThanksBg, 3500);
+  setTimeout(function(){ ensureFormalIntro(); initSectionReveal(); }, 1200);
   setTimeout(initSectionReveal, 3200);
 })();
