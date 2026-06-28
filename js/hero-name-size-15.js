@@ -14,9 +14,11 @@
     if(oldStyle6) oldStyle6.remove();
     const oldStyle7 = document.getElementById('hero-name-size-15-v194');
     if(oldStyle7) oldStyle7.remove();
-    if(document.getElementById('hero-name-size-15-v195')) return;
+    const oldStyle8 = document.getElementById('hero-name-size-15-v195');
+    if(oldStyle8) oldStyle8.remove();
+    if(document.getElementById('hero-name-size-15-v196')) return;
     const style = document.createElement('style');
-    style.id = 'hero-name-size-15-v195';
+    style.id = 'hero-name-size-15-v196';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
@@ -36,7 +38,7 @@
         max-width:100% !important;
         margin-left:auto !important;
         margin-right:auto !important;
-        font-size:clamp(24px, 3.5vw, 34px) !important;
+        font-size:clamp(1.5rem, calc(1.25rem + 1vw), 2.125rem) !important;
         line-height:1.14 !important;
         white-space:nowrap !important;
         letter-spacing:0 !important;
@@ -71,7 +73,7 @@
           max-width:100% !important;
           margin-left:auto !important;
           margin-right:auto !important;
-          font-size:clamp(24px, 3.5vw, 34px) !important;
+          font-size:clamp(1.5rem, calc(1.25rem + 1vw), 2.125rem) !important;
           line-height:1.14 !important;
           white-space:nowrap !important;
           letter-spacing:0 !important;
