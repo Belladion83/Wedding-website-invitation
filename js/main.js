@@ -74,9 +74,11 @@ function initContent(){
   const thanksEl = $('thanks');
   if(thanksEl){
     thanksEl.style.setProperty('--thanks-bg', thanksBg ? `url("${thanksBg}")` : 'none');
-    thanksEl.style.backgroundImage = thanksBg ? `var(--thanks-bg)` : '';
+    thanksEl.style.backgroundImage = thanksBg ? `url("${thanksBg}")` : '';
+    thanksEl.dataset.bg = thanksBg || '';
   }
-  applyBgTransform($('heroPhoto'), 'hero'); applyBgTransform(thanksEl, 'thankYouBg');
+  applyBgTransform($('heroPhoto'), 'hero');
+  applyBgTransform(thanksEl, 'thankYouBg');
   setText('heroGroomName', toNameCase(C.site.groomFullName));
   setText('heroBrideName', toNameCase(C.site.brideFullName));
   setText('heroDate', C.site.displayDate);

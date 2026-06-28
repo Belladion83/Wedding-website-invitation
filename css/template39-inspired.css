@@ -3479,3 +3479,175 @@ body::before{
   .formal-couple h2{ font-size:clamp(32px,7.4vw,42px) !important; }
   .formal-couple span{ font-size:clamp(26px,5.6vw,36px) !important; }
 }
+
+
+/* v1.71 exact requested fixes */
+/* Titles use the same format as "Our wedding day" */
+.section-flower{ display:none !important; }
+.section-kicker,
+.cinelove-section-kicker,
+.calendar39 .section-kicker,
+.timeline39 .section-kicker,
+.dresscode39 .section-kicker,
+.cinelove-gallery .cinelove-section-kicker,
+.cinelove-rsvp .cinelove-section-kicker,
+.cinelove-story .cinelove-section-kicker{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:14px !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 auto 12px !important;
+  padding:0 !important;
+  text-align:center !important;
+  color:var(--t39-gold) !important;
+  font-family:"Cormorant Garamond", serif !important;
+  font-style:italic !important;
+  font-weight:500 !important;
+  font-size:clamp(24px, 5vw, 34px) !important;
+  line-height:1.1 !important;
+  letter-spacing:0 !important;
+  position:relative !important;
+  overflow:visible !important;
+}
+.section-kicker::before,
+.section-kicker::after,
+.cinelove-section-kicker::before,
+.cinelove-section-kicker::after{
+  content:"✦" !important;
+  position:static !important;
+  display:inline-block !important;
+  width:auto !important;
+  height:auto !important;
+  background:none !important;
+  color:var(--t39-gold) !important;
+  font-size:.42em !important;
+  line-height:1 !important;
+  opacity:1 !important;
+  transform:none !important;
+  margin:0 !important;
+}
+
+/* Main headings same level style as other sections / Our Story */
+.calendar39 h2,
+.timeline39 h2,
+.cinelove-gallery h2,
+.cinelove-rsvp h2,
+.dresscode39 h2,
+.cinelove-story h2{
+  color:var(--t39-gold) !important;
+  font-family:"Playfair Display", serif !important;
+  font-weight:700 !important;
+  font-size:clamp(26px, 6vw, 42px) !important;
+  line-height:1.12 !important;
+  letter-spacing:.04em !important;
+  text-align:center !important;
+  text-transform:none !important;
+  margin:0 auto 14px !important;
+}
+
+/* Calendar: remove cream box and enlarge surrounding oval */
+.calendar39{
+  position:relative !important;
+  overflow:hidden !important;
+  padding-top:30px !important;
+  padding-bottom:26px !important;
+}
+.calendar39::before{
+  content:"" !important;
+  position:absolute !important;
+  left:50% !important;
+  top:12px !important;
+  transform:translateX(-50%) !important;
+  width:min(96%, 540px) !important;
+  height:min(112vw, 520px) !important;
+  border:1.35px solid rgba(201,173,128,.34) !important;
+  border-radius:50% !important;
+  background:none !important;
+  opacity:1 !important;
+  z-index:0 !important;
+}
+.calendar39::after{ display:none !important; }
+.calendar39 > *{ position:relative !important; z-index:1 !important; }
+.calendar39 .calendar-box{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  outline:none !important;
+  padding:0 !important;
+  margin-top:6px !important;
+}
+.calendar39 .calendar-week,
+.calendar39 .calendar-grid{
+  background:transparent !important;
+}
+
+/* Wedding Timeline: remove top-left floral, keep floral at bottom-left and bottom-right */
+.timeline39{
+  position:relative !important;
+  background-image:none !important;
+}
+.timeline39 .section-kicker::before,
+.timeline39 .section-kicker::after{
+  background:none !important;
+}
+.timeline39::before,
+.timeline39::after{
+  content:"" !important;
+  position:absolute !important;
+  pointer-events:none !important;
+  background-repeat:no-repeat !important;
+  background-size:contain !important;
+  z-index:0 !important;
+}
+.timeline39::before{
+  width:110px !important;
+  height:110px !important;
+  left:-8px !important;
+  bottom:-6px !important;
+  top:auto !important;
+  right:auto !important;
+  background-image:var(--floral-mini) !important;
+  opacity:.85 !important;
+}
+.timeline39::after{
+  width:128px !important;
+  height:128px !important;
+  right:-10px !important;
+  bottom:-8px !important;
+  top:auto !important;
+  left:auto !important;
+  transform:none !important;
+  background-image:var(--floral-branch) !important;
+  opacity:.9 !important;
+}
+.timeline39 > *{ position:relative !important; z-index:1 !important; }
+
+/* Ensure Thank You background stays linked to Admin-selected image */
+.thanks{
+  background-color:#e9dece !important;
+  background-image:var(--thanks-bg) !important;
+  background-position:center center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
+
+/* Bigger names in event info section (+30%) */
+.formal-couple h2{
+  font-size:clamp(46px, 8.6vw, 66px) !important;
+  line-height:1.04 !important;
+}
+
+@media (max-width:760px){
+  .calendar39::before{
+    width:min(98%, 560px) !important;
+    height:min(122vw, 560px) !important;
+    top:10px !important;
+  }
+  .formal-couple h2{
+    font-size:clamp(44px, 10.5vw, 60px) !important;
+  }
+  .timeline39::before{width:92px !important;height:92px !important;left:-10px !important;bottom:-8px !important;}
+  .timeline39::after{width:112px !important;height:112px !important;right:-12px !important;bottom:-10px !important;}
+}
