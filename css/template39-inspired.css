@@ -2874,3 +2874,224 @@ body::before{
   .thanks::before{background-size:120px auto !important;background-position:left -30px bottom -26px !important;opacity:.58 !important;}
   .thanks::after{background-size:114px auto !important;background-position:right -28px top -14px !important;opacity:.52 !important;}
 }
+
+
+/* v1.68 guided florals fixed: no extra blank block, titles restored */
+:root{
+  --floral-tr:url('../assets/images/floral-corner-top-right.png');
+  --floral-tl:url('../assets/images/floral-corner-top-left.png');
+  --floral-br:url('../assets/images/floral-corner-bottom-right.png');
+  --floral-bl:url('../assets/images/floral-corner-bottom-left.png');
+  --floral-horizontal-v168:url('../assets/images/floral-horizontal.png');
+  --floral-side-left:url('../assets/images/floral-side-left.png');
+  --floral-side-right:url('../assets/images/floral-side-right.png');
+  --floral-opacity-v168:.92;
+}
+
+/* Remove white side circles / previous blobs */
+body::after,
+.page-shell::before,
+.page-shell::after{
+  display:none !important;
+  content:none !important;
+}
+
+/* Big side florals growing from both website edges */
+body::before{
+  content:"" !important;
+  position:fixed !important;
+  inset:0 !important;
+  z-index:0 !important;
+  pointer-events:none !important;
+  opacity:.72 !important;
+  background-repeat:no-repeat !important;
+  background-image:
+    var(--floral-side-left),
+    var(--floral-side-left),
+    var(--floral-side-right),
+    var(--floral-side-right) !important;
+  background-size:
+    280px auto,
+    340px auto,
+    285px auto,
+    330px auto !important;
+  background-position:
+    left -116px top 130px,
+    left -142px bottom 80px,
+    right -122px top 250px,
+    right -138px bottom 90px !important;
+  filter:saturate(1.02) brightness(1.03);
+}
+
+.page-shell{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+/* Section titles: restore ✦ Title ✦ only, no flowers in title */
+.section-flower{ display:none !important; }
+
+.section-kicker,
+.cinelove-section-kicker{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+  position:relative !important;
+  z-index:2 !important;
+}
+
+.section-kicker::before,
+.section-kicker::after,
+.cinelove-section-kicker::before,
+.cinelove-section-kicker::after{
+  content:"✦" !important;
+  display:inline-block !important;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  background:none !important;
+  background-image:none !important;
+  color:var(--t39-gold) !important;
+  font-size:.55em !important;
+  line-height:1 !important;
+  opacity:1 !important;
+  transform:none !important;
+}
+
+/* Keep layout unchanged; use only section pseudo backgrounds */
+.hero.cinelove-cover,
+.calendar39,
+.cinelove-couple,
+.cinelove-story,
+.cinelove-event,
+.dresscode39,
+.timeline39,
+.cinelove-gallery,
+.cinelove-rsvp,
+.thanks{
+  position:relative !important;
+  overflow:hidden !important;
+  isolation:isolate;
+}
+
+/* Reset previous floral pseudo layers and use controlled 2-corner rules */
+.hero.cinelove-cover::before,
+.hero.cinelove-cover::after,
+.calendar39::before,
+.calendar39::after,
+.cinelove-couple::before,
+.cinelove-couple::after,
+.cinelove-story::before,
+.cinelove-story::after,
+.cinelove-event::before,
+.cinelove-event::after,
+.dresscode39::before,
+.dresscode39::after,
+.timeline39::before,
+.timeline39::after,
+.cinelove-gallery::before,
+.cinelove-gallery::after,
+.cinelove-rsvp::before,
+.cinelove-rsvp::after,
+.thanks::before,
+.thanks::after{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  width:auto !important;
+  height:auto !important;
+  pointer-events:none !important;
+  z-index:0 !important;
+  background-repeat:no-repeat !important;
+  background-color:transparent !important;
+  filter:saturate(1.02) brightness(1.03) drop-shadow(0 8px 22px rgba(177,142,92,.08)) !important;
+  opacity:var(--floral-opacity-v168) !important;
+  transform:none !important;
+}
+
+.hero.cinelove-cover > *,
+.calendar39 > *,
+.cinelove-couple > *,
+.cinelove-story > *,
+.cinelove-event > *,
+.dresscode39 > *,
+.timeline39 > *,
+.cinelove-gallery > *,
+.cinelove-rsvp > *,
+.thanks > *{
+  position:relative;
+  z-index:1;
+}
+
+/* Hero: top-right + bottom-left */
+.hero.cinelove-cover::before{ background-image:var(--floral-tr) !important; background-size:210px auto !important; background-position:right -34px top -8px !important; }
+.hero.cinelove-cover::after{ background-image:var(--floral-bl) !important; background-size:168px auto !important; background-position:left -24px bottom -18px !important; }
+
+/* Calendar: top-right + bottom-left */
+.calendar39::before{ background-image:var(--floral-tr) !important; background-size:138px auto !important; background-position:right -20px top -10px !important; }
+.calendar39::after{ background-image:var(--floral-bl) !important; background-size:132px auto !important; background-position:left -18px bottom -12px !important; }
+
+/* Couple: top-right + bottom-left */
+.cinelove-couple::before{ background-image:var(--floral-tr) !important; background-size:156px auto !important; background-position:right -18px top -6px !important; }
+.cinelove-couple::after{ background-image:var(--floral-bl) !important; background-size:138px auto !important; background-position:left -18px bottom -14px !important; }
+
+/* Story: top-left + bottom-right */
+.cinelove-story::before{ background-image:var(--floral-tl) !important; background-size:126px auto !important; background-position:left -18px top -10px !important; }
+.cinelove-story::after{ background-image:var(--floral-br) !important; background-size:140px auto !important; background-position:right -22px bottom -12px !important; }
+
+/* Event: top-right + bottom-left */
+.cinelove-event::before{ background-image:var(--floral-tr) !important; background-size:170px auto !important; background-position:right -22px top -6px !important; }
+.cinelove-event::after{ background-image:var(--floral-bl) !important; background-size:166px auto !important; background-position:left -24px bottom -18px !important; }
+
+/* Dresscode: two top corners + floral-horizontal bottom center */
+.dresscode39::before{ background-image:var(--floral-tl), var(--floral-horizontal-v168) !important; background-size:108px auto, 210px auto !important; background-position:left -16px top -8px, center bottom -14px !important; }
+.dresscode39::after{ background-image:var(--floral-tr) !important; background-size:108px auto !important; background-position:right -16px top -8px !important; }
+
+/* Timeline: top-left + bottom-right */
+.timeline39::before{ background-image:var(--floral-tl) !important; background-size:112px auto !important; background-position:left -16px top -8px !important; }
+.timeline39::after{ background-image:var(--floral-br) !important; background-size:126px auto !important; background-position:right -18px bottom -10px !important; }
+
+/* Album: two top corners + floral-horizontal bottom center */
+.cinelove-gallery::before{ background-image:var(--floral-tl), var(--floral-horizontal-v168) !important; background-size:132px auto, 240px auto !important; background-position:left -20px top -10px, center bottom -16px !important; }
+.cinelove-gallery::after{ background-image:var(--floral-tr) !important; background-size:132px auto !important; background-position:right -20px top -10px !important; }
+
+/* RSVP: two top corners + floral-horizontal bottom center */
+.cinelove-rsvp::before{ background-image:var(--floral-tl), var(--floral-horizontal-v168) !important; background-size:108px auto, 210px auto !important; background-position:left -14px top -8px, center bottom -14px !important; }
+.cinelove-rsvp::after{ background-image:var(--floral-tr) !important; background-size:108px auto !important; background-position:right -14px top -8px !important; }
+
+/* Thank You: top-right + bottom-left */
+.thanks::before{ background-image:var(--floral-tr) !important; background-size:178px auto !important; background-position:right -26px top -14px !important; }
+.thanks::after{ background-image:var(--floral-bl) !important; background-size:180px auto !important; background-position:left -28px bottom -22px !important; }
+
+@media(max-width:760px){
+  body::before{
+    opacity:.62 !important;
+    background-size:165px auto,190px auto,170px auto,190px auto !important;
+    background-position:left -78px top 120px,left -86px bottom 76px,right -78px top 260px,right -86px bottom 86px !important;
+  }
+  .hero.cinelove-cover::before{background-size:144px auto !important;background-position:right -22px top -6px !important;}
+  .hero.cinelove-cover::after{background-size:118px auto !important;background-position:left -16px bottom -12px !important;}
+  .calendar39::before{background-size:92px auto !important;background-position:right -12px top -6px !important;}
+  .calendar39::after{background-size:90px auto !important;background-position:left -12px bottom -8px !important;}
+  .cinelove-couple::before{background-size:112px auto !important;background-position:right -12px top -6px !important;}
+  .cinelove-couple::after{background-size:96px auto !important;background-position:left -10px bottom -8px !important;}
+  .cinelove-story::before{background-size:84px auto !important;background-position:left -10px top -6px !important;}
+  .cinelove-story::after{background-size:96px auto !important;background-position:right -12px bottom -8px !important;}
+  .cinelove-event::before{background-size:118px auto !important;background-position:right -14px top -6px !important;}
+  .cinelove-event::after{background-size:112px auto !important;background-position:left -14px bottom -10px !important;}
+  .dresscode39::before{background-size:78px auto,138px auto !important;background-position:left -8px top -4px, center bottom -8px !important;}
+  .dresscode39::after{background-size:78px auto !important;background-position:right -8px top -4px !important;}
+  .timeline39::before{background-size:82px auto !important;background-position:left -8px top -4px !important;}
+  .timeline39::after{background-size:88px auto !important;background-position:right -10px bottom -6px !important;}
+  .cinelove-gallery::before{background-size:88px auto,150px auto !important;background-position:left -10px top -4px, center bottom -10px !important;}
+  .cinelove-gallery::after{background-size:88px auto !important;background-position:right -10px top -4px !important;}
+  .cinelove-rsvp::before{background-size:78px auto,138px auto !important;background-position:left -8px top -4px, center bottom -8px !important;}
+  .cinelove-rsvp::after{background-size:78px auto !important;background-position:right -8px top -4px !important;}
+  .thanks::before{background-size:120px auto !important;background-position:right -16px top -8px !important;}
+  .thanks::after{background-size:120px auto !important;background-position:left -18px bottom -12px !important;}
+}
