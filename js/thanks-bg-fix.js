@@ -55,9 +55,9 @@
     }
   }
   function applyCalendarRequestedFix(){
-    if(document.getElementById('calendar-requested-fix-v178')) return;
+    if(document.getElementById('calendar-requested-fix-v179')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v178';
+    style.id = 'calendar-requested-fix-v179';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -66,16 +66,27 @@
         background:none !important;
         opacity:0 !important;
       }
-      .calendar39 h2{
-        font-family:"Playfair Display", serif !important;
-        font-weight:700 !important;
-        font-size:clamp(26px, 6vw, 42px) !important;
-        line-height:1.12 !important;
-        letter-spacing:.04em !important;
-        text-transform:none !important;
+      .calendar39 h2,
+      #storyTitle,
+      .timeline39 h2,
+      .cinelove-gallery h2,
+      .cinelove-rsvp h2{
+        font-family:"Inter", "Cormorant Garamond", serif !important;
+        font-weight:600 !important;
+        font-size:clamp(21px, 4.8vw, 34px) !important;
+        line-height:1.14 !important;
+        letter-spacing:.045em !important;
+        text-transform:uppercase !important;
         color:var(--t39-gold) !important;
         text-align:center !important;
-        margin:0 auto 14px !important;
+        margin-left:auto !important;
+        margin-right:auto !important;
+        font-variant-numeric:lining-nums tabular-nums !important;
+        font-feature-settings:"lnum" 1, "tnum" 1 !important;
+      }
+      .calendar39 h2{
+        margin-top:0 !important;
+        margin-bottom:14px !important;
       }
     `;
     document.head.appendChild(style);
