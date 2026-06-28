@@ -197,3 +197,42 @@ body .page-shell .site .calendar39 .calendar-countdown .countdown {
   margin: 0 auto !important;
   justify-content: center !important;
 }
+
+/* v1.91: Opening invitation card becomes an image-only frame. */
+body .template44-intro .gif-card.intro-image-card {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 14px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,248,240,.98)) !important;
+  overflow: hidden !important;
+}
+
+body .template44-intro .intro-image-frame {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 14px !important;
+  background-color: #f3ece1 !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  box-shadow: inset 0 0 0 1px rgba(214,167,93,.18), inset 0 0 0 2px rgba(255,255,255,.45) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+body .template44-intro .intro-hidden-data {
+  display: none !important;
+}
+
+body .template44-intro .intro-image-frame.is-empty::after {
+  content: "Ảnh mở đầu";
+  position: absolute;
+  inset: auto 0 18px 0;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  font-size: 14px;
+  letter-spacing: .14em;
+  color: #b6904b;
+  opacity: .9;
+}
