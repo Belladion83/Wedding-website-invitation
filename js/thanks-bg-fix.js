@@ -1,4 +1,7 @@
 (function(){
+  let revealObserver = null;
+  let siteObserverStarted = false;
+
   function getImageValue(cfg){
     return cfg && cfg.images ? (cfg.images.thankYouBg || cfg.images.hero || '') : '';
   }
@@ -54,10 +57,10 @@
       map.rel = 'noopener';
     }
   }
-  function applyCalendarRequestedFix(){
-    if(document.getElementById('calendar-requested-fix-v182')) return;
+  function applyVisualRefinements(){
+    if(document.getElementById('calendar-requested-fix-v183')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v182';
+    style.id = 'calendar-requested-fix-v183';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -88,26 +91,43 @@
         margin-top:0 !important;
         margin-bottom:14px !important;
       }
-      .cinelove-site > section + section{
-        margin-top:12px !important;
+      .cinelove-site{
+        background:#f1e8dc !important;
       }
-      .section-reveal{
+      .cinelove-site > section + section{
+        margin-top:14px !important;
+      }
+      .cinelove-site > section{
+        position:relative !important;
+        box-shadow:0 -8px 18px rgba(112,76,43,.08), 0 12px 26px rgba(112,76,43,.13) !important;
+      }
+      .cinelove-site > section:first-child{
+        box-shadow:0 12px 26px rgba(112,76,43,.12) !important;
+      }
+      .site:not(.hidden) .section-reveal{
         opacity:0 !important;
-        transform:translateY(28px) !important;
-        transition:opacity .85s ease, transform .85s ease !important;
+        transform:translate3d(0,34px,0) !important;
+        transition:opacity .95s ease, transform .95s ease !important;
         will-change:opacity, transform;
       }
-      .section-reveal.visible{
+      .site:not(.hidden) .section-reveal.visible{
         opacity:1 !important;
-        transform:translateY(0) !important;
+        transform:translate3d(0,0,0) !important;
       }
-      .intro.section-reveal,
       .site.hidden .section-reveal{
-        opacity:1 !important;
-        transform:none !important;
+        opacity:0 !important;
+        transform:translate3d(0,34px,0) !important;
+      }
+      .formal-intro{
+        margin:8px 0 18px !important;
+        text-align:center !important;
+        font:500 24px/1.4 "Cormorant Garamond", serif !important;
+        letter-spacing:.02em !important;
+        color:var(--t39-muted) !important;
       }
       @media (prefers-reduced-motion: reduce){
-        .section-reveal{
+        .site:not(.hidden) .section-reveal,
+        .site.hidden .section-reveal{
           opacity:1 !important;
           transform:none !important;
           transition:none !important;
@@ -117,29 +137,55 @@
     document.head.appendChild(style);
   }
   function initSectionReveal(){
-    const sections = Array.from(document.querySelectorAll('.site .section-reveal'));
+    const site = document.getElementById('site');
+    if(!site || site.classList.contains('hidden')) return;
+    const sections = Array.from(site.querySelectorAll('.section-reveal'));
     if(!sections.length) return;
+
+    if(revealObserver) revealObserver.disconnect();
+    sections.forEach(function(section){
+      if(section.dataset.revealShown !== '1') section.classList.remove('visible');
+    });
+
     if(!('IntersectionObserver' in window)){
-      sections.forEach(function(section){ section.classList.add('visible'); });
+      sections.forEach(function(section){ section.classList.add('visible'); section.dataset.revealShown = '1'; });
       return;
     }
-    const observer = new IntersectionObserver(function(entries){
+
+    revealObserver = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
         if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+          window.setTimeout(function(){
+            entry.target.classList.add('visible');
+            entry.target.dataset.revealShown = '1';
+          }, 80);
+          revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold:0.16, rootMargin:'0px 0px -8% 0px' });
-    sections.forEach(function(section){
-      if(section.getBoundingClientRect().top < window.innerHeight * 0.88) section.classList.add('visible');
-      else observer.observe(section);
+    }, { threshold:0.18, rootMargin:'0px 0px -10% 0px' });
+
+    window.setTimeout(function(){
+      sections.forEach(function(section){
+        if(section.dataset.revealShown === '1') section.classList.add('visible');
+        else revealObserver.observe(section);
+      });
+    }, 60);
+  }
+  function watchSiteReveal(){
+    const site = document.getElementById('site');
+    if(!site || siteObserverStarted) return;
+    siteObserverStarted = true;
+    if(!site.classList.contains('hidden')) initSectionReveal();
+    const observer = new MutationObserver(function(){
+      if(!site.classList.contains('hidden')) window.setTimeout(initSectionReveal, 80);
     });
+    observer.observe(site, { attributes:true, attributeFilter:['class'] });
   }
   function runEnhancements(){
     refreshThanksBg();
     restoreMapTarget();
-    applyCalendarRequestedFix();
+    applyVisualRefinements();
+    watchSiteReveal();
     initSectionReveal();
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runEnhancements);
@@ -147,5 +193,5 @@
   window.addEventListener('load', runEnhancements);
   setTimeout(refreshThanksBg, 1200);
   setTimeout(refreshThanksBg, 3500);
-  setTimeout(initSectionReveal, 1200);
+  setTimeout(initSectionReveal, 3200);
 })();
