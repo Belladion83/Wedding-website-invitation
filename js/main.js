@@ -217,15 +217,15 @@ async function submitRsvp(e){
 
 function getTimelineIconSvg(it, idx){
   const raw = `${it?.title || ''} ${it?.description || ''}`.toLowerCase();
-  const kind = /khai tiệc|khai tiec|tiệc|tiec|dinner|banquet/.test(raw)
-    ? 'dining'
-    : (/báo hỷ|bao hy|nghi lễ|nghi le|nhẫn|nhan|ceremony/.test(raw) ? 'rings' : 'welcome');
+  const kind = /báo hỷ|bao hy|nghi lễ|nghi le|nhẫn|nhan|ceremony/.test(raw)
+    ? 'rings'
+    : (/khai tiệc|khai tiec|tiệc|tiec|dinner|banquet/.test(raw) ? 'dining' : 'welcome');
   if(kind === 'rings') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <circle cx="24" cy="35" r="14"></circle>
-      <circle cx="40" cy="35" r="14"></circle>
-      <path d="M39 17l5-7 5 7"></path>
-      <circle cx="44" cy="10" r="2.8" fill="currentColor" stroke="none"></circle>
+      <circle cx="24" cy="36" r="13"></circle>
+      <circle cx="40" cy="36" r="13"></circle>
+      <path d="M38 18l6-8 6 8"></path>
+      <circle cx="44" cy="10" r="2.6" fill="currentColor" stroke="none"></circle>
     </svg>`;
   if(kind === 'dining') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">

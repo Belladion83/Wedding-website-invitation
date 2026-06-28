@@ -2189,3 +2189,6 @@ input,select,textarea{
   .timeline-icon{ width:52px !important; height:52px !important; }
   .timeline-icon svg{ width:48px !important; height:48px !important; }
 }
+
+/* v1.60 companions select */
+#companionsInput{ appearance:none; }
