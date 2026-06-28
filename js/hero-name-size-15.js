@@ -16,9 +16,11 @@
     if(oldStyle7) oldStyle7.remove();
     const oldStyle8 = document.getElementById('hero-name-size-15-v195');
     if(oldStyle8) oldStyle8.remove();
-    if(document.getElementById('hero-name-size-15-v196')) return;
+    const oldStyle9 = document.getElementById('hero-name-size-15-v196');
+    if(oldStyle9) oldStyle9.remove();
+    if(document.getElementById('hero-name-size-15-v197')) return;
     const style = document.createElement('style');
-    style.id = 'hero-name-size-15-v196';
+    style.id = 'hero-name-size-15-v197';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
@@ -36,12 +38,14 @@
         display:block !important;
         width:100% !important;
         max-width:100% !important;
-        margin-left:auto !important;
-        margin-right:auto !important;
-        font-size:clamp(1.5rem, calc(1.25rem + 1vw), 2.125rem) !important;
-        line-height:1.14 !important;
+        margin:12px auto !important;
+        font-family:"Cormorant Garamond", serif !important;
+        font-weight:500 !important;
+        font-size:clamp(24px, 3.5vw, 34px) !important;
+        line-height:1.15 !important;
         white-space:nowrap !important;
         letter-spacing:0 !important;
+        text-transform:none !important;
         text-align:center !important;
       }
       @media (max-width:760px){
@@ -71,12 +75,14 @@
           display:block !important;
           width:100% !important;
           max-width:100% !important;
-          margin-left:auto !important;
-          margin-right:auto !important;
-          font-size:clamp(1.5rem, calc(1.25rem + 1vw), 2.125rem) !important;
-          line-height:1.14 !important;
+          margin:12px auto !important;
+          font-family:"Cormorant Garamond", serif !important;
+          font-weight:500 !important;
+          font-size:clamp(24px, 3.5vw, 34px) !important;
+          line-height:1.15 !important;
           white-space:nowrap !important;
           letter-spacing:0 !important;
+          text-transform:none !important;
           text-align:center !important;
         }
       }
