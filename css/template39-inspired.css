@@ -1802,3 +1802,168 @@ input,select,textarea{
   text-transform:none !important;
   font-variant-caps:normal !important;
 }
+
+
+/* ===== v1.57 refinements ===== */
+/* 1) Event header ribbon: align with overall warm neutral tone */
+.event-ribbon{
+  background:linear-gradient(180deg,#efe3d3 0%, #e8dac8 100%) !important;
+  color:var(--t39-gold) !important;
+  border-top:1px solid rgba(177,138,78,.22) !important;
+  border-bottom:1px solid rgba(177,138,78,.22) !important;
+  text-shadow:none !important;
+  letter-spacing:.03em !important;
+}
+
+/* 2) Ceremony venue typography */
+#venue .venue-main{
+  font-size:clamp(18px, 3.8vw, 24px) !important;
+  line-height:1.22 !important;
+  letter-spacing:.01em !important;
+}
+#venue .venue-brand{
+  font-size:clamp(34px, 6vw, 46px) !important; /* ~20% larger */
+  line-height:1.08 !important;
+  margin-top:4px !important;
+}
+#venueAddress,
+.time-label,
+.year-line,
+.lunar,
+.date-line span,
+.date-line b{
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "tnum" 1 !important;
+  text-rendering: geometricPrecision;
+}
+#venueAddress{
+  font-size:clamp(18px, 3.5vw, 22px) !important;
+  line-height:1.52 !important;
+}
+.time-label{
+  font-size:clamp(18px, 3.3vw, 22px) !important;
+  letter-spacing:.03em !important;
+}
+.time-label strong{
+  font-size:1em !important;
+  font-weight:600 !important;
+}
+.date-line{
+  align-items:center !important;
+}
+.date-line span,
+.date-line b{
+  display:inline-block !important;
+  vertical-align:middle !important;
+  line-height:1 !important;
+}
+.date-line span{
+  font-size:clamp(22px,4vw,30px) !important;
+}
+.date-line b{
+  font-size:clamp(52px,9vw,70px) !important;
+  font-weight:600 !important;
+}
+.year-line{
+  font-size:clamp(24px,4.5vw,34px) !important;
+  line-height:1.1 !important;
+}
+.lunar{
+  font-size:clamp(16px,3vw,22px) !important;
+  line-height:1.45 !important;
+}
+
+/* 3) Dresscode: keep only kicker and color choices */
+.dresscode39 h2,
+.dresscode39 .dresscode-note{
+  display:none !important;
+}
+.dresscode39{
+  padding-top:34px !important;
+  padding-bottom:34px !important;
+}
+.dresscode39 .section-kicker{
+  margin-bottom:18px !important;
+}
+
+/* 4) Calendar section: decorative soft background */
+.calendar39{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(420px 280px at -8% 12%, rgba(234,220,202,.38), transparent 70%),
+    radial-gradient(360px 240px at 108% 86%, rgba(234,220,202,.34), transparent 72%),
+    linear-gradient(180deg,#fff 0%, #fdfbf8 100%) !important;
+}
+.calendar39::before,
+.calendar39::after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(209,185,155,.38);
+  border-radius:999px;
+  pointer-events:none;
+}
+.calendar39::before{
+  width:240px; height:240px;
+  left:-120px; top:42px;
+  opacity:.42;
+}
+.calendar39::after{
+  width:250px; height:250px;
+  right:-145px; bottom:30px;
+  opacity:.34;
+}
+.calendar39 .calendar-box{
+  position:relative;
+  z-index:1;
+}
+.calendar39 > *{
+  position:relative;
+  z-index:1;
+}
+.calendar39 .calendar-note{ display:none !important; }
+
+/* 5) Timeline typography consistency */
+.timeline-list{ max-width:420px; }
+.time-dot{
+  background:linear-gradient(180deg,#c19a59 0%, #b48b49 100%) !important;
+  box-shadow:0 12px 28px rgba(177,138,78,.24) !important;
+}
+.time-dot span{
+  display:block !important;
+  color:#fff !important;
+  font-family:"Cormorant Garamond","Playfair Display",serif !important;
+  font-size:28px !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:.02em !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "tnum" 1 !important;
+  text-rendering: geometricPrecision;
+}
+.timeline-item h3{
+  color:var(--t39-gold) !important;
+  font-size:clamp(22px, 4vw, 28px) !important;
+  line-height:1.22 !important;
+  letter-spacing:.01em !important;
+}
+.timeline-item p{
+  color:var(--t39-muted) !important;
+  font-size:clamp(16px, 3.2vw, 18px) !important;
+  line-height:1.6 !important;
+}
+
+@media (max-width:760px){
+  #venue .venue-main{
+    font-size:clamp(17px,4.8vw,21px) !important;
+  }
+  #venue .venue-brand{
+    font-size:clamp(34px,8vw,42px) !important;
+  }
+  .time-dot span{
+    font-size:26px !important;
+  }
+  .timeline-item h3{
+    font-size:24px !important;
+  }
+}

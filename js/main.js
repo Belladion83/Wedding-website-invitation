@@ -228,8 +228,8 @@ function renderTimeline39(){
   ]);
   wrap.innerHTML = items.map((it,idx)=>`
     <article class="timeline-item">
-      <div class="time-dot"><span>${it.time || ''}</span></div>
-      <div>
+      <div class="time-dot"><span class="timeline-time-text">${it.time || ''}</span></div>
+      <div class="timeline-copy">
         <h3>${it.title || ''}</h3>
         <p>${it.description || ''}</p>
       </div>
