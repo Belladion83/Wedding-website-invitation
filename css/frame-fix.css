@@ -160,3 +160,12 @@ body .page-shell .site .cinelove-event .formal-couple #formalBrideRole {
   margin-top: 2px !important;
   margin-bottom: 0 !important;
 }
+
+/* v1.89: Match ceremony title with venue format and prevent clipping on narrow screens. */
+body main#app.page-shell section#site.site section#eventInvite.event-invite .ceremony-block h3#ceremonyTitle {
+  white-space: normal !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  text-wrap: balance !important;
+  overflow: visible !important;
+}
