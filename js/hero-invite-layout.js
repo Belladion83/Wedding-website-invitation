@@ -23,18 +23,29 @@
   }
 
   function injectStyle(){
-    const old = document.getElementById('hero-invite-layout-v195');
-    if(old) old.remove();
+    const old195 = document.getElementById('hero-invite-layout-v195');
+    if(old195) old195.remove();
+    const old196 = document.getElementById('hero-invite-layout-v196');
+    if(old196) old196.remove();
     const style = document.createElement('style');
-    style.id = 'hero-invite-layout-v195';
+    style.id = 'hero-invite-layout-v196';
     style.textContent = `
+      body .page-shell .site .hero.cinelove-cover{
+        justify-content:flex-start !important;
+        align-items:center !important;
+      }
+      body .page-shell .site .hero.cinelove-cover::before{
+        background:linear-gradient(180deg, rgba(255,248,239,.74) 0%, rgba(255,248,239,.46) 22%, rgba(255,255,255,0) 56%, rgba(255,248,239,.35) 100%) !important;
+      }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195{
         display:flex !important;
         flex-direction:column !important;
         align-items:center !important;
-        justify-content:center !important;
+        justify-content:flex-start !important;
         gap:0 !important;
-        padding-bottom:54px !important;
+        padding-top:56px !important;
+        padding-bottom:0 !important;
+        margin-top:0 !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
         order:1 !important;
@@ -128,7 +139,8 @@
       }
       @media (max-width:760px){
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195{
-          padding-bottom:42px !important;
+          padding-top:42px !important;
+          padding-bottom:0 !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:clamp(39px, 11vw, 52px) !important;
@@ -142,6 +154,9 @@
         }
       }
       @media (max-width:390px){
+        body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195{
+          padding-top:36px !important;
+        }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:38px !important;
         }
