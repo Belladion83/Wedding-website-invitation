@@ -55,9 +55,9 @@
     }
   }
   function applyCalendarRequestedFix(){
-    if(document.getElementById('calendar-requested-fix-v179')) return;
+    if(document.getElementById('calendar-requested-fix-v180')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v179';
+    style.id = 'calendar-requested-fix-v180';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -71,9 +71,9 @@
       .timeline39 h2,
       .cinelove-gallery h2,
       .cinelove-rsvp h2{
-        font-family:"Inter", "Cormorant Garamond", serif !important;
+        font-family:"Times New Roman", Times, serif !important;
         font-weight:600 !important;
-        font-size:clamp(21px, 4.8vw, 34px) !important;
+        font-size:clamp(20px, 4.56vw, 32px) !important;
         line-height:1.14 !important;
         letter-spacing:.045em !important;
         text-transform:uppercase !important;
@@ -81,8 +81,8 @@
         text-align:center !important;
         margin-left:auto !important;
         margin-right:auto !important;
-        font-variant-numeric:lining-nums tabular-nums !important;
-        font-feature-settings:"lnum" 1, "tnum" 1 !important;
+        font-variant-numeric:normal !important;
+        font-feature-settings:normal !important;
       }
       .calendar39 h2{
         margin-top:0 !important;
