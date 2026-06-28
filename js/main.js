@@ -198,6 +198,41 @@ async function submitRsvp(e){
 (async function init(){ C = await WeddingCMS.loadConfig(); initContent(); startCountdown(); initEvents(); })();
 
 
+
+function getTimelineIconSvg(it, idx){
+  const raw = `${it?.title || ''} ${it?.description || ''}`.toLowerCase();
+  const isCeremony = /nghi lễ|nghi le|lễ|le|ceremony|nhẫn|nhan/.test(raw);
+  const isDinner = /khai tiệc|khai tiec|tiệc|tiec|dùng tiệc|dung tiec|dinner|banquet/.test(raw);
+  const kind = isCeremony ? 'rings' : (isDinner ? 'dining' : (idx === 1 ? 'rings' : idx >= 2 ? 'dining' : 'welcome'));
+  if(kind === 'rings') return `
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <circle cx="24" cy="34" r="15"></circle>
+      <circle cx="40" cy="34" r="15"></circle>
+      <path d="M38 17l5-8 5 8"></path>
+      <circle cx="43" cy="9" r="2.5" fill="currentColor" stroke="none"></circle>
+    </svg>`;
+  if(kind === 'dining') return `
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <circle cx="32" cy="32" r="18"></circle>
+      <circle cx="32" cy="32" r="11"></circle>
+      <path d="M12 14v36"></path>
+      <path d="M8 14v12"></path>
+      <path d="M12 14v12"></path>
+      <path d="M16 14v12"></path>
+      <path d="M52 14v36"></path>
+      <path d="M48 14c0 5 8 5 8 0"></path>
+    </svg>`;
+  return `
+    <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <path d="M14 50V25h36v25"></path>
+      <path d="M14 25l7-7h22l7 7"></path>
+      <path d="M21 50V28"></path>
+      <path d="M43 50V28"></path>
+      <path d="M24 18c5-6 11-6 16 0"></path>
+      <path d="M28 13c2-3 6-3 8 0"></path>
+    </svg>`;
+}
+
 function renderCalendar39(){
   const grid = $('calendarGrid');
   if(!grid || !C || !C.site) return;
@@ -222,17 +257,16 @@ function renderTimeline39(){
   const wrap = $('timelineList');
   if(!wrap) return;
   const items = (C.timeline && C.timeline.length ? C.timeline : [
-    {time:'17:30', title:'Đón tiếp khách', description:'Cô dâu và chú rể hân hạnh đón tiếp quý khách.'},
-    {time:'18:00', title:'Tiệc báo hỷ', description:'Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.'},
-    {time:'18:30', title:'Khai tiệc', description:'Cùng nâng ly chúc mừng hạnh phúc của cô dâu chú rể.'}
+    {time:'17:30', title:'Đón Khách', description:''},
+    {time:'18:30', title:'Tổ Chức Nghi Lễ', description:''},
+    {time:'19:00', title:'Khai Tiệc', description:''}
   ]);
   wrap.innerHTML = items.map((it,idx)=>`
-    <article class="timeline-item">
-      <div class="time-dot"><span class="timeline-time-text">${it.time || ''}</span></div>
-      <div class="timeline-copy">
-        <h3>${it.title || ''}</h3>
-        <p>${it.description || ''}</p>
-      </div>
+    <article class="timeline-item timeline-card">
+      <div class="timeline-icon" aria-hidden="true">${getTimelineIconSvg(it, idx)}</div>
+      <div class="time-dot timeline-time"><span class="timeline-time-text">${escapeHtml(it.time || '')}</span></div>
+      <h3>${escapeHtml(it.title || '')}</h3>
+      ${it.description ? `<p>${escapeHtml(it.description)}</p>` : ``}
     </article>
   `).join('');
 }

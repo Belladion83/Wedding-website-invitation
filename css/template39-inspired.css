@@ -1967,3 +1967,143 @@ input,select,textarea{
     font-size:24px !important;
   }
 }
+
+
+/* ===== v1.58 refinements ===== */
+/* 1) Header THÔNG TIN LỄ BÁO HỶ */
+.event-ribbon{
+  background:linear-gradient(180deg,#ba9450 0%, #a77b3b 100%) !important;
+  color:#fff !important;
+  border-top:none !important;
+  border-bottom:none !important;
+  box-shadow:0 8px 18px rgba(120,82,28,.14) inset;
+}
+
+/* 2) Formal couple names a bit larger, roles smaller */
+.formal-couple h2{
+  font-size:clamp(54px, 7vw, 82px) !important;
+  line-height:1.08 !important;
+}
+.formal-couple p{
+  font-size:clamp(14px, 2.4vw, 20px) !important;
+  letter-spacing:.26em !important;
+  opacity:.88 !important;
+}
+@media(max-width:760px){
+  .formal-couple h2{
+    font-size:clamp(46px, 11vw, 66px) !important;
+  }
+  .formal-couple p{
+    font-size:clamp(12px, 3.2vw, 16px) !important;
+  }
+}
+
+/* 3) Timeline redesigned to icon > time > short title */
+.timeline39{
+  background:#fff !important;
+}
+.timeline-list{
+  max-width:720px !important;
+  margin:24px auto 0 !important;
+  display:grid !important;
+  grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+  gap:14px !important;
+  align-items:start !important;
+}
+.timeline-list:before{
+  display:none !important;
+  content:none !important;
+}
+.timeline-item.timeline-card{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  text-align:center !important;
+  padding:8px 8px 2px !important;
+  gap:8px !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+.timeline-icon{
+  width:58px !important;
+  height:58px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#b1aba2 !important;
+  opacity:.95 !important;
+}
+.timeline-icon svg{
+  width:54px !important;
+  height:54px !important;
+  overflow:visible;
+}
+.timeline-icon svg *{
+  stroke:currentColor !important;
+  stroke-width:1.8 !important;
+  fill:none !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+.timeline-item.timeline-card .timeline-time,
+.timeline-item.timeline-card .time-dot{
+  width:auto !important;
+  height:auto !important;
+  min-width:unset !important;
+  background:transparent !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+.timeline-item.timeline-card .timeline-time-text,
+.timeline-item.timeline-card .time-dot span{
+  color:var(--t39-muted) !important;
+  font-family:"Cormorant Garamond", "Playfair Display", serif !important;
+  font-size:clamp(28px, 4vw, 32px) !important;
+  font-weight:600 !important;
+  line-height:1 !important;
+  letter-spacing:0 !important;
+}
+.timeline-item.timeline-card h3{
+  margin:0 !important;
+  color:#6e665f !important;
+  font-family:"Cormorant Garamond", "Playfair Display", serif !important;
+  font-size:clamp(20px, 3.2vw, 24px) !important;
+  font-weight:600 !important;
+  line-height:1.18 !important;
+  text-transform:none !important;
+}
+.timeline-item.timeline-card p{
+  margin:2px 0 0 !important;
+  color:#8a837b !important;
+  font-size:14px !important;
+  line-height:1.45 !important;
+}
+@media(max-width:760px){
+  .timeline-list{
+    max-width:100% !important;
+    grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+    gap:8px !important;
+  }
+  .timeline-item.timeline-card{
+    padding:4px 2px 0 !important;
+    gap:6px !important;
+  }
+  .timeline-icon{
+    width:48px !important;
+    height:48px !important;
+  }
+  .timeline-icon svg{
+    width:44px !important;
+    height:44px !important;
+  }
+  .timeline-item.timeline-card .timeline-time-text,
+  .timeline-item.timeline-card .time-dot span{
+    font-size:clamp(20px, 5vw, 24px) !important;
+  }
+  .timeline-item.timeline-card h3{
+    font-size:clamp(14px, 4.2vw, 19px) !important;
+  }
+}
