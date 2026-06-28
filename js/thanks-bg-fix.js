@@ -54,9 +54,35 @@
       map.rel = 'noopener';
     }
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ refreshThanksBg(); restoreMapTarget(); });
-  else { refreshThanksBg(); restoreMapTarget(); }
-  window.addEventListener('load', function(){ refreshThanksBg(); restoreMapTarget(); });
+  function applyCalendarRequestedFix(){
+    if(document.getElementById('calendar-requested-fix-v178')) return;
+    const style = document.createElement('style');
+    style.id = 'calendar-requested-fix-v178';
+    style.textContent = `
+      .calendar39::before{
+        content:none !important;
+        display:none !important;
+        border:none !important;
+        background:none !important;
+        opacity:0 !important;
+      }
+      .calendar39 h2{
+        font-family:"Playfair Display", serif !important;
+        font-weight:700 !important;
+        font-size:clamp(26px, 6vw, 42px) !important;
+        line-height:1.12 !important;
+        letter-spacing:.04em !important;
+        text-transform:none !important;
+        color:var(--t39-gold) !important;
+        text-align:center !important;
+        margin:0 auto 14px !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); });
+  else { refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); }
+  window.addEventListener('load', function(){ refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); });
   setTimeout(refreshThanksBg, 1200);
   setTimeout(refreshThanksBg, 3500);
 })();
