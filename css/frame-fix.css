@@ -65,3 +65,51 @@
     height: 160px;
   }
 }
+
+/* v1.74: Sync bride/groom name size between desktop and mobile.
+   Scope: only the names in Hero (Kính mời) and Event Info (Thông tin lễ báo hỷ). */
+body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
+body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span {
+  font-size: 52px !important;
+  line-height: 1.06 !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span:nth-child(2) {
+  font-size: 32px !important;
+  line-height: 1 !important;
+}
+
+body .page-shell .site .cinelove-event .formal-couple h2,
+body .page-shell .site .event-invite .formal-couple h2 {
+  font-size: 60px !important;
+  line-height: 1.04 !important;
+}
+
+body .page-shell .site .cinelove-event .formal-couple span,
+body .page-shell .site .event-invite .formal-couple span {
+  font-size: 38px !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 760px) {
+  body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
+  body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span {
+    font-size: 52px !important;
+    line-height: 1.06 !important;
+  }
+
+  body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span:nth-child(2) {
+    font-size: 32px !important;
+  }
+
+  body .page-shell .site .cinelove-event .formal-couple h2,
+  body .page-shell .site .event-invite .formal-couple h2 {
+    font-size: 60px !important;
+    line-height: 1.04 !important;
+  }
+
+  body .page-shell .site .cinelove-event .formal-couple span,
+  body .page-shell .site .event-invite .formal-couple span {
+    font-size: 38px !important;
+  }
+}
