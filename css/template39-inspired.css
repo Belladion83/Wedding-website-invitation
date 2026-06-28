@@ -3675,3 +3675,67 @@ body::before{
     background-position:left -10px bottom -8px, right -10px bottom -8px !important;
   }
 }
+
+
+/* v1.73: ONLY fix section title stars.
+   Ensure every title/kicker has both 4-point stars: ✦ Title ✦ */
+.section-kicker,
+.cinelove-section-kicker,
+.calendar39 .section-kicker,
+.dresscode39 .section-kicker,
+.timeline39 .section-kicker,
+.cinelove-story .cinelove-section-kicker,
+.cinelove-gallery .cinelove-section-kicker,
+.cinelove-rsvp .cinelove-section-kicker{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin-left:auto !important;
+  margin-right:auto !important;
+  text-align:center !important;
+}
+.section-kicker::before,
+.section-kicker::after,
+.cinelove-section-kicker::before,
+.cinelove-section-kicker::after,
+.calendar39 .section-kicker::before,
+.calendar39 .section-kicker::after,
+.dresscode39 .section-kicker::before,
+.dresscode39 .section-kicker::after,
+.timeline39 .section-kicker::before,
+.timeline39 .section-kicker::after,
+.cinelove-story .cinelove-section-kicker::before,
+.cinelove-story .cinelove-section-kicker::after,
+.cinelove-gallery .cinelove-section-kicker::before,
+.cinelove-gallery .cinelove-section-kicker::after,
+.cinelove-rsvp .cinelove-section-kicker::before,
+.cinelove-rsvp .cinelove-section-kicker::after{
+  content:"✦" !important;
+  display:inline-block !important;
+  position:static !important;
+  width:auto !important;
+  height:auto !important;
+  min-width:auto !important;
+  min-height:auto !important;
+  background:none !important;
+  background-image:none !important;
+  border:none !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  color:var(--t39-gold) !important;
+  font-size:.42em !important;
+  line-height:1 !important;
+  opacity:1 !important;
+  transform:none !important;
+  flex:0 0 auto !important;
+}
+
+/* Keep hidden decorative section-flower hidden; title stars are handled by ::before/::after */
+.section-flower{
+  display:none !important;
+}

@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.71-calendar-titles-thanks-fix',
+  version: '1.73-title-double-star-fix',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
