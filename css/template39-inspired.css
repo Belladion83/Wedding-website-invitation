@@ -2192,3 +2192,15 @@ input,select,textarea{
 
 /* v1.60 companions select */
 #companionsInput{ appearance:none; }
+
+
+/* v1.61 timeline vector icons refinement */
+.timeline-icon{ color:#2f2f2f !important; }
+.timeline-icon svg *{
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.9 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+.timeline-icon svg circle[fill="currentColor"]{ fill:currentColor !important; stroke:none !important; }

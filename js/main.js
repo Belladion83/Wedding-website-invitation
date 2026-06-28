@@ -220,38 +220,40 @@ function getTimelineIconSvg(it, idx){
   const kind = /báo hỷ|bao hy|nghi lễ|nghi le|nhẫn|nhan|ceremony/.test(raw)
     ? 'rings'
     : (/khai tiệc|khai tiec|tiệc|tiec|dinner|banquet/.test(raw) ? 'dining' : 'welcome');
+
   if(kind === 'rings') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <circle cx="24" cy="36" r="13"></circle>
-      <circle cx="40" cy="36" r="13"></circle>
-      <path d="M38 18l6-8 6 8"></path>
-      <circle cx="44" cy="10" r="2.6" fill="currentColor" stroke="none"></circle>
+      <path d="M32 13c1.8-2.8 4.3-4.2 7.4-4.2 5 0 8.8 3.9 8.8 8.8 0 2.5-.9 4.7-3.1 7.2L32 39 18.9 24.8c-2.2-2.5-3.1-4.7-3.1-7.2 0-4.9 3.8-8.8 8.8-8.8 3.1 0 5.6 1.4 7.4 4.2Z"></path>
+      <circle cx="24" cy="40" r="12.2"></circle>
+      <circle cx="40" cy="40" r="12.2"></circle>
     </svg>`;
+
   if(kind === 'dining') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <circle cx="32" cy="32" r="17"></circle>
-      <circle cx="32" cy="32" r="10"></circle>
-      <path d="M12 14v36"></path>
-      <path d="M8 14v12"></path>
-      <path d="M12 14v12"></path>
-      <path d="M16 14v12"></path>
-      <path d="M52 14v36"></path>
-      <path d="M48 14c0 6 8 6 8 0"></path>
+      <circle cx="32" cy="34" r="14.8"></circle>
+      <circle cx="32" cy="34" r="8.5"></circle>
+      <path d="M15 16v32"></path>
+      <path d="M11.8 16v10"></path>
+      <path d="M15 16v10"></path>
+      <path d="M18.2 16v10"></path>
+      <path d="M49 16v32"></path>
+      <path d="M46 16c0 5.8 6 5.8 6 0"></path>
+      <path d="M46 24h6"></path>
     </svg>`;
+
   return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <path d="M12 48V28"></path>
-      <path d="M52 48V28"></path>
-      <path d="M16 48h32"></path>
-      <path d="M10 28h44"></path>
-      <path d="M18 28c0-10 6-16 14-16"></path>
-      <path d="M46 28c0-10-6-16-14-16"></path>
-      <path d="M20 16l-4-5"></path>
-      <path d="M24 14l-2-6"></path>
-      <path d="M28 13l1-5"></path>
-      <path d="M44 16l4-5"></path>
-      <path d="M40 14l2-6"></path>
-      <path d="M36 13l-1-5"></path>
+      <rect x="14" y="16" width="36" height="33" rx="1.5"></rect>
+      <path d="M14 49h36"></path>
+      <path d="M20 22v17"></path>
+      <path d="M44 22v17"></path>
+      <path d="M14 16h36"></path>
+      <path d="M18 16c6 9 22 9 28 0"></path>
+      <path d="M22 16c4 6 16 6 20 0"></path>
+      <path d="M26 16c2 3 8 3 12 0"></path>
+      <path d="M20 39c2.6-1.2 4.1-2.3 4.1-3.4V22"></path>
+      <path d="M44 39c-2.6-1.2-4.1-2.3-4.1-3.4V22"></path>
+      <path d="M17 53h30"></path>
     </svg>`;
 }
 function renderCalendar39(){
