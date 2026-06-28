@@ -1,0 +1,103 @@
+/* v1.91: Opening image fills the whole intro section, no card frame or background. */
+body .template44-intro,
+body .template44-intro .t44-gate,
+body .template44-intro .gif-envelope-stage,
+body .template44-intro .gif-envelope {
+  width: 100% !important;
+  max-width: none !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+}
+
+body .template44-intro .gif-envelope-stage,
+body .template44-intro .gif-envelope {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+}
+
+body .template44-intro .gif-bg-copy,
+body .template44-intro .gif-shadow,
+body .template44-intro .gif-back,
+body .template44-intro .gif-front,
+body .template44-intro .gif-front-left,
+body .template44-intro .gif-front-right,
+body .template44-intro .gif-front-bottom,
+body .template44-intro .gif-flap {
+  display: none !important;
+}
+
+body .template44-intro .gif-card.intro-image-card,
+body .template44-intro .t44-gate.opened .gif-card.intro-image-card,
+body .template44-intro .t44-gate.flap-back .gif-card.intro-image-card,
+body .template44-intro .t44-gate.card-pull .gif-card.intro-image-card,
+body .template44-intro .t44-gate.card-front .gif-card.intro-image-card {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  transform: none !important;
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+body .template44-intro .intro-image-frame,
+body .template44-intro .gif-card.intro-image-card .intro-image-frame {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+body .template44-intro .intro-hidden-data {
+  display: none !important;
+}
+
+body .template44-intro .gif-seal {
+  z-index: 3 !important;
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: 34px !important;
+  transform: translateX(-50%) !important;
+}
+
+body .template44-intro .gif-hint {
+  position: absolute !important;
+  z-index: 3 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 12px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+body .template44-intro.sequence-done {
+  display: none !important;
+}
