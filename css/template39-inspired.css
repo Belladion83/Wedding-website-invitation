@@ -3651,3 +3651,27 @@ body::before{
   .timeline39::before{width:92px !important;height:92px !important;left:-10px !important;bottom:-8px !important;}
   .timeline39::after{width:112px !important;height:112px !important;right:-12px !important;bottom:-10px !important;}
 }
+
+/* v1.72: ONLY fix Wedding Timeline florals per user request.
+   - Remove any leftover pseudo-element florals for this section.
+   - Keep ONLY bottom-left floral using the bottom-left asset,
+     and bottom-right floral using the bottom-right asset.
+   - No other section/layout changes. */
+.timeline39::before,
+.timeline39::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
+.timeline39{
+  background-image:var(--floral-bl), var(--floral-br) !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-size:92px auto, 96px auto !important;
+  background-position:left -12px bottom -10px, right -12px bottom -8px !important;
+}
+@media (max-width:760px){
+  .timeline39{
+    background-size:88px auto, 92px auto !important;
+    background-position:left -10px bottom -8px, right -10px bottom -8px !important;
+  }
+}
