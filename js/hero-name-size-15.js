@@ -12,9 +12,11 @@
     if(oldStyle5) oldStyle5.remove();
     const oldStyle6 = document.getElementById('hero-name-size-15-v193');
     if(oldStyle6) oldStyle6.remove();
-    if(document.getElementById('hero-name-size-15-v194')) return;
+    const oldStyle7 = document.getElementById('hero-name-size-15-v194');
+    if(oldStyle7) oldStyle7.remove();
+    if(document.getElementById('hero-name-size-15-v195')) return;
     const style = document.createElement('style');
-    style.id = 'hero-name-size-15-v194';
+    style.id = 'hero-name-size-15-v195';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
@@ -29,10 +31,16 @@
       }
       body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
       body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
+        display:block !important;
+        width:100% !important;
+        max-width:100% !important;
+        margin-left:auto !important;
+        margin-right:auto !important;
         font-size:clamp(24px, 3.5vw, 34px) !important;
         line-height:1.14 !important;
         white-space:nowrap !important;
         letter-spacing:0 !important;
+        text-align:center !important;
       }
       @media (max-width:760px){
         body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
@@ -58,10 +66,16 @@
         }
         body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
         body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
+          display:block !important;
+          width:100% !important;
+          max-width:100% !important;
+          margin-left:auto !important;
+          margin-right:auto !important;
           font-size:clamp(24px, 3.5vw, 34px) !important;
           line-height:1.14 !important;
           white-space:nowrap !important;
           letter-spacing:0 !important;
+          text-align:center !important;
         }
       }
       @media (max-width:390px){
