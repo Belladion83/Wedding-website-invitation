@@ -58,9 +58,9 @@
     }
   }
   function applyVisualRefinements(){
-    if(document.getElementById('calendar-requested-fix-v183')) return;
+    if(document.getElementById('calendar-requested-fix-v184')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v183';
+    style.id = 'calendar-requested-fix-v184';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -91,23 +91,29 @@
         margin-top:0 !important;
         margin-bottom:14px !important;
       }
+
+      /* Uniform separation for every direct website section */
       .cinelove-site{
         background:#f1e8dc !important;
       }
-      .cinelove-site > section + section{
-        margin-top:14px !important;
-      }
       .cinelove-site > section{
         position:relative !important;
-        box-shadow:0 -8px 18px rgba(112,76,43,.08), 0 12px 26px rgba(112,76,43,.13) !important;
+        margin-top:0 !important;
+        margin-bottom:0 !important;
+        box-shadow:0 -7px 16px rgba(112,76,43,.08), 0 12px 28px rgba(112,76,43,.14) !important;
+      }
+      .cinelove-site > section:not(:first-child){
+        border-top:14px solid #f1e8dc !important;
       }
       .cinelove-site > section:first-child{
-        box-shadow:0 12px 26px rgba(112,76,43,.12) !important;
+        box-shadow:0 12px 28px rgba(112,76,43,.12) !important;
       }
+
+      /* Fade in + slight upward slide when sections enter viewport */
       .site:not(.hidden) .section-reveal{
         opacity:0 !important;
-        transform:translate3d(0,34px,0) !important;
-        transition:opacity .95s ease, transform .95s ease !important;
+        transform:translate3d(0,38px,0) !important;
+        transition:opacity 1.05s ease, transform 1.05s ease !important;
         will-change:opacity, transform;
       }
       .site:not(.hidden) .section-reveal.visible{
@@ -116,14 +122,24 @@
       }
       .site.hidden .section-reveal{
         opacity:0 !important;
-        transform:translate3d(0,34px,0) !important;
+        transform:translate3d(0,38px,0) !important;
       }
+
       .formal-intro{
         margin:8px 0 18px !important;
         text-align:center !important;
         font:500 24px/1.4 "Cormorant Garamond", serif !important;
         letter-spacing:.02em !important;
         color:var(--t39-muted) !important;
+      }
+      @media (max-width:520px){
+        .cinelove-site > section:not(:first-child){
+          border-top-width:12px !important;
+        }
+        .formal-intro{
+          font-size:21px !important;
+          margin:6px 0 16px !important;
+        }
       }
       @media (prefers-reduced-motion: reduce){
         .site:not(.hidden) .section-reveal,
@@ -139,7 +155,7 @@
   function initSectionReveal(){
     const site = document.getElementById('site');
     if(!site || site.classList.contains('hidden')) return;
-    const sections = Array.from(site.querySelectorAll('.section-reveal'));
+    const sections = Array.from(site.querySelectorAll(':scope > .section-reveal'));
     if(!sections.length) return;
 
     if(revealObserver) revealObserver.disconnect();
@@ -162,14 +178,14 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold:0.18, rootMargin:'0px 0px -10% 0px' });
+    }, { threshold:0.18, rootMargin:'0px 0px -12% 0px' });
 
     window.setTimeout(function(){
       sections.forEach(function(section){
         if(section.dataset.revealShown === '1') section.classList.add('visible');
         else revealObserver.observe(section);
       });
-    }, 60);
+    }, 80);
   }
   function watchSiteReveal(){
     const site = document.getElementById('site');
@@ -177,7 +193,7 @@
     siteObserverStarted = true;
     if(!site.classList.contains('hidden')) initSectionReveal();
     const observer = new MutationObserver(function(){
-      if(!site.classList.contains('hidden')) window.setTimeout(initSectionReveal, 80);
+      if(!site.classList.contains('hidden')) window.setTimeout(initSectionReveal, 120);
     });
     observer.observe(site, { attributes:true, attributeFilter:['class'] });
   }
