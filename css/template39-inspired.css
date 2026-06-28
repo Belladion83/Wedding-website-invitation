@@ -2204,3 +2204,19 @@ input,select,textarea{
   stroke-linejoin:round !important;
 }
 .timeline-icon svg circle[fill="currentColor"]{ fill:currentColor !important; stroke:none !important; }
+
+
+/* v1.62 timeline icon gold refine */
+.timeline-icon{
+  color:#b9924d !important;
+}
+.timeline-item.timeline-card p{
+  display:none !important;
+}
+.timeline-icon svg *{
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.9 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}

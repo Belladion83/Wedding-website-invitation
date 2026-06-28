@@ -223,9 +223,9 @@ function getTimelineIconSvg(it, idx){
 
   if(kind === 'rings') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <path d="M32 13c1.8-2.8 4.3-4.2 7.4-4.2 5 0 8.8 3.9 8.8 8.8 0 2.5-.9 4.7-3.1 7.2L32 39 18.9 24.8c-2.2-2.5-3.1-4.7-3.1-7.2 0-4.9 3.8-8.8 8.8-8.8 3.1 0 5.6 1.4 7.4 4.2Z"></path>
-      <circle cx="24" cy="40" r="12.2"></circle>
-      <circle cx="40" cy="40" r="12.2"></circle>
+      <path d="M32 10.5c1.3-2 3.2-3 5.5-3 3.8 0 6.5 2.8 6.5 6.4 0 1.9-.7 3.5-2.3 5.3L32 29.6 22.3 19.2c-1.6-1.8-2.3-3.4-2.3-5.3 0-3.6 2.7-6.4 6.5-6.4 2.3 0 4.2 1 5.5 3Z"></path>
+      <circle cx="24" cy="41" r="12.2"></circle>
+      <circle cx="40" cy="41" r="12.2"></circle>
     </svg>`;
 
   if(kind === 'dining') return `
@@ -237,8 +237,9 @@ function getTimelineIconSvg(it, idx){
       <path d="M15 16v10"></path>
       <path d="M18.2 16v10"></path>
       <path d="M49 16v32"></path>
-      <path d="M46 16c0 5.8 6 5.8 6 0"></path>
-      <path d="M46 24h6"></path>
+      <path d="M45.8 16c0 3.8 1.2 6.8 3.2 9.2"></path>
+      <path d="M49 16c0 3.8 0 32 0 32"></path>
+      <path d="M52.2 16c0 3.8-1.2 6.8-3.2 9.2"></path>
     </svg>`;
 
   return `
@@ -289,7 +290,6 @@ function renderTimeline39(){
       <div class="timeline-icon" aria-hidden="true">${getTimelineIconSvg(it, idx)}</div>
       <div class="time-dot timeline-time"><span class="timeline-time-text">${escapeHtml(it.time || '')}</span></div>
       <h3>${escapeHtml(it.title || '')}</h3>
-      ${it.description ? `<p>${escapeHtml(it.description)}</p>` : ``}
     </article>
   `).join('');
 }
