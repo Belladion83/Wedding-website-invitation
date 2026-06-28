@@ -10,9 +10,11 @@
     if(oldStyle4) oldStyle4.remove();
     const oldStyle5 = document.getElementById('hero-name-size-15-v192');
     if(oldStyle5) oldStyle5.remove();
-    if(document.getElementById('hero-name-size-15-v193')) return;
+    const oldStyle6 = document.getElementById('hero-name-size-15-v193');
+    if(oldStyle6) oldStyle6.remove();
+    if(document.getElementById('hero-name-size-15-v194')) return;
     const style = document.createElement('style');
-    style.id = 'hero-name-size-15-v193';
+    style.id = 'hero-name-size-15-v194';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
       body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
@@ -27,10 +29,10 @@
       }
       body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
       body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-        font-size:clamp(17px, 2.71vw, 28px) !important;
-        line-height:1.15 !important;
+        font-size:clamp(24px, 3.5vw, 34px) !important;
+        line-height:1.14 !important;
         white-space:nowrap !important;
-        letter-spacing:.02em !important;
+        letter-spacing:0 !important;
       }
       @media (max-width:760px){
         body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
@@ -56,10 +58,10 @@
         }
         body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
         body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-          font-size:clamp(14px, 4vw, 18px) !important;
-          line-height:1.16 !important;
+          font-size:clamp(24px, 3.5vw, 34px) !important;
+          line-height:1.14 !important;
           white-space:nowrap !important;
-          letter-spacing:.01em !important;
+          letter-spacing:0 !important;
         }
       }
       @media (max-width:390px){
@@ -71,10 +73,6 @@
         body .page-shell .site .event-invite .formal-couple #formalGroomName,
         body .page-shell .site .event-invite .formal-couple #formalBrideName{
           font-size:37px !important;
-        }
-        body .page-shell .site .event-invite .ceremony-block #ceremonyTitle,
-        body .page-shell .site .event-invite .ceremony-block h3#ceremonyTitle{
-          font-size:14px !important;
         }
       }
     `;
