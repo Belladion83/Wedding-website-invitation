@@ -169,3 +169,31 @@ body main#app.page-shell section#site.site section#eventInvite.event-invite .cer
   text-wrap: balance !important;
   overflow: visible !important;
 }
+
+/* v1.90: Countdown merged into Calendar and centered. */
+body .page-shell .site .calendar39 .calendar-countdown {
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 26px auto 0 !important;
+  text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body .page-shell .site .calendar39 .calendar-countdown .countdown-intro {
+  width: 100% !important;
+  margin: 0 auto 10px !important;
+  text-align: center !important;
+}
+
+body .page-shell .site .calendar39 .calendar-countdown .divider {
+  margin: 12px auto 16px !important;
+}
+
+body .page-shell .site .calendar39 .calendar-countdown .countdown {
+  width: 100% !important;
+  margin: 0 auto !important;
+  justify-content: center !important;
+}
