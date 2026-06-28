@@ -2220,3 +2220,348 @@ input,select,textarea{
   stroke-linecap:round !important;
   stroke-linejoin:round !important;
 }
+
+
+/* v1.63 floral accents */
+:root{
+  --floral-corner:url('../assets/images/floral-corner.png');
+  --floral-horizontal:url('../assets/images/floral-horizontal.png');
+  --section-tint:#fbf7f1;
+  --section-tint-2:#f3eadf;
+}
+body{
+  background:
+    radial-gradient(circle at top left, rgba(186,145,85,.10), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(204,177,128,.10), transparent 30%),
+    linear-gradient(180deg,#f6f0e8 0%, #efe6da 100%) !important;
+}
+.cinelove-site{
+  background:transparent !important;
+}
+.hero.cinelove-cover,
+.calendar39,
+.cinelove-couple,
+.cinelove-story,
+.cinelove-event,
+.dresscode39,
+.timeline39,
+.cinelove-gallery,
+.cinelove-rsvp,
+.thanks{
+  position:relative;
+  overflow:hidden;
+}
+.hero.cinelove-cover::before,
+.calendar39::before,
+.cinelove-story::before,
+.cinelove-event::before,
+.dresscode39::before,
+.timeline39::before,
+.cinelove-gallery::before,
+.cinelove-rsvp::before,
+.thanks::before{
+  content:"";
+  position:absolute;
+  inset:auto auto -14px -24px;
+  width:180px;
+  height:180px;
+  background-image:var(--floral-corner);
+  background-repeat:no-repeat;
+  background-size:contain;
+  opacity:.28;
+  filter:saturate(.92) brightness(1.02);
+  pointer-events:none;
+  z-index:0;
+}
+.hero.cinelove-cover::after,
+.calendar39::after,
+.cinelove-story::after,
+.cinelove-event::after,
+.dresscode39::after,
+.timeline39::after,
+.cinelove-gallery::after,
+.cinelove-rsvp::after,
+.thanks::after{
+  content:"";
+  position:absolute;
+  inset:-12px -20px auto auto;
+  width:165px;
+  height:165px;
+  background-image:var(--floral-corner);
+  background-repeat:no-repeat;
+  background-size:contain;
+  transform:scaleX(-1) scaleY(-1);
+  opacity:.22;
+  filter:saturate(.92) brightness(1.04);
+  pointer-events:none;
+  z-index:0;
+}
+.cinelove-couple::before,
+.cinelove-couple::after{
+  content:"";
+  position:absolute;
+  width:170px;
+  height:170px;
+  background-image:var(--floral-corner);
+  background-repeat:no-repeat;
+  background-size:contain;
+  opacity:.24;
+  pointer-events:none;
+  z-index:0;
+}
+.cinelove-couple::before{left:-16px; bottom:-8px;}
+.cinelove-couple::after{right:-16px; top:-8px; transform:scale(-1);}
+.hero.cinelove-cover > *,
+.calendar39 > *,
+.cinelove-couple > *,
+.cinelove-story > *,
+.cinelove-event > *,
+.dresscode39 > *,
+.timeline39 > *,
+.cinelove-gallery > *,
+.cinelove-rsvp > *,
+.thanks > *{
+  position:relative;
+  z-index:1;
+}
+.calendar39,
+.cinelove-story,
+.dresscode39,
+.timeline39,
+.cinelove-gallery,
+.cinelove-rsvp{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.96), rgba(253,249,243,.96)),
+    var(--section-tint) !important;
+  border-color:rgba(189,155,101,.22) !important;
+  box-shadow:0 16px 34px rgba(123,90,46,.08) !important;
+}
+.cinelove-event,
+.thanks,
+.cinelove-couple article,
+.hero-content{
+  box-shadow:0 16px 34px rgba(123,90,46,.08) !important;
+}
+.cinelove-story,
+.dresscode39,
+.timeline39,
+.cinelove-gallery,
+.cinelove-rsvp{
+  padding-top:56px !important;
+}
+.cinelove-story .cinelove-section-kicker::before,
+.cinelove-gallery .cinelove-section-kicker::before,
+.rsvp .cinelove-section-kicker::before,
+.calendar39 .section-kicker::before,
+.dresscode39 .section-kicker::before,
+.timeline39 .section-kicker::before{
+  content:"";
+  display:block;
+  width:min(76%,420px);
+  height:42px;
+  margin:0 auto 10px;
+  background-image:var(--floral-horizontal);
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:center;
+  opacity:.20;
+}
+.thanks{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08)),
+    linear-gradient(180deg, #d9c2a0 0%, #f5ece0 42%, #efdfc9 100%) !important;
+}
+.gif-stage{
+  background:
+    radial-gradient(circle at top left, rgba(186,145,85,.12), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(186,145,85,.10), transparent 22%),
+    linear-gradient(180deg,#fbf7f1 0%, #f2e8dc 100%) !important;
+}
+.gif-stage::before,
+.gif-stage::after{
+  content:"";
+  position:absolute;
+  width:160px;
+  height:160px;
+  background-image:var(--floral-corner);
+  background-size:contain;
+  background-repeat:no-repeat;
+  opacity:.18;
+  pointer-events:none;
+}
+.gif-stage::before{left:-10px; bottom:22px;}
+.gif-stage::after{right:-10px; top:22px; transform:scale(-1);}
+@media (max-width:760px){
+  .hero.cinelove-cover::before,
+  .calendar39::before,
+  .cinelove-story::before,
+  .cinelove-event::before,
+  .dresscode39::before,
+  .timeline39::before,
+  .cinelove-gallery::before,
+  .cinelove-rsvp::before,
+  .thanks::before,
+  .cinelove-couple::before{
+    width:124px; height:124px; left:-18px; bottom:-14px; opacity:.24;
+  }
+  .hero.cinelove-cover::after,
+  .calendar39::after,
+  .cinelove-story::after,
+  .cinelove-event::after,
+  .dresscode39::after,
+  .timeline39::after,
+  .cinelove-gallery::after,
+  .cinelove-rsvp::after,
+  .thanks::after,
+  .cinelove-couple::after{
+    width:112px; height:112px; right:-14px; top:-8px; opacity:.18;
+  }
+  .cinelove-story .cinelove-section-kicker::before,
+  .cinelove-gallery .cinelove-section-kicker::before,
+  .rsvp .cinelove-section-kicker::before,
+  .calendar39 .section-kicker::before,
+  .dresscode39 .section-kicker::before,
+  .timeline39 .section-kicker::before{
+    height:28px; width:min(82%,300px); margin-bottom:8px; opacity:.18;
+  }
+}
+
+
+/* v1.64 multi floral styles */
+:root{
+  --floral-main:url('../assets/images/floral-corner-main.png');
+  --floral-opposite:url('../assets/images/floral-corner-opposite.png');
+  --floral-tall:url('../assets/images/floral-tall-spray.png');
+  --floral-garland:url('../assets/images/floral-garland-main.png');
+  --floral-top:url('../assets/images/floral-top-garland.png');
+  --floral-mini:url('../assets/images/floral-mini-cluster.png');
+  --floral-branch:url('../assets/images/floral-airy-branch.png');
+  --floral-swag:url('../assets/images/floral-bottom-swag.png');
+}
+
+/* default section accents refined */
+.hero.cinelove-cover::before,
+.calendar39::before,
+.cinelove-story::before,
+.cinelove-event::before,
+.dresscode39::before,
+.timeline39::before,
+.cinelove-gallery::before,
+.cinelove-rsvp::before,
+.thanks::before{
+  background-image:var(--floral-main) !important;
+  background-size:contain !important;
+  opacity:.24 !important;
+}
+.hero.cinelove-cover::after,
+.calendar39::after,
+.cinelove-story::after,
+.cinelove-event::after,
+.dresscode39::after,
+.timeline39::after,
+.cinelove-gallery::after,
+.cinelove-rsvp::after,
+.thanks::after{
+  background-image:var(--floral-opposite) !important;
+  background-size:contain !important;
+  opacity:.18 !important;
+}
+
+/* hero: richer, more romantic corners */
+.hero.cinelove-cover::before{width:240px !important;height:240px !important;left:-20px !important;bottom:-16px !important;opacity:.30 !important;}
+.hero.cinelove-cover::after{width:210px !important;height:210px !important;right:-16px !important;top:-6px !important;opacity:.22 !important;}
+.hero-content::before,
+.hero-content::after{
+  content:"";
+  position:absolute;
+  inset:auto auto auto auto;
+  pointer-events:none;
+  z-index:0;
+  background-repeat:no-repeat;
+  background-size:contain;
+}
+.hero-content::before{width:360px;height:96px;left:50%;top:18px;transform:translateX(-50%);background-image:var(--floral-top);opacity:.10;}
+.hero-content::after{width:130px;height:130px;right:12px;bottom:18px;background-image:var(--floral-mini);opacity:.16;}
+.hero-content > *{position:relative;z-index:1;}
+
+/* calendar: soft floral branch and mini flowers */
+.calendar39::before{background-image:var(--floral-branch) !important;width:150px !important;height:150px !important;left:-8px !important;bottom:16px !important;opacity:.16 !important;}
+.calendar39::after{background-image:var(--floral-mini) !important;width:110px !important;height:110px !important;right:18px !important;top:22px !important;transform:none !important;opacity:.16 !important;}
+.calendar39 .calendar-box::before,
+.calendar39 .calendar-box::after{
+  content:""; position:absolute; background-repeat:no-repeat; background-size:contain; pointer-events:none; opacity:.14;
+}
+.calendar39 .calendar-box::before{width:120px;height:120px;left:-20px;top:-18px;background-image:var(--floral-mini);}
+.calendar39 .calendar-box::after{width:150px;height:150px;right:-18px;bottom:-18px;background-image:var(--floral-branch);transform:scaleX(-1) rotate(-12deg);}
+
+/* couple section: subtle mini bouquets */
+.cinelove-couple::before{background-image:var(--floral-mini) !important;width:120px !important;height:120px !important;left:8px !important;bottom:8px !important;opacity:.18 !important;}
+.cinelove-couple::after{background-image:var(--floral-mini) !important;width:120px !important;height:120px !important;right:8px !important;top:8px !important;transform:scale(-1) !important;opacity:.16 !important;}
+.couple article::before,
+.couple article::after{
+  content:""; position:absolute; width:70px; height:70px; background-repeat:no-repeat; background-size:contain; opacity:.16; pointer-events:none;
+}
+.couple article::before{left:-8px; bottom:-8px; background-image:var(--floral-mini);}
+.couple article::after{right:-10px; top:-10px; background-image:var(--floral-branch); opacity:.12;}
+
+/* story section: one tall floral + top swag */
+.cinelove-story::before{background-image:var(--floral-tall) !important;width:170px !important;height:220px !important;left:-14px !important;bottom:-18px !important;opacity:.20 !important;}
+.cinelove-story::after{background-image:var(--floral-mini) !important;width:96px !important;height:96px !important;right:16px !important;top:14px !important;transform:none !important;opacity:.15 !important;}
+.cinelove-story .cinelove-section-kicker::before{background-image:var(--floral-top) !important;opacity:.22 !important;}
+
+/* event section: more formal floral framing */
+.cinelove-event::before{background-image:var(--floral-main) !important;width:220px !important;height:220px !important;left:-18px !important;bottom:-12px !important;opacity:.23 !important;}
+.cinelove-event::after{background-image:var(--floral-opposite) !important;width:210px !important;height:210px !important;right:-16px !important;top:10px !important;opacity:.20 !important;}
+.event-ribbon::before,
+.event-ribbon::after{content:""; position:absolute; top:50%; width:54px; height:34px; transform:translateY(-50%); background-repeat:no-repeat; background-size:contain; opacity:.18; pointer-events:none;}
+.event-ribbon::before{left:16px; background-image:var(--floral-mini);}
+.event-ribbon::after{right:16px; background-image:var(--floral-mini); transform:translateY(-50%) scaleX(-1);}
+.ceremony-block::before{content:""; position:absolute; left:50%; top:0; transform:translate(-50%,-24%); width:220px; height:66px; background-image:var(--floral-top); background-repeat:no-repeat; background-size:contain; opacity:.14; pointer-events:none;}
+
+/* dresscode: minimal, airy flowers */
+.dresscode39::before{background-image:var(--floral-branch) !important;width:120px !important;height:120px !important;left:12px !important;bottom:12px !important;opacity:.14 !important;}
+.dresscode39::after{background-image:var(--floral-mini) !important;width:96px !important;height:96px !important;right:12px !important;top:18px !important;transform:none !important;opacity:.14 !important;}
+.dresscode39 .section-kicker::before{background-image:var(--floral-top) !important;opacity:.15 !important;}
+
+/* timeline: cleaner with smaller accents */
+.timeline39::before{background-image:var(--floral-mini) !important;width:104px !important;height:104px !important;left:8px !important;bottom:12px !important;opacity:.12 !important;}
+.timeline39::after{background-image:var(--floral-branch) !important;width:120px !important;height:120px !important;right:8px !important;top:14px !important;transform:none !important;opacity:.12 !important;}
+.timeline39 .section-kicker::before{background-image:var(--floral-top) !important;opacity:.13 !important;}
+
+/* album: more decorative corners */
+.cinelove-gallery::before{background-image:var(--floral-main) !important;width:170px !important;height:170px !important;left:-10px !important;bottom:-8px !important;opacity:.18 !important;}
+.cinelove-gallery::after{background-image:var(--floral-opposite) !important;width:150px !important;height:150px !important;right:-6px !important;top:0 !important;opacity:.15 !important;}
+.cinelove-gallery .cinelove-section-kicker::before{background-image:var(--floral-top) !important;opacity:.20 !important;}
+
+/* RSVP: friendly but not crowded */
+.cinelove-rsvp::before{background-image:var(--floral-mini) !important;width:118px !important;height:118px !important;left:10px !important;bottom:10px !important;opacity:.16 !important;}
+.cinelove-rsvp::after{background-image:var(--floral-mini) !important;width:118px !important;height:118px !important;right:10px !important;top:14px !important;transform:scaleX(-1) !important;opacity:.14 !important;}
+.cinelove-rsvp .cinelove-section-kicker::before{background-image:var(--floral-top) !important;opacity:.18 !important;}
+
+/* thank you: richer floral closing */
+.thanks::before{background-image:var(--floral-main) !important;width:210px !important;height:210px !important;left:-18px !important;bottom:-12px !important;opacity:.28 !important;}
+.thanks::after{background-image:var(--floral-opposite) !important;width:210px !important;height:210px !important;right:-18px !important;top:-10px !important;opacity:.24 !important;}
+.thanks > div::before{content:""; position:absolute; left:50%; top:18px; transform:translateX(-50%); width:320px; height:80px; background-image:var(--floral-swag); background-repeat:no-repeat; background-size:contain; opacity:.16; pointer-events:none;}
+.thanks > div{position:relative;}
+
+/* envelope stage richer floral */
+.gif-stage::before{background-image:var(--floral-main) !important;width:150px !important;height:150px !important;opacity:.18 !important;}
+.gif-stage::after{background-image:var(--floral-opposite) !important;width:150px !important;height:150px !important;opacity:.16 !important;}
+
+/* mobile refinement to avoid crowding */
+@media (max-width:760px){
+  .hero.cinelove-cover::before{width:170px !important;height:170px !important;left:-20px !important;bottom:-12px !important;}
+  .hero.cinelove-cover::after{width:130px !important;height:130px !important;right:-12px !important;top:12px !important;}
+  .hero-content::before{width:220px;height:56px;top:22px;opacity:.10;}
+  .hero-content::after{width:90px;height:90px;right:4px;bottom:12px;}
+  .calendar39 .calendar-box::before,
+  .calendar39 .calendar-box::after,
+  .event-ribbon::before,
+  .event-ribbon::after,
+  .ceremony-block::before,
+  .thanks > div::before{display:none;}
+  .cinelove-event::before{width:150px !important;height:150px !important;left:-24px !important;bottom:-18px !important;}
+  .cinelove-event::after{width:120px !important;height:120px !important;right:-16px !important;top:-4px !important;}
+  .cinelove-story::before{width:130px !important;height:165px !important;left:-18px !important;bottom:-10px !important;}
+  .cinelove-gallery::before,.cinelove-gallery::after,.thanks::before,.thanks::after{width:130px !important;height:130px !important;}
+}
