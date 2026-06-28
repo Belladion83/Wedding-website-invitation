@@ -1,0 +1,36 @@
+(function(){
+  function applyHeroNameSize(){
+    if(document.getElementById('hero-name-size-15-v188')) return;
+    const style = document.createElement('style');
+    style.id = 'hero-name-size-15-v188';
+    style.textContent = `
+      body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
+      body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
+      body .page-shell .site .hero.cinelove-cover .hero-content #heroGroomName,
+      body .page-shell .site .hero.cinelove-cover .hero-content #heroBrideName{
+        font-size:44px !important;
+        line-height:1.05 !important;
+      }
+      body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span:nth-child(2){
+        font-size:27px !important;
+        line-height:1 !important;
+      }
+      @media (max-width:760px){
+        body .page-shell .site .hero.cinelove-cover .hero-content .hero-names,
+        body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span,
+        body .page-shell .site .hero.cinelove-cover .hero-content #heroGroomName,
+        body .page-shell .site .hero.cinelove-cover .hero-content #heroBrideName{
+          font-size:44px !important;
+          line-height:1.05 !important;
+        }
+        body .page-shell .site .hero.cinelove-cover .hero-content .hero-names span:nth-child(2){
+          font-size:27px !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyHeroNameSize);
+  else applyHeroNameSize();
+  window.addEventListener('load', applyHeroNameSize);
+})();
