@@ -47,9 +47,16 @@
       console.warn('Thank You background refresh failed', e);
     }
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refreshThanksBg);
-  else refreshThanksBg();
-  window.addEventListener('load', refreshThanksBg);
+  function restoreMapTarget(){
+    const map = document.getElementById('mapBtn');
+    if(map){
+      map.target = '_blank';
+      map.rel = 'noopener';
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ refreshThanksBg(); restoreMapTarget(); });
+  else { refreshThanksBg(); restoreMapTarget(); }
+  window.addEventListener('load', function(){ refreshThanksBg(); restoreMapTarget(); });
   setTimeout(refreshThanksBg, 1200);
   setTimeout(refreshThanksBg, 3500);
 })();
