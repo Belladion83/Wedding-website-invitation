@@ -113,3 +113,50 @@ body .page-shell .site .event-invite .formal-couple span {
     font-size: 38px !important;
   }
 }
+
+/* v1.81: Balance spacing around ampersand in Thông tin lễ báo hỷ. */
+body .page-shell .site .event-invite .formal-couple,
+body .page-shell .site .cinelove-event .formal-couple {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+body .page-shell .site .event-invite .formal-couple h2,
+body .page-shell .site .cinelove-event .formal-couple h2 {
+  line-height: 1.08 !important;
+}
+
+body .page-shell .site .event-invite .formal-couple #formalGroomName,
+body .page-shell .site .cinelove-event .formal-couple #formalGroomName {
+  margin-top: 6px !important;
+  margin-bottom: 4px !important;
+}
+
+body .page-shell .site .event-invite .formal-couple #formalGroomRole,
+body .page-shell .site .cinelove-event .formal-couple #formalGroomRole {
+  margin-top: 2px !important;
+  margin-bottom: 10px !important;
+}
+
+body .page-shell .site .event-invite .formal-couple > span,
+body .page-shell .site .cinelove-event .formal-couple > span {
+  display: block !important;
+  line-height: 1 !important;
+  margin-top: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+body .page-shell .site .event-invite .formal-couple #formalBrideName,
+body .page-shell .site .cinelove-event .formal-couple #formalBrideName {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+}
+
+body .page-shell .site .event-invite .formal-couple #formalBrideRole,
+body .page-shell .site .cinelove-event .formal-couple #formalBrideRole {
+  margin-top: 2px !important;
+  margin-bottom: 0 !important;
+}
