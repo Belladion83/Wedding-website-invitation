@@ -13,6 +13,196 @@
   <link rel="stylesheet" href="css/cinelove-inspired.css?v=1.66">
   <link rel="stylesheet" href="css/template39-inspired.css?v=1.66">
   <link rel="stylesheet" href="css/template44-opening.css?v=1.66">
+
+  <style id="guided-floral-v167">
+    :root{
+      --guided-floral-opacity: .98;
+      --guided-floral-size: clamp(112px, 20vw, 210px);
+      --guided-floral-size-lg: clamp(144px, 24vw, 260px);
+      --guided-floral-horizontal-w: min(46%, 360px);
+      --guided-side-floral-w: clamp(150px, 20vw, 260px);
+      --guided-floral-shadow: 0 8px 24px rgba(177,142,92,.10);
+    }
+
+    .section-flower{ display:none !important; }
+
+    .section-kicker,
+    .cinelove-section-kicker{
+      display:flex !important;
+      align-items:center;
+      justify-content:center;
+      gap:.7rem;
+      width:100%;
+      text-align:center !important;
+      position:relative;
+      z-index:2;
+    }
+    .section-kicker::before,
+    .section-kicker::after,
+    .cinelove-section-kicker::before,
+    .cinelove-section-kicker::after{
+      content:"✦";
+      color:#c39a58;
+      font-size:.78em;
+      line-height:1;
+      flex:0 0 auto;
+      transform:translateY(-.02em);
+    }
+
+    .cinelove-site{ position:relative; isolation:isolate; }
+    .cinelove-site > .site-side-floral{
+      position:fixed;
+      z-index:0;
+      pointer-events:none;
+      width:var(--guided-side-floral-w);
+      aspect-ratio: 1 / 1.1;
+      background-repeat:no-repeat;
+      background-size:contain;
+      filter:drop-shadow(var(--guided-floral-shadow));
+      opacity:.92;
+    }
+    .cinelove-site > .site-side-floral.left{
+      left:max(-72px, -6vw);
+      top:26vh;
+      background-image:url('assets/images/floral-side-left.png');
+      background-position:left center;
+    }
+    .cinelove-site > .site-side-floral.right{
+      right:max(-72px, -6vw);
+      top:54vh;
+      background-image:url('assets/images/floral-side-right.png');
+      background-position:right center;
+    }
+
+    .cinelove-cover,
+    .calendar39,
+    .cinelove-couple,
+    .cinelove-story,
+    .cinelove-event,
+    .dresscode39,
+    .timeline39,
+    .cinelove-gallery,
+    .cinelove-rsvp,
+    .thanks{
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .cinelove-cover::before,.cinelove-cover::after,
+    .calendar39::before,.calendar39::after,
+    .cinelove-couple::before,.cinelove-couple::after,
+    .cinelove-story::before,.cinelove-story::after,
+    .cinelove-event::before,.cinelove-event::after,
+    .dresscode39::before,.dresscode39::after,
+    .timeline39::before,.timeline39::after,
+    .cinelove-gallery::before,.cinelove-gallery::after,
+    .cinelove-rsvp::before,.cinelove-rsvp::after,
+    .thanks::before,.thanks::after{
+      content:none !important;
+      background:none !important;
+    }
+
+    .cinelove-cover > *,
+    .calendar39 > *,
+    .cinelove-couple > *,
+    .cinelove-story > *,
+    .cinelove-event > *,
+    .dresscode39 > *,
+    .timeline39 > *,
+    .cinelove-gallery > *,
+    .cinelove-rsvp > *,
+    .thanks > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .section-floral-corner,
+    .section-floral-bottom{
+      position:absolute;
+      pointer-events:none;
+      z-index:0;
+      background-repeat:no-repeat;
+      background-size:contain;
+      opacity:var(--guided-floral-opacity);
+      filter:drop-shadow(var(--guided-floral-shadow));
+    }
+    .section-floral-corner.tr{
+      top:0; right:0;
+      width:var(--guided-floral-size);
+      height:var(--guided-floral-size);
+      background-image:url('assets/images/floral-corner-top-right.png');
+      background-position:top right;
+    }
+    .section-floral-corner.tl{
+      top:0; left:0;
+      width:var(--guided-floral-size);
+      height:var(--guided-floral-size);
+      background-image:url('assets/images/floral-corner-top-left.png');
+      background-position:top left;
+    }
+    .section-floral-corner.br{
+      right:0; bottom:0;
+      width:var(--guided-floral-size);
+      height:var(--guided-floral-size);
+      background-image:url('assets/images/floral-corner-bottom-right.png');
+      background-position:bottom right;
+    }
+    .section-floral-corner.bl{
+      left:0; bottom:0;
+      width:var(--guided-floral-size);
+      height:var(--guided-floral-size);
+      background-image:url('assets/images/floral-corner-bottom-left.png');
+      background-position:bottom left;
+    }
+    .section-floral-bottom{
+      left:50%; bottom:0;
+      transform:translateX(-50%);
+      width:var(--guided-floral-horizontal-w);
+      max-width:360px;
+      min-width:180px;
+      aspect-ratio: 3 / 1.2;
+      background-image:url('assets/images/floral-horizontal.png');
+      background-position:center bottom;
+    }
+
+    /* fine-tune by section */
+    .cinelove-cover .section-floral-corner.tr,
+    .cinelove-couple .section-floral-corner.tr,
+    .cinelove-event .section-floral-corner.tr,
+    .cinelove-gallery .section-floral-corner.tr,
+    .thanks .section-floral-corner.tr{
+      width:var(--guided-floral-size-lg);
+      height:var(--guided-floral-size-lg);
+    }
+
+    .cinelove-cover .section-floral-corner.bl,
+    .calendar39 .section-floral-corner.bl,
+    .cinelove-gallery .section-floral-corner.bl,
+    .thanks .section-floral-corner.bl{
+      width:calc(var(--guided-floral-size) * .95);
+      height:calc(var(--guided-floral-size) * .95);
+    }
+
+    .cinelove-gallery .section-floral-bottom,
+    .dresscode39 .section-floral-bottom,
+    .thanks .section-floral-bottom{
+      bottom:-2px;
+    }
+
+    @media (max-width: 768px){
+      :root{
+        --guided-floral-size: clamp(90px, 28vw, 140px);
+        --guided-floral-size-lg: clamp(110px, 32vw, 160px);
+        --guided-floral-horizontal-w: min(54%, 240px);
+        --guided-side-floral-w: clamp(110px, 24vw, 150px);
+      }
+      .cinelove-site > .site-side-floral.left{ left:-54px; top:22vh; }
+      .cinelove-site > .site-side-floral.right{ right:-54px; top:60vh; }
+      .section-floral-bottom{ opacity:.96; }
+    }
+  </style>
+
 </head>
 <body>
   <audio id="bgMusic" loop preload="none"></audio>
@@ -63,7 +253,11 @@
     </section>
 
     <section class="site hidden cinelove-site" id="site">
+      <div class="site-side-floral left" aria-hidden="true"></div>
+      <div class="site-side-floral right" aria-hidden="true"></div>
       <section class="hero section-reveal cinelove-cover">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
         <div class="hero-arch-wrap"><div class="hero-arch" id="heroPhoto"></div></div>
         <div class="hero-content">
           <p class="invitee" id="inviteeLine"><span>Kính mời</span><span>Quý khách</span></p>
@@ -77,6 +271,8 @@
 
       
       <section class="calendar39 panel section-reveal" id="calendar39">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
         <div class="section-flower">✦</div>
         <p class="section-kicker">Our wedding day</p>
         <h2>THÁNG 07 / 2026</h2>
@@ -88,17 +284,23 @@
       </section>
 
       <section class="couple cards section-reveal cinelove-couple">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
         <article><div class="couple-photo-frame"><img id="groomPhoto" alt="Chú rể"></div><div><h3 id="groomName"></h3><p id="groomBirthday"></p><p id="groomSubtitle"></p><p id="groomAddress"></p></div></article>
         <article><div class="couple-photo-frame"><img id="bridePhoto" alt="Cô dâu"></div><div><h3 id="brideName"></h3><p id="brideBirthday"></p><p id="brideSubtitle"></p><p id="brideAddress"></p></div></article>
       </section>
 
       <section class="story panel section-reveal cinelove-story">
+        <div class="section-floral-corner tl" aria-hidden="true"></div>
+        <div class="section-floral-corner br" aria-hidden="true"></div>
         <div class="cinelove-section-kicker">Love</div>
         <h2 id="storyTitle">OUR STORY</h2>
         <p id="storyText"></p>
       </section>
 
       <section class="event-invite section-reveal cinelove-event" id="eventInvite">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
         <div class="event-top">
           <article class="person-side"><div class="person-photo-frame"><img id="eventGroomPhoto" alt="Chú rể"></div><p id="eventGroomRole">Út Nam</p><h3 id="eventGroomShort">Phú Quí</h3></article>
           <article class="person-side"><div class="person-photo-frame"><img id="eventBridePhoto" alt="Cô dâu"></div><p id="eventBrideRole">Út Nữ</p><h3 id="eventBrideShort">Ánh Nguyệt</h3></article>
@@ -125,6 +327,9 @@
       </section>
 
       <section class="dresscode39 panel section-reveal" id="dresscode39">
+        <div class="section-floral-corner tl" aria-hidden="true"></div>
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-bottom" aria-hidden="true"></div>
         <div class="section-flower">✦</div>
         <p class="section-kicker" id="dresscodeKicker">Dresscode</p>
         <h2 id="dresscodeTitle">TRANG PHỤC GỢI Ý</h2>
@@ -139,6 +344,8 @@
       </section>
 
       <section class="timeline39 panel section-reveal" id="timeline39">
+        <div class="section-floral-corner tl" aria-hidden="true"></div>
+        <div class="section-floral-corner br" aria-hidden="true"></div>
         <div class="section-flower">✦</div>
         <p class="section-kicker">Wedding Timeline</p>
         <h2>LỊCH TRÌNH BUỔI TIỆC</h2>
@@ -146,12 +353,20 @@
       </section>
 
       <section class="gallery panel section-reveal cinelove-gallery">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
+        <div class="section-floral-bottom" aria-hidden="true"></div>
         <div class="cinelove-section-kicker">Album</div><h2>ALBUM ẢNH CƯỚI</h2><div class="gallery-grid" id="galleryGrid"></div></section>
 
       <section class="rsvp panel section-reveal cinelove-rsvp">
+        <div class="section-floral-corner tl" aria-hidden="true"></div>
+        <div class="section-floral-corner br" aria-hidden="true"></div>
         <div class="cinelove-section-kicker">RSVP</div><h2>VUI LÒNG XÁC NHẬN</h2><p class="rsvp-note">Vui lòng xác nhận sự hiện diện của bạn để cô dâu và chú rể có thể chuẩn bị đón tiếp chu đáo nhất nhé!!!</p><form id="rsvpForm"><input name="guestName" id="guestNameInput" placeholder="Họ và tên" required><input name="wish" placeholder="Gửi lời chúc đến cô dâu và chú rể"><select name="attending" required><option value="">Quý khách có tham dự không?</option><option>Có tham dự</option><option>Rất tiếc không thể tham dự</option></select><select name="companions" id="companionsInput"><option value="">Quý khách tham dự cùng bao nhiêu khách?</option><option>Đi một mình</option><option>1</option><option>2</option><option>3</option></select><select name="guestOf" required><option value="">Quý khách là khách mời của</option><option>Cô dâu</option><option>Chú rể</option><option>Khách chung</option></select><button class="btn solid" type="submit">GỬI LỜI CHÚC & XÁC NHẬN</button></form><p id="formStatus"></p><button class="btn outline" id="giftBtn">GỬI QUÀ MỪNG CƯỚI</button></section>
 
-      <section class="thanks section-reveal" id="thanks"><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">18 . 07 . 2026</p></div></section>
+      <section class="thanks section-reveal" id="thanks">
+        <div class="section-floral-corner tr" aria-hidden="true"></div>
+        <div class="section-floral-corner bl" aria-hidden="true"></div>
+        <div class="section-floral-bottom" aria-hidden="true"></div><div><h2>Thank You!</h2><p>Cảm ơn Quý khách đã dành thời gian đến chung vui cùng gia đình chúng tôi!</p><h3 id="thanksNames">PHÚ QUÍ & ÁNH NGUYỆT</h3><p id="thanksDate">18 . 07 . 2026</p></div></section>
     </section>
   </main>
 
