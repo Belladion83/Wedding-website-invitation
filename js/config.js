@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.58-event-header-timeline-icons',
+  version: '1.59-rsvp-prefill-timeline-icons-hall',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -49,7 +49,7 @@ window.DEFAULT_WEDDING_CONFIG = {
   event: {
     intro: 'TRÂN TRỌNG KÍNH MỜI',
     description: 'Tới dự buổi tiệc rượu chung vui cùng gia đình chúng tôi tại',
-    venue: 'TRUNG TÂM HỘI NGHỊ & TIỆC CƯỚI\nJOLIE WEDDING & EVENT',
+    venue: 'TRUNG TÂM HỘI NGHỊ & TIỆC CƯỚI\nJolie Wedding & Event\nSảnh Floral - Tầng 4',
     address: '177 Phan Chu Trinh, Quận Bình Thạnh, TP. Hồ Chí Minh',
     ceremonyTitle: 'TIỆC BÁO HỶ ĐƯỢC TỔ CHỨC TẠI',
     dayLabel: 'CHỦ NHẬT',
@@ -65,9 +65,9 @@ window.DEFAULT_WEDDING_CONFIG = {
     note: 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn, đen.'
   },
   timeline: [
-    { time: '17:30', title: 'Đón tiếp khách', description: 'Cô dâu và chú rể hân hạnh đón tiếp quý khách.' },
-    { time: '18:00', title: 'Tiệc báo hỷ', description: 'Nghi thức chúc mừng và lưu giữ khoảnh khắc cùng gia đình.' },
-    { time: '18:30', title: 'Khai tiệc', description: 'Cùng nâng ly chúc mừng hạnh phúc của cô dâu chú rể.' }
+    { time: '17:30', title: 'Đón Khách', description: '' },
+    { time: '18:30', title: 'Tiệc Báo Hỷ', description: '' },
+    { time: '19:00', title: 'Khai Tiệc', description: '' }
   ],
   gallery: [
     'assets/images/venue.jpg','assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg',

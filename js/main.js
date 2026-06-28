@@ -51,6 +51,16 @@ function resolveGuest(){
   const found = (C.guests || []).find(g => String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase());
   return { id: guestId, name: guestNameParam || (found && found.name) || '', side: (found && found.side) || '' };
 }
+
+function prefillRsvpForm(){
+  const form = $('rsvpForm');
+  if(!form) return;
+  const guest = resolveGuest();
+  const nameInput = form.elements['guestName'];
+  if(nameInput && guest.name) nameInput.value = guest.name;
+  const guestOf = form.elements['guestOf'];
+  if(guestOf && guest.side && [...guestOf.options].some(o => o.value === guest.side)) guestOf.value = guest.side;
+}
 function initContent(){
   document.documentElement.style.setProperty('--gold', C.site.colorPrimary || '#b98645');
   document.documentElement.style.setProperty('--gold2', C.site.colorPrimary || '#d7b77f');
@@ -82,6 +92,7 @@ function initContent(){
   setText('dresscodeNote', D.note || 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn, đen.');
   const map = $('mapBtn'); if(map) map.href = C.site.googleMapsUrl || '#';
   setText('thanksNames', `${toNameCase(C.site.groomShortName)} & ${toNameCase(C.site.brideShortName)}`); setText('thanksDate', C.site.displayDate);
+  prefillRsvpForm();
   fillGift('', C.banking.bride, C.banking.groom);
   buildGallery();
   renderCalendar39();
@@ -102,17 +113,22 @@ function renderVenueBlock(value){
   const el = $('venue');
   if(!el) return;
   const raw = String(value || '').trim();
-  let line1 = raw, line2 = '';
+  let line1 = raw, line2 = '', line3 = '';
   if(raw.includes('\n')){
     const parts = raw.split(/\n+/).map(s=>s.trim()).filter(Boolean);
     line1 = parts[0] || '';
-    line2 = parts.slice(1).join(' ');
+    line2 = parts[1] || '';
+    line3 = parts[2] || '';
   }else if(/JOLIE WEDDING & EVENT/i.test(raw)) {
     line1 = raw.replace(/\s*JOLIE WEDDING & EVENT\s*/i,'').trim();
     line2 = 'Jolie Wedding & Event';
   }
-  if(line2 && line2 !== 'Jolie Wedding & Event') line2 = titleCaseWords(line2);
-  el.innerHTML = `<span class="venue-main">${escapeHtml(line1)}</span>${line2 ? `<span class="venue-brand">${escapeHtml(line2)}</span>` : ''}`;
+  if(line2){
+    const normalized = line2.toLowerCase().replace(/\s+/g,' ').trim();
+    if(normalized === 'jolie wedding & event') line2 = 'Jolie Wedding & Event';
+    else line2 = titleCaseWords(line2);
+  }
+  el.innerHTML = `<span class="venue-main">${escapeHtml(line1)}</span>${line2 ? `<span class="venue-brand">${escapeHtml(line2)}</span>` : ''}${line3 ? `<span class="venue-hall">${escapeHtml(line3)}</span>` : ''}`;
 }
 function fillGift(suffix, bride, groom){
   setText('brideGiftTitle'+suffix, bride.title); setSrc('brideQr'+suffix, bride.qr); setText('brideBank'+suffix, bride.bank); setText('brideAcc'+suffix, bride.accountNo); setText('brideNameBank'+suffix, bride.accountName); setText('brideMemo'+suffix, bride.memo);
@@ -189,7 +205,7 @@ async function submitRsvp(e){
       localStorage.setItem('wedding_rsvp_records', JSON.stringify(arr));
       localStorage.setItem('wedding_rsvp', JSON.stringify(arr));
     }
-    setText('formStatus','Cảm ơn Quý khách. Lời chúc và xác nhận đã được ghi nhận.'); e.target.reset();
+    setText('formStatus','Cảm ơn Quý khách. Lời chúc và xác nhận đã được ghi nhận.'); e.target.reset(); prefillRsvpForm();
   }catch(err){
     console.error(err);
     setText('formStatus','Chưa gửi được xác nhận. Vui lòng thử lại sau.');
@@ -201,38 +217,43 @@ async function submitRsvp(e){
 
 function getTimelineIconSvg(it, idx){
   const raw = `${it?.title || ''} ${it?.description || ''}`.toLowerCase();
-  const isCeremony = /nghi lễ|nghi le|lễ|le|ceremony|nhẫn|nhan/.test(raw);
-  const isDinner = /khai tiệc|khai tiec|tiệc|tiec|dùng tiệc|dung tiec|dinner|banquet/.test(raw);
-  const kind = isCeremony ? 'rings' : (isDinner ? 'dining' : (idx === 1 ? 'rings' : idx >= 2 ? 'dining' : 'welcome'));
+  const kind = /khai tiệc|khai tiec|tiệc|tiec|dinner|banquet/.test(raw)
+    ? 'dining'
+    : (/báo hỷ|bao hy|nghi lễ|nghi le|nhẫn|nhan|ceremony/.test(raw) ? 'rings' : 'welcome');
   if(kind === 'rings') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <circle cx="24" cy="34" r="15"></circle>
-      <circle cx="40" cy="34" r="15"></circle>
-      <path d="M38 17l5-8 5 8"></path>
-      <circle cx="43" cy="9" r="2.5" fill="currentColor" stroke="none"></circle>
+      <circle cx="24" cy="35" r="14"></circle>
+      <circle cx="40" cy="35" r="14"></circle>
+      <path d="M39 17l5-7 5 7"></path>
+      <circle cx="44" cy="10" r="2.8" fill="currentColor" stroke="none"></circle>
     </svg>`;
   if(kind === 'dining') return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <circle cx="32" cy="32" r="18"></circle>
-      <circle cx="32" cy="32" r="11"></circle>
+      <circle cx="32" cy="32" r="17"></circle>
+      <circle cx="32" cy="32" r="10"></circle>
       <path d="M12 14v36"></path>
       <path d="M8 14v12"></path>
       <path d="M12 14v12"></path>
       <path d="M16 14v12"></path>
       <path d="M52 14v36"></path>
-      <path d="M48 14c0 5 8 5 8 0"></path>
+      <path d="M48 14c0 6 8 6 8 0"></path>
     </svg>`;
   return `
     <svg viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-      <path d="M14 50V25h36v25"></path>
-      <path d="M14 25l7-7h22l7 7"></path>
-      <path d="M21 50V28"></path>
-      <path d="M43 50V28"></path>
-      <path d="M24 18c5-6 11-6 16 0"></path>
-      <path d="M28 13c2-3 6-3 8 0"></path>
+      <path d="M12 48V28"></path>
+      <path d="M52 48V28"></path>
+      <path d="M16 48h32"></path>
+      <path d="M10 28h44"></path>
+      <path d="M18 28c0-10 6-16 14-16"></path>
+      <path d="M46 28c0-10-6-16-14-16"></path>
+      <path d="M20 16l-4-5"></path>
+      <path d="M24 14l-2-6"></path>
+      <path d="M28 13l1-5"></path>
+      <path d="M44 16l4-5"></path>
+      <path d="M40 14l2-6"></path>
+      <path d="M36 13l-1-5"></path>
     </svg>`;
 }
-
 function renderCalendar39(){
   const grid = $('calendarGrid');
   if(!grid || !C || !C.site) return;
@@ -258,7 +279,7 @@ function renderTimeline39(){
   if(!wrap) return;
   const items = (C.timeline && C.timeline.length ? C.timeline : [
     {time:'17:30', title:'Đón Khách', description:''},
-    {time:'18:30', title:'Tổ Chức Nghi Lễ', description:''},
+    {time:'18:30', title:'Tiệc Báo Hỷ', description:''},
     {time:'19:00', title:'Khai Tiệc', description:''}
   ]);
   wrap.innerHTML = items.map((it,idx)=>`
