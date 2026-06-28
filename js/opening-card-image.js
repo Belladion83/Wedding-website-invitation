@@ -1,6 +1,7 @@
 (function(){
   function getOpeningImage(cfg){
-    return cfg && cfg.images ? String(cfg.images.openingCardImage || '').trim() : '';
+    if(!cfg || !cfg.images) return '';
+    return String(cfg.images.openingCardImage || cfg.images.envelope2 || cfg.images.hero || '').trim();
   }
 
   function candidatesFor(value){
