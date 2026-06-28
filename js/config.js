@@ -1,5 +1,5 @@
 window.DEFAULT_WEDDING_CONFIG = {
-  version: '1.69-refine-titles-spacing-gift',
+  version: '1.70-requested-fixes-only',
   adminPassword: '832501',
   googleAppsScriptUrl: 'https://script.google.com/macros/s/AKfycbwwCsbun86MMYmFgb3D9-oyhfSsc2wBeaT15fOXndcOBX01eoAyztkIMp2VAe0U2kGCDQ/exec',
   site: {
@@ -65,9 +65,9 @@ window.DEFAULT_WEDDING_CONFIG = {
     note: 'Quý khách vui lòng ưu tiên các gam màu: trắng, kem, nâu, hồng phấn, đen.'
   },
   timeline: [
-    { time: '17:30', title: 'Đón Khách', description: '' },
-    { time: '18:30', title: 'Tiệc Báo Hỷ', description: '' },
-    { time: '19:00', title: 'Khai Tiệc', description: '' }
+    { time: '17:30', title: 'Đón khách', description: '' },
+    { time: '18:30', title: 'Lễ báo hỷ', description: '' },
+    { time: '19:00', title: 'Khai tiệc', description: '' }
   ],
   gallery: [
     'assets/images/venue.jpg','assets/images/paper-invite.jpg','assets/images/design-preview.png','assets/images/venue.jpg',

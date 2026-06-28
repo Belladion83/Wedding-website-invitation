@@ -3352,3 +3352,130 @@ body::before{
   .person-side h3{font-size:clamp(22px,6.8vw,30px) !important;}
   .thanks{min-height:238px !important;padding:24px 14px !important;}
 }
+
+
+/* v1.70 requested-fixes-only */
+/* 1) Calendar: remove inner box frame and tighten to oval */
+.calendar39 .calendar-box{
+  border:none !important;
+  box-shadow:none !important;
+  outline:none !important;
+  background:#fbf2e6 !important;
+}
+.calendar39 .section-kicker,
+.calendar39 h2{
+  position:relative;
+  z-index:2;
+}
+.calendar39 h2{
+  font-family:"Playfair Display",serif !important;
+  font-weight:700 !important;
+  font-size:clamp(26px,6vw,40px) !important;
+  line-height:1.12 !important;
+  letter-spacing:.04em !important;
+  color:var(--t39-gold) !important;
+  margin:4px 0 12px !important;
+}
+.calendar39{ padding-top:24px !important; }
+.calendar39 .calendar-box{ margin-top:4px !important; }
+
+/* 2) Titles: force same style as Our wedding day */
+.section-kicker,
+.cinelove-section-kicker{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:12px !important;
+  width:max-content !important;
+  max-width:100% !important;
+  margin:0 auto 10px !important;
+  padding:0 !important;
+  text-align:center !important;
+  font-family:"Cormorant Garamond",serif !important;
+  font-style:italic !important;
+  font-weight:500 !important;
+  font-size:clamp(24px,6.4vw,34px) !important;
+  line-height:1.08 !important;
+  color:var(--t39-gold) !important;
+  letter-spacing:0 !important;
+  overflow:visible !important;
+  position:relative !important;
+  z-index:3 !important;
+}
+.section-kicker::before,
+.section-kicker::after,
+.cinelove-section-kicker::before,
+.cinelove-section-kicker::after{
+  content:"✦" !important;
+  display:inline-block !important;
+  position:static !important;
+  background:none !important;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  color:var(--t39-gold) !important;
+  font-size:.42em !important;
+  line-height:1 !important;
+  opacity:1 !important;
+}
+
+/* 3) Larger names in Kính mời and Thông tin lễ báo hỷ */
+.hero-names,
+.hero-names span{
+  font-size:clamp(44px,10.2vw,64px) !important;
+  line-height:1.06 !important;
+}
+.hero-names span:nth-child(2){
+  font-size:clamp(30px,6vw,40px) !important;
+}
+.formal-couple h2{
+  font-size:clamp(36px,7.5vw,52px) !important;
+  line-height:1.06 !important;
+}
+.formal-couple span{
+  font-size:clamp(30px,6vw,42px) !important;
+}
+
+/* 4) Wedding timeline: move florals to both bottom corners only */
+.timeline39{
+  background-image:var(--floral-bl), var(--floral-br) !important;
+  background-repeat:no-repeat, no-repeat !important;
+  background-size:92px auto, 96px auto !important;
+  background-position:left -12px bottom -10px, right -12px bottom -8px !important;
+}
+
+/* 5) Wedding timeline main title same level as RSVP */
+.timeline39 h2{
+  font-family:"Playfair Display",serif !important;
+  font-weight:700 !important;
+  font-size:clamp(26px,6vw,40px) !important;
+  line-height:1.12 !important;
+  letter-spacing:.04em !important;
+  color:var(--t39-gold) !important;
+}
+
+/* 6) Center gift button */
+#giftBtn{
+  display:flex !important;
+  margin:18px auto 0 !important;
+}
+
+/* 7) Keep Thank You background linked to Admin-selected image */
+.thanks{
+  background-image:var(--thanks-bg) !important;
+  background-position:center center !important;
+  background-size:cover !important;
+  background-repeat:no-repeat !important;
+}
+
+/* 8) RSVP and Album horizontal florals already kept from v1.69; leave as is. */
+
+/* 9) Minor mobile consistency */
+@media (max-width:760px){
+  .timeline39{ background-size:78px auto, 82px auto !important; background-position:left -10px bottom -10px, right -10px bottom -8px !important; }
+  .hero-names,
+  .hero-names span{ font-size:clamp(40px,9.2vw,54px) !important; }
+  .hero-names span:nth-child(2){ font-size:clamp(26px,5.2vw,34px) !important; }
+  .formal-couple h2{ font-size:clamp(32px,7.4vw,42px) !important; }
+  .formal-couple span{ font-size:clamp(26px,5.6vw,36px) !important; }
+}

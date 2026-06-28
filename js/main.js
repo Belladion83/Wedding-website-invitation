@@ -65,12 +65,18 @@ function initContent(){
   document.documentElement.style.setProperty('--gold', C.site.colorPrimary || '#b98645');
   document.documentElement.style.setProperty('--gold2', C.site.colorPrimary || '#d7b77f');
   $('bgMusic').src = C.site.musicUrl || '';
-  setText('introGroom', toNameCase(C.site.groomShortName)); setText('introBride', toNameCase(C.site.brideShortName)); setText('introDate', C.site.displayDate); setText('introType', C.site.eventType);
+  setText('introGroom', toNameCase(C.site.groomShortName)); setText('introBride', toNameCase(C.site.brideShortName)); setText('introDate', C.site.displayDate); setText('introType', C.site.saveText || 'SAVE OUR DATE');
   document.querySelectorAll('[data-bind="site.saveText"]').forEach(el => el.textContent = C.site.saveText || 'SAVE OUR DATE');
   setSrc('envPhoto1', C.images.envelope1); setSrc('envPhoto2', C.images.envelope2); setText('envDate1', C.site.displayDate); setText('envDate2', C.site.displayDate);
   applyImgTransform($('envPhoto1'), 'envelope1'); applyImgTransform($('envPhoto2'), 'envelope2');
-  setBg('heroPhoto', C.images.hero); setBg('thanks', C.images.thankYouBg || C.images.hero);
-  applyBgTransform($('heroPhoto'), 'hero'); applyBgTransform($('thanks'), 'thankYouBg');
+  setBg('heroPhoto', C.images.hero);
+  const thanksBg = imgUrl(C.images.thankYouBg || C.images.hero);
+  const thanksEl = $('thanks');
+  if(thanksEl){
+    thanksEl.style.setProperty('--thanks-bg', thanksBg ? `url("${thanksBg}")` : 'none');
+    thanksEl.style.backgroundImage = thanksBg ? `var(--thanks-bg)` : '';
+  }
+  applyBgTransform($('heroPhoto'), 'hero'); applyBgTransform(thanksEl, 'thankYouBg');
   setText('heroGroomName', toNameCase(C.site.groomFullName));
   setText('heroBrideName', toNameCase(C.site.brideFullName));
   setText('heroDate', C.site.displayDate);
@@ -287,9 +293,9 @@ function renderTimeline39(){
   const wrap = $('timelineList');
   if(!wrap) return;
   const items = (C.timeline && C.timeline.length ? C.timeline : [
-    {time:'17:30', title:'Đón Khách', description:''},
-    {time:'18:30', title:'Tiệc Báo Hỷ', description:''},
-    {time:'19:00', title:'Khai Tiệc', description:''}
+    {time:'17:30', title:'Đón khách', description:''},
+    {time:'18:30', title:'Lễ báo hỷ', description:''},
+    {time:'19:00', title:'Khai tiệc', description:''}
   ]);
   wrap.innerHTML = items.map((it,idx)=>`
     <article class="timeline-item timeline-card">
