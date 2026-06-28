@@ -181,10 +181,16 @@ function initEvents(){
 
   if(openBtn) openBtn.onclick = openInvitation;
 
-  $('giftBtn').onclick = ()=> $('giftOverlay').classList.add('show');
-  $('giftBack').onclick = ()=> $('giftOverlay').classList.remove('show');
-  $('lightbox').onclick = (e)=> { if(e.target.id==='lightbox') $('lightbox').classList.remove('show'); };
-  $('closeLightbox').onclick=()=> $('lightbox').classList.remove('show'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
+  const giftBtn = $('giftBtn');
+  const giftSheet = $('giftSheet');
+  const closeGift = $('closeGift');
+  const backInvite = $('backInvite');
+  if(giftBtn && giftSheet) giftBtn.onclick = ()=> giftSheet.classList.add('open');
+  if(closeGift && giftSheet) closeGift.onclick = ()=> giftSheet.classList.remove('open');
+  if(backInvite && giftSheet) backInvite.onclick = ()=> giftSheet.classList.remove('open');
+  if(giftSheet) giftSheet.onclick = (e)=>{ if(e.target === giftSheet) giftSheet.classList.remove('open'); };
+  $('lightbox').onclick = (e)=> { if(e.target.id==='lightbox') $('lightbox').classList.remove('open'); };
+  $('closeLightbox').onclick=()=> $('lightbox').classList.remove('open'); $('prevImg').onclick=()=>navLightbox(-1); $('nextImg').onclick=()=>navLightbox(1);
   $('rsvpForm').onsubmit = submitRsvp;
   const obs = new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting && x.target.classList.add('visible')), {threshold:.14});
   document.querySelectorAll('.section-reveal').forEach(el=>obs.observe(el));
