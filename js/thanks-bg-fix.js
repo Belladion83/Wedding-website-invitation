@@ -55,9 +55,9 @@
     }
   }
   function applyCalendarRequestedFix(){
-    if(document.getElementById('calendar-requested-fix-v180')) return;
+    if(document.getElementById('calendar-requested-fix-v182')) return;
     const style = document.createElement('style');
-    style.id = 'calendar-requested-fix-v180';
+    style.id = 'calendar-requested-fix-v182';
     style.textContent = `
       .calendar39::before{
         content:none !important;
@@ -88,12 +88,64 @@
         margin-top:0 !important;
         margin-bottom:14px !important;
       }
+      .cinelove-site > section + section{
+        margin-top:12px !important;
+      }
+      .section-reveal{
+        opacity:0 !important;
+        transform:translateY(28px) !important;
+        transition:opacity .85s ease, transform .85s ease !important;
+        will-change:opacity, transform;
+      }
+      .section-reveal.visible{
+        opacity:1 !important;
+        transform:translateY(0) !important;
+      }
+      .intro.section-reveal,
+      .site.hidden .section-reveal{
+        opacity:1 !important;
+        transform:none !important;
+      }
+      @media (prefers-reduced-motion: reduce){
+        .section-reveal{
+          opacity:1 !important;
+          transform:none !important;
+          transition:none !important;
+        }
+      }
     `;
     document.head.appendChild(style);
   }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); });
-  else { refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); }
-  window.addEventListener('load', function(){ refreshThanksBg(); restoreMapTarget(); applyCalendarRequestedFix(); });
+  function initSectionReveal(){
+    const sections = Array.from(document.querySelectorAll('.site .section-reveal'));
+    if(!sections.length) return;
+    if(!('IntersectionObserver' in window)){
+      sections.forEach(function(section){ section.classList.add('visible'); });
+      return;
+    }
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold:0.16, rootMargin:'0px 0px -8% 0px' });
+    sections.forEach(function(section){
+      if(section.getBoundingClientRect().top < window.innerHeight * 0.88) section.classList.add('visible');
+      else observer.observe(section);
+    });
+  }
+  function runEnhancements(){
+    refreshThanksBg();
+    restoreMapTarget();
+    applyCalendarRequestedFix();
+    initSectionReveal();
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', runEnhancements);
+  else runEnhancements();
+  window.addEventListener('load', runEnhancements);
   setTimeout(refreshThanksBg, 1200);
   setTimeout(refreshThanksBg, 3500);
+  setTimeout(initSectionReveal, 1200);
 })();
