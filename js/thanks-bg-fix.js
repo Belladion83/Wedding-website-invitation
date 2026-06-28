@@ -70,10 +70,14 @@
     }
   }
   function applyVisualRefinements(){
-    if(document.getElementById('visual-refinements-v185')) return;
+    if(document.getElementById('visual-refinements-v186')) return;
     const style = document.createElement('style');
-    style.id = 'visual-refinements-v185';
+    style.id = 'visual-refinements-v186';
     style.textContent = `
+      .site.hidden,
+      .site.hidden.cinelove-site{
+        display:none !important;
+      }
       .calendar39::before{
         content:none !important;
         display:none !important;
@@ -104,8 +108,7 @@
         margin-bottom:14px !important;
       }
 
-      /* Real empty space between sections: no border/object attached to sections */
-      .cinelove-site{
+      .cinelove-site:not(.hidden){
         background:#f1e8dc !important;
         display:flex !important;
         flex-direction:column !important;
@@ -121,11 +124,7 @@
       .cinelove-site > section:first-child{
         box-shadow:0 12px 30px rgba(112,76,43,.13) !important;
       }
-      .cinelove-site > section:last-child{
-        margin-bottom:0 !important;
-      }
 
-      /* Apply the RSVP-style reveal behavior consistently to every section */
       .site:not(.hidden) .section-reveal{
         opacity:0 !important;
         transform:translateY(24px) !important;
@@ -142,7 +141,7 @@
       }
 
       .formal-intro{
-        margin:22px 0 8px !important;
+        margin:24px 0 8px !important;
         padding:0 22px !important;
         text-align:center !important;
         font-family:"Cormorant Garamond", serif !important;
@@ -150,14 +149,18 @@
         font-size:clamp(22px, 4.8vw, 30px) !important;
         line-height:1.35 !important;
         letter-spacing:.02em !important;
-        color:var(--t39-gold) !important;
+        color:#000 !important;
+      }
+      #ceremonyTitle,
+      #venue{
+        color:#000 !important;
       }
       @media (max-width:520px){
-        .cinelove-site{
+        .cinelove-site:not(.hidden){
           gap:12px !important;
         }
         .formal-intro{
-          margin:20px 0 6px !important;
+          margin:22px 0 6px !important;
           font-size:clamp(21px, 5vw, 27px) !important;
         }
       }
