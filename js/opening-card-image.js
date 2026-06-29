@@ -46,9 +46,9 @@
   }
 
   function injectEnvelopeTimingStyle(){
-    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5').forEach(function(old){ old.remove(); });
+    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5,#envelope-sequence-smooth-v6').forEach(function(old){ old.remove(); });
     const style = document.createElement('style');
-    style.id = 'envelope-sequence-smooth-v5';
+    style.id = 'envelope-sequence-smooth-v6';
     style.textContent = `
       .gif-envelope{
         --env-bottom:28px;
@@ -91,14 +91,23 @@
       }
       .gif-card{
         transform:translate3d(0,240px,0) scale(.985) !important;
-        opacity:0 !important;
-        will-change:transform, opacity;
+        opacity:1 !important;
+        visibility:visible !important;
+        will-change:transform;
         backface-visibility:hidden !important;
+        transform-style:preserve-3d !important;
         transition:
-          opacity .10s ease,
           transform .62s cubic-bezier(.22,1,.36,1),
           box-shadow .48s ease,
           z-index 0s linear 0s !important;
+      }
+      .intro-image-frame,
+      #introCardPhoto{
+        opacity:1 !important;
+        visibility:visible !important;
+        backface-visibility:hidden !important;
+        transform:translate3d(0,0,0) !important;
+        will-change:auto !important;
       }
       .gif-shadow{
         will-change:transform, opacity;
@@ -114,10 +123,12 @@
       }
       .t44-gate.card-front-now .gif-card{
         opacity:1 !important;
+        visibility:visible !important;
         z-index:8 !important;
       }
       .t44-gate.card-pull .gif-card{
         opacity:1 !important;
+        visibility:visible !important;
         transform:translate3d(0,-230px,0) scale(1.012) !important;
         z-index:8 !important;
         box-shadow:0 22px 46px rgba(93,45,22,.15) !important;
@@ -125,6 +136,7 @@
       .t44-gate.card-front .gif-card,
       .t44-gate.card-rise .gif-card{
         opacity:1 !important;
+        visibility:visible !important;
         transform:translate3d(0,-150px,0) scale(1) !important;
         z-index:8 !important;
         box-shadow:0 24px 50px rgba(93,45,22,.17) !important;
@@ -175,7 +187,7 @@
     const gate = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeButton');
     if(!gate || !openBtn) return;
-    openBtn.dataset.envelopeSequenceOverride = 'v5';
+    openBtn.dataset.envelopeSequenceOverride = 'v6';
     openBtn.onclick = function(e){
       if(e) e.stopPropagation();
       if(gate.dataset.opened === '1') return;
