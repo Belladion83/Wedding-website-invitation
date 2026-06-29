@@ -45,9 +45,93 @@
     }
   }
 
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', refreshOpeningCard);
-  else refreshOpeningCard();
-  window.addEventListener('load', refreshOpeningCard);
+  function injectEnvelopeTimingStyle(){
+    if(document.getElementById('envelope-sequence-speed-v1')) return;
+    const style = document.createElement('style');
+    style.id = 'envelope-sequence-speed-v1';
+    style.textContent = `
+      .gif-flap{
+        transition:transform .56s cubic-bezier(.22,.85,.23,1), z-index 0s linear .36s !important;
+      }
+      .gif-card{
+        transition:
+          opacity .06s linear,
+          transform .58s cubic-bezier(.22,1,.22,1),
+          box-shadow .42s ease,
+          z-index 0s linear .18s !important;
+      }
+      .gif-shadow{
+        transition:transform .55s ease, opacity .55s ease !important;
+      }
+      .t44-gate.card-pull .gif-card{
+        opacity:1 !important;
+        transform:translateY(-250px) !important;
+        z-index:3 !important;
+        box-shadow:0 20px 42px rgba(93,45,22,.14) !important;
+      }
+      .t44-gate.card-front .gif-card,
+      .t44-gate.card-rise .gif-card{
+        opacity:1 !important;
+        transform:translateY(-150px) !important;
+        z-index:8 !important;
+        box-shadow:0 24px 50px rgba(93,45,22,.17) !important;
+      }
+      .t44-gate.card-front .gif-hint,
+      .t44-gate.card-rise .gif-hint{
+        opacity:1 !important;
+        transform:translateX(-50%) translateY(-4px) !important;
+      }
+      @media(max-width:520px){
+        .t44-gate.card-pull .gif-card{
+          transform:translateY(-220px) !important;
+        }
+        .t44-gate.card-front .gif-card,
+        .t44-gate.card-rise .gif-card{
+          transform:translateY(-128px) !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function revealSiteBelow(){
+    const site = document.getElementById('site');
+    const musicToggle = document.getElementById('musicToggle');
+    const intro = document.getElementById('intro');
+    if(site) site.classList.remove('hidden');
+    if(musicToggle) musicToggle.classList.remove('hidden');
+    if(intro) intro.classList.add('sequence-done');
+    const offset = Math.max(Math.round(window.innerHeight * 0.30), 230);
+    window.scrollTo({ top: offset, behavior: 'smooth' });
+  }
+
+  function installEnvelopeSequenceOverride(){
+    injectEnvelopeTimingStyle();
+    const gate = document.getElementById('envelope');
+    const openBtn = document.getElementById('openEnvelopeButton');
+    if(!gate || !openBtn) return;
+    if(openBtn.dataset.envelopeSequenceOverride === 'v1') return;
+    openBtn.dataset.envelopeSequenceOverride = 'v1';
+    openBtn.onclick = function(e){
+      if(e) e.stopPropagation();
+      if(gate.dataset.opened === '1') return;
+      gate.dataset.opened = '1';
+      if(window.playMusic) window.playMusic();
+
+      gate.classList.add('opened');
+      setTimeout(function(){ gate.classList.add('flap-back'); }, 420);
+      setTimeout(function(){ gate.classList.add('card-pull'); }, 500);
+      setTimeout(function(){ gate.classList.add('card-front'); }, 960);
+      setTimeout(revealSiteBelow, 1780);
+    };
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ refreshOpeningCard(); installEnvelopeSequenceOverride(); });
+  else { refreshOpeningCard(); installEnvelopeSequenceOverride(); }
+  window.addEventListener('load', function(){ refreshOpeningCard(); installEnvelopeSequenceOverride(); });
   setTimeout(refreshOpeningCard, 1200);
   setTimeout(refreshOpeningCard, 3500);
+  setTimeout(installEnvelopeSequenceOverride, 300);
+  setTimeout(installEnvelopeSequenceOverride, 900);
+  setTimeout(installEnvelopeSequenceOverride, 1600);
 })();
