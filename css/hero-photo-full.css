@@ -1,4 +1,4 @@
-/* v1.94: Full photo invitation cover with curved Save Our Date panel. */
+/* v1.95: Full photo invitation cover with curved Save Our Date panel. */
 body .page-shell .site .hero.cinelove-cover {
   position: relative !important;
   min-height: 100svh !important;
@@ -97,7 +97,7 @@ body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero
   position: relative !important;
   z-index: 3 !important;
   order: 1 !important;
-  margin: clamp(34px, 7vh, 56px) auto 0 !important;
+  margin: clamp(30px, 6.2vh, 48px) auto 0 !important;
   padding: 0 14px !important;
   width: 100% !important;
   max-width: 470px !important;
@@ -110,7 +110,7 @@ body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #invi
   position: relative !important;
   z-index: 3 !important;
   order: 2 !important;
-  margin: clamp(48px, 7.5vh, 78px) auto 0 !important;
+  margin: clamp(14px, 2.2vh, 26px) auto 0 !important;
   width: 100% !important;
   text-align: center !important;
   text-shadow: 0 2px 16px rgba(255,255,255,.78), 0 1px 3px rgba(70,44,18,.18) !important;
@@ -181,10 +181,10 @@ body .page-shell .site .hero.cinelove-cover .hero-date::after {
 
 @media (max-width: 390px) {
   body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names {
-    margin-top: 30px !important;
+    margin-top: 26px !important;
   }
   body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine {
-    margin-top: 42px !important;
+    margin-top: 12px !important;
   }
   body .page-shell .site .hero.cinelove-cover .hero-date b {
     font-size: 29px !important;
