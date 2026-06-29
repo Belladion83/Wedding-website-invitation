@@ -46,12 +46,11 @@
   }
 
   function injectEnvelopeTimingStyle(){
-    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5,#envelope-sequence-smooth-v6,#envelope-sequence-smooth-v7').forEach(function(old){ old.remove(); });
+    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5,#envelope-sequence-smooth-v6,#envelope-sequence-smooth-v7,#envelope-sequence-smooth-v8').forEach(function(old){ old.remove(); });
     const style = document.createElement('style');
-    style.id = 'envelope-sequence-smooth-v7';
+    style.id = 'envelope-sequence-smooth-v8';
     style.textContent = `
-      .gif-envelope-stage,
-      .gif-envelope{
+      .gif-envelope-stage{
         overflow:visible !important;
         clip-path:none !important;
       }
@@ -60,10 +59,18 @@
         --env-height:282px;
         --flap-height:156px;
         --flap-top:calc(100% - var(--env-bottom) - var(--env-height));
+        overflow:hidden !important;
+        clip-path:none !important;
         transform:translate3d(0,0,0) !important;
         transform-style:preserve-3d !important;
         backface-visibility:hidden !important;
         contain:layout style;
+      }
+      .t44-gate.opened .gif-envelope,
+      .t44-gate.card-front-now .gif-envelope,
+      .t44-gate.card-pull .gif-envelope,
+      .t44-gate.card-front .gif-envelope{
+        overflow:visible !important;
       }
       .gif-back,
       .gif-front{
@@ -73,6 +80,20 @@
         backface-visibility:hidden !important;
       }
       .gif-front{ z-index:5 !important; }
+      .gif-seal{
+        z-index:20 !important;
+        opacity:1 !important;
+        visibility:visible !important;
+        transition:opacity .18s ease, transform .18s ease !important;
+      }
+      .t44-gate.opened .gif-seal,
+      .t44-gate.card-front-now .gif-seal,
+      .t44-gate.card-pull .gif-seal,
+      .t44-gate.card-front .gif-seal{
+        opacity:0 !important;
+        visibility:hidden !important;
+        pointer-events:none !important;
+      }
       .gif-flap{
         top:var(--flap-top) !important;
         height:var(--flap-height) !important;
@@ -96,8 +117,8 @@
       }
       .gif-card{
         transform:translate3d(0,240px,0) scale(.985) !important;
-        opacity:1 !important;
-        visibility:visible !important;
+        opacity:0 !important;
+        visibility:hidden !important;
         will-change:transform;
         backface-visibility:hidden !important;
         transform-style:preserve-3d !important;
@@ -110,7 +131,6 @@
       .intro-image-frame,
       #introCardPhoto{
         opacity:1 !important;
-        visibility:visible !important;
         overflow:hidden !important;
         backface-visibility:hidden !important;
         transform:translate3d(0,0,0) !important;
@@ -194,7 +214,7 @@
     const gate = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeButton');
     if(!gate || !openBtn) return;
-    openBtn.dataset.envelopeSequenceOverride = 'v7';
+    openBtn.dataset.envelopeSequenceOverride = 'v8';
     openBtn.onclick = function(e){
       if(e) e.stopPropagation();
       if(gate.dataset.opened === '1') return;
