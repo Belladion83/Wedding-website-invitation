@@ -1,5 +1,6 @@
-/* v1.97: Full photo invitation cover with curved Save Our Date panel. */
+/* v1.98: Full photo invitation cover with separate Save Our Date panel for in-app browsers. */
 body .page-shell .site .hero.cinelove-cover {
+  --hero-panel-h: clamp(150px, 22svh, 210px);
   position: relative !important;
   min-height: 100svh !important;
   height: 100svh !important;
@@ -13,9 +14,12 @@ body .page-shell .site .hero.cinelove-cover {
 
 body .page-shell .site .hero.cinelove-cover .hero-arch-wrap {
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: var(--hero-panel-h) !important;
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
@@ -29,7 +33,7 @@ body .page-shell .site .hero.cinelove-cover .hero-arch {
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 100svh !important;
+  min-height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
@@ -52,11 +56,14 @@ body .page-shell .site .hero.cinelove-cover .hero-arch::after {
 body .page-shell .site .hero.cinelove-cover::before {
   content: "" !important;
   position: absolute !important;
-  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: var(--hero-panel-h) !important;
   z-index: 1 !important;
   pointer-events: none !important;
   background:
-    linear-gradient(180deg, rgba(255,248,239,.52) 0%, rgba(255,248,239,.10) 30%, rgba(255,248,239,0) 58%, rgba(70,45,28,.10) 100%) !important;
+    linear-gradient(180deg, rgba(255,248,239,.52) 0%, rgba(255,248,239,.10) 30%, rgba(255,248,239,0) 58%, rgba(70,45,28,.08) 100%) !important;
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-content {
@@ -85,11 +92,11 @@ body .page-shell .site .hero.cinelove-cover .hero-content::before {
   position: absolute !important;
   left: -18% !important;
   right: -18% !important;
-  bottom: -6.5% !important;
-  height: 25% !important;
+  bottom: 0 !important;
+  height: calc(var(--hero-panel-h) + 34px) !important;
   z-index: 1 !important;
   background: linear-gradient(180deg, #fffaf0 0%, #fff6e8 100%) !important;
-  border-radius: 52% 52% 0 0 / 30% 30% 0 0 !important;
+  border-radius: 52% 52% 0 0 / 24% 24% 0 0 !important;
   box-shadow: 0 -12px 34px rgba(95,70,42,.10) !important;
 }
 
@@ -119,13 +126,15 @@ body .page-shell .site .hero.cinelove-cover .hero-date {
   position: absolute !important;
   left: 0 !important;
   right: 0 !important;
-  bottom: 2.6vh !important;
+  bottom: max(14px, env(safe-area-inset-bottom)) !important;
   z-index: 3 !important;
   margin: 0 auto !important;
   padding: 0 18px !important;
+  height: calc(var(--hero-panel-h) - 18px) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 8px !important;
   color: #a87a36 !important;
   text-shadow: none !important;
@@ -135,10 +144,10 @@ body .page-shell .site .hero.cinelove-cover .hero-date::before {
   content: "❧" !important;
   display: block !important;
   font-family: "Cormorant Garamond", serif !important;
-  font-size: 26px !important;
+  font-size: 24px !important;
   line-height: 1 !important;
   color: #c99a58 !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 2px !important;
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-date span {
@@ -174,6 +183,9 @@ body .page-shell .site .hero.cinelove-cover .hero-date::after {
 }
 
 @media (max-width: 390px) {
+  body .page-shell .site .hero.cinelove-cover {
+    --hero-panel-h: clamp(140px, 21svh, 185px);
+  }
   body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names {
     margin-top: 8px !important;
   }
@@ -183,8 +195,7 @@ body .page-shell .site .hero.cinelove-cover .hero-date::after {
 }
 
 @supports (height: 100dvh) {
-  body .page-shell .site .hero.cinelove-cover,
-  body .page-shell .site .hero.cinelove-cover .hero-arch {
+  body .page-shell .site .hero.cinelove-cover {
     min-height: 100dvh !important;
     height: 100dvh !important;
   }
