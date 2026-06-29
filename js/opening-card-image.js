@@ -46,9 +46,9 @@
   }
 
   function injectEnvelopeTimingStyle(){
-    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4').forEach(function(old){ old.remove(); });
+    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5').forEach(function(old){ old.remove(); });
     const style = document.createElement('style');
-    style.id = 'envelope-sequence-smooth-v4';
+    style.id = 'envelope-sequence-smooth-v5';
     style.textContent = `
       .gif-envelope{
         --env-bottom:28px;
@@ -73,10 +73,21 @@
         height:var(--flap-height) !important;
         transform-origin:50% 0 !important;
         transform:translate3d(0,0,1px) rotateX(0deg) !important;
-        backface-visibility:hidden !important;
+        backface-visibility:visible !important;
         will-change:transform;
         opacity:1 !important;
+        visibility:visible !important;
         transition:transform .46s cubic-bezier(.22,1,.36,1), z-index 0s linear 0s !important;
+      }
+      .gif-flap::after{
+        content:"" !important;
+        position:absolute !important;
+        inset:0 !important;
+        clip-path:inherit !important;
+        background:linear-gradient(180deg,#ead7ad,#f8e9ca) !important;
+        transform:rotateX(180deg) !important;
+        backface-visibility:hidden !important;
+        opacity:.98 !important;
       }
       .gif-card{
         transform:translate3d(0,240px,0) scale(.985) !important;
@@ -96,8 +107,9 @@
       .t44-gate.opened .gif-flap,
       .t44-gate.flap-back .gif-flap{
         transform:translate3d(0,0,1px) rotateX(180deg) !important;
-        z-index:6 !important;
+        z-index:7 !important;
         opacity:1 !important;
+        visibility:visible !important;
         pointer-events:none !important;
       }
       .t44-gate.card-front-now .gif-card{
@@ -163,7 +175,7 @@
     const gate = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeButton');
     if(!gate || !openBtn) return;
-    openBtn.dataset.envelopeSequenceOverride = 'v4';
+    openBtn.dataset.envelopeSequenceOverride = 'v5';
     openBtn.onclick = function(e){
       if(e) e.stopPropagation();
       if(gate.dataset.opened === '1') return;
