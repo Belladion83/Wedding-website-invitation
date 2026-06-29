@@ -23,18 +23,10 @@
   }
 
   function injectStyle(){
-    const old195 = document.getElementById('hero-invite-layout-v195');
-    if(old195) old195.remove();
-    const old196 = document.getElementById('hero-invite-layout-v196');
-    if(old196) old196.remove();
-    const old197 = document.getElementById('hero-invite-layout-v197');
-    if(old197) old197.remove();
-    const old198 = document.getElementById('hero-invite-layout-v198');
-    if(old198) old198.remove();
-    const old199 = document.getElementById('hero-invite-layout-v199');
-    if(old199) old199.remove();
+    const oldIds = ['hero-invite-layout-v195','hero-invite-layout-v196','hero-invite-layout-v197','hero-invite-layout-v198','hero-invite-layout-v199','hero-invite-layout-v200'];
+    oldIds.forEach(function(id){ const old = document.getElementById(id); if(old) old.remove(); });
     const style = document.createElement('style');
-    style.id = 'hero-invite-layout-v199';
+    style.id = 'hero-invite-layout-v200';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover{
         justify-content:flex-start !important;
@@ -49,7 +41,7 @@
         align-items:center !important;
         justify-content:flex-start !important;
         gap:0 !important;
-        padding-top:56px !important;
+        padding-top:24px !important;
         padding-bottom:0 !important;
         margin-top:0 !important;
       }
@@ -57,13 +49,13 @@
         order:1 !important;
         display:flex !important;
         flex-direction:row !important;
-        align-items:center !important;
+        align-items:flex-start !important;
         justify-content:center !important;
         width:100% !important;
         max-width:100% !important;
-        margin:0 auto 6px !important;
+        margin:0 auto 2px !important;
         padding:0 !important;
-        gap:8px !important;
+        gap:0 !important;
         color:var(--cine-wine) !important;
         font-family:"Great Vibes", cursive !important;
         font-weight:400 !important;
@@ -85,13 +77,13 @@
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroGroomName{
         position:relative !important;
         z-index:2 !important;
-        transform:translateX(-4px) !important;
+        transform:translateX(8px) !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names .hero-amp{
         position:relative !important;
         z-index:4 !important;
-        margin:0 8px !important;
-        transform:translateY(2px) rotate(-8deg) !important;
+        margin:0 -4px !important;
+        transform:translateY(9px) rotate(-8deg) !important;
         color:#f3e5c8 !important;
         font-family:"Great Vibes", "Allura", cursive !important;
         font-size:1.05em !important;
@@ -104,7 +96,7 @@
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroBrideName{
         position:relative !important;
         z-index:2 !important;
-        transform:translate(4px, 7px) !important;
+        transform:translate(0, 26px) !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine{
         order:2 !important;
@@ -113,7 +105,7 @@
         align-items:center !important;
         justify-content:center !important;
         width:100% !important;
-        margin:0 auto 0 !important;
+        margin:18px auto 0 !important;
         gap:5px !important;
         text-align:center !important;
       }
@@ -142,19 +134,22 @@
       }
       @media (max-width:760px){
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195{
-          padding-top:42px !important;
+          padding-top:18px !important;
           padding-bottom:0 !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:clamp(39px, 11vw, 52px) !important;
-          margin-bottom:5px !important;
-          gap:7px !important;
+          margin-bottom:0 !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names .hero-amp{
-          margin:0 6px !important;
+          margin:0 -4px !important;
+          transform:translateY(8px) rotate(-8deg) !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #heroBrideName{
-          transform:translate(4px, 6px) !important;
+          transform:translate(0, 24px) !important;
+        }
+        body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine{
+          margin-top:16px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine span+span{
           font-size:clamp(32px, 8.8vw, 40px) !important;
@@ -162,17 +157,16 @@
       }
       @media (max-width:390px){
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195{
-          padding-top:36px !important;
+          padding-top:14px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:38px !important;
-          gap:5px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroGroomName{
-          transform:translateX(-2px) !important;
+          transform:translateX(6px) !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroBrideName{
-          transform:translate(2px, 6px) !important;
+          transform:translate(0, 22px) !important;
         }
       }
     `;
