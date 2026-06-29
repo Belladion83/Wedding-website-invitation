@@ -31,8 +31,10 @@
     if(old197) old197.remove();
     const old198 = document.getElementById('hero-invite-layout-v198');
     if(old198) old198.remove();
+    const old199 = document.getElementById('hero-invite-layout-v199');
+    if(old199) old199.remove();
     const style = document.createElement('style');
-    style.id = 'hero-invite-layout-v198';
+    style.id = 'hero-invite-layout-v199';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover{
         justify-content:flex-start !important;
@@ -61,7 +63,7 @@
         max-width:100% !important;
         margin:0 auto 6px !important;
         padding:0 !important;
-        gap:0 !important;
+        gap:8px !important;
         color:var(--cine-wine) !important;
         font-family:"Great Vibes", cursive !important;
         font-weight:400 !important;
@@ -83,12 +85,12 @@
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroGroomName{
         position:relative !important;
         z-index:2 !important;
-        transform:translateX(11px) !important;
+        transform:translateX(-4px) !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names .hero-amp{
         position:relative !important;
         z-index:4 !important;
-        margin:0 -6px !important;
+        margin:0 8px !important;
         transform:translateY(2px) rotate(-8deg) !important;
         color:#f3e5c8 !important;
         font-family:"Great Vibes", "Allura", cursive !important;
@@ -102,7 +104,7 @@
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroBrideName{
         position:relative !important;
         z-index:2 !important;
-        transform:translate(-11px, 7px) !important;
+        transform:translate(4px, 7px) !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine{
         order:2 !important;
@@ -146,12 +148,13 @@
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:clamp(39px, 11vw, 52px) !important;
           margin-bottom:5px !important;
+          gap:7px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names .hero-amp{
-          margin:0 -5px !important;
+          margin:0 6px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #heroBrideName{
-          transform:translate(-11px, 6px) !important;
+          transform:translate(4px, 6px) !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine span+span{
           font-size:clamp(32px, 8.8vw, 40px) !important;
@@ -163,12 +166,13 @@
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names{
           font-size:38px !important;
+          gap:5px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroGroomName{
-          transform:translateX(9px) !important;
+          transform:translateX(-2px) !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names #heroBrideName{
-          transform:translate(-9px, 6px) !important;
+          transform:translate(2px, 6px) !important;
         }
       }
     `;
