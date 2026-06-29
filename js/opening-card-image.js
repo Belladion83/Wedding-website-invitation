@@ -46,9 +46,9 @@
   }
 
   function injectEnvelopeTimingStyle(){
-    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-smooth-v3').forEach(function(old){ old.remove(); });
+    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4').forEach(function(old){ old.remove(); });
     const style = document.createElement('style');
-    style.id = 'envelope-sequence-smooth-v3';
+    style.id = 'envelope-sequence-smooth-v4';
     style.textContent = `
       .gif-envelope{
         --env-bottom:28px;
@@ -67,6 +67,7 @@
         transform:translate3d(0,0,0) !important;
         backface-visibility:hidden !important;
       }
+      .gif-front{ z-index:5 !important; }
       .gif-flap{
         top:var(--flap-top) !important;
         height:var(--flap-height) !important;
@@ -74,7 +75,8 @@
         transform:translate3d(0,0,1px) rotateX(0deg) !important;
         backface-visibility:hidden !important;
         will-change:transform;
-        transition:transform .62s cubic-bezier(.22,1,.36,1), z-index 0s linear .46s !important;
+        opacity:1 !important;
+        transition:transform .46s cubic-bezier(.22,1,.36,1), z-index 0s linear 0s !important;
       }
       .gif-card{
         transform:translate3d(0,240px,0) scale(.985) !important;
@@ -82,21 +84,20 @@
         will-change:transform, opacity;
         backface-visibility:hidden !important;
         transition:
-          opacity .16s ease,
-          transform .88s cubic-bezier(.22,1,.36,1),
-          box-shadow .72s ease,
+          opacity .10s ease,
+          transform .62s cubic-bezier(.22,1,.36,1),
+          box-shadow .48s ease,
           z-index 0s linear 0s !important;
       }
       .gif-shadow{
         will-change:transform, opacity;
-        transition:transform .72s ease, opacity .72s ease !important;
+        transition:transform .55s ease, opacity .55s ease !important;
       }
-      .t44-gate.opened .gif-flap{
-        transform:translate3d(0,0,1px) rotateX(180deg) !important;
-        z-index:7 !important;
-      }
+      .t44-gate.opened .gif-flap,
       .t44-gate.flap-back .gif-flap{
-        z-index:1 !important;
+        transform:translate3d(0,0,1px) rotateX(180deg) !important;
+        z-index:6 !important;
+        opacity:1 !important;
         pointer-events:none !important;
       }
       .t44-gate.card-front-now .gif-card{
@@ -105,7 +106,7 @@
       }
       .t44-gate.card-pull .gif-card{
         opacity:1 !important;
-        transform:translate3d(0,-212px,0) scale(1.012) !important;
+        transform:translate3d(0,-230px,0) scale(1.012) !important;
         z-index:8 !important;
         box-shadow:0 22px 46px rgba(93,45,22,.15) !important;
       }
@@ -135,7 +136,7 @@
           transform:translate3d(0,225px,0) scale(.985) !important;
         }
         .t44-gate.card-pull .gif-card{
-          transform:translate3d(0,-178px,0) scale(1.012) !important;
+          transform:translate3d(0,-200px,0) scale(1.012) !important;
         }
         .t44-gate.card-front .gif-card,
         .t44-gate.card-rise .gif-card{
@@ -162,7 +163,7 @@
     const gate = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeButton');
     if(!gate || !openBtn) return;
-    openBtn.dataset.envelopeSequenceOverride = 'v3';
+    openBtn.dataset.envelopeSequenceOverride = 'v4';
     openBtn.onclick = function(e){
       if(e) e.stopPropagation();
       if(gate.dataset.opened === '1') return;
@@ -170,11 +171,11 @@
       if(window.playMusic) window.playMusic();
 
       gate.classList.add('opened');
-      setTimeout(function(){ gate.classList.add('flap-back'); }, 500);
-      setTimeout(function(){ gate.classList.add('card-front-now'); }, 540);
-      setTimeout(function(){ gate.classList.add('card-pull'); }, 560);
-      setTimeout(function(){ gate.classList.add('card-front'); }, 1260);
-      setTimeout(revealSiteBelow, 2200);
+      setTimeout(function(){ gate.classList.add('flap-back'); }, 280);
+      setTimeout(function(){ gate.classList.add('card-front-now'); }, 300);
+      setTimeout(function(){ gate.classList.add('card-pull'); }, 310);
+      setTimeout(function(){ gate.classList.add('card-front'); }, 860);
+      setTimeout(revealSiteBelow, 1650);
     };
   }
 
