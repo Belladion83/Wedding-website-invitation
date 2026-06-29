@@ -46,10 +46,15 @@
   }
 
   function injectEnvelopeTimingStyle(){
-    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5,#envelope-sequence-smooth-v6').forEach(function(old){ old.remove(); });
+    document.querySelectorAll('#envelope-sequence-speed-v1,#envelope-sequence-speed-v2,#envelope-sequence-speed-v3,#envelope-sequence-smooth-v3,#envelope-sequence-smooth-v4,#envelope-sequence-smooth-v5,#envelope-sequence-smooth-v6,#envelope-sequence-smooth-v7').forEach(function(old){ old.remove(); });
     const style = document.createElement('style');
-    style.id = 'envelope-sequence-smooth-v6';
+    style.id = 'envelope-sequence-smooth-v7';
     style.textContent = `
+      .gif-envelope-stage,
+      .gif-envelope{
+        overflow:visible !important;
+        clip-path:none !important;
+      }
       .gif-envelope{
         --env-bottom:28px;
         --env-height:282px;
@@ -58,7 +63,7 @@
         transform:translate3d(0,0,0) !important;
         transform-style:preserve-3d !important;
         backface-visibility:hidden !important;
-        contain:layout paint style;
+        contain:layout style;
       }
       .gif-back,
       .gif-front{
@@ -101,10 +106,12 @@
           box-shadow .48s ease,
           z-index 0s linear 0s !important;
       }
+      .intro-image-card,
       .intro-image-frame,
       #introCardPhoto{
         opacity:1 !important;
         visibility:visible !important;
+        overflow:hidden !important;
         backface-visibility:hidden !important;
         transform:translate3d(0,0,0) !important;
         will-change:auto !important;
@@ -187,7 +194,7 @@
     const gate = document.getElementById('envelope');
     const openBtn = document.getElementById('openEnvelopeButton');
     if(!gate || !openBtn) return;
-    openBtn.dataset.envelopeSequenceOverride = 'v6';
+    openBtn.dataset.envelopeSequenceOverride = 'v7';
     openBtn.onclick = function(e){
       if(e) e.stopPropagation();
       if(gate.dataset.opened === '1') return;
