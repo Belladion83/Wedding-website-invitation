@@ -12,21 +12,11 @@
       .replace(/(^|[\s\-'])\p{L}/gu, function(m){ return m.toLocaleUpperCase('vi-VN'); });
   }
 
-  function resolveGuest(cfg){
-    const params = new URLSearchParams(location.search);
-    const guestId = params.get('id') || params.get('guest') || '';
-    const guestNameParam = params.get('name') || '';
-    const found = ((cfg && cfg.guests) || []).find(function(g){
-      return String(g.id || '').toLowerCase() === String(guestId || '').toLowerCase();
-    });
-    return guestNameParam || (found && found.name) || 'Quý khách';
-  }
-
   function injectStyle(){
-    const oldIds = ['hero-invite-layout-v195','hero-invite-layout-v196','hero-invite-layout-v197','hero-invite-layout-v198','hero-invite-layout-v199','hero-invite-layout-v200','hero-invite-layout-v201','hero-invite-layout-v202','hero-invite-layout-v203'];
+    const oldIds = ['hero-invite-layout-v195','hero-invite-layout-v196','hero-invite-layout-v197','hero-invite-layout-v198','hero-invite-layout-v199','hero-invite-layout-v200','hero-invite-layout-v201','hero-invite-layout-v202','hero-invite-layout-v203','hero-invite-layout-v204'];
     oldIds.forEach(function(id){ const old = document.getElementById(id); if(old) old.remove(); });
     const style = document.createElement('style');
-    style.id = 'hero-invite-layout-v203';
+    style.id = 'hero-invite-layout-v204';
     style.textContent = `
       body .page-shell .site .hero.cinelove-cover{
         justify-content:flex-start !important;
@@ -106,26 +96,29 @@
         justify-content:center !important;
         width:100% !important;
         margin:-8px auto 0 !important;
-        gap:4px !important;
+        gap:6px !important;
         text-align:center !important;
+        color:#b98645 !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine span:first-child{
-        font-family:Inter, Arial, sans-serif !important;
-        font-size:13px !important;
+        font-family:"Playfair Display", Inter, Arial, sans-serif !important;
+        font-size:clamp(15px, 3.6vw, 18px) !important;
         line-height:1.1 !important;
-        font-weight:600 !important;
-        letter-spacing:.34em !important;
+        font-weight:700 !important;
+        letter-spacing:.22em !important;
         text-transform:uppercase !important;
-        color:var(--cine-wine) !important;
+        color:#b98645 !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine span+span{
-        font-family:"Cormorant Garamond", "Playfair Display", serif !important;
-        font-size:clamp(34px, 7.6vw, 42px) !important;
-        line-height:1.02 !important;
+        font-family:Inter, Arial, sans-serif !important;
+        font-size:clamp(28px, 7vw, 38px) !important;
+        line-height:1.05 !important;
         font-weight:600 !important;
-        letter-spacing:.01em !important;
+        letter-spacing:.12em !important;
         text-transform:none !important;
-        color:var(--cine-wine) !important;
+        color:#b98645 !important;
+        font-variant-numeric:lining-nums tabular-nums !important;
+        font-feature-settings:"lnum" 1, "tnum" 1 !important;
       }
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .invitee-detail,
       body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-date,
@@ -150,10 +143,10 @@
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine{
           margin-top:-9px !important;
-          gap:4px !important;
+          gap:5px !important;
         }
         body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine span+span{
-          font-size:clamp(32px, 8.8vw, 40px) !important;
+          font-size:clamp(27px, 8vw, 36px) !important;
         }
       }
       @media (max-width:390px){
@@ -209,8 +202,8 @@
     const detail = content.querySelector('.invitee-detail');
     if(detail) detail.style.display = 'none';
 
-    const guestName = resolveGuest(cfg);
-    invite.innerHTML = '<span>Kính mời</span><span>' + escapeHtml(guestName) + '</span>';
+    const displayDate = String(site.displayDate || '18 . 07 . 2026').replace(/\s*\.\s*/g, '.');
+    invite.innerHTML = '<span>Save Our Date</span><span>' + escapeHtml(displayDate) + '</span>';
   }
 
   function boot(){
