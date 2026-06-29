@@ -1,24 +1,14 @@
-/* v1.92: Make the Kính mời Quý khách hero photo fill the whole section. */
+/* v1.94: Full photo invitation cover with curved Save Our Date panel. */
 body .page-shell .site .hero.cinelove-cover {
   position: relative !important;
-  min-height: 100vh !important;
+  min-height: 100svh !important;
+  height: 100svh !important;
   width: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden !important;
-  display: flex !important;
-  align-items: flex-end !important;
-  justify-content: center !important;
-  background: none !important;
-}
-
-body .page-shell .site .hero.cinelove-cover::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 34%, rgba(255,248,239,.42) 72%, rgba(255,248,239,.72) 100%);
+  display: block !important;
+  background: #f7efe3 !important;
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-arch-wrap {
@@ -26,16 +16,29 @@ body .page-shell .site .hero.cinelove-cover .hero-arch-wrap {
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  max-width: none !important;
-  max-height: none !important;
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: none !important;
-  box-shadow: none !important;
   overflow: hidden !important;
   z-index: 0 !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-arch {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100svh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  clip-path: none !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: center top !important;
+  box-shadow: none !important;
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-arch-wrap::before,
@@ -46,53 +49,152 @@ body .page-shell .site .hero.cinelove-cover .hero-arch::after {
   display: none !important;
 }
 
-body .page-shell .site .hero.cinelove-cover .hero-arch {
+body .page-shell .site .hero.cinelove-cover::before {
+  content: "" !important;
   position: absolute !important;
   inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 100vh !important;
-  max-width: none !important;
-  max-height: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  clip-path: none !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
-  box-shadow: none !important;
-  outline: 0 !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(180deg, rgba(255,248,239,.52) 0%, rgba(255,248,239,.10) 30%, rgba(255,248,239,0) 58%, rgba(70,45,28,.10) 100%) !important;
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-content {
-  position: relative !important;
+  position: absolute !important;
+  inset: 0 !important;
   z-index: 2 !important;
-  width: min(92%, 560px) !important;
-  max-width: 560px !important;
-  margin: 0 auto !important;
-  padding: 0 16px 58px !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
   background: transparent !important;
-  box-shadow: none !important;
   border: 0 !important;
+  box-shadow: none !important;
   border-radius: 0 !important;
   text-align: center !important;
+  overflow: hidden !important;
 }
 
-body .page-shell .site .hero.cinelove-cover .hero-content * {
-  text-shadow: 0 2px 14px rgba(255,255,255,.82), 0 1px 4px rgba(255,255,255,.75) !important;
+body .page-shell .site .hero.cinelove-cover .hero-content::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -18% !important;
+  right: -18% !important;
+  bottom: -6.5% !important;
+  height: 25% !important;
+  z-index: 1 !important;
+  background: linear-gradient(180deg, #fffaf0 0%, #fff6e8 100%) !important;
+  border-radius: 52% 52% 0 0 / 30% 30% 0 0 !important;
+  box-shadow: 0 -12px 34px rgba(95,70,42,.10) !important;
 }
 
-@media (max-width: 760px) {
-  body .page-shell .site .hero.cinelove-cover {
-    min-height: 100svh !important;
+body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names {
+  position: relative !important;
+  z-index: 3 !important;
+  order: 1 !important;
+  margin: clamp(34px, 7vh, 56px) auto 0 !important;
+  padding: 0 14px !important;
+  width: 100% !important;
+  max-width: 470px !important;
+  justify-content: center !important;
+  color: #9c763a !important;
+  text-shadow: 0 2px 16px rgba(255,255,255,.88), 0 1px 2px rgba(70,44,18,.18) !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine {
+  position: relative !important;
+  z-index: 3 !important;
+  order: 2 !important;
+  margin: clamp(48px, 7.5vh, 78px) auto 0 !important;
+  width: 100% !important;
+  text-align: center !important;
+  text-shadow: 0 2px 16px rgba(255,255,255,.78), 0 1px 3px rgba(70,44,18,.18) !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .invitee-detail,
+body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #musicStart {
+  display: none !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-date {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 2.6vh !important;
+  z-index: 3 !important;
+  margin: 0 auto !important;
+  padding: 0 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  color: #a87a36 !important;
+  text-shadow: none !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-date::before {
+  content: "❧" !important;
+  display: block !important;
+  font-family: "Cormorant Garamond", serif !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  color: #c99a58 !important;
+  margin-bottom: 4px !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-date span {
+  display: block !important;
+  font-family: Inter, Arial, sans-serif !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: .34em !important;
+  text-transform: uppercase !important;
+  color: #a87a36 !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-date b {
+  display: block !important;
+  font-family: "Cormorant Garamond", "Playfair Display", serif !important;
+  font-size: clamp(28px, 8vw, 40px) !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  letter-spacing: .18em !important;
+  color: #9c763a !important;
+  font-variant-numeric: lining-nums tabular-nums !important;
+  font-feature-settings: "lnum" 1, "tnum" 1 !important;
+}
+
+body .page-shell .site .hero.cinelove-cover .hero-date::after {
+  content: "" !important;
+  display: block !important;
+  width: min(280px, 70vw) !important;
+  height: 1px !important;
+  margin-top: 4px !important;
+  background: linear-gradient(90deg, transparent, #c99a58 16%, #c99a58 84%, transparent) !important;
+}
+
+@media (max-width: 390px) {
+  body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names {
+    margin-top: 30px !important;
   }
+  body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 #inviteeLine {
+    margin-top: 42px !important;
+  }
+  body .page-shell .site .hero.cinelove-cover .hero-date b {
+    font-size: 29px !important;
+  }
+}
+
+@supports (height: 100dvh) {
+  body .page-shell .site .hero.cinelove-cover,
   body .page-shell .site .hero.cinelove-cover .hero-arch {
-    min-height: 100svh !important;
-  }
-  body .page-shell .site .hero.cinelove-cover .hero-content {
-    width: 94% !important;
-    padding-bottom: 42px !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
   }
 }
