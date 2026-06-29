@@ -1,13 +1,14 @@
-/* v1.92: Make the Kính mời Quý khách hero photo fill the whole section. */
+/* v1.93: Make the Save Our Date hero photo fill the whole section on mobile. */
 body .page-shell .site .hero.cinelove-cover {
   position: relative !important;
-  min-height: 100vh !important;
+  min-height: 100lvh !important;
+  height: 100lvh !important;
   width: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden !important;
   display: flex !important;
-  align-items: flex-end !important;
+  align-items: flex-start !important;
   justify-content: center !important;
   background: none !important;
 }
@@ -18,7 +19,7 @@ body .page-shell .site .hero.cinelove-cover::before {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0) 34%, rgba(255,248,239,.42) 72%, rgba(255,248,239,.72) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 34%, rgba(255,248,239,.18) 100%);
 }
 
 body .page-shell .site .hero.cinelove-cover .hero-arch-wrap {
@@ -51,7 +52,7 @@ body .page-shell .site .hero.cinelove-cover .hero-arch {
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 100vh !important;
+  min-height: 100lvh !important;
   max-width: none !important;
   max-height: none !important;
   margin: 0 !important;
@@ -59,7 +60,7 @@ body .page-shell .site .hero.cinelove-cover .hero-arch {
   border: 0 !important;
   border-radius: 0 !important;
   clip-path: none !important;
-  background-position: center center !important;
+  background-position: center top !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   box-shadow: none !important;
@@ -72,7 +73,7 @@ body .page-shell .site .hero.cinelove-cover .hero-content {
   width: min(92%, 560px) !important;
   max-width: 560px !important;
   margin: 0 auto !important;
-  padding: 0 16px 58px !important;
+  padding: 22px 16px 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   border: 0 !important;
@@ -86,13 +87,24 @@ body .page-shell .site .hero.cinelove-cover .hero-content * {
 
 @media (max-width: 760px) {
   body .page-shell .site .hero.cinelove-cover {
-    min-height: 100svh !important;
+    min-height: 100lvh !important;
+    height: 100lvh !important;
   }
   body .page-shell .site .hero.cinelove-cover .hero-arch {
-    min-height: 100svh !important;
+    min-height: 100lvh !important;
   }
   body .page-shell .site .hero.cinelove-cover .hero-content {
     width: 94% !important;
-    padding-bottom: 42px !important;
+    padding-top: 20px !important;
+  }
+}
+
+@supports not (height: 100lvh) {
+  body .page-shell .site .hero.cinelove-cover {
+    min-height: 100vh !important;
+    height: 100vh !important;
+  }
+  body .page-shell .site .hero.cinelove-cover .hero-arch {
+    min-height: 100vh !important;
   }
 }
