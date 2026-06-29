@@ -14,34 +14,55 @@
   }
 
   function injectStyle(){
-    const old = document.getElementById('calendar-after-timeline-v203');
-    if(old) old.remove();
+    ['calendar-after-timeline-v203','calendar-after-timeline-v204'].forEach(function(id){
+      const old = document.getElementById(id);
+      if(old) old.remove();
+    });
     const style = document.createElement('style');
-    style.id = 'calendar-after-timeline-v203';
+    style.id = 'calendar-after-timeline-v204';
     style.textContent = `
       body .page-shell .site #calendar39.calendar39{
-        padding-top:42px !important;
-        padding-bottom:34px !important;
+        padding-top:40px !important;
+        padding-bottom:28px !important;
       }
       body .page-shell .site #calendar39 .calendar-box{
-        margin-top:14px !important;
-        margin-bottom:8px !important;
+        margin-top:12px !important;
+        margin-bottom:0 !important;
+        padding-bottom:0 !important;
       }
-      body .page-shell .site #calendar39 .calendar-countdown{
-        margin-top:8px !important;
+      body .page-shell .site #calendar39 .calendar-grid{
+        margin-bottom:0 !important;
+        padding-bottom:0 !important;
+      }
+      body .page-shell .site #calendar39 .calendar-countdown,
+      body .page-shell .site #calendar39 #countdown39{
+        margin-top:-16px !important;
         padding-top:0 !important;
+        transform:translateY(-12px) !important;
       }
-      body .page-shell .site #calendar39 .calendar-countdown .countdown-intro{
+      body .page-shell .site #calendar39 .calendar-countdown .countdown-intro,
+      body .page-shell .site #calendar39 #countdown39 .countdown-intro{
         margin-top:0 !important;
+        margin-bottom:2px !important;
+        line-height:1.05 !important;
+      }
+      body .page-shell .site #calendar39 .calendar-countdown .divider,
+      body .page-shell .site #calendar39 #countdown39 .divider{
+        margin-top:4px !important;
         margin-bottom:6px !important;
       }
-      body .page-shell .site #calendar39 .calendar-countdown .divider{
-        margin-top:8px !important;
-        margin-bottom:10px !important;
-      }
-      body .page-shell .site #calendar39 .calendar-countdown .countdown{
-        margin-top:8px !important;
+      body .page-shell .site #calendar39 .calendar-countdown .countdown,
+      body .page-shell .site #calendar39 #countdown39 .countdown{
+        margin-top:0 !important;
         margin-bottom:0 !important;
+        padding-top:0 !important;
+      }
+      @media (max-width:760px){
+        body .page-shell .site #calendar39 .calendar-countdown,
+        body .page-shell .site #calendar39 #countdown39{
+          margin-top:-20px !important;
+          transform:translateY(-14px) !important;
+        }
       }
     `;
     document.head.appendChild(style);
