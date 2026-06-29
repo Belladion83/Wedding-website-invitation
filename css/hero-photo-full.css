@@ -1,4 +1,4 @@
-/* v1.96: Full photo invitation cover with curved Save Our Date panel. */
+/* v1.97: Full photo invitation cover with curved Save Our Date panel. */
 body .page-shell .site .hero.cinelove-cover {
   position: relative !important;
   min-height: 100svh !important;
@@ -97,7 +97,7 @@ body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero
   position: relative !important;
   z-index: 3 !important;
   order: 1 !important;
-  margin: clamp(34px, 6.8vh, 54px) auto 0 !important;
+  margin: clamp(8px, 2.4vh, 20px) auto 0 !important;
   padding: 0 10px !important;
   width: 100% !important;
   max-width: 500px !important;
@@ -175,7 +175,7 @@ body .page-shell .site .hero.cinelove-cover .hero-date::after {
 
 @media (max-width: 390px) {
   body .page-shell .site .hero.cinelove-cover .hero-content.hero-invite-v195 .hero-names.hero-short-names {
-    margin-top: 30px !important;
+    margin-top: 8px !important;
   }
   body .page-shell .site .hero.cinelove-cover .hero-date b {
     font-size: 29px !important;
